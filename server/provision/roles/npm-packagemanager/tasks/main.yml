@@ -1,0 +1,25 @@
+---
+
+- name: Add NodeJS Repository
+  yum: name=https://rpm.nodesource.com/pub_{{ node_version }}/el/7/x86_64/nodesource-release-el7-1.noarch.rpm state=present
+  become: yes
+  become_method: sudo
+
+- name: Install NodeJS
+  yum: name=nodejs state=latest
+  become: yes
+  become_method: sudo
+
+- name: Install Build Essentials (to support native addons via npm)
+  yum: name={{ item}} state=latest
+  with_items: [gcc-c++, make]
+  become: yes
+  become_method: sudo
+
+- name: Install Git
+  yum: name=git state=latest
+  become: yes
+  become_method: sudo
+
+- name: Ensure node_modules directory exists.
+  file: "path={{ frontend_packages }} state=directory"

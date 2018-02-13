@@ -1,0 +1,23 @@
+---
+
+- hosts: all
+  remote_user: vagrant
+
+  vars_files:
+    - settings.yml
+
+  roles:
+    - apache-server
+    - postgresql-database
+    - django-framework
+    - npm-packagemanager
+    - django-project
+    - npm-frontend
+
+  post_tasks:
+
+    - name: Provisioning has completed!
+      shell: "true"
+      notify:
+        - Restart Web Server
+        - Restart Database Server

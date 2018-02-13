@@ -1,0 +1,6 @@
+---
+
+- name: Restart Database Server
+  command: systemctl restart postgresql-9.6.service
+  become: yes
+  become_method: sudo

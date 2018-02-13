@@ -1,0 +1,24 @@
+---
+
+- name: Python pip package will be present.
+  yum: name=python-pip state=present
+  become: yes
+  become_method: sudo
+
+- name: Python virtualenv package will be present.
+  pip: name=virtualenv state=present
+  become: yes
+  become_method: sudo
+
+- name: A Python Virtual Environment will exist.
+  command: virtualenv project_env chdir=/home/vagrant
+
+- name: Python Django package will be present in the Virtual Environment.
+  pip: name=Django version=1.11 state=present virtualenv={{ backend_env }}
+  become: yes
+  become_method: sudo
+
+- name: Python PsycoPG package will be present in the Virtual Environment.
+  pip: name=psycopg2-binary state=present virtualenv={{ backend_env }}
+  become: yes
+  become_method: sudo

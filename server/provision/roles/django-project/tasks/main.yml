@@ -1,0 +1,13 @@
+---
+
+- name: Project requirements shall be installed.
+  pip: requirements={{ backend }}/requirements.txt virtualenv={{ backend_env }}
+
+- name: Project schema shall be applied to database engine.
+  shell: . {{ backend_env }}/bin/activate && python manage.py migrate chdir={{ backend }}
+
+- name: Project database will contain fixture data.
+  shell: . {{ backend_env }}/bin/activate && python manage.py loaddata fixtures.json chdir={{ backend }}
+
+- name: Project static files will be collected.
+  shell: . {{ backend_env }}/bin/activate && python manage.py collectstatic --noinput chdir={{ backend }}

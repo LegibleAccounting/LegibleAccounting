@@ -1,0 +1,4 @@
+---
+
+node_version: 8.x
+frontend_packages: /home/vagrant/node_modules

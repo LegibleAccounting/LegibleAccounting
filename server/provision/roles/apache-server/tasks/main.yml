@@ -1,0 +1,25 @@
+---
+
+- name: Apache and Python WSGI will be present.
+  yum: name={{ item }} state=present
+  with_items: [httpd, mod_wsgi]
+  become: yes
+  become_method: sudo
+
+- name: VirtualHost will be configured.
+  copy: src=virtualhost.conf dest=/etc/httpd/conf.d/virtualhost.conf
+  become: yes
+  become_method: sudo
+
+- name: Add the Apache user to the vagrant users group.
+  command: usermod -a -G vagrant apache
+  become: yes
+  become_method: sudo
+
+- name: Give Apache execute permissions for VirtualEnv.
+  command: chmod 710 /home/vagrant
+
+- name: Apache server will be configured to run at system startup.
+  command: systemctl enable httpd.service
+  become: yes
+  become_method: sudo

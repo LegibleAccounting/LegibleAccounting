@@ -1,0 +1,19 @@
+---
+
+- name: Ensure node_modules bind point exists in shared folder.
+  file: "path={{ frontend }}/node_modules state=directory"
+
+- name: Mount node_modules from VM onto shared folder.
+  mount: "src={{ frontend_packages }} name={{ frontend }}/node_modules opts='bind' fstype=none state=mounted"
+  become: yes
+  become_method: sudo
+
+- name: NPM dependencies will be installed.
+  shell: npm install
+  args:
+    chdir: "{{ frontend }}"
+
+- name: Frontend code will be built.
+  shell: npm run build
+  args:
+    chdir: "{{ frontend }}"
