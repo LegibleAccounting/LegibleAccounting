@@ -28,6 +28,20 @@ range (e.g. 1.0.0) if you encounter issues with a newer software version.
 * Open a web browser and load the web address `localhost: 8079` to confirm the
   software is operational.
 
+User credentials are as follows:
+* Superuser
+  - Username: `superuser`
+  - Password: `superuser`
+* Administrator
+  - Username: `administrator1`
+  - Password: `administrator1`
+* Manager
+  - Username: `manager1`
+  - Password: `manager1`
+* Accountant
+  - Username: `accountant1`
+  - Password: `accountant1`
+
 ## How to Contribute
 
 Legible Accounting is a web-based software product that uses a PostgreSQL
