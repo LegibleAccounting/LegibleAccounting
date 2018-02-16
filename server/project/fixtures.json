@@ -1,5 +1,29 @@
 [
 {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+        "name": "Administrator",
+        "permissions": []
+    }
+},
+{
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+        "name": "Accountant",
+        "permissions": []
+    }
+},
+{
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+        "name": "Manager",
+        "permissions": []
+    }
+},
+{
     "model": "auth.user",
     "pk": 1,
     "fields": {
@@ -12,8 +36,68 @@
         "email": "",
         "is_staff": true,
         "is_active": true,
-        "date_joined": "2018-02-01T00:00:00.000Z",
+        "date_joined": "2018-02-01T00:00:00Z",
         "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$xHcyRHFCIMRR$ys3SEsNkvmu/cOKpiUlIFjo7TqlfU/cArYI6M0h3Png=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "administrator1",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2018-02-01T00:00:00Z",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$Vx65cYb4YmGi$c9fhOrU0Y1Jdp5COnKzh1G9CQRb7Sgr6eaZu/2FsZaM=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "accountant1",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2018-02-01T00:00:00Z",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 7,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$De1HBMQxwWmo$RRTBZhpBYYFMvJ6MLJ4QAgwncP8+R4scEYdKhOby9+Y=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "manager1",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2018-02-01T00:00:00Z",
+        "groups": [
+            3
+        ],
         "user_permissions": []
     }
 }
