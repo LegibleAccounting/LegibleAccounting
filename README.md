@@ -25,7 +25,7 @@ range (e.g. 1.0.0) if you encounter issues with a newer software version.
 * From a CLI, run the command `vagrant up` in the root directory of this
   repository. This command will build a virtual machine that will run the
   application.
-* Open a web browser and load the web address `localhost: 8079` to confirm the
+* Open a web browser and load the web address `localhost:8079` to confirm the
   software is operational.
 
 User credentials are as follows:
