@@ -1,15 +1,46 @@
 [
 {
-    "model": "auth.group",
-    "pk": 1,
+    "model": "auth.permission",
     "fields": {
-        "name": "Administrator",
-        "permissions": []
+        "name": "Can add user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "change_user"
     }
 },
 {
     "model": "auth.group",
-    "pk": 2,
+    "fields": {
+        "name": "Administrator",
+        "permissions": [
+            [
+                "add_user",
+                "auth",
+                "user"
+            ],
+            [
+                "change_user",
+                "auth",
+                "user"
+            ]
+        ]
+    }
+},
+{
+    "model": "auth.group",
     "fields": {
         "name": "Accountant",
         "permissions": []
@@ -17,7 +48,6 @@
 },
 {
     "model": "auth.group",
-    "pk": 3,
     "fields": {
         "name": "Manager",
         "permissions": []
@@ -25,7 +55,6 @@
 },
 {
     "model": "auth.user",
-    "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$36000$f8GtYKOOihkH$YMc/eJfk5ZydDQVNzIhCA3rE9cwgl6qCRqO+9o6CQRM=",
         "last_login": null,
@@ -43,7 +72,6 @@
 },
 {
     "model": "auth.user",
-    "pk": 5,
     "fields": {
         "password": "pbkdf2_sha256$36000$xHcyRHFCIMRR$ys3SEsNkvmu/cOKpiUlIFjo7TqlfU/cArYI6M0h3Png=",
         "last_login": null,
@@ -56,14 +84,15 @@
         "is_active": true,
         "date_joined": "2018-02-01T00:00:00Z",
         "groups": [
-            1
+            [
+                "Administrator"
+            ]
         ],
         "user_permissions": []
     }
 },
 {
     "model": "auth.user",
-    "pk": 6,
     "fields": {
         "password": "pbkdf2_sha256$36000$Vx65cYb4YmGi$c9fhOrU0Y1Jdp5COnKzh1G9CQRb7Sgr6eaZu/2FsZaM=",
         "last_login": null,
@@ -76,14 +105,15 @@
         "is_active": true,
         "date_joined": "2018-02-01T00:00:00Z",
         "groups": [
-            2
+            [
+                "Accountant"
+            ]
         ],
         "user_permissions": []
     }
 },
 {
     "model": "auth.user",
-    "pk": 7,
     "fields": {
         "password": "pbkdf2_sha256$36000$De1HBMQxwWmo$RRTBZhpBYYFMvJ6MLJ4QAgwncP8+R4scEYdKhOby9+Y=",
         "last_login": null,
@@ -96,7 +126,9 @@
         "is_active": true,
         "date_joined": "2018-02-01T00:00:00Z",
         "groups": [
-            3
+            [
+                "Manager"
+            ]
         ],
         "user_permissions": []
     }
