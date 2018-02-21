@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-
+import "./Login.css";
 import Auth from '../api/Auth.js';
-
+import logo from '../Ledgible_Accounting_Icon.png'
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -25,11 +25,16 @@ class Login extends Component {
     }
 
     return (
-      <form onSubmit={this.requestLogin}>
-        <input type="text" value={this.inputUsername} onChange={this.updateUsernameState} placeholder="Username" />
-        <input type="password" value={this.inputPassword} onChange={this.updatePasswordState} placeholder="Password" />
-        <button type="submit">Log In</button>
-      </form>
+      <div className="login">
+        <img src={logo} className="legible-accounting-logo"/>
+        <form onSubmit={this.requestLogin}>
+        <div className="background-color">
+          <input className="username username-text-field" type="text" value={this.inputUsername} onChange={this.updateUsernameState} placeholder="Username" />
+          <input className="password password-text-field" type="password" value={this.inputPassword} onChange={this.updatePasswordState} placeholder="Password" />
+          <button className="login-button login-meta" type="submit">Log In</button>
+        </div> 
+        </form>
+      </div>
     );
   }
 
