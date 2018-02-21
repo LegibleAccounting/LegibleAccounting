@@ -4,6 +4,8 @@ import {Grid, Row, Col} from 'react-bootstrap';
 
 import Dashboard from './Dashboard.js';
 import ChartOfAccounts from './ChartOfAccounts.js';
+import AddToAccounts from './AddToAccounts.js';
+import AddToChartOfAccounts from './AddToChartOfAccounts.js';
 import Accounts from './Accounts.js';
 import Logs from './Logs.js';
 import Sidebar from './Sidebar';
@@ -41,7 +43,9 @@ class LegibleAccounting extends Component {
             <Col xs={12} sm={8} md={9} className="overflow-container">
               <Route exact path="/" component={Dashboard} />
               <Route exact path="/chart-of-accounts" component={ChartOfAccounts} />
+              <Route exact path="/chart-of-accounts/add" component={AddToChartOfAccounts} />
               <Route exact path="/accounts" component={Accounts} />
+              <Route exact path="/accounts/add" component={AddToAccounts} />
               <Route exact path="/logs" component={Logs} />
             </Col>
           </Row>

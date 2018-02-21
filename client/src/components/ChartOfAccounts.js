@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
 class ChartOfAccounts extends Component {
     constructor(props) {
@@ -7,7 +8,10 @@ class ChartOfAccounts extends Component {
 
     render() {
         return (
-            <h1>Chart of Accounts</h1>
+            <div>
+                <h1>Chart of Accounts</h1>
+                <NavLink to="/chart-of-accounts/add">Add Account</NavLink>
+            </div>
         );
     }
 }
