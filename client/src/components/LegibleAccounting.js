@@ -15,7 +15,7 @@ class LegibleAccounting extends Component {
   }
 
   render() {
-    let destination = { pathname: '/' };
+    let destination = { pathname: '/login' };
     if (this.state.redirectToHome) {
         return <Redirect to={destination} />;
     }

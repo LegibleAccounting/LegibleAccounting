@@ -13,8 +13,8 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Route exact path="/" component={Login} />
-          <GuardedRoute exact path="/home" component={LegibleAccounting} />
+          <GuardedRoute exact path="/" component={LegibleAccounting} />
+          <Route exact path="/login" component={Login} />
         </div>
       </BrowserRouter>
     );
