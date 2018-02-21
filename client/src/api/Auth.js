@@ -52,6 +52,7 @@ class Auth {
             method: 'GET'
         })
             .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
+            .then(response => response.json())
             .then((response) => {
                 this.isAuthenticated = true;
                 return Promise.resolve(response);

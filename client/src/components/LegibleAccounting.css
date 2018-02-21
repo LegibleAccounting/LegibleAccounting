@@ -1,0 +1,19 @@
+.LegibleAccounting,
+.LegibleAccounting > .container-fluid,
+.LegibleAccounting > .container-fluid > .row {
+    height: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .LegibleAccounting > .container-fluid > .row > * {
+        height: 100%;
+    }
+}
+
+.LegibleAccounting .overflow-container {
+    overflow-y: auto;
+}
+
+.LegibleAccount .nav-stacked li {
+    margin-top: 0;
+}
