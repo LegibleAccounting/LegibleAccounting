@@ -28,6 +28,7 @@ router.register(r'groups', views.GroupViewSet)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
+    url(r'^api/accounts/', include('accounts.urls')),
     url(r'^auth/', include([
         url(r'^login/', views.login_view),
         url(r'^logout/', views.logout_view),
