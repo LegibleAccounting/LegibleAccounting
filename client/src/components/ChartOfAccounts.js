@@ -20,15 +20,16 @@ class ChartOfAccounts extends Component {
 		            </div>
 	            </div>
 
-	            <div className="tableWrapper">
+	            <div className="tableWrapper .table-responsive">
 			        <table className="table table-hover">
 					  <thead>
 					  	<tr>
-						    <th className="accountNumber">Account Number</th>
+						    <th className="accountNumber">#</th>
 						    <th className="name">Name</th>
 						    <th className="initialBalance">Initial Balance</th>
 						    <th className="isActive">Is Active</th>
 						    <th className="comments">Comments</th>
+						    <th className="edits"></th>
 					    </tr>
 					  </thead>
 					  <tbody>
@@ -38,6 +39,7 @@ class ChartOfAccounts extends Component {
 						    <td>0</td>
 						    <td>Yes</td>
 						    <td></td>
+						    <td><button className="btn btn-default editButton">Edit</button></td>
 						  </tr>
 						  <tr>
 						    <td>2</td>
@@ -45,6 +47,7 @@ class ChartOfAccounts extends Component {
 						    <td>0</td>
 						    <td>Yes</td>
 						    <td></td>
+						    <td> <button className="btn btn-default editButton">Edit</button></td>
 						  </tr>
 						</tbody>
 					</table>

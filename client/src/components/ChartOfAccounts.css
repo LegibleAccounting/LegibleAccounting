@@ -3,8 +3,9 @@
 	flex-direction: row;
 	align-items: center;
 	margin-top: 40px;
-	margin-bottom: 40px;
-	margin-left: 40px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 .chartOfAccounts h1 {
@@ -18,12 +19,10 @@
 }
 
 .chartOfAccounts .newButton {
-	height: 35px;
-	width: 80px;
-	border: 1px solid #979797;
 	background-color: #4A90E2;
-	border-radius: 8px;
 	margin-left: 20px;
+	margin-right: 20px;
+	border: 0px;
 }
 
 .chartOfAccounts .newButton .navLink {
@@ -31,27 +30,20 @@
 }
 
 .chartOfAccounts .search {
-	width: 16em;
+	width: 8em;
 }
 
 .chartOfAccounts .searchContainer {
 	display: flex;
 	flex-direction: row;
+	float: right;
 }
 
-.chartOfAccounts .search-container {
-  float: right;
-}
-
-.chartOfAccounts .search-container button {
-  float: right;
-  padding: 6px 10px;
-  margin-top: 8px;
-  margin-right: 16px;
-  background: #ddd;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
+.chartOfAccounts .searchContainer button {
+	margin-left: 5px;
+	background-color: #4A90E2;
+	color: white;
+	border: 0px;
 }
 
 .chartOfAccounts .tableWrapper {
@@ -66,7 +58,7 @@
 }
 
 .table .accountNumber{
-	width: 20px;
+	width: 10px;
 }
 
 .table .name{
@@ -79,4 +71,12 @@
 
 .table .isActive{
 	width: 20px;
+}
+
+.table .edits{
+	width: 40px;
+}
+.table .editButton{
+	background-color: #4A90E2;
+	color: white;
 }
