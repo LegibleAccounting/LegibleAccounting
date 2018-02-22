@@ -13,6 +13,9 @@ ACCOUNT_CATEGORIES = (
 )
 
 class AccountType(models.Model):
+    class Meta:
+        ordering = ['liquidity']
+
     category = models.SmallIntegerField(choices=ACCOUNT_CATEGORIES)
     name = models.CharField(max_length=100, unique=True)
     liquidity = models.PositiveIntegerField(unique=True, verbose_name='liquidity Value (1 represents highest liquidity)')
@@ -25,6 +28,9 @@ class AccountType(models.Model):
         return True if (self.category == 0) else False
 
 class Account(models.Model):
+    class Meta:
+        ordering = ['account_type__liquidity', 'relative_liquidity']
+
     account_type = models.ForeignKey(AccountType, on_delete=models.PROTECT)
     name = models.CharField(max_length=100, unique=True)
     description = models.CharField(max_length=200, blank=True)

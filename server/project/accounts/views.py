@@ -1,34 +1,40 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets
+from rest_framework.filters import SearchFilter
+from rest_framework.permissions import DjangoModelPermissions
 
-from django.shortcuts import render
+from .models import Account, AccountType
+from .serializers import AccountSerializer, AccountTypeSerializer, RetrieveAccountSerializer, RetrieveAccountTypeSerializer
 
-# Create your views here.
-from django.http import HttpResponse
-from accounts.models import Account
-from django.shortcuts import get_object_or_404
+class AccountTypeViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = AccountType.objects.all()
+    serializer_class = AccountTypeSerializer
 
+    def get_serializer_class(self):
+        if self.request.method != 'GET':
+            return super(AccountTypeViewSet, self).get_serializer_class()
 
-def index(request):
-    only_active = request.GET.get('active')
-    if only_active != '0':
-        only_active = True
-    else:
-        only_active = False
-    all_accounts = '{"accounts":['
-    count = 0
-    for a in Account.objects.all():
-        if a.is_active == 't' or not only_active:
-            all_accounts += a.get_json() + ","
-            count += 1
-    if count > 0:
-        all_accounts = all_accounts[:-1] + "]}"
-    else:
-        all_accounts = all_accounts + "]}"
-    return HttpResponse(all_accounts, content_type='application/json')
+        return RetrieveAccountTypeSerializer
 
 
-def account(request, account_id):
-    a = get_object_or_404(Account, pk=account_id)
-    return HttpResponse(a.get_json(), content_type='application/json')
+class AccountViewSet(viewsets.ModelViewSet):
+    queryset = Account.objects.all()
+    filter_backends = (SearchFilter, DjangoFilterBackend,)
+    search_fields = ('name', 'description', 'account_type__name',)
+    filter_fields = {
+        'name': ['contains'],
+        'description': ['contains'],
+        'account_type__category': ['exact'],
+        'account_type__name': ['contains'],
+        'is_active': ['exact']
+    }
+    serializer_class = AccountSerializer
+    permission_classes = (DjangoModelPermissions,)
+
+    def get_serializer_class(self):
+        if self.request.method != 'GET':
+            return super(AccountViewSet, self).get_serializer_class()
+
+        return RetrieveAccountSerializer
+
 
