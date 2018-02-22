@@ -1,5 +1,6 @@
-
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
+from rest_framework.filters import SearchFilter
 from rest_framework.permissions import DjangoModelPermissions
 
 from .models import Account, AccountType
@@ -18,6 +19,15 @@ class AccountTypeViewSet(viewsets.ReadOnlyModelViewSet):
 
 class AccountViewSet(viewsets.ModelViewSet):
     queryset = Account.objects.all()
+    filter_backends = (SearchFilter, DjangoFilterBackend,)
+    search_fields = ('name', 'description', 'account_type__name',)
+    filter_fields = {
+        'name': ['contains'],
+        'description': ['contains'],
+        'account_type__category': ['exact'],
+        'account_type__name': ['contains'],
+        'is_active': ['exact']
+    }
     serializer_class = AccountSerializer
     permission_classes = (DjangoModelPermissions,)
 
