@@ -6,7 +6,7 @@ from django.contrib import admin
 # Register your models here.
 from django.contrib import admin
 
-from .models import Account
+from .models import Account, AccountType
 
 
 class AccountAdmin(admin.ModelAdmin):
@@ -15,3 +15,4 @@ class AccountAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Account, AccountAdmin)
+admin.site.register(AccountType)
