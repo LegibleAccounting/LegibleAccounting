@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Account, AccountType, ACCOUNT_CATEGORIES
+from .models import Account, AccountType
 
 class AccountTypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,7 +10,7 @@ class RetrieveAccountTypeSerializer(AccountTypeSerializer):
     category = serializers.SerializerMethodField()
 
     def get_category(self, obj):
-        return ACCOUNT_CATEGORIES[obj.category][1]
+        return obj.get_category_display()
 
 ACCOUNT_BASE_FIELDS = ('id', 'account_type', 'name', 'description', 'initial_balance', 'created_date', 'is_active',)
 class AccountSerializer(serializers.ModelSerializer):
