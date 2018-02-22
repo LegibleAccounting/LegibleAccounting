@@ -1,3 +1,4 @@
+
 from rest_framework import viewsets
 from rest_framework.permissions import DjangoModelPermissions
 
@@ -25,3 +26,5 @@ class AccountViewSet(viewsets.ModelViewSet):
             return super(AccountViewSet, self).get_serializer_class()
 
         return RetrieveAccountSerializer
+
+
