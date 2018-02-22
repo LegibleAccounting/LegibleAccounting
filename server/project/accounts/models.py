@@ -7,8 +7,6 @@ from django.db import models
 from django.utils import timezone
 
 ACCOUNT_TYPES = (('a', 'Asset'), ('l', 'Liability'), ('e', 'Equity'))
-BOOL_TYPES = (('t', 'True'), ('f', 'False'), ('n', 'Null'))
-
 
 class AccountType(models.Model):
     account_type_id = models.IntegerField(primary_key=True)
@@ -32,7 +30,7 @@ class Account(models.Model):
     account_name = models.CharField(max_length=60, unique=True)
     category = models.ForeignKey(AccountType, on_delete=models.PROTECT)
     priority = models.IntegerField(verbose_name="Priority (0 is top)", default=0)
-    is_active = models.CharField(max_length=1, choices=BOOL_TYPES, default='t')
+    is_active = models.BooleanField(default=False)
     starting_value = models.DecimalField(max_digits=20, decimal_places=2, default=0)
     comments = models.CharField(max_length=200, null=True)
     date_created = models.DateTimeField(default=timezone.now)
