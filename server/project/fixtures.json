@@ -2,6 +2,28 @@
 {
     "model": "auth.permission",
     "fields": {
+        "name": "Can add account",
+        "content_type": [
+            "accounts",
+            "account"
+        ],
+        "codename": "add_account"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change account",
+        "content_type": [
+            "accounts",
+            "account"
+        ],
+        "codename": "change_account"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
         "name": "Can add user",
         "content_type": [
             "auth",
@@ -26,6 +48,16 @@
     "fields": {
         "name": "Administrator",
         "permissions": [
+            [
+                "add_account",
+                "accounts",
+                "account"
+            ],
+            [
+                "change_account",
+                "accounts",
+                "account"
+            ],
             [
                 "add_user",
                 "auth",
