@@ -13,7 +13,7 @@
 	color: #4A90E2;
 }
 
-.chartOfAccounts .filler {
+.titleBar .filler {
 	flex-grow: 1;
 }
 
@@ -54,33 +54,29 @@
   cursor: pointer;
 }
 
-.titleBar .filler {
-	flex-grow: 1;
-}
-
-.chartOfAccounts .table {
-	width: 90%;
-}
-
-.tableWrapper {
+.chartOfAccounts .tableWrapper {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 }
 
-.tableWrapper .accountNumber{
+.tableWrapper .table {
+	width: 90%;
+}
+
+.table .accountNumber{
 	width: 20px;
 }
 
-.tableWrapper .name{
+.table .name{
 	width: 140px;
 }
 
-.tableWrapper .initialBalance{
+.table .initialBalance{
 	width: 20px;
 }
 
-.tableWrapper .isActive{
+.table .isActive{
 	width: 20px;
 }
