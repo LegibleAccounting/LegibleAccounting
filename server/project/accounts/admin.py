@@ -10,7 +10,7 @@ from .models import Account, AccountType
 
 
 class AccountAdmin(admin.ModelAdmin):
-    fieldsets = [('Administrator Values', {'fields': ['account_id', 'account_name', 'priority', 'category', 'date_created']}),
+    fieldsets = [('Administrator Values', {'fields': ['account_id', 'name', 'priority', 'category', 'date_created']}),
                  ('Manager Values', {'fields': ['is_active', 'starting_value', 'comments']})]
 
 
