@@ -30,7 +30,7 @@ class AccountType(models.Model):
 class Account(models.Model):
     account_id = models.IntegerField(primary_key=True)
     account_name = models.CharField(max_length=60, unique=True)
-    category = models.ForeignKey(AccountType, on_delete=models.CASCADE)
+    category = models.ForeignKey(AccountType, on_delete=models.PROTECT)
     priority = models.IntegerField(verbose_name="Priority (0 is top)", default=0)
     is_active = models.CharField(max_length=1, choices=BOOL_TYPES, default='t')
     starting_value = models.DecimalField(max_digits=20, decimal_places=2, default=0)
