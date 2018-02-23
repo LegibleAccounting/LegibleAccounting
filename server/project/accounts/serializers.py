@@ -23,4 +23,4 @@ class RetrieveAccountSerializer(AccountSerializer):
         model = Account
         fields = ACCOUNT_BASE_FIELDS + ('account_number',)
 
-    account_type = AccountTypeSerializer()
+    account_type = RetrieveAccountTypeSerializer()
