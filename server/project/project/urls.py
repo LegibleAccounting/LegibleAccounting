@@ -19,11 +19,14 @@ from django.contrib import admin
 from rest_framework import routers
 
 from . import views
+from accounts.views import AccountViewSet, AccountTypeViewSet
 
 router = routers.DefaultRouter()
 
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
+router.register(r'accounts', AccountViewSet)
+router.register(r'account-types', AccountTypeViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
