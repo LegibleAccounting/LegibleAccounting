@@ -25,13 +25,13 @@ class Login extends Component {
     }
 
     return (
-      <div class="Login">
-        <div class="login">
-          <img src={logo} class="legible-accounting-logo"/>
+      <div className="Login">
+        <div className="login">
+          <img src={logo} className="legible-accounting-logo"/>
           <form onSubmit={this.requestLogin}>
-          <input class="username username-text-field background-color" type="text" value={this.inputUsername} onChange={this.updateUsernameState} placeholder="Username" />
-          <input class="password password-text-field background-color" type="password" value={this.inputPassword} onChange={this.updatePasswordState} placeholder="Password" />
-          <button class="login-button login-meta" type="submit">Log In</button>
+          <input className="username username-text-field background-color" type="text" value={this.inputUsername} onChange={this.updateUsernameState} placeholder="Username" />
+          <input className="password password-text-field background-color" type="password" value={this.inputPassword} onChange={this.updatePasswordState} placeholder="Password" />
+          <button className="login-button login-meta" type="submit">Log In</button>
           </form>
         </div> 
       </div>
