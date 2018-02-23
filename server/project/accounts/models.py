@@ -24,8 +24,8 @@ class AccountType(models.Model):
     def __str__(self):
         return "{0}: {1}".format(self.liquidity, self.name)
 
-    def is_asset(self):
-        return True if (self.category == 0) else False
+    def is_debit(self):
+        return True if (self.category == 0 or self.category == 4) else False
 
 class Account(models.Model):
     class Meta:
@@ -42,8 +42,8 @@ class Account(models.Model):
     def __str__(self):
         return 'Account #' + "{:03}: ".format(self.account_number()) + self.name + " - ${:.2f}".format(self.get_balance())
 
-    def is_asset(self):
-        return self.account_type.is_asset()
+    def is_debit(self):
+        return self.account_type.is_debit()
 
     def account_number(self):
         return (self.account_type.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE) + self.relative_liquidity
