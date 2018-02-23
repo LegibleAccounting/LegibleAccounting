@@ -10,7 +10,7 @@ class AddToChartOfAccountsPage extends Component {
         return (
         	<div className="addToChartOfAccounts">	
         		<h1 class="page-title">Add Account</h1>
-				
+                <div>
 					<form>
 						Account ID
 						<select>
@@ -28,7 +28,7 @@ class AddToChartOfAccountsPage extends Component {
 				<div>
 					<button>&lt; Back to Chart of Accounts</button>
 				</div>
-			</body>
+            </div>
 		);
     }
 }
