@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'django_filters'
+    'django_filters',
+    'auditlog'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'auditlog.middleware.AuditlogMiddleware'
 ]
 
 ROOT_URLCONF = 'project.urls'

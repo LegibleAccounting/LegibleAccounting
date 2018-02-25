@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from auditlog.registry import auditlog
 from django.db import models
 
 NUM_ACCOUNTS_PER_ACCOUNT_TYPE = 1000
@@ -40,7 +41,7 @@ class Account(models.Model):
     is_active = models.BooleanField(default=False, verbose_name="active?")
 
     def __str__(self):
-        return 'Account #' + "{:03}: ".format(self.account_number()) + self.name + " - ${:.2f}".format(self.get_balance())
+        return 'Account #' + "{:03}: ".format(self.account_number()) + self.name
 
     def is_debit(self):
         return self.account_type.is_debit()
@@ -54,3 +55,4 @@ class Account(models.Model):
         return self.initial_balance
 
 
+auditlog.register(Account)

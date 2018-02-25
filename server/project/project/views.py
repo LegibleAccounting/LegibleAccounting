@@ -1,3 +1,4 @@
+from auditlog.models import LogEntry
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, status
@@ -7,7 +8,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny, DjangoModelPermissions
 
 from .permissions import LAAuthModelReadPermission
-from .serializers import UserSerializer, GroupSerializer
+from .serializers import UserSerializer, GroupSerializer, LogEntrySerializer
 
 @api_view(['POST'])
 @permission_classes((AllowAny,))
@@ -42,4 +43,9 @@ class UserViewSet(viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    permission_classes = (DjangoModelPermissions, LAAuthModelReadPermission,)
+
+class LogEntryViewSet(viewsets.ModelViewSet):
+    queryset = LogEntry.objects.filter(actor__is_staff=False)
+    serializer_class = LogEntrySerializer
     permission_classes = (DjangoModelPermissions, LAAuthModelReadPermission,)
