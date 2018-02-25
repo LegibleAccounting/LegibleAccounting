@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.db import models
 
-NUM_ACCOUNTS_PER_ACCOUNT_TYPE = 1000
+NUM_ACCOUNTS_PER_ACCOUNT_TYPE = 100
 
 ACCOUNT_CATEGORIES = (
     (0, 'Asset'),
