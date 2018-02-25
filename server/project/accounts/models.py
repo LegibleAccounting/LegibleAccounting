@@ -27,6 +27,9 @@ class AccountType(models.Model):
     def is_debit(self):
         return True if (self.category == 0 or self.category == 4) else False
 
+    def starting_number(self):
+        return self.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE
+
 class Account(models.Model):
     class Meta:
         ordering = ['account_type__liquidity', 'relative_liquidity']

@@ -4,7 +4,7 @@ from .models import Account, AccountType
 class AccountTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = AccountType
-        fields = ('id', 'category', 'name',)
+        fields = ('id', 'category', 'name', 'starting_number')
 
 class RetrieveAccountTypeSerializer(AccountTypeSerializer):
     category = serializers.SerializerMethodField()
