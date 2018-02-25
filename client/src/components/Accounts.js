@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Accounts.css';
+import './CommonChart.css';
 import AccountsAPI from '../api/Accounts.js';
 
 class Accounts extends Component {
@@ -53,7 +54,7 @@ class Accounts extends Component {
                       <tbody>
                         { this.state.accounts.length ? (
                           this.state.accounts.map((item, index) => (
-                             <tr>
+                            <tr key={item.id}>
                                 <td>{item.account_number}</td>
                                 <td>{item.name}</td>
                                 <td>{item.account_type.category}</td>
@@ -61,7 +62,12 @@ class Accounts extends Component {
                             </tr>
                           ))
                         ) : (
-                            <div>No Accounts</div>
+                            <tr>
+                                <td></td>
+                                <td>No Accounts</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                         )}
                        </tbody>
                     </table>
