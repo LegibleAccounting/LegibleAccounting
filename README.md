@@ -34,13 +34,13 @@ User credentials are as follows:
   - Password: `superuser`
 * Administrator
   - Username: `administrator1`
-  - Password: `administrator1`
+  - Password: `administrator`
 * Manager
   - Username: `manager1`
-  - Password: `manager1`
+  - Password: `manager`
 * Accountant
   - Username: `accountant1`
-  - Password: `accountant1`
+  - Password: `accountant`
 
 ## How to Contribute
 
