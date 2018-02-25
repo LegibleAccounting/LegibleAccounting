@@ -11,7 +11,6 @@
 .chartOfAccounts h1 {
 	margin-top: 0px;
 	margin-bottom: 0px;
-	color: #4A90E2;
 }
 
 .titleBar .filler {
@@ -19,14 +18,8 @@
 }
 
 .chartOfAccounts .newButton {
-	background-color: #4A90E2;
 	margin-left: 20px;
 	margin-right: 20px;
-	border: 0px;
-}
-
-.chartOfAccounts .newButton .navLink {
-	color: white;
 }
 
 .chartOfAccounts .search {
@@ -39,12 +32,9 @@
 	float: right;
 }
 
-.chartOfAccounts .searchContainer button {
-	margin-left: 5px;
-	background-color: #4A90E2;
-	color: white;
-	border: 0px;
-}
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+  }
 
 .chartOfAccounts .tableWrapper {
 	width: 100%;
@@ -62,21 +52,13 @@
 }
 
 .table .name{
-	width: 140px;
+	width: 220px;
 }
 
 .table .initialBalance{
 	width: 20px;
 }
 
-.table .isActive{
-	width: 20px;
-}
-
 .table .edits{
 	width: 40px;
-}
-.table .editButton{
-	background-color: #4A90E2;
-	color: white;
 }
