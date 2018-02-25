@@ -7,3 +7,12 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.btn-primary {
+	border: 0px;
+	background-color: #4A90E2;
+}
+
+h1 {
+	color: #4A90E2;
+}

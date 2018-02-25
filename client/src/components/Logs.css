@@ -1,0 +1,15 @@
+.logs .eventName{
+	width: 100px;
+}
+
+.logs .oldValue{
+	width: 30%;
+}
+
+.logs .changedBy{
+	width: 80px;
+}
+
+.logs .changedDate{
+	width: 50px;
+}

@@ -1,0 +1,11 @@
+.accounts .accountNumber{
+	width: 10px;
+}
+
+.accounts .name{
+	width: 50%;
+}
+
+.accounts .edits{
+	width: 40px;
+}

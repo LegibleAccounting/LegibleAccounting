@@ -1,10 +1,29 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './ChartOfAccounts.css';
+import './CommonChart.css';
+import AccountsAPI from '../api/Accounts.js';
 
 class ChartOfAccounts extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+	      accounts: [],
+	      ogAccounts: [],
+	      searchText: ''
+	    };
+
+		this.searchTextChanged = this.searchTextChanged.bind(this);
+    	this.search = this.search.bind(this);
+
+        AccountsAPI.getAll(true)
+        	.then(data => {
+        		this.setState({
+        			accounts: data,
+        			ogAccounts: data
+        		});
+        	});
     }
 
     render() {
@@ -14,9 +33,11 @@ class ChartOfAccounts extends Component {
 		            <h1>Chart of Accounts</h1>
 					<NavLink className="NavLink btn btn-primary newButton" to="/chart-of-accounts/add">New +</NavLink> 
 					<div className="filler"></div>
-					<div className="searchContainer">
-		            	<input type="text" class="form-control search" placeholder="Search"/>
-		            	<button className="btn btn-default" type="submit">Search</button>
+					<div className="searchContainer btn-group">
+						<form onSubmit={this.search}>
+		            		<input type="search" className="form-control search" onChange={this.searchTextChanged} onBlur={this.search} placeholder="Search"/>
+		            	</form>
+		            	<button className="btn btn-primary" type="submit" onClick={this.search}>Search</button>
 		            </div>
 	            </div>
 
@@ -27,33 +48,53 @@ class ChartOfAccounts extends Component {
 						    <th className="accountNumber">#</th>
 						    <th className="name">Name</th>
 						    <th className="initialBalance">Initial Balance</th>
-						    <th className="isActive">Is Active</th>
 						    <th className="comments">Comments</th>
 						    <th className="edits"></th>
 					    </tr>
 					  </thead>
 					  <tbody>
-						  <tr>
-						    <td>1</td>
-						    <td>Cash</td>
-						    <td>0</td>
-						    <td>Yes</td>
-						    <td></td>
-						    <td><button className="btn btn-default editButton">Edit</button></td>
-						  </tr>
-						  <tr>
-						    <td>2</td>
-						    <td>Accounts Payable</td>
-						    <td>0</td>
-						    <td>Yes</td>
-						    <td></td>
-						    <td> <button className="btn btn-default editButton">Edit</button></td>
-						  </tr>
-						</tbody>
+				       	{ this.state.accounts.length ? (
+				          this.state.accounts.map((item, index) => (
+				             <tr key={item.id}>
+						    	<td>{item.account_number}</td>
+						    	<td>{item.name}</td>
+						    	<td>$ {item.initial_balance}</td>
+						    	<td>{item.description}</td>
+						    	<td><NavLink className="NavLink btn btn-primary newButton" to={`/chart-of-accounts/${item.id}`}>Edit</NavLink> </td>
+						  	</tr>
+				          ))
+				        ) : (
+				            <tr>
+                                <td></td>
+                                <td>No Accounts</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+				        )}
+				       </tbody>
 					</table>
 				</div>
 			</div>
         );
+    }
+
+    searchTextChanged(event) {
+    	this.setState({ searchText: event.target.value });
+    	if (event.target.value == '') {
+    		this.setState({
+    			accounts: this.state.ogAccounts
+    		});
+    	}
+    }
+
+    search(event) {
+    	event.preventDefault();
+    	 AccountsAPI.search(true, this.state.searchText)
+    	.then(data => {
+    		this.setState({
+    			accounts: data
+    		});
+    	});
     }
 }
 

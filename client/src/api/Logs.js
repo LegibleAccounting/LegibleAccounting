@@ -1,21 +1,15 @@
 import { JSONAPIRequest } from './util/Request.js';
 import Auth from './Auth.js';
 
-class AccountsAPI {
+class LogsAPI {
     constructor() {}
 
-    getAll(active) {
+    getAll() {
 		if (!Auth.token) {
             return Promise.reject();
         }
 
-        // determine if searching active accounts
-        var requestURL = '/api/accounts/';
-        if (active) {
-        	requestURL += '?is_active=true';
-        }
-
-        return fetch(new JSONAPIRequest(requestURL, Auth.token), {
+        return fetch(new JSONAPIRequest('/api/logs/', Auth.token), {
             method: 'GET'
         })
             .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
@@ -29,23 +23,12 @@ class AccountsAPI {
             });
     }
 
-    search(active, searchString) {
-    	if (!Auth.token) {
+    search(searchString) {
+        if (!Auth.token) {
             return Promise.reject();
         }
 
-		// determine if searching active accounts
-        var requestURL = '/api/accounts/';
-        if (active) {
-        	requestURL += '?is_active=true&search=';
-        } else {
-        	requestURL += '?search=';
-        }
-
-        // actually search
-        requestURL += searchString;
-
-        return fetch(new JSONAPIRequest(requestURL, Auth.token), {
+        return fetch(new JSONAPIRequest('/api/logs/?search=' + searchString, Auth.token), {
             method: 'GET'
         })
             .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
@@ -60,4 +43,4 @@ class AccountsAPI {
     }
 }
 
-export default new AccountsAPI();
+export default new LogsAPI();

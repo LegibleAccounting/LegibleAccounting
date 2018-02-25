@@ -1,82 +1,15 @@
-.chartOfAccounts .titleBar {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	margin-top: 40px;
-	margin-bottom: 20px;
-	margin-left: 20px;
-	margin-right: 20px;
-}
-
-.chartOfAccounts h1 {
-	margin-top: 0px;
-	margin-bottom: 0px;
-	color: #4A90E2;
-}
-
-.titleBar .filler {
-	flex-grow: 1;
-}
-
-.chartOfAccounts .newButton {
-	background-color: #4A90E2;
-	margin-left: 20px;
-	margin-right: 20px;
-	border: 0px;
-}
-
-.chartOfAccounts .newButton .navLink {
-	color: white;
-}
-
-.chartOfAccounts .search {
-	width: 8em;
-}
-
-.chartOfAccounts .searchContainer {
-	display: flex;
-	flex-direction: row;
-	float: right;
-}
-
-.chartOfAccounts .searchContainer button {
-	margin-left: 5px;
-	background-color: #4A90E2;
-	color: white;
-	border: 0px;
-}
-
-.chartOfAccounts .tableWrapper {
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-}
-
-.tableWrapper .table {
-	width: 90%;
-}
-
-.table .accountNumber{
+.chartOfAccounts .accountNumber{
 	width: 10px;
 }
 
-.table .name{
-	width: 140px;
+.chartOfAccounts .name{
+	width: 30%;
 }
 
-.table .initialBalance{
+.chartOfAccounts .initialBalance{
 	width: 20px;
 }
 
-.table .isActive{
-	width: 20px;
-}
-
-.table .edits{
+.chartOfAccounts .edits{
 	width: 40px;
-}
-.table .editButton{
-	background-color: #4A90E2;
-	color: white;
 }

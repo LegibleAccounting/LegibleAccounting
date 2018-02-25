@@ -25,6 +25,7 @@ router = routers.DefaultRouter()
 
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
+router.register(r'logs', views.LogEntryViewSet)
 router.register(r'accounts', AccountViewSet)
 router.register(r'account-types', AccountTypeViewSet)
 
