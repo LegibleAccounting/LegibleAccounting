@@ -1,9 +1,5 @@
-.logs .eventName{
-	width: 100px;
-}
-
-.logs .oldValue{
-	width: 30%;
+.logs .changed{
+	width: 200px;
 }
 
 .logs .changedBy{

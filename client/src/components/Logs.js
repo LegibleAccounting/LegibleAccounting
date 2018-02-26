@@ -31,7 +31,6 @@ class Logs extends Component {
             <div className="logs">
                 <div className="titleBar">
                     <h1>Logs</h1>
-                    <NavLink className="NavLink btn btn-primary newButton" to="/accounts/add">New +</NavLink> 
                     <div className="filler"></div>
                     <div className="searchContainer btn-group">
                         <form onSubmit={this.search}>
@@ -45,33 +44,46 @@ class Logs extends Component {
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                            <th className="eventName">Event Name</th>
-                            <th className="oldValue">Old Value</th>
-                            <th className="newValue">New Value</th>
+                            <th className="changed">Changed</th>
+                            <th className="changes">Old Value | New Value</th>
                             <th className="changedBy">Changed By</th>
                             <th className="changeDate">Date</th>
                         </tr>
                       </thead>
                       <tbody>
-                        { this.state.logs.length ? (
-                          this.state.logs.map((item, index) => (
-                            <tr key={item.id}>
-                                <td>{item.account_number}</td>
-                                <td>{item.name}</td>
-                                <td>{item.account_type.category}</td>
-                                <td></td>
-                                <td>{item.name}</td>
-                            </tr>
-                          ))
-                        ) : (
-                            <tr>
-                                <td></td>
-                                <td>No Logs</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        )}
+                        { 
+                        	this.state.logs.length ? (
+	                          	this.state.logs.map((item, index) => (
+	                          		<tr key={index}>
+		                          		<td>{item.object_repr}</td>
+				                        
+				                        <td>
+			                          		{item.changes ? (
+					                          	Object.keys(item.changes).map((itemName, index) => (
+					                          		<div key={index}>
+						                          		<div>{itemName} --- From: {item.changes[itemName][0]} | To: {item.changes[itemName][1]}</div>
+						                          	</div>
+					                          	))
+					                        ) : (
+					                        	<div>No Changes</div>
+					                        )}
+				                        </td>
+
+				                        <td>{item.actor.username}</td>
+				                        <td>{item.timestamp}</td>
+			                    	</tr>
+	                          	))
+	                        ) : (
+	                        	//else
+	                            <tr>
+	                                <td></td>
+	                                <td>No Logs</td>
+	                                <td></td>
+	                                <td></td>
+	                                <td></td>
+	                            </tr>
+	                        )
+                   		}
                        </tbody>
                     </table>
                 </div>
