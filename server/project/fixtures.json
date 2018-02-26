@@ -1,95 +1,350 @@
 [
 {
     "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add account type",
+        "content_type": 1,
+        "codename": "add_accounttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change account type",
+        "content_type": 1,
+        "codename": "change_accounttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete account type",
+        "content_type": 1,
+        "codename": "delete_accounttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
     "fields": {
         "name": "Can add account",
-        "content_type": [
-            "accounts",
-            "account"
-        ],
+        "content_type": 2,
         "codename": "add_account"
     }
 },
 {
     "model": "auth.permission",
+    "pk": 5,
     "fields": {
         "name": "Can change account",
-        "content_type": [
-            "accounts",
-            "account"
-        ],
+        "content_type": 2,
         "codename": "change_account"
     }
 },
 {
     "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can delete account",
+        "content_type": 2,
+        "codename": "delete_account"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can add transaction",
+        "content_type": 3,
+        "codename": "add_transaction"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can change transaction",
+        "content_type": 3,
+        "codename": "change_transaction"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can delete transaction",
+        "content_type": 3,
+        "codename": "delete_transaction"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can add journal",
+        "content_type": 4,
+        "codename": "add_journal"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can change journal",
+        "content_type": 4,
+        "codename": "change_journal"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can delete journal",
+        "content_type": 4,
+        "codename": "delete_journal"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 5,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 5,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 5,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 6,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 6,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 6,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
     "fields": {
         "name": "Can add user",
-        "content_type": [
-            "auth",
-            "user"
-        ],
+        "content_type": 7,
         "codename": "add_user"
     }
 },
 {
     "model": "auth.permission",
+    "pk": 20,
     "fields": {
         "name": "Can change user",
-        "content_type": [
-            "auth",
-            "user"
-        ],
+        "content_type": 7,
         "codename": "change_user"
     }
 },
 {
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can delete user",
+        "content_type": 7,
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 8,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 8,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 8,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 9,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 9,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 9,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 10,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 10,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 10,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can add receipt",
+        "content_type": 11,
+        "codename": "add_receipt"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can change receipt",
+        "content_type": 11,
+        "codename": "change_receipt"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+        "name": "Can delete receipt",
+        "content_type": 11,
+        "codename": "delete_receipt"
+    }
+},
+{
     "model": "auth.group",
+    "pk": 1,
     "fields": {
         "name": "Administrator",
         "permissions": [
-            [
-                "add_account",
-                "accounts",
-                "account"
-            ],
-            [
-                "change_account",
-                "accounts",
-                "account"
-            ],
-            [
-                "add_user",
-                "auth",
-                "user"
-            ],
-            [
-                "change_user",
-                "auth",
-                "user"
-            ]
+            4,
+            5,
+            19,
+            20
         ]
     }
 },
 {
     "model": "auth.group",
+    "pk": 2,
     "fields": {
         "name": "Accountant",
-        "permissions": []
+        "permissions": [
+            10,
+            11,
+            31,
+            32,
+            7,
+            8
+        ]
     }
 },
 {
     "model": "auth.group",
+    "pk": 3,
     "fields": {
         "name": "Manager",
-        "permissions": []
+        "permissions": [
+            10,
+            11,
+            31,
+            32,
+            7,
+            8
+        ]
     }
 },
 {
     "model": "auth.user",
+    "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$36000$f8GtYKOOihkH$YMc/eJfk5ZydDQVNzIhCA3rE9cwgl6qCRqO+9o6CQRM=",
-        "last_login": null,
+        "last_login": "2018-02-25T22:53:01.876Z",
         "is_superuser": true,
         "username": "superuser",
         "first_name": "",
@@ -104,6 +359,7 @@
 },
 {
     "model": "auth.user",
+    "pk": 2,
     "fields": {
         "password": "pbkdf2_sha256$36000$xHcyRHFCIMRR$ys3SEsNkvmu/cOKpiUlIFjo7TqlfU/cArYI6M0h3Png=",
         "last_login": null,
@@ -116,18 +372,17 @@
         "is_active": true,
         "date_joined": "2018-02-01T00:00:00Z",
         "groups": [
-            [
-                "Administrator"
-            ]
+            1
         ],
         "user_permissions": []
     }
 },
 {
     "model": "auth.user",
+    "pk": 3,
     "fields": {
         "password": "pbkdf2_sha256$36000$Vx65cYb4YmGi$c9fhOrU0Y1Jdp5COnKzh1G9CQRb7Sgr6eaZu/2FsZaM=",
-        "last_login": null,
+        "last_login": "2018-02-26T00:10:07.918Z",
         "is_superuser": false,
         "username": "accountant1",
         "first_name": "",
@@ -137,18 +392,17 @@
         "is_active": true,
         "date_joined": "2018-02-01T00:00:00Z",
         "groups": [
-            [
-                "Accountant"
-            ]
+            2
         ],
         "user_permissions": []
     }
 },
 {
     "model": "auth.user",
+    "pk": 4,
     "fields": {
-        "password": "pbkdf2_sha256$36000$De1HBMQxwWmo$RRTBZhpBYYFMvJ6MLJ4QAgwncP8+R4scEYdKhOby9+Y=",
-        "last_login": null,
+        "password": "pbkdf2_sha256$36000$2D1PUiFNdO42$FidNObdwiuc4Ll/kkKj9f2Qu+oFR1rd3Us4jX+4BsJY=",
+        "last_login": "2018-02-26T00:10:29.142Z",
         "is_superuser": false,
         "username": "manager1",
         "first_name": "",
@@ -158,9 +412,7 @@
         "is_active": true,
         "date_joined": "2018-02-01T00:00:00Z",
         "groups": [
-            [
-                "Manager"
-            ]
+            3
         ],
         "user_permissions": []
     }

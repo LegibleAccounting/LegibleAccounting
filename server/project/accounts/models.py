@@ -12,6 +12,7 @@ ACCOUNT_CATEGORIES = (
     (4, 'Operating Expense')
 )
 
+
 class AccountType(models.Model):
     class Meta:
         ordering = ['liquidity']
@@ -26,6 +27,7 @@ class AccountType(models.Model):
 
     def is_debit(self):
         return True if (self.category == 0 or self.category == 4) else False
+
 
 class Account(models.Model):
     class Meta:
@@ -51,6 +53,12 @@ class Account(models.Model):
     def get_balance(self):
         # TODO: This will be updated to return a calculated balance
         # based on all transactions that have been made to this account.
-        return self.initial_balance
+        value = 0
+        for t in self.transactions.all():
+            if t.from_journal is not None:
+                if t.from_journal.is_approved == 't':
+                    value += t.get_value()
+        value *= 1 if(self.is_debit()) else -1
+        return self.initial_balance + value
 
 
