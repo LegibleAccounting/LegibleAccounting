@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import './Logs.css';
 import './CommonChart.css';
 import LogsAPI from '../api/Logs.js';
@@ -93,7 +92,7 @@ class Logs extends Component {
 
     searchTextChanged(event) {
         this.setState({ searchText: event.target.value });
-        if (event.target.value == '') {
+        if (event.target.value === '') {
             this.setState({
                 logs: this.state.ogLogs
             });

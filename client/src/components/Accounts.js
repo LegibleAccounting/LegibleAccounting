@@ -78,7 +78,7 @@ class Accounts extends Component {
 
     searchTextChanged(event) {
         this.setState({ searchText: event.target.value });
-        if (event.target.value == '') {
+        if (event.target.value === '') {
             this.setState({
                 accounts: this.state.ogAccounts
             });

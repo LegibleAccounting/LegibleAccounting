@@ -58,7 +58,7 @@ class ChartOfAccounts extends Component {
 				             <tr key={item.id}>
 						    	<td>{item.account_number}</td>
 						    	<td>{item.name}</td>
-						    	<td>$ {item.initial_balance}</td>
+						    	<td>${item.initial_balance}</td>
 						    	<td>{item.description}</td>
 						    	<td><NavLink className="NavLink btn btn-primary newButton" to={`/chart-of-accounts/${item.id}`}>Edit</NavLink> </td>
 						  	</tr>
@@ -80,7 +80,7 @@ class ChartOfAccounts extends Component {
 
     searchTextChanged(event) {
     	this.setState({ searchText: event.target.value });
-    	if (event.target.value == '') {
+    	if (event.target.value === '') {
     		this.setState({
     			accounts: this.state.ogAccounts
     		});

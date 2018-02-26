@@ -27,7 +27,7 @@ class Login extends Component {
     return (
       <div className="Login">
         <div>
-          <img src={logo} className="legible-accounting-logo"/>
+          <img src={logo} alt="Legible Accounting" className="legible-accounting-logo"/>
           <form onSubmit={this.requestLogin}>
           <div className="input-text text-field">
             <div className="padding-space">

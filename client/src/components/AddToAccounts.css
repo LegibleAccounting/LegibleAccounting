@@ -1,18 +1,3 @@
-h1 {
-	color: #4A90E2;
-	font: Helvetica;
-	font-weight: bold;
-	padding-left: 35px;
-	padding-bottom: 50px;
-	padding-top: 40px;
-}
-
-body {
-	min-height: 100%;
-	font-weight: bold;
-	font-size: 20px;
-}
-
 .addToAccounts {
 	height: 100%;
 }

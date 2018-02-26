@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from './AddToAccounts.css';
+import './AddToAccounts.css';
 import AccountTypesAPI from '../api/AccountTypes.js';
 import { NavLink } from 'react-router-dom';
 

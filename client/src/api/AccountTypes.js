@@ -15,7 +15,7 @@ class AccountTypesAPI {
         .catch((response) => {
             // Consider how to handle this?
             return Promise.reject(response);
-        });;
+        });
     }
 }
 
