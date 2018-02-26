@@ -1,0 +1,74 @@
+h1 {
+	color: #4A90E2;
+	font: Helvetica;
+	font-weight: bold;
+	padding-left: 35px;
+	padding-bottom: 50px;
+	padding-top: 40px;
+}
+
+body {
+	min-height: 100%;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.addToAccounts {
+	height: 100%;
+}
+
+.addToAccounts .createButton {
+	height: 35px;
+	width: 80px;
+	margin-left: 65px;
+	margin-top: 25px;	
+}
+
+.addToAccounts .initialBalanceTextField {
+	width: 8em;
+}
+
+.accountActiveCheckBox {
+	height: 25px;
+	width: 25px;
+}
+
+.addToAccounts .textBox {
+	width: 60em;
+}
+
+.textColumn {
+	float: left;
+	width: 310px;
+	padding: 5px 80px;
+	left: 10px;
+}
+
+.fieldColumn {
+	float: left;
+	width: 530px;
+}
+
+.row {
+	height: 65px;
+}
+
+.container {
+	display: flex;
+	height: 65px;
+}
+
+.fillSpace {
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+	height: 150px;
+}
+
+.addToAccounts .backButton {
+	margin-left: 65px;
+}
+
+input.currency {
+    text-align: right;
+}

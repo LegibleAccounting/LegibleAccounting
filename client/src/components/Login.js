@@ -26,15 +26,23 @@ class Login extends Component {
 
     return (
       <div className="Login">
-        <div className="login">
+        <div>
           <img src={logo} className="legible-accounting-logo"/>
           <form onSubmit={this.requestLogin}>
-          <input className="username username-text-field background-color" type="text" value={this.inputUsername} onChange={this.updateUsernameState} placeholder="Username" />
-          <input className="password password-text-field background-color" type="password" value={this.inputPassword} onChange={this.updatePasswordState} placeholder="Password" />
-          <button className="login-button login-meta" type="submit">Log In</button>
+          <div className="input-text text-field">
+            <div className="padding-space">
+              <input className="background-color" type="text" value={this.inputUsername} onChange={this.updateUsernameState} placeholder="Username" />
+            </div>
+            <div className="padding-space">
+              <input className="background-color" type="password" value={this.inputPassword} onChange={this.updatePasswordState} placeholder="Password" />
+            </div>
+            <div className="padding-space login-button">
+              <button className="login-meta login-button" type="submit">Log In</button>
+            </div>
+          </div>
           </form>
-        </div> 
-      </div>
+        </div>
+      </div> 
     );
   }
   updateUsernameState(event) {
