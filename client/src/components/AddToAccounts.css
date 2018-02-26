@@ -4,6 +4,7 @@ h1 {
 	font-weight: bold;
 	padding-left: 35px;
 	padding-bottom: 50px;
+	padding-top: 40px;
 }
 
 body {
@@ -12,18 +13,18 @@ body {
 	font-size: 20px;
 }
 
-.addToChartOfAccounts {
+.addToAccounts {
 	height: 100%;
 }
 
-.addToChartOfAccounts .createButton {
+.addToAccounts .createButton {
 	height: 35px;
 	width: 80px;
 	margin-left: 65px;
 	margin-top: 25px;	
 }
 
-.addToChartOfAccounts .initialBalanceTextField {
+.addToAccounts .initialBalanceTextField {
 	width: 8em;
 }
 
@@ -32,7 +33,7 @@ body {
 	width: 25px;
 }
 
-.addToChartOfAccounts .textBox {
+.addToAccounts .textBox {
 	width: 60em;
 }
 
@@ -61,10 +62,10 @@ body {
 	display: flex;
 	flex-direction: row;
 	flex-grow: 1;
-	height: 200px;
+	height: 150px;
 }
 
-.addToChartOfAccounts .backButton {
+.addToAccounts .backButton {
 	margin-left: 65px;
 }
 
