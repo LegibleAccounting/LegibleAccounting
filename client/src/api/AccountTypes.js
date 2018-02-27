@@ -2,7 +2,6 @@ import { JSONAPIRequest } from './util/Request.js';
 import Auth from './Auth.js';
 
 class AccountTypesAPI {
-    constructor() {}
     getAll() {
     	return fetch(new JSONAPIRequest('/api/account-types/', Auth.token), {
     		method: 'GET'

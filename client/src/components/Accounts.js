@@ -33,7 +33,7 @@ class Accounts extends Component {
                 <div className="titleBar">
                     <h1>Accounts</h1>
                     {
-                        Auth.currentUser.groups.find(group => group.name == 'Administrator') ? (
+                        Auth.currentUser.groups.find(group => group.name === 'Administrator') ? (
                             <NavLink className="NavLink btn btn-primary newButton" to="/accounts/add">New +</NavLink> 
                         ) : (
                             <span></span>
@@ -67,7 +67,7 @@ class Accounts extends Component {
                                 <td>{item.account_type.category}</td>
                                 <td>
                                 {
-                                    Auth.currentUser.groups.find(group => group.name == 'Administrator' || group.name === 'Manager') ? (
+                                    Auth.currentUser.groups.find(group => group.name === 'Administrator' || group.name === 'Manager') ? (
                                         <NavLink className="NavLink btn btn-primary newButton" to={`/accounts/${item.id}`}>Edit</NavLink>
                                     ) : (
                                         <span></span>

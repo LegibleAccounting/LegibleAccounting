@@ -11,7 +11,7 @@ const GuardedManagerPermissionsRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      Auth.currentUser.groups.find(group => group.name === 'Manager') ? (
+      Auth.currentUser.groups.find(group => group.name === 'Manager' || group.name === 'Administrator') ? (
         <Component {...props} />
       ) : (
         <Redirect

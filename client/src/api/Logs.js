@@ -2,8 +2,6 @@ import { JSONAPIRequest } from './util/Request.js';
 import Auth from './Auth.js';
 
 class LogsAPI {
-    constructor() {}
-
     getAll() {
 		if (!Auth.token) {
             return Promise.reject();

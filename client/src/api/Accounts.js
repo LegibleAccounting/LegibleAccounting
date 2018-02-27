@@ -2,8 +2,6 @@ import { JSONAPIRequest } from './util/Request.js';
 import Auth from './Auth.js';
 
 class AccountsAPI {
-    constructor() {}
-
     getAll(active) {
 		if (!Auth.token) {
             return Promise.reject();

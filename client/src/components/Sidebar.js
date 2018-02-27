@@ -1,13 +1,10 @@
+
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Auth from '../api/Auth.js';
 import './Sidebar.css';
 
 class Sidebar extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         if (this.props.isLoading) {
             return (<div>Loading...</div>);
@@ -30,7 +27,7 @@ class Sidebar extends Component {
                         <NavLink to="/accounts">Accounts</NavLink>
                     </li>
                     {
-                        Auth.currentUser.groups.find(group => group.name == 'Administrator') ? (
+                        Auth.currentUser.groups.find(group => group.name === 'Administrator') ? (
                             <li>
                                 <NavLink to="/logs">Event Log</NavLink>
                             </li>
