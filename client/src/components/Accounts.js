@@ -58,7 +58,7 @@ class Accounts extends Component {
                                 <td>{item.account_number}</td>
                                 <td>{item.name}</td>
                                 <td>{item.account_type.category}</td>
-                                <td><NavLink className="NavLink btn btn-primary newButton" to={`/chart-of-accounts/${item.id}`}>Edit</NavLink> </td>
+                                <td><NavLink className="NavLink btn btn-primary newButton" to={`/accounts/${item.id}`}>Edit</NavLink> </td>
                             </tr>
                           ))
                         ) : (
