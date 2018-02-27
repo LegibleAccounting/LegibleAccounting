@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import AccountTypesAPI from '../api/AccountTypes.js';
 import AccountsAPI from '../api/Accounts.js';
-import './AddToAccounts.css';
+import './AccountForm.css';
 
-class AddToAccountsPage extends Component {
+class AccountForm extends Component {
     constructor(props) {
         super(props);
 
@@ -63,7 +63,7 @@ class AddToAccountsPage extends Component {
         }
 
         return (
-            <form className="addToAccounts" onSubmit={this.submitAccount}>
+            <form className="accountForm" onSubmit={this.submitAccount}>
                 <div className="titleBar">
                     <h1>{ this.state.accountModel.id === undefined ? 'Add' : 'Edit' } Account</h1>
                 </div>
@@ -190,4 +190,4 @@ class AddToAccountsPage extends Component {
     }
   }
 
-export default AddToAccountsPage;
+export default AccountForm;

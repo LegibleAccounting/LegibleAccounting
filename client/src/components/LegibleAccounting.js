@@ -4,7 +4,7 @@ import {Grid, Row, Col} from 'react-bootstrap';
 
 import Dashboard from './Dashboard.js';
 import ChartOfAccounts from './ChartOfAccounts.js';
-import AddToAccounts from './AddToAccounts.js';
+import AccountForm from './AccountForm.js';
 import AddToChartOfAccounts from './AddToChartOfAccounts.js';
 import Accounts from './Accounts.js';
 import Logs from './Logs.js';
@@ -46,8 +46,8 @@ class LegibleAccounting extends Component {
                 <Route exact path="/chart-of-accounts" component={ChartOfAccounts} />
                 <Route exact path="/chart-of-accounts/add" component={AddToChartOfAccounts} />
                 <Route exact path="/accounts" component={Accounts} />
-                <Route exact path="/accounts/add" component={AddToAccounts} />
-                <Route path="/accounts/:id" component={AddToAccounts} />
+                <Route exact path="/accounts/add" component={AccountForm} />
+                <Route path="/accounts/:id" component={AccountForm} />
                 <Route exact path="/logs" component={Logs} />
               </Switch>
             </Col>
