@@ -18,7 +18,7 @@ class Sidebar extends Component {
                 </div>
                 <ul className="nav nav-stacked">
                     <li>
-                        <NavLink to="/">Dashboard</NavLink>
+                        <NavLink exact to="/">Dashboard</NavLink>
                     </li>
                     <li>
                         <NavLink to="/chart-of-accounts">Chart of Accounts</NavLink>
