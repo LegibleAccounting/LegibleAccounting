@@ -18,7 +18,7 @@ class Accounts extends Component {
         this.searchTextChanged = this.searchTextChanged.bind(this);
         this.search = this.search.bind(this);
 
-        AccountsAPI.getAll(false)
+        AccountsAPI.getAll()
             .then(data => {
                 this.setState({
                     accounts: data,
