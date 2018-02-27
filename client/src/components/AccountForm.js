@@ -118,6 +118,7 @@ class AccountForm extends Component {
 						<input 	type="checkbox" 
 								name="is_active"
 								className="accountActiveCheckBox"
+                                checked={this.state.accountModel.is_active}
 								value={this.state.accountModel.is_active}
                                 onChange={this.changeInputState} />
 					</div>
