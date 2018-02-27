@@ -9,8 +9,26 @@
     padding-top: 2em;
     padding-bottom: 6em;
     text-align: center;
+    color: white;
 }
 
 .Sidebar .sidebar-heading .user-heading {
     margin-top: 0;
+}
+
+.Sidebar .nav.nav-stacked li {
+    margin-top: 0;
+}
+
+.Sidebar .nav [href] {
+    color: white;
+}
+
+.Sidebar .nav [href]:hover {
+    color: black;
+}
+
+.Sidebar .nav [href].active {
+    background-color: #eee;
+    color: #111;
 }
