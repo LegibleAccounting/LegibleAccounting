@@ -60,7 +60,7 @@ class ChartOfAccounts extends Component {
 						    	<td>{item.name}</td>
 						    	<td>${item.initial_balance}</td>
 						    	<td>{item.description}</td>
-						    	<td><NavLink className="NavLink btn btn-primary newButton" to={`/chart-of-accounts/${item.id}`}>Edit</NavLink> </td>
+						    	<td><NavLink className="NavLink btn btn-primary newButton" to={`/accounts/${item.id}`}>Edit</NavLink> </td>
 						  	</tr>
 				          ))
 				        ) : (
