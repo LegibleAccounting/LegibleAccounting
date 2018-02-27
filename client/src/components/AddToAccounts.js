@@ -22,7 +22,9 @@ class AddToAccountsPage extends Component {
     render() {
         return (
         	<div className="addToAccounts">	
-        		<h1 className="page-title">Add Account</h1>
+                <div className="titleBar">
+                    <h1>Add Account</h1>
+                </div>
                 <div className="row">
 					<div className="textColumn container">
 						Account Type
