@@ -10,15 +10,35 @@ class AddToAccountsPage extends Component {
 
         this.state = {
             redirectToAccountsPage: false,
-            accountTypes: [],
-            accountModel: {
+            accountTypes: []
+        };
+
+        if (this.props.match.params.id) {
+            this.state.isLoading = true;
+            AccountsAPI.getOne(this.props.match.params.id)
+                .then((account) => {
+                    account.account_type = account.account_type.id;
+
+                    this.state.accountModel = account;
+                })
+                .catch(() => {
+                    alert('Failed to retrieve account information.');
+                })
+                .finally(() => {
+                    this.setState({
+                        isLoading: false
+                    });
+                });
+        } else {
+            this.state.isLoading = false;
+            this.state.accountModel = {
                 account_type: '',
                 relative_liquidity: '',
                 name: '',
                 description: '',
                 initial_balance: '',
                 is_active: false
-            }
+            };
         }
 
         AccountTypesAPI.getAll()
@@ -34,6 +54,10 @@ class AddToAccountsPage extends Component {
     }
 
     render() {
+        if (this.state.isLoading) {
+            return <div>Loading...</div>;
+        }
+
         if (this.state.redirectToAccountsPage) {
             return <Redirect to="/accounts" />
         }
@@ -41,7 +65,7 @@ class AddToAccountsPage extends Component {
         return (
             <form className="addToAccounts" onSubmit={this.submitAccount}>
                 <div className="titleBar">
-                    <h1>Add Account</h1>
+                    <h1>{ this.state.accountModel.id === undefined ? 'Add' : 'Edit' } Account</h1>
                 </div>
                 <div className="row">
 					<div className="textColumn container">
@@ -127,7 +151,7 @@ class AddToAccountsPage extends Component {
 					</div>
 				</div>	
 				<div>
-					<input type="submit" value="Create" name="createButton" className="btn btn-primary createButton"/>
+					<input type="submit" value={ this.state.accountModel.id === undefined ? 'Create' : 'Update' } className="btn btn-primary createButton"/>
 				</div>
         		<div className="fillSpace"></div>
 				<div>
@@ -149,15 +173,19 @@ class AddToAccountsPage extends Component {
     submitAccount(event) {
         event.preventDefault();
 
-        AccountsAPI.create(this.state.accountModel)
+        let request = this.state.accountModel.id === undefined ?
+            AccountsAPI.create(this.state.accountModel) :
+            AccountsAPI.update(this.state.accountModel);
+
+        request
             .then(() => {
-                alert("Account created successfully.");
+                alert(`Account ${this.state.accountModel.id === undefined ? 'created' : 'updated' } successfully.`);
                 this.setState({
                     redirectToAccountsPage: true
                 });
             })
             .catch(() => {
-                alert("Failed to create account.");
+                alert(`Failed to ${this.state.accountModel.id === undefined ? 'create' : 'update' } account.`);
             });
     }
   }
