@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
-import './AddToAccounts.css';
+import { NavLink, Redirect } from 'react-router-dom';
 import AccountTypesAPI from '../api/AccountTypes.js';
-import { NavLink } from 'react-router-dom';
+import AccountsAPI from '../api/Accounts.js';
+import './AddToAccounts.css';
 
 class AddToAccountsPage extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-        	accountTypes: []
+            redirectToAccountsPage: false,
+            accountTypes: [],
+            accountModel: {
+                account_type: '',
+                relative_liquidity: '',
+                name: '',
+                description: '',
+                initial_balance: '',
+                is_active: false
+            }
         }
 
         AccountTypesAPI.getAll()
@@ -17,11 +27,19 @@ class AddToAccountsPage extends Component {
             		accountTypes: data
             	});
             });
+
+        // Bind event handlers to class instance context.
+        this.changeInputState = this.changeInputState.bind(this);
+        this.submitAccount = this.submitAccount.bind(this);
     }
 
     render() {
+        if (this.state.redirectToAccountsPage) {
+            return <Redirect to="/accounts" />
+        }
+
         return (
-        	<div className="addToAccounts">	
+            <form className="addToAccounts" onSubmit={this.submitAccount}>
                 <div className="titleBar">
                     <h1>Add Account</h1>
                 </div>
@@ -30,10 +48,11 @@ class AddToAccountsPage extends Component {
 						Account Type
 					</div>
 					<div className="fieldColumn container">
-						<select className="form-control textBox">
+						<select name="account_type" className="form-control textBox" value={this.state.accountModel.account_type} onChange={this.changeInputState}>
+                            <option hidden>-- Select Account Type --</option>
 							{
                                 this.state.accountTypes.map((item, index) => (
-                                    <option key={item.id}>{item.starting_number} - {item.name}</option>
+                                    <option key={item.id} value={item.id}>{item.starting_number} - {item.name}</option>
                                 ))
 							}
 						</select>
@@ -44,22 +63,39 @@ class AddToAccountsPage extends Component {
 						Account Name
 					</div>
 					<div className="fieldColumn container">
-						<input 	type="text"
-								name="accountNameTextField"
+						<input type="text"
+								name="name"
 								className="form-control textBox"
-								maxLength="200"/>
+								maxLength="200"
+                                value={this.state.accountModel.name}
+                                onChange={this.changeInputState} />
 					</div>
 				</div>	
+                <div className="row">
+                    <div className="textColumn container">
+                        Account Relative Liquidity
+                    </div>
+                    <div className="fieldColumn container">
+                        <input type="number"
+                          name="relative_liquidity"
+                          className="form-control"
+                          placeholder="0"
+                          step="1"
+                          min="0"
+                          value={this.state.accountModel.relative_liquidity}
+                          onChange={this.changeInputState} />
+                    </div>
+                </div>
 				<div className="row">
 					<div className="textColumn container">
 						Account Active
 					</div>
 					<div className="fieldColumn container">
 						<input 	type="checkbox" 
-								name="accountActiveCheckBox"
+								name="is_active"
 								className="accountActiveCheckBox"
-								value="true"
-								defaultChecked="checked"/>
+								value={this.state.accountModel.is_active}
+                                onChange={this.changeInputState} />
 					</div>
 				</div>
 				<div className="row">
@@ -68,11 +104,13 @@ class AddToAccountsPage extends Component {
 					</div>
 					<div className="fieldColumn container">
 						<input	type="number"
-								name="initialBalanceTextField"
+								name="initial_balance"
 								className="form-control initialBalanceTextField currency"
 								placeholder="$0.00"
 								step="0.01"
-								min="0"/>
+								min="0"
+                                value={this.state.accountModel.initial_balance}
+                                onChange={this.changeInputState} />
 					</div>
 				</div>
 				<div className="row">
@@ -81,9 +119,11 @@ class AddToAccountsPage extends Component {
 					</div>
 					<div className="fieldColumn container">
 						<input 	type="text"
-								name="commentsTextField"
+								name="description"
 								className="form-control textBox"
-								maxLength="200"/>
+								maxLength="200"
+                                value={this.state.accountModel.description}
+                                onChange={this.changeInputState} />
 					</div>
 				</div>	
 				<div>
@@ -93,9 +133,33 @@ class AddToAccountsPage extends Component {
 				<div>
 					<NavLink className="NavLink btn btn-primary newButton" to="/accounts">&lt; Back to Accounts</NavLink>
 				</div>
-			</div>
+			</form>
 		);
     }
-}
+
+    changeInputState(event) {
+        this.setState({
+            accountModel: Object.assign({}, this.state.accountModel, {
+                [event.target.name]: event.target.type === 'checkbox' ?
+                    event.target.checked : event.target.value
+            })
+        });
+    }
+
+    submitAccount(event) {
+        event.preventDefault();
+
+        AccountsAPI.create(this.state.accountModel)
+            .then(() => {
+                alert("Account created successfully.");
+                this.setState({
+                    redirectToAccountsPage: true
+                });
+            })
+            .catch(() => {
+                alert("Failed to create account.");
+            });
+    }
+  }
 
 export default AddToAccountsPage;

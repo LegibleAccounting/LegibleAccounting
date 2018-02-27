@@ -58,6 +58,25 @@ class AccountsAPI {
                 return Promise.reject(response);
             });
     }
+
+    create(data) {
+        if (!Auth.token) {
+            return Promise.reject();
+        }
+
+        return fetch(new JSONAPIRequest('/api/accounts/', Auth.token), {
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
+          .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
+          .then(response => response = response.json())
+          .then((response) => {
+            return Promise.resolve(response);
+          })
+          .catch((response) => {
+            return Promise.reject(response);
+          });
+    }
 }
 
 export default new AccountsAPI();
