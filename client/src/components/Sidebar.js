@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import Auth from '../api/Auth.js';
 import './Sidebar.css';
 
 class Sidebar extends Component {
@@ -28,9 +29,15 @@ class Sidebar extends Component {
                     <li>
                         <NavLink to="/accounts">Accounts</NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/logs">Event Log</NavLink>
-                    </li>
+                    {
+                        Auth.currentUser.groups.find(group => group.name == 'Administrator') ? (
+                            <li>
+                                <NavLink to="/logs">Event Log</NavLink>
+                            </li>
+                        ) : (
+                            <span></span>
+                        )
+                    }
                 </ul>
             </div>
         );

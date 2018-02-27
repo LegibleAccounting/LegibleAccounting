@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ChartOfAccounts from './ChartOfAccounts.js';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -7,7 +8,7 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <h1>Dashboard</h1>
+            <ChartOfAccounts />
         );
     }
 }

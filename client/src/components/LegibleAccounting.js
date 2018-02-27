@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import {Grid, Row, Col} from 'react-bootstrap';
 
+import GuardedAdministratorPermissionsRoute from './GuardedAdministratorPermissionsRoute.js';
+import GuardedManagerPermissionsRoute from './GuardedManagerPermissionsRoute.js';
 import Dashboard from './Dashboard.js';
 import ChartOfAccounts from './ChartOfAccounts.js';
 import AccountForm from './AccountForm.js';
@@ -44,11 +46,11 @@ class LegibleAccounting extends Component {
               <Switch>
                 <Route exact path="/" component={Dashboard} />
                 <Route exact path="/chart-of-accounts" component={ChartOfAccounts} />
-                <Route exact path="/chart-of-accounts/add" component={AddToChartOfAccounts} />
+                <GuardedAdministratorPermissionsRoute exact path="/chart-of-accounts/add" component={AddToChartOfAccounts} />
                 <Route exact path="/accounts" component={Accounts} />
-                <Route exact path="/accounts/add" component={AccountForm} />
-                <Route path="/accounts/:id" component={AccountForm} />
-                <Route exact path="/logs" component={Logs} />
+                <GuardedAdministratorPermissionsRoute exact path="/accounts/add" component={AccountForm} />
+                <GuardedManagerPermissionsRoute path="/accounts/:id" component={AccountForm} />
+                <GuardedAdministratorPermissionsRoute exact path="/logs" component={Logs} />
               </Switch>
             </Col>
           </Row>
