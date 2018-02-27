@@ -31,7 +31,7 @@ class ChartOfAccounts extends Component {
         	<div className="chartOfAccounts">
         		<div className="titleBar">
 		            <h1>Chart of Accounts</h1>
-					<NavLink className="NavLink btn btn-primary newButton" to="/chart-of-accounts/add">New +</NavLink> 
+					<NavLink className="NavLink btn btn-primary newButton" to="/chart-of-accounts/add">Add +</NavLink> 
 					<div className="filler"></div>
 					<div className="searchContainer btn-group">
 						<form onSubmit={this.search}>
@@ -60,7 +60,7 @@ class ChartOfAccounts extends Component {
 						    	<td>{item.name}</td>
 						    	<td>${item.initial_balance}</td>
 						    	<td>{item.description}</td>
-						    	<td><NavLink className="NavLink btn btn-primary newButton" to={`/chart-of-accounts/${item.id}`}>Edit</NavLink> </td>
+						    	<td><NavLink className="NavLink btn btn-primary newButton" to={`/accounts/${item.id}`}>Edit</NavLink> </td>
 						  	</tr>
 				          ))
 				        ) : (
@@ -90,11 +90,11 @@ class ChartOfAccounts extends Component {
     search(event) {
     	event.preventDefault();
     	 AccountsAPI.search(true, this.state.searchText)
-    	.then(data => {
-    		this.setState({
-    			accounts: data
-    		});
-    	});
+        	.then(data => {
+        		this.setState({
+        			accounts: data
+        		});
+        	});
     }
 }
 

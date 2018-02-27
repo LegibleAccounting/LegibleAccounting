@@ -1,15 +1,15 @@
-.addToAccounts {
+.accountForm {
 	height: 100%;
 }
 
-.addToAccounts .createButton {
+.accountForm .createButton {
 	height: 35px;
 	width: 80px;
 	margin-left: 65px;
 	margin-top: 25px;	
 }
 
-.addToAccounts .initialBalanceTextField {
+.accountForm .initialBalanceTextField {
 	width: 8em;
 }
 
@@ -18,7 +18,7 @@
 	width: 25px;
 }
 
-.addToAccounts .textBox {
+.accountForm .textBox {
 	width: 60em;
 }
 
@@ -50,7 +50,7 @@
 	height: 150px;
 }
 
-.addToAccounts .backButton {
+.accountForm .backButton {
 	margin-left: 65px;
 }
 
