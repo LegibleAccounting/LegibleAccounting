@@ -11,8 +11,8 @@ class AccountsAPI {
 
         // determine if searching active accounts
         var requestURL = '/api/accounts/';
-        if (active) {
-        	requestURL += '?is_active=true';
+        if (active === true || active === false) {
+            requestURL += '?is_active=' + (active ? 'true' : 'false');
         }
 
         return fetch(new JSONAPIRequest(requestURL, Auth.token), {
