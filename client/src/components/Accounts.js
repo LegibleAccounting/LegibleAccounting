@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Accounts.css';
 import './CommonChart.css';
+import Auth from '../api/Auth.js';
 import AccountsAPI from '../api/Accounts.js';
 
 class Accounts extends Component {
@@ -31,7 +32,13 @@ class Accounts extends Component {
             <div className="accounts">
                 <div className="titleBar">
                     <h1>Accounts</h1>
-                    <NavLink className="NavLink btn btn-primary newButton" to="/accounts/add">New +</NavLink> 
+                    {
+                        Auth.currentUser.groups.find(group => group.name == 'Administrator') ? (
+                            <NavLink className="NavLink btn btn-primary newButton" to="/accounts/add">New +</NavLink> 
+                        ) : (
+                            <span></span>
+                        )
+                    }
                     <div className="filler"></div>
                     <div className="searchContainer btn-group">
                         <form onSubmit={this.search}>
@@ -58,7 +65,15 @@ class Accounts extends Component {
                                 <td>{item.account_number}</td>
                                 <td>{item.name}</td>
                                 <td>{item.account_type.category}</td>
-                                <td><NavLink className="NavLink btn btn-primary newButton" to={`/accounts/${item.id}`}>Edit</NavLink> </td>
+                                <td>
+                                {
+                                    Auth.currentUser.groups.find(group => group.name == 'Administrator' || group.name === 'Manager') ? (
+                                        <NavLink className="NavLink btn btn-primary newButton" to={`/accounts/${item.id}`}>Edit</NavLink>
+                                    ) : (
+                                        <span></span>
+                                    )
+                                }
+                                </td>
                             </tr>
                           ))
                         ) : (

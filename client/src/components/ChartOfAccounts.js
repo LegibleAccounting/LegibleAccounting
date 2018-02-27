@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './ChartOfAccounts.css';
 import './CommonChart.css';
+import Auth from '../api/Auth.js';
 import AccountsAPI from '../api/Accounts.js';
 
 class ChartOfAccounts extends Component {
@@ -31,7 +32,13 @@ class ChartOfAccounts extends Component {
         	<div className="chartOfAccounts">
         		<div className="titleBar">
 		            <h1>Chart of Accounts</h1>
-					<NavLink className="NavLink btn btn-primary newButton" to="/chart-of-accounts/add">Add +</NavLink> 
+                    {
+                        Auth.currentUser.groups.find(group => group.name == 'Administrator') ? (
+					       <NavLink className="NavLink btn btn-primary newButton" to="/chart-of-accounts/add">Add +</NavLink> 
+                        ) : (
+                            <span></span>
+                        )
+                    }
 					<div className="filler"></div>
 					<div className="searchContainer btn-group">
 						<form onSubmit={this.search}>
@@ -60,7 +67,15 @@ class ChartOfAccounts extends Component {
 						    	<td>{item.name}</td>
 						    	<td>${item.initial_balance}</td>
 						    	<td>{item.description}</td>
-						    	<td><NavLink className="NavLink btn btn-primary newButton" to={`/accounts/${item.id}`}>Edit</NavLink> </td>
+                                <td>
+                                {
+                                    Auth.currentUser.groups.find(group => group.name == 'Administrator' || group.name === 'Manager') ? (
+                                        <NavLink className="NavLink btn btn-primary newButton" to={`/accounts/${item.id}`}>Edit</NavLink>
+                                    ) : (
+                                        <span></span>
+                                    )
+                                }
+                                </td>
 						  	</tr>
 				          ))
 				        ) : (
