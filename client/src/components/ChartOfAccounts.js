@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import './ChartOfAccounts.css';
 import './CommonChart.css';
 import Auth from '../api/Auth.js';
-import AccountsAPI from '../api/Accounts.js';
+import AccountsAPI from '../api/AccountsApi.js';
 
 class ChartOfAccounts extends Component {
     constructor(props) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import Auth from '../api/Auth.js';
 import AccountTypesAPI from '../api/AccountTypes.js';
-import AccountsAPI from '../api/Accounts.js';
+import AccountsAPI from '../api/AccountsApi.js';
 import './AccountForm.css';
 
 class AccountForm extends Component {

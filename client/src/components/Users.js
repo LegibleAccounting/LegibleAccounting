@@ -1,40 +1,40 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import './Accounts.css';
+import './Users.css';
 import './CommonChart.css';
 import Auth from '../api/Auth.js';
-import AccountsAPI from '../api/AccountsApi.js';
+import UsersAPI from '../api/UsersApi.js';
 
-class Accounts extends Component {
+class Users extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-          accounts: [],
-          ogAccounts: [],
+          users: [],
+          ogUsers: [],
           searchText: ''
         };
 
         this.searchTextChanged = this.searchTextChanged.bind(this);
         this.search = this.search.bind(this);
 
-        AccountsAPI.getAll()
+        UsersAPI.getAll()
             .then(data => {
                 this.setState({
-                    accounts: data,
-                    ogAccounts: data
+                    users: data,
+                    ogUsers: data
                 });
             });
     }
 
     render() {
         return (
-            <div className="accounts">
+            <div className="users">
                 <div className="titleBar">
-                    <h1>AccountsApi</h1>
+                    <h1>Users</h1>
                     {
                         Auth.currentUser.groups.find(group => group.name === 'Administrator') ? (
-                            <NavLink className="NavLink btn btn-primary newButton" to="/accounts/add">New +</NavLink> 
+                            <NavLink className="NavLink btn btn-primary newButton" to="/users/add">New +</NavLink> 
                         ) : (
                             <span></span>
                         )
@@ -52,23 +52,23 @@ class Accounts extends Component {
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                            <th className="accountNumber">#</th>
+                            <th className="usersNumber">#</th>
                             <th className="name">Name</th>
                             <th className="type">Type</th>
                             <th className="edits"></th>
                         </tr>
                       </thead>
                       <tbody>
-                        { this.state.accounts.length ? (
-                          this.state.accounts.map((item, index) => (
+                        { this.state.users.length ? (
+                          this.state.users.map((item, index) => (
                             <tr key={item.id}>
-                                <td>{item.account_number}</td>
+                                <td>{item.user_number}</td>
                                 <td>{item.name}</td>
-                                <td>{item.account_type.category}</td>
+                                <td>{item.user_type.category}</td>
                                 <td>
                                 {
                                     Auth.currentUser.groups.find(group => group.name === 'Administrator' || group.name === 'Manager') ? (
-                                        <NavLink className="NavLink btn btn-primary newButton" to={`/accounts/${item.id}`}>Edit</NavLink>
+                                        <NavLink className="NavLink btn btn-primary newButton" to={`/users/${item.id}`}>Edit</NavLink>
                                     ) : (
                                         <span></span>
                                     )
@@ -79,7 +79,7 @@ class Accounts extends Component {
                         ) : (
                             <tr>
                                 <td></td>
-                                <td>No Accounts</td>
+                                <td>No Users</td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -95,20 +95,20 @@ class Accounts extends Component {
         this.setState({ searchText: event.target.value });
         if (event.target.value === '') {
             this.setState({
-                accounts: this.state.ogAccounts
+                users: this.state.ogUsers
             });
         }
     }
 
     search(event) {
         event.preventDefault();
-         AccountsAPI.search(false, this.state.searchText)
+         UsersAPI.search(false, this.state.searchText)
         .then(data => {
             this.setState({
-                accounts: data
+                users: data
             });
         });
     }
 }
 
-export default Accounts;
+export default Users;

@@ -1,0 +1,11 @@
+.users .userNumber{
+	width: 10px;
+}
+
+.users .name{
+	width: 50%;
+}
+
+.users .edits{
+	width: 40px;
+}
