@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
+import Auth from '../api/Auth.js';
 import AccountTypesAPI from '../api/AccountTypes.js';
 import AccountsAPI from '../api/Accounts.js';
 import './AccountForm.css';
@@ -120,6 +121,7 @@ class AccountForm extends Component {
 								className="accountActiveCheckBox"
                                 checked={this.state.accountModel.is_active}
 								value={this.state.accountModel.is_active}
+                                disabled={ !Auth.currentUser.groups.find(group => group.name === 'Administrator') }
                                 onChange={this.changeInputState} />
 					</div>
 				</div>
