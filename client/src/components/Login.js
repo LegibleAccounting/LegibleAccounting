@@ -27,27 +27,26 @@ class Login extends Component {
     return (
        <form className="Login" onSubmit={this.requestLogin}>
           <div className = "Spacer">
-            
             <img className ="Login-logo" alt="" src={logo} />
           </div>
-          <div className = "El-Container Spacer"> 
+          <div className = "Spacer"> 
               <input className = "input"
               placeholder = 'Username'
               value={this.inputUsername} 
               onChange={this.updateUsernameState} />
           </div>
-          <div className = "El-Container Spacer"> 
+          <div className = "Spacer"> 
               <input className = "input"
               type="password" 
               placeholder = 'Password'
               value={this.inputPassword}
               onChange={this.updatePasswordState} />
           </div>
-          <div className = "El-Container Spacer">
+          <div className = "Spacer">
             <button className ="button" type = "submit">
               Login
-              </button>
-            </div>
+            </button>
+          </div>
       </form>
     );
   }
