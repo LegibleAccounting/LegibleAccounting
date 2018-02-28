@@ -12,7 +12,7 @@ class RetrieveAccountTypeSerializer(AccountTypeSerializer):
     def get_category(self, obj):
         return obj.get_category_display()
 
-ACCOUNT_BASE_FIELDS = ('id', 'account_type', 'name', 'description', 'initial_balance', 'created_date', 'is_active', 'relative_liquidity')
+ACCOUNT_BASE_FIELDS = ('id', 'account_type', 'name', 'description', 'initial_balance', 'created_date', 'is_active', 'order',)
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
