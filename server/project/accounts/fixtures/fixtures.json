@@ -226,7 +226,7 @@
         "account_type": 1,
         "name": "Cash",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -239,7 +239,7 @@
         "account_type": 1,
         "name": "Petty Cash",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -252,7 +252,7 @@
         "account_type": 2,
         "name": "Notes Receivable",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -265,7 +265,7 @@
         "account_type": 2,
         "name": "Accounts Receivable",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -278,7 +278,7 @@
         "account_type": 2,
         "name": "Allowance for Bad Debts",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -291,7 +291,7 @@
         "account_type": 2,
         "name": "Interest Receivable (Also Accrued Interest Receivable)",
         "description": "",
-        "relative_liquidity": 3,
+        "order": 3,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -304,7 +304,7 @@
         "account_type": 2,
         "name": "Common Stock Subscriptions Receivable",
         "description": "",
-        "relative_liquidity": 4,
+        "order": 4,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -317,7 +317,7 @@
         "account_type": 2,
         "name": "Preferred Stock Subscriptions Receivable",
         "description": "",
-        "relative_liquidity": 5,
+        "order": 5,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -330,7 +330,7 @@
         "account_type": 3,
         "name": "Merchandise Inventory",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -343,7 +343,7 @@
         "account_type": 3,
         "name": "Raw Materials",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -356,7 +356,7 @@
         "account_type": 3,
         "name": "Work in Process",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -369,7 +369,7 @@
         "account_type": 3,
         "name": "Finished Goods",
         "description": "",
-        "relative_liquidity": 3,
+        "order": 3,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -382,7 +382,7 @@
         "account_type": 4,
         "name": "Supplies (Specialty Items like Medical, Bicycle, Tailoring, etc.)",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -395,7 +395,7 @@
         "account_type": 4,
         "name": "Office Supplies",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -408,7 +408,7 @@
         "account_type": 4,
         "name": "Food  Supplies",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -421,7 +421,7 @@
         "account_type": 4,
         "name": "Prepaid Insurance",
         "description": "",
-        "relative_liquidity": 3,
+        "order": 3,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -434,7 +434,7 @@
         "account_type": 5,
         "name": "Bond Sinking Fund",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -447,7 +447,7 @@
         "account_type": 6,
         "name": "Land",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -460,7 +460,7 @@
         "account_type": 6,
         "name": "Natural Resources",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -473,7 +473,7 @@
         "account_type": 6,
         "name": "Accumulated Depletion",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -486,7 +486,7 @@
         "account_type": 7,
         "name": "Buildings",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -499,7 +499,7 @@
         "account_type": 7,
         "name": "Accumulated Depreciation--Buildings",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -512,7 +512,7 @@
         "account_type": 8,
         "name": "Office Equipment (Also Store Equipment)",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -525,7 +525,7 @@
         "account_type": 8,
         "name": "Accumulated Depreciation--Office Equipment (Also Store Equipment)",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -538,7 +538,7 @@
         "account_type": 8,
         "name": "Office Furniture",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -551,7 +551,7 @@
         "account_type": 8,
         "name": "Accumulated Depreciation--Office Furniture",
         "description": "",
-        "relative_liquidity": 3,
+        "order": 3,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -564,7 +564,7 @@
         "account_type": 8,
         "name": "Athletic Equipment (Also Tailoring, Lawn, Cleaning)",
         "description": "",
-        "relative_liquidity": 4,
+        "order": 4,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -577,7 +577,7 @@
         "account_type": 8,
         "name": "Accumulated Depreciation--Athletic Equipment (Also Tailoring, Lawn, Cleaning)",
         "description": "",
-        "relative_liquidity": 5,
+        "order": 5,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -590,7 +590,7 @@
         "account_type": 8,
         "name": "Tennis Facilities (Also Basketball Facilities)",
         "description": "",
-        "relative_liquidity": 6,
+        "order": 6,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -603,7 +603,7 @@
         "account_type": 8,
         "name": "Accumulated Depreciation--Tennis Facilities (Also Basketball Facilities)",
         "description": "",
-        "relative_liquidity": 7,
+        "order": 7,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -616,7 +616,7 @@
         "account_type": 8,
         "name": "Delivery Equipment (Also Medical, Van)",
         "description": "",
-        "relative_liquidity": 8,
+        "order": 8,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -629,7 +629,7 @@
         "account_type": 8,
         "name": "Accumulated Depreciation--Delivery Equipment (Also Medical, Van)",
         "description": "",
-        "relative_liquidity": 9,
+        "order": 9,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -642,7 +642,7 @@
         "account_type": 8,
         "name": "Exercise Equipment",
         "description": "",
-        "relative_liquidity": 10,
+        "order": 10,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -655,7 +655,7 @@
         "account_type": 8,
         "name": "Accumulated Depreciation--Exercise Equipment",
         "description": "",
-        "relative_liquidity": 11,
+        "order": 11,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -668,7 +668,7 @@
         "account_type": 8,
         "name": "Computer Equipment",
         "description": "",
-        "relative_liquidity": 12,
+        "order": 12,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -681,7 +681,7 @@
         "account_type": 8,
         "name": "Accumulated Depreciation--Computer Equipment",
         "description": "",
-        "relative_liquidity": 13,
+        "order": 13,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -694,7 +694,7 @@
         "account_type": 9,
         "name": "Patents",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -707,7 +707,7 @@
         "account_type": 9,
         "name": "Copyrights",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -720,7 +720,7 @@
         "account_type": 9,
         "name": "Organization Costs",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -733,7 +733,7 @@
         "account_type": 10,
         "name": "Notes Payable",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -746,7 +746,7 @@
         "account_type": 10,
         "name": "Discount on Notes Payable",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -759,7 +759,7 @@
         "account_type": 10,
         "name": "Accounts Payable (Also Vouchers Payable)",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -772,7 +772,7 @@
         "account_type": 10,
         "name": "United Way Contribution Payable",
         "description": "",
-        "relative_liquidity": 3,
+        "order": 3,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -785,7 +785,7 @@
         "account_type": 10,
         "name": "Income Tax Payable",
         "description": "",
-        "relative_liquidity": 4,
+        "order": 4,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -798,7 +798,7 @@
         "account_type": 10,
         "name": "Common Dividends Payable",
         "description": "",
-        "relative_liquidity": 5,
+        "order": 5,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -811,7 +811,7 @@
         "account_type": 10,
         "name": "Preferred Dividends Payable",
         "description": "",
-        "relative_liquidity": 6,
+        "order": 6,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -824,7 +824,7 @@
         "account_type": 10,
         "name": "Interest Payable (Also Bond Interest Payable)",
         "description": "",
-        "relative_liquidity": 7,
+        "order": 7,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -837,7 +837,7 @@
         "account_type": 11,
         "name": "Employee Income Tax Payable",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -850,7 +850,7 @@
         "account_type": 11,
         "name": "Social Security Tax Payable",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -863,7 +863,7 @@
         "account_type": 11,
         "name": "Medicare Tax Payable",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -876,7 +876,7 @@
         "account_type": 11,
         "name": "City Earnings Tax Payable",
         "description": "",
-        "relative_liquidity": 3,
+        "order": 3,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -889,7 +889,7 @@
         "account_type": 11,
         "name": "Health Insurance Premiums Payable",
         "description": "",
-        "relative_liquidity": 4,
+        "order": 4,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -902,7 +902,7 @@
         "account_type": 11,
         "name": "Credit Union Payable",
         "description": "",
-        "relative_liquidity": 5,
+        "order": 5,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -915,7 +915,7 @@
         "account_type": 11,
         "name": "Savings Bond Deductions Payable",
         "description": "",
-        "relative_liquidity": 6,
+        "order": 6,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -928,7 +928,7 @@
         "account_type": 11,
         "name": "Wages Payable",
         "description": "",
-        "relative_liquidity": 7,
+        "order": 7,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -941,7 +941,7 @@
         "account_type": 12,
         "name": "FUTA Tax Payable",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -954,7 +954,7 @@
         "account_type": 12,
         "name": "SUTA Tax Payable",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -967,7 +967,7 @@
         "account_type": 12,
         "name": "Workers' Compensation Insurance Payable",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -980,7 +980,7 @@
         "account_type": 13,
         "name": "Sales Tax Payable",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -993,7 +993,7 @@
         "account_type": 14,
         "name": "Unearned Subscription Revenue (Also Unearned Ticket Revenue, Unearned Repair Fees)",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1006,7 +1006,7 @@
         "account_type": 14,
         "name": "Current Portion of Mortgage Payable",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1019,7 +1019,7 @@
         "account_type": 15,
         "name": "Mortgage Payable",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1032,7 +1032,7 @@
         "account_type": 15,
         "name": "Bonds Payable",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1045,7 +1045,7 @@
         "account_type": 15,
         "name": "Discount on Bonds Payable",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1058,7 +1058,7 @@
         "account_type": 15,
         "name": "Premium on Bonds Payable",
         "description": "",
-        "relative_liquidity": 3,
+        "order": 3,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1071,7 +1071,7 @@
         "account_type": 16,
         "name": "Jessica Jane, Capital",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1084,7 +1084,7 @@
         "account_type": 16,
         "name": "Jessica Jane, Drawing",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1097,7 +1097,7 @@
         "account_type": 16,
         "name": "Income Summary",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1110,7 +1110,7 @@
         "account_type": 16,
         "name": "Common Stock",
         "description": "",
-        "relative_liquidity": 3,
+        "order": 3,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1123,7 +1123,7 @@
         "account_type": 16,
         "name": "Common Treasury Stock",
         "description": "",
-        "relative_liquidity": 4,
+        "order": 4,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1136,7 +1136,7 @@
         "account_type": 16,
         "name": "Paid in Capital in Excess of Par/Stated Value--Common Stock",
         "description": "",
-        "relative_liquidity": 5,
+        "order": 5,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1149,7 +1149,7 @@
         "account_type": 16,
         "name": "Preferred Stock",
         "description": "",
-        "relative_liquidity": 6,
+        "order": 6,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1162,7 +1162,7 @@
         "account_type": 16,
         "name": "Preferred Treasury Stock",
         "description": "",
-        "relative_liquidity": 7,
+        "order": 7,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1175,7 +1175,7 @@
         "account_type": 16,
         "name": "Discount on Preferred Stock",
         "description": "",
-        "relative_liquidity": 8,
+        "order": 8,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1188,7 +1188,7 @@
         "account_type": 16,
         "name": "Paid in Capital in Excess of Par/Stated Value--Preferred Stock",
         "description": "",
-        "relative_liquidity": 9,
+        "order": 9,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1201,7 +1201,7 @@
         "account_type": 16,
         "name": "Retained Earnings",
         "description": "",
-        "relative_liquidity": 10,
+        "order": 10,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1214,7 +1214,7 @@
         "account_type": 16,
         "name": "Retained Earnings Appropriated for...",
         "description": "",
-        "relative_liquidity": 11,
+        "order": 11,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1227,7 +1227,7 @@
         "account_type": 16,
         "name": "Common Stock Subscribed",
         "description": "",
-        "relative_liquidity": 12,
+        "order": 12,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1240,7 +1240,7 @@
         "account_type": 16,
         "name": "Preferred Stock Subscribed",
         "description": "",
-        "relative_liquidity": 13,
+        "order": 13,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1253,7 +1253,7 @@
         "account_type": 16,
         "name": "Paid in Capital from Sale of Treasury Stock",
         "description": "",
-        "relative_liquidity": 14,
+        "order": 14,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1266,7 +1266,7 @@
         "account_type": 17,
         "name": "Delivery Fees",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1279,7 +1279,7 @@
         "account_type": 17,
         "name": "Appraisal Fees",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1292,7 +1292,7 @@
         "account_type": 17,
         "name": "Medical Fees",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1305,7 +1305,7 @@
         "account_type": 17,
         "name": "Service Fees",
         "description": "",
-        "relative_liquidity": 3,
+        "order": 3,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1318,7 +1318,7 @@
         "account_type": 17,
         "name": "Repair Fees",
         "description": "",
-        "relative_liquidity": 4,
+        "order": 4,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1331,7 +1331,7 @@
         "account_type": 17,
         "name": "Sales",
         "description": "",
-        "relative_liquidity": 5,
+        "order": 5,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1344,7 +1344,7 @@
         "account_type": 17,
         "name": "Sales Returns and Allowances",
         "description": "",
-        "relative_liquidity": 6,
+        "order": 6,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1357,7 +1357,7 @@
         "account_type": 17,
         "name": "Sales Discounts",
         "description": "",
-        "relative_liquidity": 7,
+        "order": 7,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1370,7 +1370,7 @@
         "account_type": 17,
         "name": "Boarding and Grooming Revenue",
         "description": "",
-        "relative_liquidity": 8,
+        "order": 8,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1383,7 +1383,7 @@
         "account_type": 17,
         "name": "Subscriptions Revenue (if main line of business)",
         "description": "",
-        "relative_liquidity": 19,
+        "order": 19,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1396,7 +1396,7 @@
         "account_type": 18,
         "name": "Interest Revenue",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1409,7 +1409,7 @@
         "account_type": 18,
         "name": "Rent Revenue",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1422,7 +1422,7 @@
         "account_type": 18,
         "name": "Subscriptions Revenue (if not main line of business)",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1435,7 +1435,7 @@
         "account_type": 18,
         "name": "Sinking Fund Earnings",
         "description": "",
-        "relative_liquidity": 3,
+        "order": 3,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1448,7 +1448,7 @@
         "account_type": 18,
         "name": "Uncollectible Accounts Recovered",
         "description": "",
-        "relative_liquidity": 4,
+        "order": 4,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1461,7 +1461,7 @@
         "account_type": 18,
         "name": "Gain on Sale/Exchange of Equipment",
         "description": "",
-        "relative_liquidity": 5,
+        "order": 5,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1474,7 +1474,7 @@
         "account_type": 18,
         "name": "Gain on Bonds Redeemed",
         "description": "",
-        "relative_liquidity": 6,
+        "order": 6,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1487,7 +1487,7 @@
         "account_type": 19,
         "name": "Purchases",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1500,7 +1500,7 @@
         "account_type": 19,
         "name": "Purchases Returns and Allowances",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1513,7 +1513,7 @@
         "account_type": 19,
         "name": "Purchases Discounts",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1526,7 +1526,7 @@
         "account_type": 19,
         "name": "Freight-In",
         "description": "",
-        "relative_liquidity": 3,
+        "order": 3,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1539,7 +1539,7 @@
         "account_type": 19,
         "name": "Overhead",
         "description": "",
-        "relative_liquidity": 4,
+        "order": 4,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1552,7 +1552,7 @@
         "account_type": 19,
         "name": "Cost of Goods Sold",
         "description": "",
-        "relative_liquidity": 5,
+        "order": 5,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1565,7 +1565,7 @@
         "account_type": 20,
         "name": "Wages Expense (Also Wages and Salaries Expense)",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1578,7 +1578,7 @@
         "account_type": 20,
         "name": "Advertising Expense",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1591,7 +1591,7 @@
         "account_type": 20,
         "name": "Bank Credit Card Expense",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1604,7 +1604,7 @@
         "account_type": 20,
         "name": "Store Supplies Expense",
         "description": "",
-        "relative_liquidity": 3,
+        "order": 3,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1617,7 +1617,7 @@
         "account_type": 20,
         "name": "Travel and Entertainment Expense",
         "description": "",
-        "relative_liquidity": 4,
+        "order": 4,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1630,7 +1630,7 @@
         "account_type": 20,
         "name": "Cash Short and Over",
         "description": "",
-        "relative_liquidity": 5,
+        "order": 5,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1643,7 +1643,7 @@
         "account_type": 20,
         "name": "Depreciation Expense--Store Equipment and Fixtures",
         "description": "",
-        "relative_liquidity": 6,
+        "order": 6,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1656,7 +1656,7 @@
         "account_type": 21,
         "name": "Rent Expense",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1669,7 +1669,7 @@
         "account_type": 21,
         "name": "Office Salaries Expense",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1682,7 +1682,7 @@
         "account_type": 21,
         "name": "Office Supplies Expense (Also Medical)",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1695,7 +1695,7 @@
         "account_type": 21,
         "name": "Other Supplies: Food Supplies Expense (Also Medical)",
         "description": "",
-        "relative_liquidity": 3,
+        "order": 3,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1708,7 +1708,7 @@
         "account_type": 21,
         "name": "Telephone Expense",
         "description": "",
-        "relative_liquidity": 4,
+        "order": 4,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1721,7 +1721,7 @@
         "account_type": 21,
         "name": "Transportation/Automobile Expense (also Laboratory, Travel)",
         "description": "",
-        "relative_liquidity": 5,
+        "order": 5,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1734,7 +1734,7 @@
         "account_type": 21,
         "name": "Collection Expense",
         "description": "",
-        "relative_liquidity": 6,
+        "order": 6,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1747,7 +1747,7 @@
         "account_type": 21,
         "name": "Inventory Short and Over",
         "description": "",
-        "relative_liquidity": 7,
+        "order": 7,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1760,7 +1760,7 @@
         "account_type": 21,
         "name": "Loss on Write Down of Inventory",
         "description": "",
-        "relative_liquidity": 8,
+        "order": 8,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1773,7 +1773,7 @@
         "account_type": 21,
         "name": "Payroll Taxes Expense",
         "description": "",
-        "relative_liquidity": 9,
+        "order": 9,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1786,7 +1786,7 @@
         "account_type": 21,
         "name": "Workers' Compensation Insurance Expense",
         "description": "",
-        "relative_liquidity": 10,
+        "order": 10,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1799,7 +1799,7 @@
         "account_type": 21,
         "name": "Bad Debt Expense",
         "description": "",
-        "relative_liquidity": 11,
+        "order": 11,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1812,7 +1812,7 @@
         "account_type": 21,
         "name": "Electricity Expense, Utilities Expense",
         "description": "",
-        "relative_liquidity": 12,
+        "order": 12,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1825,7 +1825,7 @@
         "account_type": 21,
         "name": "Charitable Contributions Expense",
         "description": "",
-        "relative_liquidity": 13,
+        "order": 13,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1838,7 +1838,7 @@
         "account_type": 21,
         "name": "Insurance Expense",
         "description": "",
-        "relative_liquidity": 14,
+        "order": 14,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1851,7 +1851,7 @@
         "account_type": 21,
         "name": "Postage Expense",
         "description": "",
-        "relative_liquidity": 15,
+        "order": 15,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1864,7 +1864,7 @@
         "account_type": 21,
         "name": "Repair Expense",
         "description": "",
-        "relative_liquidity": 16,
+        "order": 16,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1877,7 +1877,7 @@
         "account_type": 21,
         "name": "Oil and Gas Expense (Also Automobile Expense)",
         "description": "",
-        "relative_liquidity": 17,
+        "order": 17,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1890,7 +1890,7 @@
         "account_type": 21,
         "name": "Depreciation Expense--Building",
         "description": "",
-        "relative_liquidity": 18,
+        "order": 18,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1903,7 +1903,7 @@
         "account_type": 21,
         "name": "Depreciation Expense--Equipment (Also Tennis Facilities, Delivery Equip, Office Equip, Furniture)",
         "description": "",
-        "relative_liquidity": 19,
+        "order": 19,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1916,7 +1916,7 @@
         "account_type": 21,
         "name": "Depreciation Expense--Other Equipment (Medical Equipment, Exercise Equipment, Computer Equipment)",
         "description": "",
-        "relative_liquidity": 20,
+        "order": 20,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1929,7 +1929,7 @@
         "account_type": 21,
         "name": "Depletion Expense",
         "description": "",
-        "relative_liquidity": 21,
+        "order": 21,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1942,7 +1942,7 @@
         "account_type": 21,
         "name": "Patent Amortization",
         "description": "",
-        "relative_liquidity": 22,
+        "order": 22,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1955,7 +1955,7 @@
         "account_type": 21,
         "name": "Amortization of Organization Costs",
         "description": "",
-        "relative_liquidity": 23,
+        "order": 23,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1968,7 +1968,7 @@
         "account_type": 21,
         "name": "Miscellaneous Expense",
         "description": "",
-        "relative_liquidity": 24,
+        "order": 24,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1981,7 +1981,7 @@
         "account_type": 22,
         "name": "Interest Expense (Also Bond Interest Expense)",
         "description": "",
-        "relative_liquidity": 0,
+        "order": 0,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -1994,7 +1994,7 @@
         "account_type": 22,
         "name": "Loss on Discarded Equipment",
         "description": "",
-        "relative_liquidity": 1,
+        "order": 1,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -2007,7 +2007,7 @@
         "account_type": 22,
         "name": "Loss on Sale/Exchange of Equipment",
         "description": "",
-        "relative_liquidity": 2,
+        "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -2020,7 +2020,7 @@
         "account_type": 22,
         "name": "Loss on Bonds Redeemed",
         "description": "",
-        "relative_liquidity": 3,
+        "order": 3,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
@@ -2033,7 +2033,7 @@
         "account_type": 22,
         "name": "Income Tax Expense",
         "description": "",
-        "relative_liquidity": 4,
+        "order": 4,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
         "is_active": false
