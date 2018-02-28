@@ -34,7 +34,7 @@ class AccountForm extends Component {
             this.state.isLoading = false;
             this.state.accountModel = {
                 account_type: '',
-                relative_liquidity: '',
+                order: '',
                 name: '',
                 description: '',
                 initial_balance: '',
@@ -98,16 +98,16 @@ class AccountForm extends Component {
 				</div>	
                 <div className="row">
                     <div className="textColumn container">
-                        Account Relative Liquidity
+                        Account Order
                     </div>
                     <div className="fieldColumn container">
                         <input type="number"
-                          name="relative_liquidity"
+                          name="order"
                           className="form-control"
                           placeholder="0"
                           step="1"
                           min="0"
-                          value={this.state.accountModel.relative_liquidity}
+                          value={this.state.accountModel.order}
                           onChange={this.changeInputState} />
                     </div>
                 </div>
