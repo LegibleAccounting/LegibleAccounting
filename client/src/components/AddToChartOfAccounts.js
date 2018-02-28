@@ -74,13 +74,13 @@ class AddToChartOfAccounts extends Component {
             is_active: true
         }))
             .then(() => {
-                alert('Account successfully added to the chart of accounts.');
+                this.props.onNotifySuccess('Account successfully added to the chart of accounts.');
                 this.setState({
                     redirectToChartOfAccountsPage: true
                 });
             })
             .catch(() => {
-                alert('Failed to add account to the chart of accounts.');
+                this.props.onNotifyError('Failed to add account to the chart of accounts.');
             });
     }
 }
