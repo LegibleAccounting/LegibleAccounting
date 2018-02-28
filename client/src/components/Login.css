@@ -19,17 +19,17 @@
   }
 
   .input{
-    width: 16em;
+    width: 18em;
     border-radius: 6px;
     border-style: none;
     padding: 6px;
   }
 
   .button{
-    border-radius: 3px;
+    border-radius: 6px;
     padding: 6px;
     background-color: transparent;
     border: 1px solid white;
     color: white;
-    width: 16em;
+    width: 18em;
   }
