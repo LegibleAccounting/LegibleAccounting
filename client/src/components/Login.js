@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import "./Login.css";
 import Auth from '../api/Auth.js';
-import logo from '../Ledgible_Accounting_Icon.png'
+import logo from '../LALoginIcon.png'
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -25,24 +25,29 @@ class Login extends Component {
     }
 
     return (
-      <div className="Login">
-        <div>
-          <img src={logo} alt="Legible Accounting" className="legible-accounting-logo"/>
-          <form onSubmit={this.requestLogin}>
-          <div className="input-text text-field">
-            <div className="padding-space">
-              <input className="background-color" type="text" value={this.inputUsername} onChange={this.updateUsernameState} placeholder="Username" />
-            </div>
-            <div className="padding-space">
-              <input className="background-color" type="password" value={this.inputPassword} onChange={this.updatePasswordState} placeholder="Password" />
-            </div>
-            <div className="padding-space login-button">
-              <button className="login-meta login-button" type="submit">Log In</button>
-            </div>
+       <form className="Login" onSubmit={this.requestLogin}>
+          <div className = "Spacer">
+            <img className ="Login-logo" alt="" src={logo} />
           </div>
-          </form>
-        </div>
-      </div> 
+          <div className = "Spacer"> 
+              <input className = "input"
+              placeholder = 'Username'
+              value={this.inputUsername} 
+              onChange={this.updateUsernameState} />
+          </div>
+          <div className = "Spacer"> 
+              <input className = "input"
+              type="password" 
+              placeholder = 'Password'
+              value={this.inputPassword}
+              onChange={this.updatePasswordState} />
+          </div>
+          <div className = "Spacer">
+            <button className ="button" type = "submit">
+              Login
+            </button>
+          </div>
+      </form>
     );
   }
   updateUsernameState(event) {

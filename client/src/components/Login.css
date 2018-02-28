@@ -1,67 +1,35 @@
 .Login {
-	height: 100%;
-	background-color: #4A90E2;
-	display: flex;
-	justify-content: center;
-	align-items: flex-start;
-}
+    background-color: #4A90E2;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    padding-bottom: 80px;
+  }
+  
+  .Login-logo {
+    height: 160px;
+    margin-bottom: 20px;
+  }
 
-.Login .ledgible-accounting-logo {	
-	height: 460px;	
-	width: 566px;
-}
+  .Spacer{
+    margin: 8px;
+  }
 
-.Login .text-field {
-	height: 60px;	
-	width: 400px;
-}
+  .input{
+    width: 16em;
+    border-radius: 6px;
+    border-style: none;
+    padding: 6px;
+  }
 
-.Login .input-text {	
-	height: 30px;	
-	width: 266px;	
-	color: #9B9B9B;	
-	font-family: Helvetica;	
-	font-size: 25px;	
-	line-height: 30px;
-}
-
-.Login .padding-space {
-	padding:0 15px 15px 0;
-}
-
-.Login .background-color {	
-	height: 60px;	
-	width: 400px;	
-	border-radius: 10px;	
-	background-color: #FFFFFF;
-	padding: 1em;
-}
-
-.Login .background-border {
-	height: 60px;
-	width: 400px;	
-	border: 1px solid #FFFFFF;
-	border-radius: 10px;	
-	box-shadow: 0 2px 15px 0 #FFFFFF;
-}
-
-.Login .login-button {	
-	height: 60px;
-	width: 400px;
-	border: 1px solid #FFFFFF;
-	border-radius: 10px;
-	box-shadow: 0 2px 15px 0 #4A90E2;
-}
-
-.Login .login-meta {	
-
-	color: #FFFFFF;	
-	background-color: #4A90E2;
-	font-family: Helvetica;	
-	font-size: 30px;	
-	line-height: 36px;	
-	border-radius: 10px;
-	text-align: center;
-}
-
-
+  .button{
+    border-radius: 3px;
+    padding: 6px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    width: 16em;
+  }
