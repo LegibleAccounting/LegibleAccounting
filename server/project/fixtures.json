@@ -82,7 +82,13 @@
     "model": "auth.group",
     "fields": {
         "name": "Manager",
-        "permissions": []
+        "permissions": [
+            [
+                "change_account",
+                "accounts",
+                "account"
+            ]
+        ]
     }
 },
 {
