@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Auth from '../api/Auth.js';
 import './Sidebar.css';
+import logo from '../book.png';
+import profilePicture from '../profilePicture.png'
 
 class Sidebar extends Component {
     render() {
@@ -13,10 +15,11 @@ class Sidebar extends Component {
         return (
             <div className="Sidebar">
                 <div className="sidebar-heading">
-                    <h4 className="user-heading">Logged in as {this.props.currentUser.username}</h4>
-                    <button type="button" className="btn btn-default" onClick={this.props.onRequestLogout}>Log Out</button>
+                    <div className = "Spacer">
+                        <img className ="sidebar-logo" alt="" src={logo} />
+                    </div>
                 </div>
-                <ul className="nav nav-stacked">
+                <ul className="nav nav-stacked nav-pills stack">
                     <li>
                         <NavLink exact to="/">Dashboard</NavLink>
                     </li>
@@ -36,6 +39,13 @@ class Sidebar extends Component {
                         )
                     }
                 </ul>
+                <div className = "sidebar-footing">
+                    <div className = "user-heading">
+                        <img className ="user-logo" alt="" src={profilePicture} />
+                        <div className ="userText"> {this.props.currentUser.username} </div>
+                    </div>
+                    <button type="button" className="btn btn-primary logoutButton" onClick={this.props.onRequestLogout}>Log Out</button>
+                </div>
             </div>
         );
     }

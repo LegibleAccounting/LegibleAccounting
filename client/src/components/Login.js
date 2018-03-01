@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import "./Login.css";
 import Auth from '../api/Auth.js';
-import logo from '../LALoginIcon.png'
+import logo from '../logo.png'
 class Login extends Component {
   constructor(props) {
     super(props);

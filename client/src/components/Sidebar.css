@@ -6,10 +6,47 @@
 }
 
 .Sidebar .sidebar-heading {
-    padding-top: 2em;
-    padding-bottom: 6em;
     text-align: center;
     color: white;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sidebar-logo {
+    width: 280px;
+}
+
+.Sidebar .sidebar-footing {
+    padding-bottom: 10px;
+    text-align: center;
+    color: white;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    background-color: #3F7DC4;
+}
+
+.stack {
+    font-size: 17px;
+}
+
+.user-logo {
+    width: 50px;
+}
+
+.userText {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.user-heading {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.logoutButton {
+    margin-bottom: 0px;
 }
 
 .Sidebar .sidebar-heading .user-heading {
@@ -22,13 +59,18 @@
 
 .Sidebar .nav [href] {
     color: white;
+    width: 85%;
+    border-bottom-left-radius:0px;
+    border-top-left-radius:0px;
+    padding-left: 40px;
 }
 
 .Sidebar .nav [href]:hover {
-    color: black;
+    color: white;
+    background-color: #3F7DC4;
 }
 
 .Sidebar .nav [href].active {
-    background-color: #eee;
-    color: #111;
+    background-color: white;
+    color: black;
 }
