@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from auditlog.registry import auditlog
 from django.db import models
 
-NUM_ACCOUNTS_PER_ACCOUNT_TYPE = 100
+NUM_ACCOUNTS_PER_ACCOUNT_TYPE = 1000
 
 ACCOUNT_CATEGORIES = (
     (0, 'Asset'),
@@ -30,12 +29,9 @@ class AccountType(models.Model):
         return True if (self.category == 0 or self.category == 4) else False
 
 
-    def starting_number(self):
-        return self.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE
-
 class Account(models.Model):
     class Meta:
-        ordering = ['account_type__liquidity', 'order']
+        ordering = ['account_type__liquidity', 'relative_liquidity']
 
     account_type = models.ForeignKey(AccountType, on_delete=models.PROTECT)
     name = models.CharField(max_length=100, unique=True)
@@ -46,7 +42,7 @@ class Account(models.Model):
     is_active = models.BooleanField(default=False, verbose_name="active?")
 
     def __str__(self):
-        return 'Account #' + "{:03}: ".format(self.account_number()) + self.name
+        return 'Account #' + "{:03}: ".format(self.account_number()) + self.name + " - ${:.2f}".format(self.get_balance())
 
     def is_debit(self):
         return self.account_type.is_debit()
@@ -66,4 +62,3 @@ class Account(models.Model):
         return self.initial_balance + value
 
 
-auditlog.register(Account)

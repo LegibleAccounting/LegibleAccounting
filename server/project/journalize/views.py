@@ -24,7 +24,7 @@ class JournalViewSet(viewsets.ModelViewSet):
         return super(JournalViewSet, self).create(request, args, kwargs)
 
     def update(self, request, pk=None):
-        if (request.POST.get("approval_memo") == Journal.objects.get(pk=pk).approval_memo \
+        if (request.POST.get("approval_memo") == Journal.objects.get(pk=pk).approval_memo
                 and request.POST.get("is_approved") == Journal.objects.get(pk=pk).is_approved) \
                 or manager in request.user.groups.all():
                 if request.POST.get("is_approved") == 't':
