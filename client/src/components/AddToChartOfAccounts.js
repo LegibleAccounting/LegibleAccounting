@@ -75,7 +75,7 @@ class AddToChartOfAccounts extends Component {
 
     changeInitialBalance(event) {
     	this.setState({
-    		initial_balance: event.target.value
+    		initialBalance: event.target.value
     	});
     }
 
