@@ -19,7 +19,7 @@ class Login extends Component {
   }
 
   render() {
-    let referrer = this.props.location.state ? this.props.location.state.from : { pathname: '/' };
+    let referrer = this.props.location.state ? this.props.location.state.from : { pathname: '/chart-of-accounts' };
     if (this.state.redirectToReferrer) {
       return <Redirect to={referrer} />;
     }

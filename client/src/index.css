@@ -1,7 +1,7 @@
 :root {
-	--mainBlue: #4A90E2;
+	--mainBlue: #549FF7;
   	--darkBlue: #3D7AC1;
-  	--hoverBlue: #549FF7;
+  	--hoverBlue: #4A90E2;
 }
 
 html, body, #root {
