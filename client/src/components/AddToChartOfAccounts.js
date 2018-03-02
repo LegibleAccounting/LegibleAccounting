@@ -9,7 +9,8 @@ class AddToChartOfAccounts extends Component {
         this.state = {
             redirectToChartOfAccountsPage: false,
             accounts: [],
-            accountID: ''
+            accountID: '',
+            initialBalance: ''
         };
 
         AccountsAPI.getAll(false)
@@ -21,6 +22,7 @@ class AddToChartOfAccounts extends Component {
 
         // Bind event handlers to class instance context.
         this.changeAccount = this.changeAccount.bind(this);
+        this.changeInitialBalance = this.changeInitialBalance.bind(this);
         this.submitAccount = this.submitAccount.bind(this);
     }
 
@@ -48,6 +50,12 @@ class AddToChartOfAccounts extends Component {
                     </div>
                 </div>
                 <div className="form-group">
+                	<label className="col-xs-12 col-sm-2 control-label">Initial Balance</label>
+                	<div className="col-xs-6 col-sm-6 col-md-2">
+                		<input type="number" className="form-control text-right" placeholder="0.00" onChange={this.changeInitialBalance} />
+                	</div>
+                </div>
+                <div className="form-group">
                     <div className="col-xs-12 col-sm-10 col-xs-offset-0 col-sm-offset-2">
                         <input type="submit" value="Add" className="btn btn-primary" />
                     </div>
@@ -65,13 +73,20 @@ class AddToChartOfAccounts extends Component {
         });
     }
 
+    changeInitialBalance(event) {
+    	this.setState({
+    		initialBalance: event.target.value
+    	});
+    }
+
     submitAccount(event) {
         event.preventDefault();
 
         let account = this.state.accounts.find(account => account.id === Number(this.state.accountID));
         account.account_type = account.account_type.id;
         AccountsAPI.update(Object.assign({}, account, {
-            is_active: true
+            is_active: true,
+            initial_balance: Number(this.state.initialBalance)
         }))
             .then(() => {
                 this.props.onNotifySuccess('Account successfully added to the chart of accounts.');

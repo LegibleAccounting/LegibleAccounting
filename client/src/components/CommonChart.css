@@ -24,6 +24,8 @@ h1 {
 
  .search {
 	width: 8em;
+	border-bottom-right-radius:0px;
+	border-top-right-radius:0px;
 }
 
  .searchContainer {

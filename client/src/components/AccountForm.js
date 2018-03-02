@@ -133,7 +133,7 @@ class AccountForm extends Component {
 						<input	type="number"
 								name="initial_balance"
 								className="form-control initialBalanceTextField currency"
-								placeholder="$0.00"
+								placeholder="0.00"
 								step="0.01"
 								min="0"
                                 value={this.state.accountModel.initial_balance}
