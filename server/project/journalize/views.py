@@ -12,11 +12,11 @@ from django.http.response import HttpResponse
 from django.contrib.auth.models import Group
 # Create your views here.
 
-manager = Group.objects.all().filter(name="Manager").all()[0]
 
 class JournalViewSet(viewsets.ModelViewSet):
     queryset = Journal.objects.all()
     serializer_class = JournalSerializer
+    manager = None
 
     permission_classes = (DjangoModelPermissions,)
 
@@ -24,6 +24,8 @@ class JournalViewSet(viewsets.ModelViewSet):
         return super(JournalViewSet, self).create(request, args, kwargs)
 
     def update(self, request, pk=None):
+        if Group.objects.all().count() > 0 and self.manager is None:
+            manager = Group.objects.all().filter(name="Manager").all()[0]
         if (request.POST.get("approval_memo") == Journal.objects.get(pk=pk).approval_memo
                 and request.POST.get("is_approved") == Journal.objects.get(pk=pk).is_approved) \
                 or manager in request.user.groups.all():

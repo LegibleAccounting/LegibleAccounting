@@ -31,7 +31,7 @@ class AccountType(models.Model):
 
 class Account(models.Model):
     class Meta:
-        ordering = ['account_type__liquidity', 'relative_liquidity']
+        ordering = ['account_type__liquidity', 'order']
 
     account_type = models.ForeignKey(AccountType, on_delete=models.PROTECT)
     name = models.CharField(max_length=100, unique=True)
