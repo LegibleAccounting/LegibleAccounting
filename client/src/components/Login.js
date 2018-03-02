@@ -43,7 +43,7 @@ class Login extends Component {
               onChange={this.updatePasswordState} />
           </div>
           <div className = "Spacer">
-            <button className ="button" type = "submit">
+            <button className ="button btn-primary" type = "submit">
               Login
             </button>
           </div>
