@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Journal, Transaction, Receipt
 
 
-ACCOUNT_BASE_FIELDS = ('date_created', 'is_approved', 'approval_memo', 'transactions')
+ACCOUNT_BASE_FIELDS = ('date_created', 'status', 'approval_memo', 'transactions')
 
 
 class ReceiptSerializer(serializers.ModelSerializer):
@@ -11,7 +11,7 @@ class ReceiptSerializer(serializers.ModelSerializer):
         fields = ('of_transaction', 'img_url',)
 
     def create(self, validated_data):
-        if validated_data['of_transaction'].from_journal.is_approved != 't':
+        if validated_data['of_transaction'].from_journal.status == 'i':
             instance = Receipt(**validated_data)
             instance.save()
             return instance
@@ -24,7 +24,7 @@ class TransactionSerializer(serializers.ModelSerializer):
         fields = ('effected_account', 'from_journal', 'value', 'charge', 'receipts')
 
     def create(self, validated_data):
-        if validated_data['from_journal'].is_approved != 't':
+        if validated_data['from_journal'].status == 'i':
             instance = Transaction(
                 effected_account=validated_data['effected_account'], from_journal=validated_data['from_journal'],
                 value=validated_data['value'], charge=validated_data['charge']
@@ -40,15 +40,14 @@ class JournalSerializer(serializers.ModelSerializer):
         fields = ACCOUNT_BASE_FIELDS
 
     def create(self, validated_data):
-        j = Journal(is_approved='n', approval_memo=None)
+        j = Journal(status='i', approval_memo=None)
         j.save()
         return j
 
     def update(self, instance, validated_data):
-        if instance.is_approved == 't':
-            raise serializers.ValidationError("The journal has already been approved and can only be changed by an"
-                                              " administrator!")
-        instance.is_approved = validated_data.get('is_approved')
+        if instance.status == 'a' or instance.status == 'd':
+            raise serializers.ValidationError("The journal has already been approved/denied and can not be changed!")
+        instance.status = validated_data.get('status')
         instance.approval_memo = validated_data.get('approval_memo')
         valid_transactions = instance.transactions.all()
         for transaction in validated_data.get('transactions'):

@@ -11,13 +11,13 @@ from django.utils import timezone
 from accounts.models import Account
 
 CHARGE_TYPES = (('d', 'Debit'), ('c', 'Credit'))
-NULLABLE_BOOL_TYPES = (('t', 'True'), ('f', 'False'), ('n', 'Null'))
+JOURNAL_STATUS_TYPES = (('a', 'Approved'), ('d', 'Denied'), ('s', 'Submitted'), ('i', 'Initial'))
 
 
 class Journal(models.Model):
     #id = models.IntegerField(primary_key=True, auto_created=True, default=1)
     date_created = models.DateTimeField(auto_now_add=True)
-    is_approved = models.CharField(max_length=1, choices=NULLABLE_BOOL_TYPES, default='n')
+    status = models.CharField(max_length=1, choices=JOURNAL_STATUS_TYPES, default='i')
     approval_memo = models.CharField(max_length=200, null=True, blank=True)
 
     def is_valid(self):
@@ -31,7 +31,7 @@ class Journal(models.Model):
 
     def get_json(self):
         return '{{"id":{0}, "approved":{1}, "memo":{2}, "dateCreated":"{3}"}}'.format(
-            self.pk, self.is_approved, self.approval_memo, self.date_created
+            self.pk, self.status, self.approval_memo, self.date_created
         )
 
 
@@ -60,7 +60,7 @@ class Transaction(models.Model):
 
 class Receipt(models.Model):
     of_transaction = models.ForeignKey(Transaction, related_name="receipts", on_delete=models.CASCADE)
-    img_url = models.URLField(verbose_name="Receipt Image")
+    img = models.FileField(verbose_name="Receipt Image")
 
     def __str__(self):
         return "Receipt #{0:} for [{1:}]".format(

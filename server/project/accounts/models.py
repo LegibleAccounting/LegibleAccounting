@@ -50,13 +50,16 @@ class Account(models.Model):
     def account_number(self):
         return (self.account_type.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE) + self.order
 
-    def get_balance(self):
+    def balance(self):
+        return self.get_balance()
+
+    def get_balance(self, as_of=None):
         # TODO: This will be updated to return a calculated balance
         # based on all transactions that have been made to this account.
         value = 0
         for t in self.transactions.all():
             if t.from_journal is not None:
-                if t.from_journal.is_approved == 't':
+                if t.from_journal.status == 'a' and (as_of is None or as_of >= t.date):
                     value += t.get_value()
         value *= 1 if(self.is_debit()) else -1
         return self.initial_balance + value

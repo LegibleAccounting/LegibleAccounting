@@ -5,6 +5,7 @@ from rest_framework import viewsets
 from rest_framework.filters import SearchFilter
 from rest_framework.permissions import DjangoModelPermissions
 
+import django.views
 from django.shortcuts import render
 from .models import Transaction, Journal, Receipt
 from .serializers import JournalSerializer, TransactionSerializer, ReceiptSerializer
@@ -24,12 +25,14 @@ class JournalViewSet(viewsets.ModelViewSet):
         return super(JournalViewSet, self).create(request, args, kwargs)
 
     def update(self, request, pk=None):
+        manager_feild_changed = not ((request.POST.get("status") == Journal.objects.get(pk=pk).is_approved
+                                      or request.POST.get('status') is None) and
+                                     (request.POST.get("approval_memo") == Journal.objects.get(pk=pk).approval_memo
+                                      or request.POST.get("approval_memo") is None))
         if Group.objects.all().count() > 0 and self.manager is None:
             manager = Group.objects.all().filter(name="Manager").all()[0]
-        if (request.POST.get("approval_memo") == Journal.objects.get(pk=pk).approval_memo
-                and request.POST.get("is_approved") == Journal.objects.get(pk=pk).is_approved) \
-                or manager in request.user.groups.all():
-                if request.POST.get("is_approved") == 't':
+        if not manager_feild_changed or manager in request.user.groups.all():
+                if request.POST.get("status") == 'a':
                     if Journal.objects.get(pk=pk).is_valid():
                         return super(JournalViewSet, self).update(request, pk)
                     else:
@@ -69,4 +72,8 @@ class ReceiptViewSet(viewsets.ModelViewSet):
             return super(ReceiptViewSet, self).get_serializer_class()
 
         return ReceiptSerializer
+
+
+def RecieptGenerator(request):
+    return HttpResponse()
 

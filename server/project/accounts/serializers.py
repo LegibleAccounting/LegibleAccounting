@@ -27,6 +27,7 @@ class AccountSerializer(serializers.ModelSerializer):
 class RetrieveAccountSerializer(AccountSerializer):
     class Meta:
         model = Account
-        fields = ACCOUNT_BASE_FIELDS + ('account_number',)
+        fields = ACCOUNT_BASE_FIELDS + ('account_number', 'balance',)
 
     account_type = AccountTypeSerializer()
+
