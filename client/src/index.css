@@ -2,6 +2,7 @@
 	--mainBlue: #549FF7;
   	--darkBlue: #3D7AC1;
   	--hoverBlue: #4A90E2;
+  	--tableWidth: 90%;
 }
 
 html, body, #root {

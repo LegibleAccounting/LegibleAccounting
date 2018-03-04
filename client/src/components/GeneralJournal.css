@@ -1,0 +1,23 @@
+.generalJournal {
+}
+
+.dateColumn {
+	width: 100px;
+}
+
+.accountsColumn {
+	width: 300px;
+}
+
+.debitColumn {
+ 	width: 100px;
+}
+
+.creditColumn {
+	width: 100px;
+}
+
+.entriesWrapper {
+	margin: auto;
+	width: 90%;
+}

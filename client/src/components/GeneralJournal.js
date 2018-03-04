@@ -4,6 +4,7 @@ import './GeneralJournal.css';
 import './CommonChart.css';
 import Auth from '../api/Auth.js';
 import GeneralJournalAPI from '../api/GeneralJournal.js';
+import GeneralJournalEntry from './GeneralJournalEntry.js';
 
 class GeneralJournal extends Component {
     constructor(props) {
@@ -35,6 +36,21 @@ class GeneralJournal extends Component {
 		            	<button className="btn btn-primary" type="submit" onClick={this.search}>Search</button>
 		            </div>
 	            </div>
+                <div className="tableWrapper .table-responsive">
+                    <table className="table table-hover">
+                          <thead>
+                            <tr>
+                                <th className="dateColumn">Date</th>
+                                <th className="accountsColumn">Accounts</th>
+                                <th className="debitColumn">Debit</th>
+                                <th className="creditColumn">Credit</th>
+                            </tr>
+                          </thead>
+                        </table>
+                </div>
+                <div className="entriesWrapper">
+                    <GeneralJournalEntry> </GeneralJournalEntry>
+                </div>
 			</div>
         );
     }

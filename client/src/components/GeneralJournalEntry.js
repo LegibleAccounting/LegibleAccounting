@@ -9,16 +9,14 @@ class GeneralJournalEntry extends Component {
 
         this.state = {
 	      entryStatus: [],
-	      searchText: ''
 	    };
-
-		this.searchTextChanged = this.searchTextChanged.bind(this);
-    	this.search = this.search.bind(this);
     }
 
     render() {
         return (
-        	<div className="generalJournal">
+        	<div className="generalJournalEntry">
+                <div className="date debitColumn">10/12/18</div>
+                <div className="accountsColumn">Account 1</div>
 			</div>
         );
     }

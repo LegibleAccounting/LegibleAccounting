@@ -46,5 +46,5 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .tableWrapper .table {
-	width: 90%;
+	width: var(--tableWidth);
 }
