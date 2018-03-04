@@ -17,7 +17,7 @@ JOURNAL_STATUS_TYPES = (('a', 'Approved'), ('d', 'Denied'), ('s', 'Submitted'), 
 
 class Journal(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
     status = models.CharField(max_length=1, choices=JOURNAL_STATUS_TYPES, default='i')
     rejection_memo = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=200, null=True, blank=True)

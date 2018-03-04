@@ -25,13 +25,13 @@ class JournalViewSet(viewsets.ModelViewSet):
         return super(JournalViewSet, self).create(request, args, kwargs)
 
     def update(self, request, pk=None):
-        manager_feild_changed = not ((request.POST.get("status") == Journal.objects.get(pk=pk).is_approved
+        manager_field_changed = not ((request.POST.get("status") == Journal.objects.get(pk=pk).is_approved
                                       or request.POST.get('status') is None) and
                                      (request.POST.get("rejection_memo") == Journal.objects.get(pk=pk).approval_memo
                                       or request.POST.get("rejection_memo") is None))
         if Group.objects.all().count() > 0 and self.manager is None:
             manager = Group.objects.all().filter(name="Manager").all()[0]
-        if not manager_feild_changed or manager in request.user.groups.all():
+        if not manager_field_changed or manager in request.user.groups.all():
                 if request.POST.get("status") == 'a':
                     if Journal.objects.get(pk=pk).is_valid():
                         return super(JournalViewSet, self).update(request, pk)

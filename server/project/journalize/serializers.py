@@ -1,8 +1,7 @@
 from rest_framework import serializers
 from .models import Journal, Transaction, Receipt
-
-
-ACCOUNT_BASE_FIELDS = ('date_created', 'status', 'rejection_memo', 'transactions')
+from accounts.serializers import RetrieveAccountSerializer
+from project.serializers import UserSerializer
 
 
 class ReceiptSerializer(serializers.ModelSerializer):
@@ -23,6 +22,8 @@ class TransactionSerializer(serializers.ModelSerializer):
         model = Transaction
         fields = ('effected_account', 'from_journal', 'value', 'charge', 'receipts')
 
+    effected_account = RetrieveAccountSerializer()
+
     def create(self, validated_data):
         if validated_data['from_journal'].status == 'i':
             instance = Transaction(
@@ -37,7 +38,7 @@ class TransactionSerializer(serializers.ModelSerializer):
 class JournalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Journal
-        fields = ACCOUNT_BASE_FIELDS
+        fields = ('date_created', 'date', 'status', 'rejection_memo', 'description', 'creator', 'transactions')
 
     def create(self, validated_data):
         j = Journal(status='i', approval_memo=None)
@@ -56,7 +57,13 @@ class JournalSerializer(serializers.ModelSerializer):
         instance.transactions = valid_transactions
         instance.save()
         return instance
-#   transactions = serializers.PrimaryKeyRelatedField(many=True, read_only=False, queryset=Transaction.objects.all())
+    #transactions = serializers.SerializerMethodField()
+    transactions = TransactionSerializer(many=True)
+    creator = UserSerializer()
+
+    #def get_transactions(self, obj):
+     #   return TransactionSerializer(Transaction.objects.filter(from_journal=obj))
+    #transactions = serializers.PrimaryKeyRelatedField(many=True, read_only=False, queryset=Transaction.objects.all())
 
 # class RetrieveJournalSerializer(JournalSerializer):
 #     class Meta:
