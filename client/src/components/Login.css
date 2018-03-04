@@ -1,5 +1,5 @@
 .Login {
-    background-color: #4A90E2;
+    background-color: var(--mainBlue);
     height: 100%;
     text-align: center;
     display: flex;
@@ -19,17 +19,19 @@
   }
 
   .input{
-    width: 18em;
+    width: 20em;
+    height: 40px;
     border-radius: 6px;
     border-style: none;
     padding: 6px;
   }
 
   .button{
+    height: 40px;
     border-radius: 6px;
     padding: 6px;
-    background-color: transparent;
-    border: 1px solid white;
+    background-color: var(--darkBlue);
+    border: 0px;
     color: white;
-    width: 18em;
+    width: 20em;
   }
