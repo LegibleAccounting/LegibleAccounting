@@ -24,10 +24,10 @@ class AccountViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend,)
     search_fields = ('name', 'description', 'account_type__name',)
     filter_fields = {
-        'name': ['contains'],
-        'description': ['contains'],
+        'name': ['icontains'],
+        'description': ['icontains'],
         'account_type__category': ['exact'],
-        'account_type__name': ['contains'],
+        'account_type__name': ['icontains'],
         'is_active': ['exact']
     }
     serializer_class = AccountSerializer

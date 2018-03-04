@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from auditlog.registry import auditlog
 from django.db import models
 
-NUM_ACCOUNTS_PER_ACCOUNT_TYPE = 1000
+NUM_ACCOUNTS_PER_ACCOUNT_TYPE = 100
 
 ACCOUNT_CATEGORIES = (
     (0, 'Asset'),
@@ -27,6 +28,9 @@ class AccountType(models.Model):
 
     def is_debit(self):
         return True if (self.category == 0 or self.category == 4) else False
+
+    def starting_number(self):
+        return self.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE
 
 
 class Account(models.Model):
@@ -61,4 +65,5 @@ class Account(models.Model):
         value *= 1 if(self.is_debit()) else -1
         return self.initial_balance + value
 
+auditlog.register(Account)
 
