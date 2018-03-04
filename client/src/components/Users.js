@@ -61,10 +61,9 @@ class Users extends Component {
                       <tbody>
                         { this.state.users.length ? (
                           this.state.users.map((item, index) => (
-                            <tr key={item.id}>
-                                <td>{item.user_number}</td>
-                                <td>{item.name}</td>
-                                <td>{item.user_type.category}</td>
+                            <tr key={item.username}>
+                                <td>{item.first_name}</td>
+                                <td>{item.last_name}</td>
                                 <td>
                                 {
                                     Auth.currentUser.groups.find(group => group.name === 'Administrator' || group.name === 'Manager') ? (
