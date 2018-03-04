@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Journal, Transaction, Receipt
 
 
-ACCOUNT_BASE_FIELDS = ('date_created', 'status', 'approval_memo', 'transactions')
+ACCOUNT_BASE_FIELDS = ('date_created', 'status', 'rejection_memo', 'transactions')
 
 
 class ReceiptSerializer(serializers.ModelSerializer):
@@ -48,7 +48,7 @@ class JournalSerializer(serializers.ModelSerializer):
         if instance.status == 'a' or instance.status == 'd':
             raise serializers.ValidationError("The journal has already been approved/denied and can not be changed!")
         instance.status = validated_data.get('status')
-        instance.approval_memo = validated_data.get('approval_memo')
+        instance.approval_memo = validated_data.get('rejection_memo')
         valid_transactions = instance.transactions.all()
         for transaction in validated_data.get('transactions'):
             if transaction.from_journal is None:

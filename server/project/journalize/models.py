@@ -7,6 +7,7 @@ from django.db import models
 
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 from accounts.models import Account
 
@@ -15,10 +16,12 @@ JOURNAL_STATUS_TYPES = (('a', 'Approved'), ('d', 'Denied'), ('s', 'Submitted'), 
 
 
 class Journal(models.Model):
-    #id = models.IntegerField(primary_key=True, auto_created=True, default=1)
     date_created = models.DateTimeField(auto_now_add=True)
+    date = models.DateField()
     status = models.CharField(max_length=1, choices=JOURNAL_STATUS_TYPES, default='i')
-    approval_memo = models.CharField(max_length=200, null=True, blank=True)
+    rejection_memo = models.CharField(max_length=200, null=True, blank=True)
+    description = models.CharField(max_length=200, null=True, blank=True)
+    creator = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def is_valid(self):
         balance = 0
@@ -31,7 +34,7 @@ class Journal(models.Model):
 
     def get_json(self):
         return '{{"id":{0}, "approved":{1}, "memo":{2}, "dateCreated":"{3}"}}'.format(
-            self.pk, self.status, self.approval_memo, self.date_created
+            self.pk, self.status, self.rejection_memo, self.date_created
         )
 
 
