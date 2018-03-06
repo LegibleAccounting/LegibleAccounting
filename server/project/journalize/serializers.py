@@ -9,13 +9,6 @@ class ReceiptSerializer(serializers.ModelSerializer):
         model = Receipt
         fields = ('of_transaction', 'img_url',)
 
-    def create(self, validated_data):
-        if validated_data['of_transaction'].journal_entry.status == 'i':
-            instance = Receipt(**validated_data)
-            instance.save()
-            return instance
-        raise serializers.ValidationError("The transaction has already been approved!")
-
 
 class RetrieveTransactionSerializer(serializers.ModelSerializer):
     class Meta:
