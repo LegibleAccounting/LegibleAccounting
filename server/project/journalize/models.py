@@ -32,11 +32,6 @@ class Journal(models.Model):
     def __str__(self):
         return "Journal {0:03d} {1:}".format(self.pk, "Valid" if self.is_valid() else "Invalid")
 
-    def get_json(self):
-        return '{{"id":{0}, "approved":{1}, "memo":{2}, "dateCreated":"{3}"}}'.format(
-            self.pk, self.status, self.rejection_memo, self.date_created
-        )
-
 
 class Transaction(models.Model):
     affected_account = models.ForeignKey(Account, related_name="transactions", on_delete=models.PROTECT)
@@ -53,11 +48,6 @@ class Transaction(models.Model):
 
         return "{0:} - Journal {3:03d} - {1:} - ${2:.2f}".format(
             self.affected_account.name, charge, self.value, self.from_journal.pk if self.from_journal is not None else -1
-        )
-
-    def get_json(self):
-        return '{{"account": {0}, "journal": {1}, "value":{2}, "charge":{3}, "date":"{4}"}}'.format(
-            self.affected_account.account_number(), self.from_journal.pk, self.value, self.charge, self.date
         )
 
 
