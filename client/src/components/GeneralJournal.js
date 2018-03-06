@@ -26,7 +26,7 @@ class GeneralJournal extends Component {
         		<div className="titleBar">
 		            <h1>General Journal</h1>
                     {
-					   <NavLink className="NavLink btn btn-primary newButton" to="">Add +</NavLink> 
+					   <NavLink className="NavLink btn btn-primary newButton" to="">+ Add</NavLink> 
                     }
 					<div className="filler"></div>
 					<div className="searchContainer btn-group">
@@ -36,7 +36,7 @@ class GeneralJournal extends Component {
 		            	<button className="btn btn-primary" type="submit" onClick={this.search}>Search</button>
 		            </div>
 	            </div>
-                <div className="tableWrapper .table-responsive">
+                <div className=".table-responsive">
                     <table className="table table-hover">
                           <thead>
                             <tr>
@@ -45,11 +45,45 @@ class GeneralJournal extends Component {
                                 <th className="debitColumn">Debit</th>
                                 <th className="creditColumn">Credit</th>
                             </tr>
-                          </thead>
-                        </table>
+                        </thead>
+                    </table>
                 </div>
-                <div className="entriesWrapper">
-                    <GeneralJournalEntry> </GeneralJournalEntry>
+                <div className=".container">
+                    <div className="row topEntryWrapper">
+                          <div className="col-lg-2 dateEntry">3/15/18</div>
+                          <div className="col-lg-6">
+                                <select className="form-control accountDropdown debitDropdown" value={this.state.accountID} onChange={this.changeAccount}>
+                                    <option hidden>-- Select Account --</option>
+                                </select>
+                                <select className="form-control accountDropdown creditDropdown" value={this.state.accountID} onChange={this.changeAccount}>
+                                    <option hidden>-- Select Account --</option>
+                                </select>
+                          </div>
+                          <div className="col-lg-2">
+                            <div>
+                                <input type="number" className="form-control text-right" placeholder="0.00"/>
+                            </div>
+                          </div>
+                          <div className="col-lg-2">
+                          </div>
+                    </div>
+                    <div className="line"></div> 
+                    <div className="row">
+                        <div className="col-lg-5 descriptionWrapper">
+                            <h4>Description</h4>
+                            <textarea type="text" className="form-control description" cols="40" rows="5" placeholder="Description"/>
+                        </div>
+                        <div className="col-lg-4 descriptionWrapper">
+                            <div className="attachmentsTitle">
+                                <h4>Attachments</h4>
+                                <button class="addEntityButton">+ Add</button>
+                            </div>
+                        </div>
+                        <div className="col-lg-3 actionButtonsWrapper">
+                                <button className="btn cancelButton">Cancel</button>
+                                <button className="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
                 </div>
 			</div>
         );
