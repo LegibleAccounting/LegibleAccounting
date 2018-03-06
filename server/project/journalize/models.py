@@ -39,8 +39,8 @@ class Journal(models.Model):
 
 
 class Transaction(models.Model):
-    effected_account = models.ForeignKey(Account, related_name="transactions")
-    from_journal = models.ForeignKey(Journal, related_name="transactions", null=True)
+    affected_account = models.ForeignKey(Account, related_name="transactions", on_delete=models.PROTECT)
+    from_journal = models.ForeignKey(Journal, related_name="transactions", on_delete=models.PROTECT)
     value = models.DecimalField(max_digits=20, decimal_places=2)
     charge = models.CharField(max_length=1, choices=CHARGE_TYPES)
     date = models.DateTimeField(auto_now_add=True)
@@ -52,12 +52,12 @@ class Transaction(models.Model):
         charge = "DEBIT" if (self.charge == 'd') else "CREDIT"
 
         return "{0:} - Journal {3:03d} - {1:} - ${2:.2f}".format(
-            self.effected_account.name, charge, self.value, self.from_journal.pk if self.from_journal is not None else -1
+            self.affected_account.name, charge, self.value, self.from_journal.pk if self.from_journal is not None else -1
         )
 
     def get_json(self):
         return '{{"account": {0}, "journal": {1}, "value":{2}, "charge":{3}, "date":"{4}"}}'.format(
-            self.effected_account.account_number(), self.from_journal.pk, self.value, self.charge, self.date
+            self.affected_account.account_number(), self.from_journal.pk, self.value, self.charge, self.date
         )
 
 

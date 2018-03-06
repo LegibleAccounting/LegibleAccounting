@@ -17,64 +17,79 @@ class ReceiptSerializer(serializers.ModelSerializer):
         raise serializers.ValidationError("The transaction has already been approved!")
 
 
-class TransactionSerializer(serializers.ModelSerializer):
+class RetrieveTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ('effected_account', 'from_journal', 'value', 'charge', 'receipts')
+        fields = ('date', 'affected_account', 'from_journal', 'value', 'charge', 'receipts',)
 
-    effected_account = RetrieveAccountSerializer()
-
-    def create(self, validated_data):
-        if validated_data['from_journal'].status == 'i':
-            instance = Transaction(
-                effected_account=validated_data['effected_account'], from_journal=validated_data['from_journal'],
-                value=validated_data['value'], charge=validated_data['charge']
-            )
-            instance.save()
-            return instance
-        raise serializers.ValidationError("The journal has already been approved!")
+    affected_account = RetrieveAccountSerializer()
 
 
-class JournalSerializer(serializers.ModelSerializer):
+class CreateTransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = ('affected_account', 'value', 'charge',)
+
+    def validate_value(self, value):
+        if value <= 0:
+            raise serializers.ValidationError('A transaction cannot have a negative value.')
+
+        return value
+
+
+class RetrieveJournalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Journal
-        fields = ('date_created', 'date', 'status', 'rejection_memo', 'description', 'creator', 'transactions')
+        fields = ('date_created', 'date', 'status', 'rejection_memo', 'description', 'creator', 'transactions',)
+
+    transactions = RetrieveTransactionSerializer(many=True)
+    creator = UserSerializer()
+
+
+class CreateJournalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Journal
+        fields = ('date', 'description', 'transactions',)
+
+    transactions = CreateTransactionSerializer(many=True)
+
+    def validate_transactions(self, value):
+        if len(value) == 0:
+            raise serializers.ValidationError('There must be at least one transaction in a journal entry.')
+
+        transaction_sum = reduce(lambda accumulated, update:
+            accumulated + update['value'] if update['charge'] == 'd' else accumulated - update['value'], value, 0)
+
+        if transaction_sum != 0:
+            raise serializers.ValidationError('Transactions must be balanced.')
+
+        return value
 
     def create(self, validated_data):
-        j = Journal(status='i', approval_memo=None)
-        j.save()
-        return j
+        transactions = validated_data.pop('transactions')
+
+        journal = Journal.objects.create(**validated_data)
+
+        for transaction in transactions:
+            Transaction.objects.create(from_journal=journal, **transaction)
+
+        return journal
+
+
+class UpdateJournalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Journal
+        fields = ('status', 'rejection_memo',)
 
     def update(self, instance, validated_data):
         if instance.status == 'a' or instance.status == 'd':
-            raise serializers.ValidationError("The journal has already been approved/denied and can not be changed!")
+            raise serializers.ValidationError('The journal entry has already been approved/denied and can not be changed!')
+
+        if (validated_data.get('status') == 'd' and len(validated_data.get('rejection_memo')) == 0):
+            raise serializers.ValidationError('A rejection reason must be provided for denying the journal entry.')
+
         instance.status = validated_data.get('status')
-        instance.approval_memo = validated_data.get('rejection_memo')
-        valid_transactions = instance.transactions.all()
-        for transaction in validated_data.get('transactions'):
-            if transaction.from_journal is None:
-                valid_transactions.append(transaction)
-        instance.transactions = valid_transactions
+        instance.rejection_memo = validated_data.get('rejection_memo')
         instance.save()
+
         return instance
-    #transactions = serializers.SerializerMethodField()
-    transactions = TransactionSerializer(many=True)
-    creator = UserSerializer()
-
-    #def get_transactions(self, obj):
-     #   return TransactionSerializer(Transaction.objects.filter(from_journal=obj))
-    #transactions = serializers.PrimaryKeyRelatedField(many=True, read_only=False, queryset=Transaction.objects.all())
-
-# class RetrieveJournalSerializer(JournalSerializer):
-#     class Meta:
-#         model = Journal
-#         fields = ACCOUNT_BASE_FIELDS
-
-
-
-#
-# class RetrieveTransactionSerializer(TransactionSerializer):
-#     effected_account = AccountSerializer()
-#     from_journal = JournalSerializer()
-
-
