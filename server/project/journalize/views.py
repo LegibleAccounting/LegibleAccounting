@@ -6,8 +6,6 @@ from rest_framework.permissions import DjangoModelPermissions
 from .models import JournalEntry
 from .permissions import LAJournalEntryReadPermission
 from .serializers import RetrieveJournalEntrySerializer, CreateJournalEntrySerializer, UpdateJournalEntrySerializer
-from django.http.response import HttpResponse
-from django.contrib.auth.models import Group
 
 
 class JournalEntryViewSet(viewsets.ModelViewSet):
