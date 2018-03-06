@@ -30,3 +30,7 @@ class RetrieveAccountSerializer(AccountSerializer):
         fields = ACCOUNT_BASE_FIELDS + ('account_number', 'balance',)
 
     account_type = RetrieveAccountTypeSerializer()
+    balance = serializers.SerializerMethodField()
+
+    def get_balance(self, obj):
+        return obj.get_balance()

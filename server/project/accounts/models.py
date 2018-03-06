@@ -54,9 +54,6 @@ class Account(models.Model):
     def account_number(self):
         return (self.account_type.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE) + self.order
 
-    def balance(self):
-        return self.get_balance()
-
     def get_balance(self, as_of=None):
         # TODO: This will be updated to return a calculated balance
         # based on all transactions that have been made to this account.
