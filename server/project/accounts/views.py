@@ -6,7 +6,6 @@ from rest_framework.permissions import DjangoModelPermissions
 from .models import Account, AccountType
 from .serializers import AccountSerializer, AccountTypeSerializer, RetrieveAccountSerializer, RetrieveAccountTypeSerializer
 
-from django.http.response import HttpResponse
 
 class AccountTypeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = AccountType.objects.all()
