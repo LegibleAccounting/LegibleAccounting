@@ -3,25 +3,25 @@ from __future__ import unicode_literals
 from rest_framework import viewsets
 from rest_framework.permissions import DjangoModelPermissions
 
-from .models import Journal
-from .permissions import LAJournalReadPermission
-from .serializers import RetrieveJournalSerializer, CreateJournalSerializer, UpdateJournalSerializer
+from .models import JournalEntry
+from .permissions import LAJournalEntryReadPermission
+from .serializers import RetrieveJournalEntrySerializer, CreateJournalEntrySerializer, UpdateJournalEntrySerializer
 from django.http.response import HttpResponse
 from django.contrib.auth.models import Group
 
 
-class JournalViewSet(viewsets.ModelViewSet):
-    queryset = Journal.objects.all()
-    serializer_class = RetrieveJournalSerializer
-    permission_classes = (DjangoModelPermissions, LAJournalReadPermission,)
+class JournalEntryViewSet(viewsets.ModelViewSet):
+    queryset = JournalEntry.objects.all()
+    serializer_class = RetrieveJournalEntrySerializer
+    permission_classes = (DjangoModelPermissions, LAJournalEntryReadPermission,)
 
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
-            return CreateJournalSerializer
+            return CreateJournalEntrySerializer
         elif self.request.method == 'PUT' or self.request.method == 'PATCH':
-            return UpdateJournalSerializer
+            return UpdateJournalEntrySerializer
         else:
-            return super(JournalViewSet, self).get_serializer_class()
+            return super(JournalEntryViewSet, self).get_serializer_class()

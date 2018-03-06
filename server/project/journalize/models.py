@@ -12,13 +12,13 @@ from django.contrib.auth.models import User
 from accounts.models import Account
 
 CHARGE_TYPES = (('d', 'Debit'), ('c', 'Credit'))
-JOURNAL_STATUS_TYPES = (('a', 'Approved'), ('d', 'Denied'), ('s', 'Submitted'), ('i', 'Initial'))
+JOURNAL_ENTRY_STATUS_TYPES = (('a', 'Approved'), ('d', 'Denied'), ('s', 'Submitted'), ('i', 'Initial'))
 
 
-class Journal(models.Model):
+class JournalEntry(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date = models.DateField()
-    status = models.CharField(max_length=1, choices=JOURNAL_STATUS_TYPES, default='i')
+    status = models.CharField(max_length=1, choices=JOURNAL_ENTRY_STATUS_TYPES, default='i')
     rejection_memo = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=200, null=True, blank=True)
     creator = models.ForeignKey(User, on_delete=models.PROTECT)
@@ -30,12 +30,12 @@ class Journal(models.Model):
         return balance == 0
 
     def __str__(self):
-        return "Journal {0:03d} {1:}".format(self.pk, "Valid" if self.is_valid() else "Invalid")
+        return "Journal Entry {0:03d} {1:}".format(self.pk, "Valid" if self.is_valid() else "Invalid")
 
 
 class Transaction(models.Model):
     affected_account = models.ForeignKey(Account, related_name="transactions", on_delete=models.PROTECT)
-    from_journal = models.ForeignKey(Journal, related_name="transactions", on_delete=models.PROTECT)
+    journal_entry = models.ForeignKey(JournalEntry, related_name="transactions", on_delete=models.PROTECT)
     value = models.DecimalField(max_digits=20, decimal_places=2)
     charge = models.CharField(max_length=1, choices=CHARGE_TYPES)
     date = models.DateTimeField(auto_now_add=True)
@@ -46,8 +46,8 @@ class Transaction(models.Model):
     def __str__(self):
         charge = "DEBIT" if (self.charge == 'd') else "CREDIT"
 
-        return "{0:} - Journal {3:03d} - {1:} - ${2:.2f}".format(
-            self.affected_account.name, charge, self.value, self.from_journal.pk if self.from_journal is not None else -1
+        return "{0:} - Journal Entry {3:03d} - {1:} - ${2:.2f}".format(
+            self.affected_account.name, charge, self.value, self.journal_entry.pk if self.journal_entry is not None else -1
         )
 
 

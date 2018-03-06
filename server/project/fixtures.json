@@ -24,23 +24,23 @@
 {
     "model": "auth.permission",
     "fields": {
-        "name": "Can add journal",
+        "name": "Can add journal entry",
         "content_type": [
             "journalize",
-            "journal"
+            "journalentry"
         ],
-        "codename": "add_journal"
+        "codename": "add_journalentry"
     }
 },
 {
     "model": "auth.permission",
     "fields": {
-        "name": "Can change journal",
+        "name": "Can change journal entry",
         "content_type": [
             "journalize",
-            "journal"
+            "journalentry"
         ],
-        "codename": "change_journal"
+        "codename": "change_journalentry"
     }
 },
 {
@@ -99,9 +99,9 @@
         "name": "Accountant",
         "permissions": [
             [
-                "add_journal",
+                "add_journalentry",
                 "journalize",
-                "journal"
+                "journalentry"
             ]
         ]
     }
@@ -117,14 +117,14 @@
                 "account"
             ],
             [
-                "add_journal",
+                "add_journalentry",
                 "journalize",
-                "journal"
+                "journalentry"
             ],
             [
-                "change_journal",
+                "change_journalentry",
                 "journalize",
-                "journal"
+                "journalentry"
             ]
         ]
     }

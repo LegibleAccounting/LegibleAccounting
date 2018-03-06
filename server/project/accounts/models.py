@@ -62,8 +62,8 @@ class Account(models.Model):
         # based on all transactions that have been made to this account.
         value = 0
         for t in self.transactions.all():
-            if t.from_journal is not None:
-                if t.from_journal.status == 'a' and (as_of is None or as_of >= t.date):
+            if t.journal_entry is not None:
+                if t.journal_entry.status == 'a' and (as_of is None or as_of >= t.date):
                     value += t.get_value()
         value *= 1 if(self.is_debit()) else -1
         return self.initial_balance + value

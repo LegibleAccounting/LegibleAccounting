@@ -5,8 +5,8 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Transaction, Journal, Receipt
+from .models import Transaction, JournalEntry, Receipt
 
-admin.site.register(Journal)
+admin.site.register(JournalEntry)
 admin.site.register(Transaction)
 admin.site.register(Receipt)

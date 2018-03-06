@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Journal, Transaction, Receipt
+from .models import JournalEntry, Transaction, Receipt
 from accounts.serializers import RetrieveAccountSerializer
 from project.serializers import UserSerializer
 
@@ -10,7 +10,7 @@ class ReceiptSerializer(serializers.ModelSerializer):
         fields = ('of_transaction', 'img_url',)
 
     def create(self, validated_data):
-        if validated_data['of_transaction'].from_journal.status == 'i':
+        if validated_data['of_transaction'].journal_entry.status == 'i':
             instance = Receipt(**validated_data)
             instance.save()
             return instance
@@ -20,7 +20,7 @@ class ReceiptSerializer(serializers.ModelSerializer):
 class RetrieveTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ('date', 'affected_account', 'from_journal', 'value', 'charge', 'receipts',)
+        fields = ('date', 'affected_account', 'journal_entry', 'value', 'charge', 'receipts',)
 
     affected_account = RetrieveAccountSerializer()
 
@@ -37,18 +37,18 @@ class CreateTransactionSerializer(serializers.ModelSerializer):
         return value
 
 
-class RetrieveJournalSerializer(serializers.ModelSerializer):
+class RetrieveJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Journal
+        model = JournalEntry
         fields = ('date_created', 'date', 'status', 'rejection_memo', 'description', 'creator', 'transactions',)
 
     transactions = RetrieveTransactionSerializer(many=True)
     creator = UserSerializer()
 
 
-class CreateJournalSerializer(serializers.ModelSerializer):
+class CreateJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Journal
+        model = JournalEntry
         fields = ('date', 'description', 'transactions',)
 
     transactions = CreateTransactionSerializer(many=True)
@@ -68,17 +68,17 @@ class CreateJournalSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         transactions = validated_data.pop('transactions')
 
-        journal = Journal.objects.create(**validated_data)
+        journal_entry = JournalEntry.objects.create(**validated_data)
 
         for transaction in transactions:
-            Transaction.objects.create(from_journal=journal, **transaction)
+            Transaction.objects.create(journal_entry=journal_entry, **transaction)
 
-        return journal
+        return journal_entry
 
 
-class UpdateJournalSerializer(serializers.ModelSerializer):
+class UpdateJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Journal
+        model = JournalEntry
         fields = ('status', 'rejection_memo',)
 
     def update(self, instance, validated_data):

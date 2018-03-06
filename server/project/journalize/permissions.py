@@ -3,7 +3,7 @@ from rest_framework import permissions
 
 # Custom Django REST Framework permission to check if the current User
 # is in the "Manager" or "Accountant" Group.
-class LAJournalReadPermission(permissions.BasePermission):
+class LAJournalEntryReadPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.method not in permissions.SAFE_METHODS:
             return True
