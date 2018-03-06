@@ -23,6 +23,13 @@ class AccountSerializer(serializers.ModelSerializer):
         model = Account
         fields = ACCOUNT_BASE_FIELDS
 
+    def update(self, instance, validated_data):
+        if validated_data.get('is_active') is False and instance.get_balance() != 0:
+            raise serializers.ValidationError('Accounts with a non-zero balance cannot be disabled.')
+
+        return super(AccountSerializer, self).update(instance, validated_data)
+
+
 
 class RetrieveAccountSerializer(AccountSerializer):
     class Meta:
