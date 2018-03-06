@@ -13,7 +13,7 @@ class ReceiptSerializer(serializers.ModelSerializer):
 class RetrieveTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ('date', 'affected_account', 'journal_entry', 'value', 'charge', 'receipts',)
+        fields = ('date', 'affected_account', 'journal_entry', 'value', 'is_debit', 'receipts',)
 
     affected_account = RetrieveAccountSerializer()
 
@@ -21,7 +21,7 @@ class RetrieveTransactionSerializer(serializers.ModelSerializer):
 class CreateTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ('affected_account', 'value', 'charge',)
+        fields = ('affected_account', 'value', 'is_debit',)
 
     def validate_value(self, value):
         if value <= 0:
@@ -33,7 +33,7 @@ class CreateTransactionSerializer(serializers.ModelSerializer):
 class RetrieveJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalEntry
-        fields = ('date_created', 'date', 'status', 'rejection_memo', 'description', 'creator', 'transactions',)
+        fields = ('date_created', 'date', 'is_approved', 'rejection_memo', 'description', 'creator', 'transactions',)
 
     transactions = RetrieveTransactionSerializer(many=True)
     creator = UserSerializer()
@@ -51,7 +51,7 @@ class CreateJournalEntrySerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('There must be at least one transaction in a journal entry.')
 
         transaction_sum = reduce(lambda accumulated, update:
-            accumulated + update['value'] if update['charge'] == 'd' else accumulated - update['value'], value, 0)
+            accumulated + update['value'] if update['is_debit'] == True else accumulated - update['value'], value, 0)
 
         if transaction_sum != 0:
             raise serializers.ValidationError('Transactions must be balanced.')
@@ -72,16 +72,16 @@ class CreateJournalEntrySerializer(serializers.ModelSerializer):
 class UpdateJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalEntry
-        fields = ('status', 'rejection_memo',)
+        fields = ('is_approved', 'rejection_memo',)
 
     def update(self, instance, validated_data):
-        if instance.status == 'a' or instance.status == 'd':
+        if instance.is_approved is not None:
             raise serializers.ValidationError('The journal entry has already been approved/denied and can not be changed!')
 
-        if (validated_data.get('status') == 'd' and len(validated_data.get('rejection_memo')) == 0):
+        if (validated_data.get('is_approved') == False and len(validated_data.get('rejection_memo')) == 0):
             raise serializers.ValidationError('A rejection reason must be provided for denying the journal entry.')
 
-        instance.status = validated_data.get('status')
+        instance.is_approved = validated_data.get('is_approved')
         instance.rejection_memo = validated_data.get('rejection_memo')
         instance.save()
 

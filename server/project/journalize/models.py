@@ -11,14 +11,11 @@ from django.contrib.auth.models import User
 
 from accounts.models import Account
 
-CHARGE_TYPES = (('d', 'Debit'), ('c', 'Credit'))
-JOURNAL_ENTRY_STATUS_TYPES = (('a', 'Approved'), ('d', 'Denied'), ('s', 'Submitted'), ('i', 'Initial'))
-
 
 class JournalEntry(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date = models.DateField()
-    status = models.CharField(max_length=1, choices=JOURNAL_ENTRY_STATUS_TYPES, default='i')
+    is_approved = models.NullBooleanField(blank=True)
     rejection_memo = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=200, null=True, blank=True)
     creator = models.ForeignKey(User, on_delete=models.PROTECT)
@@ -37,17 +34,17 @@ class Transaction(models.Model):
     affected_account = models.ForeignKey(Account, related_name="transactions", on_delete=models.PROTECT)
     journal_entry = models.ForeignKey(JournalEntry, related_name="transactions", on_delete=models.PROTECT)
     value = models.DecimalField(max_digits=20, decimal_places=2)
-    charge = models.CharField(max_length=1, choices=CHARGE_TYPES)
+    is_debit = models.BooleanField()
     date = models.DateTimeField(auto_now_add=True)
 
     def get_value(self):
-        return self.value * 1 if (self.charge == 'd') else self.value * -1
+        return self.value * 1 if (self.is_debit == True) else self.value * -1
 
     def __str__(self):
-        charge = "DEBIT" if (self.charge == 'd') else "CREDIT"
+        is_debit = "DEBIT" if (self.is_debit == True) else "CREDIT"
 
         return "{0:} - Journal Entry {3:03d} - {1:} - ${2:.2f}".format(
-            self.affected_account.name, charge, self.value, self.journal_entry.pk if self.journal_entry is not None else -1
+            self.affected_account.name, is_debit, self.value, self.journal_entry.pk if self.journal_entry is not None else -1
         )
 
 
