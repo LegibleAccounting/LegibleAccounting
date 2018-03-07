@@ -7,16 +7,10 @@ class GeneralJournalAPI {
             return Promise.reject();
         }
 
-        var postedEnum = {
-        	PENDING: 0,
-        	REJECTED: 1,
-        	POSTED: 2
-        };
-
         // determine if searching posted entries
-        var requestURL = '/api/journals/';
-        if (posted === postedEnum.PENDING || posted === postedEnum.REJECTED || posted === postedEnum.POSTED) {
-            requestURL += '?status=' + (posted ? 'pending' : 'rejected' : 'posted');
+        var requestURL = '/api/journal-entries/';
+        if (posted === false || posted === true) {
+            requestURL += '?is_approved=' + (posted ? 'rejected' : 'posted');
         }
 
         return fetch(new JSONAPIRequest(requestURL, Auth.token), {
@@ -38,7 +32,7 @@ class GeneralJournalAPI {
             return Promise.reject();
         }
 
-        return fetch(new JSONAPIRequest(`/api/journals/${id}/`, Auth.token), {
+        return fetch(new JSONAPIRequest(`/api/journal-entries/${id}/`, Auth.token), {
             method: 'GET'
         })
             .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
@@ -58,7 +52,7 @@ class GeneralJournalAPI {
         }
 
 		// determine if searching posted entries
-        var requestURL = '/api/journals/';
+        var requestURL = '/api/journal-entries/';
         if (posted) {
         	requestURL += '?status=true&search=';
         } else {
@@ -87,7 +81,7 @@ class GeneralJournalAPI {
             return Promise.reject();
         }
 
-        return fetch(new JSONAPIRequest('/api/journals/', Auth.token), {
+        return fetch(new JSONAPIRequest('/api/journal-entries/', Auth.token), {
             method: 'POST',
             body: JSON.stringify(data)
         })
@@ -106,7 +100,7 @@ class GeneralJournalAPI {
             return Promise.reject();
         }
 
-        return fetch(new JSONAPIRequest(`/api/journals/${data.id}/`, Auth.token), {
+        return fetch(new JSONAPIRequest(`/api/journal-entries/${data.id}/`, Auth.token), {
             method: 'PUT',
             body: JSON.stringify(data)
         })
