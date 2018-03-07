@@ -48,9 +48,12 @@ class Transaction(models.Model):
         )
 
 
+def get_upload_path(receipt, filename):
+    return 'transaction_{0}/{1}'.format(receipt.of_transaction.pk, filename)
+
 class Receipt(models.Model):
     of_transaction = models.ForeignKey(Transaction, related_name="receipts", on_delete=models.CASCADE)
-    img = models.FileField(verbose_name="Receipt Image")
+    file = models.FileField(upload_to=get_upload_path, verbose_name="Receipt File")
 
     def __str__(self):
         return "Receipt #{0:} for [{1:}]".format(

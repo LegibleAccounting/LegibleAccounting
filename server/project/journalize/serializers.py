@@ -3,11 +3,20 @@ from .models import JournalEntry, Transaction, Receipt
 from accounts.serializers import RetrieveAccountSerializer
 from project.serializers import UserSerializer
 
+from drf_extra_fields.fields import Base64FileField
+
+class ReceiptFileField(Base64FileField):
+    ALLOWED_TYPES = ['pdf']
+
+    def get_file_extension(self, filename, decoded_file):
+        return 'pdf'
 
 class ReceiptSerializer(serializers.ModelSerializer):
     class Meta:
         model = Receipt
-        fields = ('of_transaction', 'img_url',)
+        fields = ('file',)
+
+    file = ReceiptFileField()
 
 
 class RetrieveTransactionSerializer(serializers.ModelSerializer):
@@ -16,12 +25,15 @@ class RetrieveTransactionSerializer(serializers.ModelSerializer):
         fields = ('date', 'affected_account', 'journal_entry', 'value', 'is_debit', 'receipts',)
 
     affected_account = RetrieveAccountSerializer()
+    receipts = ReceiptSerializer(many=True)
 
 
 class CreateTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ('affected_account', 'value', 'is_debit',)
+        fields = ('affected_account', 'value', 'is_debit', 'receipts',)
+
+    receipts = ReceiptSerializer(many=True)
 
     def validate_value(self, value):
         if value <= 0:
@@ -64,7 +76,11 @@ class CreateJournalEntrySerializer(serializers.ModelSerializer):
         journal_entry = JournalEntry.objects.create(**validated_data)
 
         for transaction in transactions:
-            Transaction.objects.create(journal_entry=journal_entry, **transaction)
+            receipts = transaction.pop('receipts')
+            transaction = Transaction.objects.create(journal_entry=journal_entry, **transaction)
+
+            for receipt in receipts:
+                Receipt.objects.create(of_transaction=transaction, **receipt)
 
         return journal_entry
 
