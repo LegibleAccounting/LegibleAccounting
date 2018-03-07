@@ -20,6 +20,7 @@ from rest_framework import routers
 
 from . import views
 from accounts.views import AccountViewSet, AccountTypeViewSet
+from journalize.views import JournalEntryViewSet
 
 router = routers.DefaultRouter()
 
@@ -28,6 +29,7 @@ router.register(r'groups', views.GroupViewSet)
 router.register(r'logs', views.LogEntryViewSet)
 router.register(r'accounts', AccountViewSet)
 router.register(r'account-types', AccountTypeViewSet)
+router.register(r'journal-entries', JournalEntryViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
