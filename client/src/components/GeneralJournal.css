@@ -1,23 +1,152 @@
 .generalJournal {
+
 }
 
-.dateColumn {
-	width: 100px;
+.gridHeading {
+	height: 15px;
 }
 
-.accountsColumn {
-	width: 300px;
+.generalJournal .container {
+	width: var(--tableWidth);
 }
 
-.debitColumn {
- 	width: 100px;
+.titleLine {
+	width: 100%;
+	height: 2px;
+	background-color: #D7D6D7;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
-.creditColumn {
-	width: 100px;
+.topOfEntryWrapper {
+	height: auto;
 }
 
-.entriesWrapper {
-	margin: auto;
-	width: 90%;
+.bottomOfEntryWrapper {
+	height: auto;
+	overflow:hidden;
+}
+
+.accountEntryDropdownWrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+.accountEntryDropdown {
+	margin-bottom: 8px;
+	width: 50%;
+	margin-right: 10px;
+}
+
+.debitAccountEntryDropdown {
+
+}
+
+.creditAccountEntryDropdown {
+	margin-left: 20%;
+}
+
+.accountEntryDropdown {
+	margin-bottom: 8px;
+	width: 50%;
+	height: 30px;
+}
+
+.entryAmount {
+	width: 50%;
+	margin-bottom: 8px;
+	height: 30px;
+}
+
+.creditEntryAmount {
+	margin-left:auto;
+	margin-right:0;
+}
+
+.debitEntryAmount {
+	
+}
+
+.line {
+	width: 100%;
+	height: 1.5px;
+	background-color: #EAEAEA;
+	margin-bottom: 10px;
+}
+
+.description {
+	resize: none;
+	margin-bottom: 10px;
+}
+
+.attachmentsWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.attachmentsTitleWrapper {
+	display: flex;
+	flex-direction: row;
+	height: 20px;
+}
+
+.attachmentsTitle {
+	margin-right: 15px;
+}
+
+.attachmentsContentWrapper {
+	margin-top: 10px;
+	margin-left: 10px;
+	overflow-y: scroll;
+	height: 85px;
+}
+
+.textButton {
+	color: var(--mainBlue);
+	background:none;
+    border:none;
+    padding:0;
+    text-align: left;
+}
+
+.textButton:hover {
+	color: var(--hoverBlue);
+}
+
+.attachmentButton {
+	 width: 180px;
+	 margin-bottom: 5px;
+}
+
+.removeAttachmentButton {
+	margin-left: 5px;
+}
+
+.addEntityButton:hover {
+	color: var(--hoverBlue);
+}
+
+.actionButtonsWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 120px;
+}
+
+.cancelButton {
+	background-color: white;
+	color: var(--mainBlue);
+	border-color: var(--mainBlue);
+	margin-bottom: 10px;
+}
+
+.cancelButton:hover{
+	color: var(--hoverBlue);
+	border-color: var(--hoverBlue);
+}
+
+.submitButton {
+	width: 130px;
 }
