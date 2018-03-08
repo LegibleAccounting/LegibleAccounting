@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from django.db import models
-
-# Create your models here.
-
+from auditlog.registry import auditlog
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -60,6 +56,8 @@ class Receipt(models.Model):
         return "Receipt #{0:} for [{1:}]".format(
             self.pk, self.of_transaction
         )
+
+auditlog.register(JournalEntry)
 
 #         _
 # /\___/\/ \
