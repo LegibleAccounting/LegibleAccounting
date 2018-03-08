@@ -5,11 +5,26 @@ from project.serializers import UserSerializer
 
 from drf_extra_fields.fields import Base64FileField
 
+import magic
+
 class ReceiptFileField(Base64FileField):
-    ALLOWED_TYPES = ['pdf']
+    ALLOWED_TYPES = ['xlsx', 'xls', 'docx', 'doc', 'pdf']
 
     def get_file_extension(self, filename, decoded_file):
-        return 'pdf'
+        file_type = magic.from_buffer(decoded_file)
+
+        if file_type == 'Microsoft Excel 2007+':
+            return 'xlsx'
+        elif file_type == 'Microsoft Word 2007+':
+            return 'docx'
+        elif 'Microsoft Excel' in file_type:
+            return 'xls'
+        elif 'Microsoft Word' in file_type:
+            return 'doc'
+        elif 'PDF document' in file_type:
+            return 'pdf'
+        else:
+            return None
 
 class ReceiptSerializer(serializers.ModelSerializer):
     class Meta:
