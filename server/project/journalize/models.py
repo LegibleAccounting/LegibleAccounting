@@ -23,7 +23,7 @@ class JournalEntry(models.Model):
         return balance == 0
 
     def __str__(self):
-        return "Journal Entry {0:03d} {1:}".format(self.pk, "Valid" if self.is_valid() else "Invalid")
+        return "Journal Entry {0:03d}".format(self.pk)
 
 
 class Transaction(models.Model):
