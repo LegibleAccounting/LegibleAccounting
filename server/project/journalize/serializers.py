@@ -29,7 +29,7 @@ class ReceiptFileField(Base64FileField):
 class ReceiptSerializer(serializers.ModelSerializer):
     class Meta:
         model = Receipt
-        fields = ('file',)
+        fields = ('file', 'original_filename')
 
     file = ReceiptFileField()
 

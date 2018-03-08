@@ -54,6 +54,7 @@ def get_upload_path(receipt, filename):
 class Receipt(models.Model):
     of_transaction = models.ForeignKey(Transaction, related_name="receipts", on_delete=models.CASCADE)
     file = models.FileField(upload_to=get_upload_path, verbose_name="Receipt File")
+    original_filename = models.CharField(max_length=256)
 
     def __str__(self):
         return "Receipt #{0:} for [{1:}]".format(
