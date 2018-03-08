@@ -1,8 +1,9 @@
 :root {
 	--mainBlue: #549FF7;
   --darkBlue: #3D7AC1;
-  --hoverBlue: #4A90E2;
+  --hoverBlue: #3986DF;
   --tableWidth: 90%;
+  --journalEntryAccountMarginBottom: 8px;
 }
 
 html, body, #root {
@@ -26,7 +27,7 @@ body {
 }
 
 .btn { 
-  min-width: 80px;
+
 }
 
 h1 {
