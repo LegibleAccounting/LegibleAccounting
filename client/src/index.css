@@ -1,3 +1,9 @@
+:root {
+	--mainBlue: #549FF7;
+  	--darkBlue: #3D7AC1;
+  	--hoverBlue: #4A90E2;
+}
+
 html, body, #root {
     height: 100%;
 }
@@ -10,9 +16,14 @@ body {
 
 .btn-primary {
 	border: 0px;
-	background-color: #4A90E2;
+	background-color: var(--mainBlue);
+}
+
+.btn-primary:hover {
+	border: 0px;
+	background-color: var(--hoverBlue);
 }
 
 h1 {
-	color: #4A90E2;
+	color: var(--mainBlue);
 }

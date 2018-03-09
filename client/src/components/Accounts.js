@@ -55,6 +55,7 @@ class Accounts extends Component {
                             <th className="accountNumber">#</th>
                             <th className="name">Name</th>
                             <th className="type">Type</th>
+                            <th className="subtype">Sub-Type</th>
                             <th className="edits"></th>
                         </tr>
                       </thead>
@@ -65,6 +66,7 @@ class Accounts extends Component {
                                 <td>{item.account_number}</td>
                                 <td>{item.name}</td>
                                 <td>{item.account_type.category}</td>
+                                <td>{item.account_type.name}</td>
                                 <td>
                                 {
                                     Auth.currentUser.groups.find(group => group.name === 'Administrator' || group.name === 'Manager') ? (

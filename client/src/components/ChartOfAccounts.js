@@ -54,7 +54,7 @@ class ChartOfAccounts extends Component {
 					  	<tr>
 						    <th className="accountNumber">#</th>
 						    <th className="name">Name</th>
-						    <th className="initialBalance">Initial Balance</th>
+						    <th className="initialBalance">Balance</th>
 						    <th className="comments">Comments</th>
 						    <th className="edits"></th>
 					    </tr>
@@ -65,7 +65,7 @@ class ChartOfAccounts extends Component {
 				             <tr key={item.id}>
 						    	<td>{item.account_number}</td>
 						    	<td>{item.name}</td>
-						    	<td>${item.initial_balance}</td>
+						    	<td align="right"></td>
 						    	<td>{item.description}</td>
                                 <td>
                                 {
