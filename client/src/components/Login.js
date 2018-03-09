@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import "./Login.css";
 import Auth from '../api/Auth.js';
-import logo from '../LALoginIcon.png'
+import logo from '../logo.png'
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +19,7 @@ class Login extends Component {
   }
 
   render() {
-    let referrer = this.props.location.state ? this.props.location.state.from : { pathname: '/' };
+    let referrer = this.props.location.state ? this.props.location.state.from : { pathname: '/chart-of-accounts' };
     if (this.state.redirectToReferrer) {
       return <Redirect to={referrer} />;
     }
@@ -43,7 +43,7 @@ class Login extends Component {
               onChange={this.updatePasswordState} />
           </div>
           <div className = "Spacer">
-            <button className ="button" type = "submit">
+            <button className ="button btn-primary" type = "submit">
               Login
             </button>
           </div>

@@ -133,7 +133,7 @@ class AccountForm extends Component {
 						<input	type="number"
 								name="initial_balance"
 								className="form-control initialBalanceTextField currency"
-								placeholder="$0.00"
+								placeholder="0.00"
 								step="0.01"
 								min="0"
                                 value={this.state.accountModel.initial_balance}
@@ -160,7 +160,7 @@ class AccountForm extends Component {
 				<div>
 					<NavLink className="NavLink btn btn-primary newButton" to="/accounts">&lt; Back to Accounts</NavLink>
 				</div>
-			</form>
+            </form>
 		);
     }
 
@@ -182,13 +182,14 @@ class AccountForm extends Component {
 
         request
             .then(() => {
-                alert(`Account ${this.state.accountModel.id === undefined ? 'created' : 'updated' } successfully.`);
+                this.props.onNotifySuccess(`Account ${this.state.accountModel.id === undefined ? 'created' : 'updated' } successfully.`);
+
                 this.setState({
                     redirectToAccountsPage: true
                 });
             })
             .catch(() => {
-                alert(`Failed to ${this.state.accountModel.id === undefined ? 'create' : 'update' } account.`);
+                this.props.onNotifyError(`Failed to ${this.state.accountModel.id === undefined ? 'create' : 'update' } account.`);
             });
     }
   }
