@@ -14,13 +14,15 @@ class GeneralJournal extends Component {
 	       entrys: [],
 	       ogEntrys: [],
 	       searchText: '',
-            newTransactions: [
+            newDebitTransactions: [
                 {
                 accountName: "",
                 accountID: "",
                 amount: 0,
                 normalSide: "Debit"
-                },
+                }
+            ],
+            newCreditTransactions: [
                 {
                 accountName: "",
                 accountID: "",
@@ -66,16 +68,31 @@ class GeneralJournal extends Component {
                           <div className="col-lg-2 dateEntry">3/15/18</div>
                           <div className="col-lg-6">
                                 {
-                                   this.state.newTransactions.map((item, index) => (
+                                   this.state.newDebitTransactions.map((item, index) => (
                                         <div className="accountEntryDropdownWrapper">
                                             <select 
-                                            className={(item.normalSide === "Debit" && 'form-control accountEntryDropdown debitAccountEntryDropdown') || (item.normalSide === "Credit" && 'form-control accountEntryDropdown creditAccountEntryDropdown')} 
+                                            className='form-control accountEntryDropdown debitAccountEntryDropdown'
                                             id={index}
                                             onChange={this.accountNameOnChange}>
                                                 <option hidden>Select Account</option>
                                                 <option value="1">Account 1</option>
                                             </select>
-                                            <button className="textButton" hidden={(index > 1)} value={item.normalSide === "Debit"} onClick={this.addNewTransaction}>+ Add</button>
+                                            <button className="textButton" hidden={(index > 0)} value={item.normalSide === "Debit"} onClick={this.addNewTransaction}>+ Add</button>
+                                        </div>
+                                    ))
+                                 }
+
+                                 {
+                                    this.state.newCreditTransactions.map((item, index) => (
+                                        <div className="accountEntryDropdownWrapper">
+                                            <select 
+                                            className='form-control accountEntryDropdown creditAccountEntryDropdown'
+                                            id={index}
+                                            onChange={this.accountNameOnChange}>
+                                                <option hidden>Select Account</option>
+                                                <option value="1">Account 1</option>
+                                            </select>
+                                            <button className="textButton" hidden={(index > 0)} value={item.normalSide === "Debit"} onClick={this.addNewTransaction}>+ Add</button>
                                         </div>
                                     ))
                                  }
@@ -83,7 +100,7 @@ class GeneralJournal extends Component {
                           <div className="col-lg-4">
                             <div>
                                 {
-                                   this.state.newTransactions.map((item, index) => (
+                                   this.state.newDebitTransactions.concat(this.state.newCreditTransactions).map((item, index) => (
                                         <input type="number" className={(item.normalSide === "Debit" && 'form-control entryAmount debitEntryAmount') || (item.normalSide === "Credit" && 'form-control entryAmount creditEntryAmount')} placeholder="0.00"/>
                                     ))
                                  }
@@ -92,23 +109,10 @@ class GeneralJournal extends Component {
                     </div>
                     <div className="line"></div> 
                     <div className="row bottomOfEntryWrapper">
-                        <div className="col-lg-5 descriptionWrapper">
-                            <label>Description</label>
-                            <textarea type="text" className="form-control description" cols="40" rows="4" placeholder="Description"/>
+                        <div className="col-lg-8 descriptionWrapper">
+                            <textarea type="text" className="form-control description" cols="1" rows="1" placeholder="Description"/>
                         </div>
-                        <div className="col-lg-4 attachmentsWrapper">
-                            <div className="attachmentsTitleWrapper">
-                                <label className="attachmentsTitle">Attachments</label>
-                                <button className="textButton">+ Add</button>
-                            </div>
-                            <div className="attachmentsContentWrapper">
-                                <div>
-                                    <button className="textButton attachmentButton">Attachment1.pdf</button>
-                                    <button className="textButton removeAttachmentButton">(Remove)</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 actionButtonsWrapper">
+                        <div className="col-lg-4 actionButtonsWrapper">
                                 <button className="btn cancelButton submitButton">Cancel</button>
                                 <button className="btn btn-primary submitButton">Submit</button>
                         </div>
@@ -133,6 +137,10 @@ class GeneralJournal extends Component {
 
     addNewTransaction(event) {
         var isDebit = (event.target.value === "true");
+
+        var currentDebitTransactions = this.state.newDebitTransactions;
+        var currentCreditTransactions = this.state.newCreditTransactions;
+
         var newTransaction = 
         {
             accountName: "",
@@ -141,17 +149,19 @@ class GeneralJournal extends Component {
             normalSide: "Debit"
         }
 
-        if (!isDebit) {
+        if (isDebit) {
+            //is debit
+            currentDebitTransactions.push(newTransaction);
+        } else {
+            //is credit
             newTransaction.normalSide = "Credit";
+            currentCreditTransactions.push(newTransaction);
         }
 
-        var transactions = this.state.newTransactions;
-        transactions.push(newTransaction);
-
         this.setState({
-            newTransactions: transactions
+            newDebitTransactions: currentDebitTransactions,
+            newCreditTransactions: currentCreditTransactions
         });
-        
     }
 
     accountNameOnChange(event) {
