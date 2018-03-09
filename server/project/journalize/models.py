@@ -7,8 +7,15 @@ from django.contrib.auth.models import User
 
 from accounts.models import Account
 
+JOURNAL_ENTRY_TYPE_CHOICES = (
+    (1, 'Regular'),
+    (2, 'Adjusting'),
+    (3, 'Closing')
+)
+
 
 class JournalEntry(models.Model):
+    entry_type = models.SmallIntegerField(choices=JOURNAL_ENTRY_TYPE_CHOICES)
     date_created = models.DateTimeField(auto_now_add=True)
     date = models.DateField()
     is_approved = models.NullBooleanField(blank=True)

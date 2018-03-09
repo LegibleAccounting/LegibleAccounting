@@ -60,16 +60,20 @@ class CreateTransactionSerializer(serializers.ModelSerializer):
 class RetrieveJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalEntry
-        fields = ('date_created', 'date', 'is_approved', 'rejection_memo', 'description', 'creator', 'transactions',)
+        fields = ('date_created', 'date', 'entry_type', 'is_approved', 'rejection_memo', 'description', 'creator', 'transactions',)
 
     transactions = RetrieveTransactionSerializer(many=True)
     creator = UserSerializer()
+    entry_type = serializers.SerializerMethodField()
+
+    def get_entry_type(self, obj):
+        return obj.get_entry_type_display()
 
 
 class CreateJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalEntry
-        fields = ('date', 'description', 'transactions',)
+        fields = ('date', 'entry_type', 'description', 'transactions',)
 
     transactions = CreateTransactionSerializer(many=True)
 
