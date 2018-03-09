@@ -52,37 +52,38 @@ class Users extends Component {
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                            <th className="usersNumber">#</th>
-                            <th className="name">Name</th>
+                            <th className="username">Name</th>
                             <th className="type">Type</th>
+                            <th className="is_active">Is Active</th>
                             <th className="edits"></th>
                         </tr>
                       </thead>
-                      <tbody>
-                        { this.state.users.length ? (
-                          this.state.users.map((item, index) => (
-                            <tr key={item.username}>
-                                <td>{item.first_name}</td>
-                                <td>{item.last_name}</td>
-                                <td>
+                       <tbody>
+                        { 
+                          	this.state.users.map((item, index) => (
+                          		<tr key={index}>
+	                          		<td>{item.username}</td>
+			                        
+			                        <td>
+		                          	{
+		                          		item.groups.map((group) => group.name)
+		                          	}	
+  				                     </td>
+
+			                        <td>{item.is_active ? "yes" : "no"}</td>
+			                                                        <td>
                                 {
                                     Auth.currentUser.groups.find(group => group.name === 'Administrator' || group.name === 'Manager') ? (
-                                        <NavLink className="NavLink btn btn-primary newButton" to={`/users/${item.id}`}>Edit</NavLink>
+                                        <NavLink className="NavLink btn btn-primary newButton" to={`/accounts/${item.id}`}>Edit</NavLink>
                                     ) : (
                                         <span></span>
                                     )
                                 }
                                 </td>
-                            </tr>
-                          ))
-                        ) : (
-                            <tr>
-                                <td></td>
-                                <td>No Users</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        )}
+		                    	</tr>
+                          	))
+	                        
+                   		}
                        </tbody>
                     </table>
                 </div>
