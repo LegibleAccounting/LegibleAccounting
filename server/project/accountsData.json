@@ -1,0 +1,796 @@
+[
+  {
+    "model": "accounts.account",
+    "pk": 141,
+    "fields": {
+      "account_type": 4,
+      "name": "Prepaid Rent",
+      "description": "Paying for leases in advance",
+      "order": 5,
+      "initial_balance": "0.00",
+      "created_date": "2018-03-11T20:02:43.793Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.account",
+    "pk": 142,
+    "fields": {
+      "account_type": 22,
+      "name": "Advertising Expenses",
+      "description": "Money spent on advertising",
+      "order": 3,
+      "initial_balance": "0.00",
+      "created_date": "2018-03-11T20:25:15.627Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 1,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 1,
+      "value": "10000.00",
+      "is_debit": true,
+      "date": "2018-03-11T19:24:16.849Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 2,
+    "fields": {
+      "affected_account": 4,
+      "journal_entry": 1,
+      "value": "1500.00",
+      "is_debit": true,
+      "date": "2018-03-11T19:24:42.885Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 3,
+    "fields": {
+      "affected_account": 13,
+      "journal_entry": 1,
+      "value": "1250.00",
+      "is_debit": true,
+      "date": "2018-03-11T19:25:05.809Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 4,
+    "fields": {
+      "affected_account": 14,
+      "journal_entry": 1,
+      "value": "7500.00",
+      "is_debit": true,
+      "date": "2018-03-11T19:25:45.909Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 5,
+    "fields": {
+      "affected_account": 66,
+      "journal_entry": 1,
+      "value": "20250.00",
+      "is_debit": false,
+      "date": "2018-03-11T19:28:41.379Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 6,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 2,
+      "value": "4500.00",
+      "is_debit": false,
+      "date": "2018-03-11T19:56:34.309Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 7,
+    "fields": {
+      "affected_account": 141,
+      "journal_entry": 2,
+      "value": "4500.00",
+      "is_debit": true,
+      "date": "2018-03-11T20:03:46.200Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 8,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 3,
+      "value": "1800.00",
+      "is_debit": false,
+      "date": "2018-03-11T20:06:03.693Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 9,
+    "fields": {
+      "affected_account": 16,
+      "journal_entry": 3,
+      "value": "1800.00",
+      "is_debit": true,
+      "date": "2018-03-11T20:06:18.173Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 10,
+    "fields": {
+      "affected_account": 60,
+      "journal_entry": 4,
+      "value": "3000.00",
+      "is_debit": false,
+      "date": "2018-03-11T20:09:46.027Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 11,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 4,
+      "value": "3000.00",
+      "is_debit": true,
+      "date": "2018-03-11T20:10:07.841Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 12,
+    "fields": {
+      "affected_account": 42,
+      "journal_entry": 5,
+      "value": "1800.00",
+      "is_debit": false,
+      "date": "2018-03-11T20:18:46.423Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 13,
+    "fields": {
+      "affected_account": 25,
+      "journal_entry": 5,
+      "value": "1800.00",
+      "is_debit": true,
+      "date": "2018-03-11T20:19:05.015Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 14,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 6,
+      "value": "800.00",
+      "is_debit": true,
+      "date": "2018-03-11T20:22:07.455Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 15,
+    "fields": {
+      "affected_account": 4,
+      "journal_entry": 6,
+      "value": "800.00",
+      "is_debit": false,
+      "date": "2018-03-11T20:22:20.518Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 16,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 7,
+      "value": "120.00",
+      "is_debit": false,
+      "date": "2018-03-11T20:26:31.058Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 17,
+    "fields": {
+      "affected_account": 142,
+      "journal_entry": 7,
+      "value": "120.00",
+      "is_debit": true,
+      "date": "2018-03-11T20:26:57.245Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 18,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 8,
+      "value": "800.00",
+      "is_debit": false,
+      "date": "2018-03-11T20:28:17.935Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 19,
+    "fields": {
+      "affected_account": 42,
+      "journal_entry": 8,
+      "value": "800.00",
+      "is_debit": true,
+      "date": "2018-03-11T20:28:45.070Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 20,
+    "fields": {
+      "affected_account": 90,
+      "journal_entry": 9,
+      "value": "2250.00",
+      "is_debit": false,
+      "date": "2018-03-11T20:32:43.464Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 21,
+    "fields": {
+      "affected_account": 4,
+      "journal_entry": 9,
+      "value": "2250.00",
+      "is_debit": true,
+      "date": "2018-03-11T20:34:22.215Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 22,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 10,
+      "value": "400.00",
+      "is_debit": false,
+      "date": "2018-03-11T20:37:00.859Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 23,
+    "fields": {
+      "affected_account": 104,
+      "journal_entry": 10,
+      "value": "400.00",
+      "is_debit": true,
+      "date": "2018-03-11T20:37:51.273Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 24,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 11,
+      "value": "3175.00",
+      "is_debit": true,
+      "date": "2018-03-11T20:46:22.707Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 25,
+    "fields": {
+      "affected_account": 90,
+      "journal_entry": 11,
+      "value": "3175.00",
+      "is_debit": false,
+      "date": "2018-03-11T20:46:55.734Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 26,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 12,
+      "value": "750.00",
+      "is_debit": false,
+      "date": "2018-03-11T20:48:55.623Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 27,
+    "fields": {
+      "affected_account": 13,
+      "journal_entry": 12,
+      "value": "750.00",
+      "is_debit": true,
+      "date": "2018-03-11T20:50:12.864Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 28,
+    "fields": {
+      "affected_account": 90,
+      "journal_entry": 13,
+      "value": "1100.00",
+      "is_debit": false,
+      "date": "2018-03-11T20:56:53.305Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 29,
+    "fields": {
+      "affected_account": 4,
+      "journal_entry": 13,
+      "value": "1100.00",
+      "is_debit": true,
+      "date": "2018-03-11T20:57:50.938Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 30,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 14,
+      "value": "1850.00",
+      "is_debit": true,
+      "date": "2018-03-11T21:01:01.030Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 31,
+    "fields": {
+      "affected_account": 90,
+      "journal_entry": 14,
+      "value": "1850.00",
+      "is_debit": false,
+      "date": "2018-03-11T21:01:32.686Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 32,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 15,
+      "value": "1600.00",
+      "is_debit": true,
+      "date": "2018-03-11T21:03:33.306Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 33,
+    "fields": {
+      "affected_account": 90,
+      "journal_entry": 15,
+      "value": "1600.00",
+      "is_debit": false,
+      "date": "2018-03-11T21:04:10.987Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 34,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 16,
+      "value": "400.00",
+      "is_debit": false,
+      "date": "2018-03-11T21:05:21.114Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 35,
+    "fields": {
+      "affected_account": 104,
+      "journal_entry": 16,
+      "value": "400.00",
+      "is_debit": true,
+      "date": "2018-03-11T21:06:48.155Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 36,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 17,
+      "value": "130.00",
+      "is_debit": false,
+      "date": "2018-03-11T21:10:54.743Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 37,
+    "fields": {
+      "affected_account": 115,
+      "journal_entry": 17,
+      "value": "130.00",
+      "is_debit": true,
+      "date": "2018-03-11T21:12:02.267Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 38,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 18,
+      "value": "200.00",
+      "is_debit": false,
+      "date": "2018-03-11T21:13:00.135Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 39,
+    "fields": {
+      "affected_account": 123,
+      "journal_entry": 18,
+      "value": "200.00",
+      "is_debit": true,
+      "date": "2018-03-11T21:13:54.103Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 40,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 19,
+      "value": "2050.00",
+      "is_debit": true,
+      "date": "2018-03-11T21:15:04.947Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 41,
+    "fields": {
+      "affected_account": 90,
+      "journal_entry": 19,
+      "value": "2050.00",
+      "is_debit": false,
+      "date": "2018-03-11T21:16:00.353Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 42,
+    "fields": {
+      "affected_account": 4,
+      "journal_entry": 20,
+      "value": "1000.00",
+      "is_debit": true,
+      "date": "2018-03-11T21:17:22.292Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 43,
+    "fields": {
+      "affected_account": 90,
+      "journal_entry": 20,
+      "value": "1000.00",
+      "is_debit": false,
+      "date": "2018-03-11T21:17:49.086Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 44,
+    "fields": {
+      "affected_account": 1,
+      "journal_entry": 21,
+      "value": "4500.00",
+      "is_debit": false,
+      "date": "2018-03-11T21:18:42.045Z"
+    }
+  },
+  {
+    "model": "journalize.transaction",
+    "pk": 45,
+    "fields": {
+      "affected_account": 104,
+      "journal_entry": 21,
+      "value": "4500.00",
+      "is_debit": true,
+      "date": "2018-03-11T21:19:03.113Z"
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 1,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T19:23:41.474Z",
+      "date": "2018-04-04",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Starting the company",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 2,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T19:56:01.890Z",
+      "date": "2018-04-04",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Paid 3 months rent",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 3,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T20:05:17.203Z",
+      "date": "2018-04-04",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Paid Insurance for the year",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 4,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T20:08:01.089Z",
+      "date": "2018-04-06",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Recieved advanced cash payment for services",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 5,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T20:15:49.736Z",
+      "date": "2018-04-07",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Purchased funature from Morrilton",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 6,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T20:21:50.989Z",
+      "date": "2018-04-08",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Recieved cash from payment on account",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 7,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T20:26:10.937Z",
+      "date": "2018-04-11",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Paid cash for advertising",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 8,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T20:27:56.291Z",
+      "date": "2018-04-12",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Paying account with Morrilton",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 9,
+    "fields": {
+      "entry_type": 3,
+      "date_created": "2018-03-11T20:31:56.618Z",
+      "date": "2018-04-15",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Services Rendered on prepaid accounts April 5-15",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 10,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T20:36:32.300Z",
+      "date": "2018-04-15",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Paid Receptionist 2 week salary",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 11,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T20:44:39.826Z",
+      "date": "2018-04-15",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Cash paid by clients",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 12,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T20:48:02.121Z",
+      "date": "2018-04-18",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Paid for supplies",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 13,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T20:52:54.179Z",
+      "date": "2018-04-22",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Services provided on account",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 14,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T20:59:33.620Z",
+      "date": "2018-04-22",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Cash from clients April 18-22",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 15,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T21:03:03.919Z",
+      "date": "2018-04-25",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Recieved cash from payment on account",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 16,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T21:05:00.622Z",
+      "date": "2018-04-27",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Paid Receptionist 2 week salary",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 17,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T21:10:27.765Z",
+      "date": "2018-04-28",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Paid telephone bill",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 18,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T21:12:37.863Z",
+      "date": "2018-04-28",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Paid Electric Bill",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 19,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T21:14:44.010Z",
+      "date": "2018-04-29",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Cash from Clients",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 20,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T21:16:51.180Z",
+      "date": "2018-03-29",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "Services provided on account",
+      "creator": 4
+    }
+  },
+  {
+    "model": "journalize.journalentry",
+    "pk": 21,
+    "fields": {
+      "entry_type": 1,
+      "date_created": "2018-03-11T21:18:22.429Z",
+      "date": "2018-04-29",
+      "is_approved": true,
+      "rejection_memo": null,
+      "description": "John's Salary",
+      "creator": 4
+    }
+  }
+]
