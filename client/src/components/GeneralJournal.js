@@ -18,7 +18,6 @@ class GeneralJournal extends Component {
            accounts: [],
             newDebitTransactions: [
                 {
-                accountName: "",
                 accountID: "",
                 amount: 0,
                 normalSide: "Debit"
@@ -26,7 +25,6 @@ class GeneralJournal extends Component {
             ],
             newCreditTransactions: [
                 {
-                accountName: "",
                 accountID: "",
                 amount: 0,
                 normalSide: "Credit"
@@ -51,7 +49,6 @@ class GeneralJournal extends Component {
 
 		this.searchTextChanged = this.searchTextChanged.bind(this);
     	this.search = this.search.bind(this);
-        this.accountNameOnChange = this.accountNameOnChange.bind(this);
         this.addNewTransaction = this.addNewTransaction.bind(this);
     }
 
@@ -88,11 +85,11 @@ class GeneralJournal extends Component {
                                             <select 
                                             className='form-control accountEntryDropdown debitAccountEntryDropdown'
                                             id={index}
-                                            onChange={this.accountNameOnChange}>
+                                            onChange={this.accountNameOnChange.bind(this, index, item.normalSide)}>
                                                 <option hidden>Select Account</option>
                                                 {
-                                                    this.state.accounts.map((account) => (
-                                                        <option key={account.id} value={account.id}>{ account.name }</option>
+                                                    this.state.accounts.map((account, index) => (
+                                                        <option key={account.id} value={index}>{ account.name }</option>
                                                     ))
                                                 }
                                             </select>
@@ -108,11 +105,11 @@ class GeneralJournal extends Component {
                                             <select 
                                             className='form-control accountEntryDropdown creditAccountEntryDropdown'
                                             id={index}
-                                            onChange={this.accountNameOnChange}>
+                                            onChange={this.accountNameOnChange.bind(this, index, item.normalSide)}>
                                                 <option hidden>Select Account</option>
                                                 {
-                                                    this.state.accounts.map((account) => (
-                                                        <option key={account.id} value={account.id}>{ account.name }</option>
+                                                    this.state.accounts.map((account, index) => (
+                                                        <option key={account.id} value={index}>{ account.name }</option>
                                                     ))
                                                 }
                                             </select>
@@ -180,7 +177,6 @@ class GeneralJournal extends Component {
 
         var newTransaction = 
         {
-            accountName: "",
             accountID: "",
             amount: 0,
             normalSide: "Debit"
@@ -221,17 +217,25 @@ class GeneralJournal extends Component {
         });
     }
 
-    accountNameOnChange(event) {
-        //todo
-        // var index = parseInt(event.target.id);
-        // console.log(index);
-        // var changedTransaction = this.state.newTransactions[index];
-        // changedTransaction.accountName = "Test";
+    accountNameOnChange(transactionIndex, normalSide, event) {
+        let selectedAccountIndex = event.target.value;
+        let selectedAccount = this.state.accounts[selectedAccountIndex];
+        
+        var transactionToEdit = this.state.newDebitTransactions[transactionIndex];
+        if (normalSide == "Credit") {
+            transactionToEdit = this.state.newCreditTransactions[transactionIndex];
+        }
+        
+        //edit transaction
+        transactionToEdit.accountID = selectedAccount.id;
 
-        // newTransactions: this.state.newTransactions.splice(index, 1, changedTransaction);
+        this.setState({
+                newDebitTransactions: this.state.newDebitTransactions,
+                newCreditTransactions: this.state.newCreditTransactions
+            });
     }
 
-    accountAmountOnChange(event, index) {
+    accountAmountOnChange(index, event) {
         //todo
         // var changedTransaction = this.state.newTransactions[index];
         // changedTransaction.amount = 1000;
