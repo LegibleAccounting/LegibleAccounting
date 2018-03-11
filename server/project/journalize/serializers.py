@@ -8,7 +8,7 @@ from drf_extra_fields.fields import Base64FileField
 import magic
 
 class ReceiptFileField(Base64FileField):
-    ALLOWED_TYPES = ['xlsx', 'xls', 'docx', 'doc', 'pdf']
+    ALLOWED_TYPES = ['xlsx', 'xls', 'docx', 'doc', 'pdf', 'txt']
 
     def get_file_extension(self, filename, decoded_file):
         file_type = magic.from_buffer(decoded_file)
@@ -23,6 +23,8 @@ class ReceiptFileField(Base64FileField):
             return 'doc'
         elif 'PDF document' in file_type:
             return 'pdf'
+        elif 'ASCII text' in file_type:
+            return 'txt'
         else:
             return None
 
