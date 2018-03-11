@@ -19,7 +19,7 @@ from django.contrib import admin
 from rest_framework import routers
 
 from . import views
-from accounts.views import AccountViewSet, AccountTypeViewSet, AccountLedgerViewSet
+from accounts.views import AccountViewSet, AccountTypeViewSet
 from journalize.views import JournalEntryViewSet
 
 router = routers.DefaultRouter()
