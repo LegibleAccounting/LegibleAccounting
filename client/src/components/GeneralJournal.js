@@ -123,8 +123,20 @@ class GeneralJournal extends Component {
                           <div className="col-lg-4">
                             <div>
                                 {
-                                   this.state.newDebitTransactions.concat(this.state.newCreditTransactions).map((item, index) => (
-                                        <input type="number" className={(item.normalSide === "Debit" && 'form-control entryAmount debitEntryAmount') || (item.normalSide === "Credit" && 'form-control entryAmount creditEntryAmount')} placeholder="0.00"/>
+                                   this.state.newDebitTransactions.map((item, index) => (
+                                        <div className="entryAmountWrapper">
+                                            <label className="dollarSignDebit" style={{visibility: index != 0 && 'hidden'}}>$</label>
+                                            <input type="number" className='form-control entryAmount debitEntryAmount' placeholder="0.00"/>
+                                        </div>
+                                    ))
+                                 }
+
+                                 {
+                                    this.state.newCreditTransactions.map((item, index) => (
+                                        <div className="entryAmountWrapper">
+                                            <label className="dollarSignCredit" style={{visibility: index != 0 && 'hidden'}}>$</label>
+                                            <input type="number" className='form-control entryAmount creditEntryAmount' placeholder="0.00"/>
+                                        </div>
                                     ))
                                  }
                             </div>
