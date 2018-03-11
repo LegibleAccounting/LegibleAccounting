@@ -7,7 +7,7 @@ from rest_framework.decorators import detail_route
 from .models import Account, AccountType
 from .serializers import AccountSerializer, AccountTypeSerializer, RetrieveAccountSerializer, RetrieveAccountTypeSerializer, LedgerAccountSerializer
 from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
+
 
 class AccountTypeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = AccountType.objects.all()
@@ -18,11 +18,6 @@ class AccountTypeViewSet(viewsets.ReadOnlyModelViewSet):
             return super(AccountTypeViewSet, self).get_serializer_class()
 
         return RetrieveAccountTypeSerializer
-
-
-class AccountLedgerViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Account.objects.all()
-    serializer_class = LedgerAccountSerializer
 
 
 class AccountViewSet(viewsets.ModelViewSet):
@@ -50,11 +45,3 @@ class AccountViewSet(viewsets.ModelViewSet):
         serializer = LedgerAccountSerializer(Account.objects.get(pk=pk))
         return Response(serializer.data)
 
-# def view_account_ledger(request, accountId, start, end):
-#     account = get_object_or_404(Account, pk=accountId)
-#     response = "{'id':{0:}, 'account_type':{1:}, 'name':{2:}, 'description':{3:}, 'initial_balance':{4:}, " \
-#                "'created_date':{5:}, 'is_active':{6:}, 'order':{7:}, 'account_number':{8:}, " \
-#                "'transactions':[{9:}]".format(account.id, account.account_type_id, account.name, account.description,
-#                                               account.initial_balance, )
-#
-#     return HttpResponse(response, content_type='application/json')
