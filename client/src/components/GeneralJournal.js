@@ -97,6 +97,7 @@ class GeneralJournal extends Component {
                                                 }
                                             </select>
                                             <button className="textButton" hidden={(index > 0)} value={item.normalSide === "Debit"} onClick={this.addNewTransaction}>+ Add</button>
+                                            <button className="textButton" hidden={(index === 0)} value={item.normalSide === "Debit"} onClick={this.removeTransaction.bind(this, index, item.normalSide)}>(Remove)</button>
                                         </div>
                                     ))
                                  }
@@ -116,6 +117,7 @@ class GeneralJournal extends Component {
                                                 }
                                             </select>
                                             <button className="textButton" hidden={(index > 0)} value={item.normalSide === "Debit"} onClick={this.addNewTransaction}>+ Add</button>
+                                            <button className="textButton" hidden={(index === 0)} value={item.normalSide === "Debit"} onClick={this.removeTransaction.bind(this, index, item.normalSide)}>(Remove)</button>
                                         </div>
                                     ))
                                  }
@@ -196,6 +198,26 @@ class GeneralJournal extends Component {
         this.setState({
             newDebitTransactions: currentDebitTransactions,
             newCreditTransactions: currentCreditTransactions
+        });
+    }
+
+    removeTransaction(index, normalSide) {
+        var isDebit = normalSide;
+
+        var currentDebitTransactions = this.state.newDebitTransactions;
+        var currentCreditTransactions = this.state.newCreditTransactions;
+
+        if (isDebit === "Debit") {
+            //is debit
+            currentDebitTransactions.splice(index, 1);
+        } else {
+            //is credit
+            currentCreditTransactions.splice(index, 1);
+        }
+
+        this.setState({
+            newDebitTransactions: currentDebitTransactions,
+            newCreditTransactions: currentCreditTransactions 
         });
     }
 
