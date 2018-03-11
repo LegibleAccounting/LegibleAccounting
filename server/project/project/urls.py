@@ -30,7 +30,6 @@ router.register(r'logs', views.LogEntryViewSet)
 router.register(r'accounts', AccountViewSet)
 router.register(r'account-types', AccountTypeViewSet)
 router.register(r'journal-entries', JournalEntryViewSet)
-router.register(r'accounts/ledgers', AccountLedgerViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
