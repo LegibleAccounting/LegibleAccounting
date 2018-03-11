@@ -5,15 +5,17 @@ import './CommonChart.css';
 import Auth from '../api/Auth.js';
 import GeneralJournalAPI from '../api/GeneralJournal.js';
 import GeneralJournalEntry from './GeneralJournalEntry.js';
+import AccountsAPI from '../api/Accounts.js';
 
 class GeneralJournal extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-	       entrys: [],
-	       ogEntrys: [],
+	       entries: [],
+	       ogentries: [],
 	       searchText: '',
+           accounts: [],
             newDebitTransactions: [
                 {
                 accountName: "",
@@ -31,8 +33,21 @@ class GeneralJournal extends Component {
                 }
             ],
             newAttachments: []
-
 	    };
+
+        AccountsAPI.getAll(true)
+            .then((accounts) => {
+                this.setState({
+                    accounts
+                });
+            });
+
+        GeneralJournalAPI.getAll(false)
+            .then((entries) => {
+                this.setState({
+                    entries
+                });
+            });
 
 		this.searchTextChanged = this.searchTextChanged.bind(this);
     	this.search = this.search.bind(this);
@@ -75,7 +90,11 @@ class GeneralJournal extends Component {
                                             id={index}
                                             onChange={this.accountNameOnChange}>
                                                 <option hidden>Select Account</option>
-                                                <option value="1">Account 1</option>
+                                                {
+                                                    this.state.accounts.map((account) => (
+                                                        <option key={account.id} value={account.id}>{ account.name }</option>
+                                                    ))
+                                                }
                                             </select>
                                             <button className="textButton" hidden={(index > 0)} value={item.normalSide === "Debit"} onClick={this.addNewTransaction}>+ Add</button>
                                         </div>
@@ -90,7 +109,11 @@ class GeneralJournal extends Component {
                                             id={index}
                                             onChange={this.accountNameOnChange}>
                                                 <option hidden>Select Account</option>
-                                                <option value="1">Account 1</option>
+                                                {
+                                                    this.state.accounts.map((account) => (
+                                                        <option key={account.id} value={account.id}>{ account.name }</option>
+                                                    ))
+                                                }
                                             </select>
                                             <button className="textButton" hidden={(index > 0)} value={item.normalSide === "Debit"} onClick={this.addNewTransaction}>+ Add</button>
                                         </div>
@@ -126,7 +149,7 @@ class GeneralJournal extends Component {
     	this.setState({ searchText: event.target.value });
     	if (event.target.value === '') {
     		this.setState({
-    			entrys: this.state.ogEntrys
+    			entries: this.state.ogentries
     		});
     	}
     }
