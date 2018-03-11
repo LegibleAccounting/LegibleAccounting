@@ -45,6 +45,8 @@ class ReceiptSerializer(serializers.ModelSerializer):
             allowed_types = ','.join(ReceiptFileField.ALLOWED_TYPES)
             raise serializers.ValidationError('The file must be one of the following types: ' + allowed_types)
 
+        return value
+
 
 class RetrieveTransactionSerializer(serializers.ModelSerializer):
     class Meta:
