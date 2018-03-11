@@ -84,11 +84,12 @@ class GeneralJournal extends Component {
                                             <select 
                                             className='form-control accountEntryDropdown debitAccountEntryDropdown'
                                             id={index}
+                                            value={item.accountID}
                                             onChange={this.accountNameOnChange.bind(this, index, item.normalSide)}>
                                                 <option hidden>Select Account</option>
                                                 {
                                                     this.state.accounts.map((account, index) => (
-                                                        <option key={account.id} value={index}>{ account.name }</option>
+                                                        <option key={account.id} value={account.id}>{ account.name }</option>
                                                     ))
                                                 }
                                             </select>
@@ -104,11 +105,12 @@ class GeneralJournal extends Component {
                                             <select 
                                             className='form-control accountEntryDropdown creditAccountEntryDropdown'
                                             id={index}
+                                            value={item.accountID}
                                             onChange={this.accountNameOnChange.bind(this, index, item.normalSide)}>
                                                 <option hidden>Select Account</option>
                                                 {
                                                     this.state.accounts.map((account, index) => (
-                                                        <option key={account.id} value={index}>{ account.name }</option>
+                                                        <option key={account.id} value={account.id}>{ account.name }</option>
                                                     ))
                                                 }
                                             </select>
@@ -216,24 +218,23 @@ class GeneralJournal extends Component {
             newDebitTransactions: currentDebitTransactions,
             newCreditTransactions: currentCreditTransactions 
         });
+
+        console.log(this.state.newDebitTransactions);
     }
 
     accountNameOnChange(transactionIndex, normalSide, event) {
-        let selectedAccountIndex = event.target.value;
-        let selectedAccount = this.state.accounts[selectedAccountIndex];
-        
         var transactionToEdit = this.state.newDebitTransactions[transactionIndex];
         if (normalSide == "Credit") {
             transactionToEdit = this.state.newCreditTransactions[transactionIndex];
         }
         
         //edit transaction
-        transactionToEdit.accountID = selectedAccount.id;
+        transactionToEdit.accountID = event.target.value;
 
         this.setState({
-                newDebitTransactions: this.state.newDebitTransactions,
-                newCreditTransactions: this.state.newCreditTransactions
-            });
+            newDebitTransactions: this.state.newDebitTransactions,
+            newCreditTransactions: this.state.newCreditTransactions
+        });
     }
 
     accountAmountOnChange(transactionIndex, normalSide, event) {
