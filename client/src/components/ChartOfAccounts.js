@@ -34,7 +34,7 @@ class ChartOfAccounts extends Component {
 		            <h1>Chart of Accounts</h1>
                     {
                         Auth.currentUser.groups.find(group => group.name === 'Administrator') ? (
-					       <NavLink className="NavLink btn btn-primary newButton" to="/chart-of-accounts/add">Add +</NavLink> 
+					       <NavLink className="NavLink btn btn-primary newButton" to="/chart-of-accounts/add">+ Add</NavLink> 
                         ) : (
                             <span></span>
                         )
