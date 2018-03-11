@@ -5,18 +5,45 @@ from project.serializers import UserSerializer
 
 from drf_extra_fields.fields import Base64FileField
 
+import magic
+
 class ReceiptFileField(Base64FileField):
-    ALLOWED_TYPES = ['pdf']
+    ALLOWED_TYPES = ['xlsx', 'xls', 'docx', 'doc', 'pdf', 'txt']
 
     def get_file_extension(self, filename, decoded_file):
-        return 'pdf'
+        file_type = magic.from_buffer(decoded_file)
+
+        if file_type == 'Microsoft Excel 2007+':
+            return 'xlsx'
+        elif file_type == 'Microsoft Word 2007+':
+            return 'docx'
+        elif 'Microsoft Excel' in file_type:
+            return 'xls'
+        elif 'Microsoft Word' in file_type:
+            return 'doc'
+        elif 'PDF document' in file_type:
+            return 'pdf'
+        elif 'ASCII text' in file_type:
+            return 'txt'
+        else:
+            return None
 
 class ReceiptSerializer(serializers.ModelSerializer):
     class Meta:
         model = Receipt
-        fields = ('file',)
+        fields = ('file', 'original_filename')
 
     file = ReceiptFileField()
+
+    def validate_original_filename(self, value):
+        name_parts = value.split('.')
+        if len(name_parts) < 2:
+            raise serializers.ValidationError('The file must have a name and an extension.')
+
+        extension = name_parts[-1]
+        if extension not in ReceiptFileField.ALLOWED_TYPES:
+            allowed_types = ','.join(ReceiptFileField.ALLOWED_TYPES)
+            raise serializers.ValidationError('The file must be one of the following types: ' + allowed_types)
 
 
 class RetrieveTransactionSerializer(serializers.ModelSerializer):
@@ -45,16 +72,20 @@ class CreateTransactionSerializer(serializers.ModelSerializer):
 class RetrieveJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalEntry
-        fields = ('date_created', 'date', 'is_approved', 'rejection_memo', 'description', 'creator', 'transactions',)
+        fields = ('date_created', 'date', 'entry_type', 'is_approved', 'rejection_memo', 'description', 'creator', 'transactions',)
 
     transactions = RetrieveTransactionSerializer(many=True)
     creator = UserSerializer()
+    entry_type = serializers.SerializerMethodField()
+
+    def get_entry_type(self, obj):
+        return obj.get_entry_type_display()
 
 
 class CreateJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalEntry
-        fields = ('date', 'description', 'transactions',)
+        fields = ('date', 'entry_type', 'description', 'transactions',)
 
     transactions = CreateTransactionSerializer(many=True)
 

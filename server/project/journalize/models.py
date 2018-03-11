@@ -1,18 +1,21 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from django.db import models
-
-# Create your models here.
-
+from auditlog.registry import auditlog
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
 from accounts.models import Account
 
+JOURNAL_ENTRY_TYPE_CHOICES = (
+    (1, 'Regular'),
+    (2, 'Adjusting'),
+    (3, 'Closing')
+)
+
 
 class JournalEntry(models.Model):
+    entry_type = models.SmallIntegerField(choices=JOURNAL_ENTRY_TYPE_CHOICES)
     date_created = models.DateTimeField(auto_now_add=True)
     date = models.DateField()
     is_approved = models.NullBooleanField(blank=True)
@@ -27,7 +30,7 @@ class JournalEntry(models.Model):
         return balance == 0
 
     def __str__(self):
-        return "Journal Entry {0:03d} {1:}".format(self.pk, "Valid" if self.is_valid() else "Invalid")
+        return "Journal Entry {0:03d}".format(self.pk)
 
 
 class Transaction(models.Model):
@@ -54,11 +57,14 @@ def get_upload_path(receipt, filename):
 class Receipt(models.Model):
     of_transaction = models.ForeignKey(Transaction, related_name="receipts", on_delete=models.CASCADE)
     file = models.FileField(upload_to=get_upload_path, verbose_name="Receipt File")
+    original_filename = models.CharField(max_length=256)
 
     def __str__(self):
         return "Receipt #{0:} for [{1:}]".format(
             self.pk, self.of_transaction
         )
+
+auditlog.register(JournalEntry)
 
 #         _
 # /\___/\/ \
