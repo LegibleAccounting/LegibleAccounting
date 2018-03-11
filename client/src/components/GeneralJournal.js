@@ -4,7 +4,6 @@ import './GeneralJournal.css';
 import './CommonChart.css';
 import Auth from '../api/Auth.js';
 import GeneralJournalAPI from '../api/GeneralJournal.js';
-import GeneralJournalEntry from './GeneralJournalEntry.js';
 import AccountsAPI from '../api/Accounts.js';
 
 class GeneralJournal extends Component {
