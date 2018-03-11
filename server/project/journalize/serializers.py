@@ -35,6 +35,16 @@ class ReceiptSerializer(serializers.ModelSerializer):
 
     file = ReceiptFileField()
 
+    def validate_original_filename(self, value):
+        name_parts = value.split('.')
+        if len(name_parts) < 2:
+            raise serializers.ValidationError('The file must have a name and an extension.')
+
+        extension = name_parts[-1]
+        if extension not in ReceiptFileField.ALLOWED_TYPES:
+            allowed_types = ','.join(ReceiptFileField.ALLOWED_TYPES)
+            raise serializers.ValidationError('The file must be one of the following types: ' + allowed_types)
+
 
 class RetrieveTransactionSerializer(serializers.ModelSerializer):
     class Meta:
