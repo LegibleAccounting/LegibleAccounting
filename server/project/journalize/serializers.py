@@ -95,6 +95,13 @@ class CreateJournalEntrySerializer(serializers.ModelSerializer):
         if len(value) == 0:
             raise serializers.ValidationError('There must be at least one transaction in a journal entry.')
 
+        used_accounts = set()
+        for transaction in value:
+            last_length = len(used_accounts)
+            used_accounts.add(transaction['affected_account'])
+            if (last_length == len(used_accounts)):
+                raise serializers.ValidationError('Two transactions cannot be made to the same account.')
+
         transaction_sum = reduce(lambda accumulated, update:
             accumulated + update['value'] if update['is_debit'] == True else accumulated - update['value'], value, 0)
 
