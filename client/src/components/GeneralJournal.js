@@ -123,7 +123,8 @@ class GeneralJournal extends Component {
                                    this.state.newDebitTransactions.map((item, index) => (
                                         <div className="entryAmountWrapper">
                                             <label className="dollarSignDebit" style={{visibility: index != 0 && 'hidden'}}>$</label>
-                                            <input type="number" className='form-control entryAmount debitEntryAmount' placeholder="0.00"/>
+                                            <input type="number" className='form-control entryAmount debitEntryAmount' placeholder="0.00"
+                                            onChange={this.accountAmountOnChange.bind(this, index, item.normalSide)}/>
                                         </div>
                                     ))
                                  }
@@ -132,7 +133,8 @@ class GeneralJournal extends Component {
                                     this.state.newCreditTransactions.map((item, index) => (
                                         <div className="entryAmountWrapper">
                                             <label className="dollarSignCredit" style={{visibility: index != 0 && 'hidden'}}>$</label>
-                                            <input type="number" className='form-control entryAmount creditEntryAmount' placeholder="0.00"/>
+                                            <input type="number" className='form-control entryAmount creditEntryAmount' placeholder="0.00"
+                                            onChange={this.accountAmountOnChange.bind(this, index, item.normalSide)}/>
                                         </div>
                                     ))
                                  }
@@ -213,12 +215,20 @@ class GeneralJournal extends Component {
             });
     }
 
-    accountAmountOnChange(index, event) {
-        //todo
-        // var changedTransaction = this.state.newTransactions[index];
-        // changedTransaction.amount = 1000;
+    accountAmountOnChange(transactionIndex, normalSide, event) {
+        var transactionToEdit = this.state.newDebitTransactions[transactionIndex];
+        if (normalSide == "Credit") {
+            transactionToEdit = this.state.newCreditTransactions[transactionIndex];
+        }
+        
+        //edit transaction
+        let newAmount = event.target.value;
+        transactionToEdit.amount = newAmount;
 
-        // newTransactions: this.state.newTransactions.splice(index, 1, changedTransaction);
+        this.setState({
+                newDebitTransactions: this.state.newDebitTransactions,
+                newCreditTransactions: this.state.newCreditTransactions
+            });
     }
 }
 
