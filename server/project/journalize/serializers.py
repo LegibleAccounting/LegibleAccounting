@@ -11,6 +11,7 @@ class ReceiptFileField(Base64FileField):
     ALLOWED_TYPES = ['xlsx', 'xls', 'docx', 'doc', 'pdf', 'txt']
 
     def get_file_extension(self, filename, decoded_file):
+
         file_type = magic.from_buffer(decoded_file)
 
         if file_type == 'Microsoft Excel 2007+':

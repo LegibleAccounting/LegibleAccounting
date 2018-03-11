@@ -33,6 +33,21 @@ class AccountType(models.Model):
         return self.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE
 
 
+class TransactionAtTime:
+    balance = 0
+    is_debit = False
+    journal_entry = None
+    value = 0
+
+    def __init__(self, balance=0, is_debit=False,journal_entry=None,value=0,date=None):
+        self.balance = balance
+        self.is_debit = is_debit
+        self.journal_entry = journal_entry
+        self.value = value
+        self.date = date
+
+
+
 class Account(models.Model):
     class Meta:
         ordering = ['account_type__liquidity', 'order']
@@ -53,6 +68,16 @@ class Account(models.Model):
 
     def account_number(self):
         return (self.account_type.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE) + self.order
+
+    def balances(self):
+        values = []
+        value = self.initial_balance
+        transactions = self.transactions.order_by('date').all()
+        for t in transactions:
+            value += (t.value * pow(-1, int(self.is_debit() ^ t.is_debit)))
+            values.append(TransactionAtTime(balance=value, is_debit=t.is_debit, journal_entry=t.journal_entry.id,
+                                            value=t.value, date=t.journal_entry.date))
+        return values
 
     def get_balance(self, as_of=None):
         # TODO: This will be updated to return a calculated balance
