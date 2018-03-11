@@ -57,15 +57,13 @@
 	margin-bottom: 8px;
 	height: 30px;
 	text-align:right;
+	margin-left: 10px;
 }
 
 .creditEntryAmount {
-	margin-left:auto;
-	margin-right:0;
 }
 
 .debitEntryAmount {
-	
 }
 
 .line {
@@ -118,6 +116,25 @@
 	color: var(--hoverBlue);
 }
 
+.entryAmountWrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+.dollarSignDebit {
+	font-size: 14px;
+	height: 100%;
+	line-height: 30px;
+}
+
+.dollarSignCredit {
+	font-size: 14px;
+	height: 100%;
+	line-height: 30px;
+	margin-right: 0px;
+	margin-left: auto;
+}
+
 .attachmentButton {
 	 width: 180px;
 	 margin-bottom: 5px;
@@ -152,4 +169,13 @@
 
 .submitButton {
 	width: 130px;
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
