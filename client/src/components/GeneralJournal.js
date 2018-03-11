@@ -94,6 +94,7 @@ class GeneralJournal extends Component {
                                                 }
                                             </select>
                                             <button className="textButton" hidden={(index > 0)} value={item.normalSide === "Debit"} onClick={this.addNewTransaction}>+ Add</button>
+                                            <button className="textButton" hidden={(index === 0)} value={item.normalSide === "Debit"} onClick={this.removeTransaction.bind(this, index, item.normalSide)}>(Remove)</button>
                                         </div>
                                     ))
                                  }
@@ -113,6 +114,7 @@ class GeneralJournal extends Component {
                                                 }
                                             </select>
                                             <button className="textButton" hidden={(index > 0)} value={item.normalSide === "Debit"} onClick={this.addNewTransaction}>+ Add</button>
+                                            <button className="textButton" hidden={(index === 0)} value={item.normalSide === "Debit"} onClick={this.removeTransaction.bind(this, index, item.normalSide)}>(Remove)</button>
                                         </div>
                                     ))
                                  }
@@ -123,7 +125,8 @@ class GeneralJournal extends Component {
                                    this.state.newDebitTransactions.map((item, index) => (
                                         <div className="entryAmountWrapper">
                                             <label className="dollarSignDebit" style={{visibility: index != 0 && 'hidden'}}>$</label>
-                                            <input type="number" className='form-control entryAmount debitEntryAmount' placeholder="0.00"/>
+                                            <input type="number" className='form-control entryAmount debitEntryAmount' placeholder="0.00"
+                                            onChange={this.accountAmountOnChange.bind(this, index, item.normalSide)}/>
                                         </div>
                                     ))
                                  }
@@ -132,7 +135,8 @@ class GeneralJournal extends Component {
                                     this.state.newCreditTransactions.map((item, index) => (
                                         <div className="entryAmountWrapper">
                                             <label className="dollarSignCredit" style={{visibility: index != 0 && 'hidden'}}>$</label>
-                                            <input type="number" className='form-control entryAmount creditEntryAmount' placeholder="0.00"/>
+                                            <input type="number" className='form-control entryAmount creditEntryAmount' placeholder="0.00"
+                                            onChange={this.accountAmountOnChange.bind(this, index, item.normalSide)}/>
                                         </div>
                                     ))
                                  }
@@ -195,10 +199,30 @@ class GeneralJournal extends Component {
         });
     }
 
+    removeTransaction(index, normalSide) {
+        var isDebit = normalSide;
+
+        var currentDebitTransactions = this.state.newDebitTransactions;
+        var currentCreditTransactions = this.state.newCreditTransactions;
+
+        if (isDebit === "Debit") {
+            //is debit
+            currentDebitTransactions.splice(index, 1);
+        } else {
+            //is credit
+            currentCreditTransactions.splice(index, 1);
+        }
+
+        this.setState({
+            newDebitTransactions: currentDebitTransactions,
+            newCreditTransactions: currentCreditTransactions 
+        });
+    }
+
     accountNameOnChange(transactionIndex, normalSide, event) {
         let selectedAccountIndex = event.target.value;
         let selectedAccount = this.state.accounts[selectedAccountIndex];
-
+        
         var transactionToEdit = this.state.newDebitTransactions[transactionIndex];
         if (normalSide == "Credit") {
             transactionToEdit = this.state.newCreditTransactions[transactionIndex];
@@ -213,12 +237,20 @@ class GeneralJournal extends Component {
             });
     }
 
-    accountAmountOnChange(index, event) {
-        //todo
-        // var changedTransaction = this.state.newTransactions[index];
-        // changedTransaction.amount = 1000;
+    accountAmountOnChange(transactionIndex, normalSide, event) {
+        var transactionToEdit = this.state.newDebitTransactions[transactionIndex];
+        if (normalSide == "Credit") {
+            transactionToEdit = this.state.newCreditTransactions[transactionIndex];
+        }
+        
+        //edit transaction
+        let newAmount = event.target.value;
+        transactionToEdit.amount = newAmount;
 
-        // newTransactions: this.state.newTransactions.splice(index, 1, changedTransaction);
+        this.setState({
+                newDebitTransactions: this.state.newDebitTransactions,
+                newCreditTransactions: this.state.newCreditTransactions
+            });
     }
 }
 
