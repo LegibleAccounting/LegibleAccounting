@@ -7,18 +7,18 @@ class JournalEntryCreate extends Component {
 
         this.state = {
             isLoading: false,
-            newDebitTransactions: [
+            transactions: [
                 {
                 accountID: "",
                 amount: 0,
-                is_debit: true
-                }
-            ],
-            newCreditTransactions: [
+                is_debit: true,
+                initial_display: true
+                },
                 {
                 accountID: "",
                 amount: 0,
-                is_debit: false
+                is_debit: false,
+                initial_display: true
                 }
             ],
             newAttachments: []
@@ -50,15 +50,15 @@ class JournalEntryCreate extends Component {
                     <div className="col-xs-12 col-sm-2 dateEntry">3/15/18</div>
                     <div className="col-xs-12 col-sm-10">
                         {
-                            this.state.newDebitTransactions.map((item, index) => (
+                            this.state.transactions.map((item, index) => (
                                 <div className="row auto-height" key={index}>
                                     <div className="col-xs-12 col-sm-7">
                                         <div className="accountEntryDropdownWrapper">
                                             <select
-                                              className="form-control accountEntryDropdown"
+                                              className={ 'form-control accountEntryDropdown ' + (item.is_debit ? '' : 'creditAccountEntryDropdown') }
                                               id={index}
                                               value={item.accountID}
-                                              onChange={this.accountNameOnChange.bind(this, index, item.is_debit)}>
+                                              onChange={this.accountNameOnChange.bind(this, index)}>
                                                 <option hidden>Select Account</option>
                                                 {
                                                     this.props.accounts.map((account, index) => (
@@ -66,46 +66,15 @@ class JournalEntryCreate extends Component {
                                                     ))
                                                 }
                                             </select>
-                                            <button className="textButton" hidden={(index > 0)} value={item.is_debit === true } onClick={this.addNewTransaction}>+ Add</button>
-                                            <button className="textButton" hidden={(index === 0)} value={item.is_debit === true } onClick={this.removeTransaction.bind(this, index, item.is_debit)}>Remove</button>
+                                            <button className="textButton" hidden={(!item.initial_display)} value={item.is_debit === true } onClick={this.addNewTransaction}>+ Add</button>
+                                            <button className="textButton" hidden={(item.initial_display)} value={item.is_debit === true } onClick={this.removeTransaction.bind(this, index)}>Remove</button>
                                         </div>
                                     </div>
                                     <div className="col-xs-12 col-sm-5">
                                         <div className="entryAmountWrapper">
-                                            <label className="dollarSignDebit" style={{visibility: index !== 0 && 'hidden'}}>$</label>
-                                            <input type="number" className='form-control entryAmount debitEntryAmount' placeholder="0.00"
-                                            onChange={this.accountAmountOnChange.bind(this, index, item.is_debit)}/>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        }
-                        {
-                            this.state.newCreditTransactions.map((item, index) => (
-                                <div className="row auto-height" key={index}>
-                                    <div className="col-xs-12 col-sm-7">
-                                        <div className="accountEntryDropdownWrapper">
-                                            <select
-                                              className="form-control accountEntryDropdown creditAccountEntryDropdown"
-                                              id={index}
-                                              value={item.accountID}
-                                              onChange={this.accountNameOnChange.bind(this, index, item.is_debit)}>
-                                                <option hidden>Select Account</option>
-                                                {
-                                                    this.props.accounts.map((account, index) => (
-                                                        <option key={account.id} value={account.id}>{ account.name }</option>
-                                                    ))
-                                                }
-                                            </select>
-                                            <button className="textButton" hidden={(index > 0)} value={item.is_debit === true } onClick={this.addNewTransaction}>+ Add</button>
-                                            <button className="textButton" hidden={(index === 0)} value={item.is_debit === true } onClick={this.removeTransaction.bind(this, index, item.is_debit)}>Remove</button>
-                                        </div>
-                                    </div>
-                                    <div className="col-xs-12 col-sm-offset-2 col-sm-3">
-                                        <div className="entryAmountWrapper">
-                                            <label className="dollarSignCredit" style={{visibility: index !== 0 && 'hidden'}}>$</label>
-                                            <input type="number" className='form-control entryAmount creditEntryAmount' placeholder="0.00"
-                                            onChange={this.accountAmountOnChange.bind(this, index, item.is_debit)}/>
+                                            <label className={ item.is_debit ? 'dollarSignDebit' : 'dollarSignCredit' } style={{visibility: index !== 0 && 'hidden'}}>$</label>
+                                            <input type="number" className={ 'form-control entryAmount ' + (item.is_debit ? 'debitEntryAmount' : 'creditEntryAmount') } placeholder="0.00"
+                                            onChange={this.accountAmountOnChange.bind(this, index)}/>
                                         </div>
                                     </div>
                                 </div>
@@ -130,82 +99,64 @@ class JournalEntryCreate extends Component {
     addNewTransaction(event) {
         var isDebit = (event.target.value === "true");
 
-        var currentDebitTransactions = this.state.newDebitTransactions;
-        var currentCreditTransactions = this.state.newCreditTransactions;
-
         var newTransaction = 
         {
             accountID: "",
-            amount: 0,
-            is_debit: true
+            amount: 0
         }
 
         if (isDebit) {
-            //is debit
-            currentDebitTransactions.push(newTransaction);
+            //is debit; have to insert after the last debit
+            newTransaction.is_debit = true;
+
+            let spliceLocation;
+            for (let i = 0; i < this.state.transactions.length; i++) {
+                if (this.state.transactions[i].is_debit === false) {
+                    spliceLocation = i;
+                    break;
+                }
+            }
+
+            this.state.transactions.splice(spliceLocation, 0, newTransaction);
         } else {
-            //is credit
+            //is credit; can just push to the end of the list
             newTransaction.is_debit = false;
-            currentCreditTransactions.push(newTransaction);
+            this.state.transactions.push(newTransaction);
         }
 
         this.setState({
-            newDebitTransactions: currentDebitTransactions,
-            newCreditTransactions: currentCreditTransactions
+            transactions: this.state.transactions
         });
     }
 
-    removeTransaction(index, is_debit) {
-        var isDebit = is_debit;
-
-        var currentDebitTransactions = this.state.newDebitTransactions;
-        var currentCreditTransactions = this.state.newCreditTransactions;
-
-        if (isDebit === "Debit") {
-            //is debit
-            currentDebitTransactions.splice(index, 1);
-        } else {
-            //is credit
-            currentCreditTransactions.splice(index, 1);
-        }
+    removeTransaction(index) {
+        this.state.transactions.splice(index, 1);
 
         this.setState({
-            newDebitTransactions: currentDebitTransactions,
-            newCreditTransactions: currentCreditTransactions 
+            transactions: this.state.transactions
         });
-
-        console.log(this.state.newDebitTransactions);
     }
 
-    accountNameOnChange(transactionIndex, is_debit, event) {
-        var transactionToEdit = this.state.newDebitTransactions[transactionIndex];
-        if (is_debit === false) {
-            transactionToEdit = this.state.newCreditTransactions[transactionIndex];
-        }
+    accountNameOnChange(transactionIndex, event) {
+        var transactionToEdit = this.state.transactions[transactionIndex];
         
         //edit transaction
         transactionToEdit.accountID = event.target.value;
 
         this.setState({
-            newDebitTransactions: this.state.newDebitTransactions,
-            newCreditTransactions: this.state.newCreditTransactions
+            transactions: this.state.transactions
         });
     }
 
-    accountAmountOnChange(transactionIndex, is_debit, event) {
-        var transactionToEdit = this.state.newDebitTransactions[transactionIndex];
-        if (is_debit === false) {
-            transactionToEdit = this.state.newCreditTransactions[transactionIndex];
-        }
-        
+    accountAmountOnChange(transactionIndex, event) {
+        var transactionToEdit = this.state.transactions[transactionIndex];
+
         //edit transaction
-        let newAmount = event.target.value;
-        transactionToEdit.amount = newAmount;
+        transactionToEdit.amount = event.target.value;
 
         this.setState({
-                newDebitTransactions: this.state.newDebitTransactions,
-                newCreditTransactions: this.state.newCreditTransactions
-            });
+            transactions: this.state.transactions
+        });
     }
 }
 
