@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './GeneralJournal.css';
 import './CommonChart.css';
-import Auth from '../api/Auth.js';
 import GeneralJournalAPI from '../api/GeneralJournal.js';
 import AccountsAPI from '../api/Accounts.js';
 

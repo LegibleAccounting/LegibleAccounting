@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import './JournalEntryCreate.css';
-import Auth from '../api/Auth.js';
 
 class JournalEntryCreate extends Component {
     constructor(props) {
@@ -98,7 +96,7 @@ class JournalEntryCreate extends Component {
                             {
                                this.state.newDebitTransactions.map((item, index) => (
                                     <div className="entryAmountWrapper">
-                                        <label className="dollarSignDebit" style={{visibility: index != 0 && 'hidden'}}>$</label>
+                                        <label className="dollarSignDebit" style={{visibility: index !== 0 && 'hidden'}}>$</label>
                                         <input type="number" className='form-control entryAmount debitEntryAmount' placeholder="0.00"
                                         onChange={this.accountAmountOnChange.bind(this, index, item.normalSide)}/>
                                     </div>
@@ -108,7 +106,7 @@ class JournalEntryCreate extends Component {
                              {
                                 this.state.newCreditTransactions.map((item, index) => (
                                     <div className="entryAmountWrapper">
-                                        <label className="dollarSignCredit" style={{visibility: index != 0 && 'hidden'}}>$</label>
+                                        <label className="dollarSignCredit" style={{visibility: index !== 0 && 'hidden'}}>$</label>
                                         <input type="number" className='form-control entryAmount creditEntryAmount' placeholder="0.00"
                                         onChange={this.accountAmountOnChange.bind(this, index, item.normalSide)}/>
                                     </div>
@@ -183,7 +181,7 @@ class JournalEntryCreate extends Component {
 
     accountNameOnChange(transactionIndex, normalSide, event) {
         var transactionToEdit = this.state.newDebitTransactions[transactionIndex];
-        if (normalSide == "Credit") {
+        if (normalSide === "Credit") {
             transactionToEdit = this.state.newCreditTransactions[transactionIndex];
         }
         
@@ -198,7 +196,7 @@ class JournalEntryCreate extends Component {
 
     accountAmountOnChange(transactionIndex, normalSide, event) {
         var transactionToEdit = this.state.newDebitTransactions[transactionIndex];
-        if (normalSide == "Credit") {
+        if (normalSide === "Credit") {
             transactionToEdit = this.state.newCreditTransactions[transactionIndex];
         }
         
