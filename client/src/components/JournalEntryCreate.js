@@ -96,7 +96,7 @@ class JournalEntryCreate extends Component {
                         <textarea type="text" className="form-control description" cols="1" rows="1" placeholder="Description"/>
                     </div>
                     <div className="col-md-4 actionButtonsWrapper">
-                        <button className="btn cancelButton submitButton">Cancel</button>
+                        <button className="btn cancelButton submitButton" onClick={this.props.onCancel}>Cancel</button>
                         <button className="btn btn-primary submitButton">Submit</button>
                     </div>
                 </div>

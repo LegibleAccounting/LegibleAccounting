@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import './GeneralJournal.css';
 import './CommonChart.css';
 import GeneralJournalAPI from '../api/GeneralJournal.js';
@@ -12,6 +11,7 @@ class GeneralJournal extends Component {
         super(props);
 
         this.state = {
+           isCreatingJournalEntry: false,
 	       entries: [],
 	       ogentries: [],
 	       searchText: '',
@@ -34,6 +34,7 @@ class GeneralJournal extends Component {
 
 		this.searchTextChanged = this.searchTextChanged.bind(this);
     	this.search = this.search.bind(this);
+        this.toggleNewJournalUI = this.toggleNewJournalUI.bind(this);
     }
 
     render() {
@@ -42,7 +43,7 @@ class GeneralJournal extends Component {
         		<div className="titleBar">
 		            <h1>General Journal</h1>
                     {
-					   <NavLink className="NavLink btn btn-primary newButton" to="">+ Add</NavLink> 
+					   <button className="btn btn-primary newButton" type="button" onClick={this.toggleNewJournalUI}>+ Add</button> 
                     }
 					<div className="filler"></div>
 					<div className="searchContainer btn-group">
@@ -59,11 +60,25 @@ class GeneralJournal extends Component {
                         <label className="hidden-xs col-sm-2">Debit</label>
                         <label className="hidden-xs col-sm-2">Credit</label>
                     </div>
-                    <div className="titleLine"></div> 
-                    <JournalEntryCreate accounts={this.state.accounts} />
+                    <div className="titleLine"></div>
+                    {
+
+                        this.state.isCreatingJournalEntry &&
+                            (<JournalEntryCreate accounts={this.state.accounts} onCancel={this.toggleNewJournalUI} />)
+                    }
+                    {
+                        (!this.state.isCreatingJournalEntry && (!this.state.entries || this.state.entries.length === 0)) &&
+                            (<h2 className="text-center pad">No Journal Entries exist.</h2>)
+                    }
                 </div>
 			</div>
         );
+    }
+
+    toggleNewJournalUI() {
+        this.setState({
+            isCreatingJournalEntry: !this.state.isCreatingJournalEntry
+        });
     }
 
     searchTextChanged(event) {
