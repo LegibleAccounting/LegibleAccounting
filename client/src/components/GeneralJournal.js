@@ -35,6 +35,7 @@ class GeneralJournal extends Component {
 		this.searchTextChanged = this.searchTextChanged.bind(this);
     	this.search = this.search.bind(this);
         this.toggleNewJournalUI = this.toggleNewJournalUI.bind(this);
+        this.submitNewJournalEntry = this.submitNewJournalEntry.bind(this);
     }
 
     render() {
@@ -64,7 +65,7 @@ class GeneralJournal extends Component {
                     {
 
                         this.state.isCreatingJournalEntry &&
-                            (<JournalEntryCreate accounts={this.state.accounts} onCancel={this.toggleNewJournalUI} />)
+                            (<JournalEntryCreate accounts={this.state.accounts} onCancel={this.toggleNewJournalUI} onSubmit={this.submitNewJournalEntry} />)
                     }
                     {
                         (!this.state.isCreatingJournalEntry && (!this.state.entries || this.state.entries.length === 0)) &&
@@ -92,6 +93,19 @@ class GeneralJournal extends Component {
 
     search(event) {
     	event.preventDefault();
+    }
+
+    submitNewJournalEntry(journalEntry) {
+        GeneralJournalAPI.create(journalEntry)
+            .then(() => {
+                this.props.onNotifySuccess('Journal Entry has been successfully created.');
+                this.setState({
+                    isCreatingJournalEntry: false
+                });
+            })
+            .catch(() => {
+                this.props.onNotifyError('Failed to create journal entry.');
+            });
     }
 }
 

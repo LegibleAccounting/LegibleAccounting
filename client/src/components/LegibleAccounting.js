@@ -61,7 +61,7 @@ class LegibleAccounting extends Component {
                 <GuardedAdministratorPermissionsRoute exact path="/accounts/add" component={DecorateRoute(AccountForm, this.notifyProps)} />
                 <GuardedManagerPermissionsRoute path="/accounts/:id" component={DecorateRoute(AccountForm, this.notifyProps)} />
                 <GuardedAdministratorPermissionsRoute exact path="/logs" component={Logs} />
-                <Route exact path="/general-journal" component={GeneralJournal} />
+                <Route exact path="/general-journal" component={DecorateRoute(GeneralJournal, this.notifyProps)} />
               </Switch>
             </Col>
           </Row>

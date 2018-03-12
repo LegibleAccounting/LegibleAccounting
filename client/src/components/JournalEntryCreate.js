@@ -99,7 +99,7 @@ class JournalEntryCreate extends Component {
                     </div>
                     <div className="col-md-4 actionButtonsWrapper">
                         <button className="btn cancelButton submitButton" onClick={this.props.onCancel}>Cancel</button>
-                        <button className="btn btn-primary submitButton">Submit</button>
+                        <button className="btn btn-primary submitButton" onClick={this.delegateJournalEntrySubmission.bind(this)}>Submit</button>
                     </div>
                 </div>
             </div>
@@ -184,6 +184,14 @@ class JournalEntryCreate extends Component {
         }
 
         return ++this.lastKey;
+    }
+
+    delegateJournalEntrySubmission() {
+        this.props.onSubmit({
+            date: this.state.date,
+            description: this.state.description,
+            transactions: this.state.transactions
+        });
     }
 }
 
