@@ -76,7 +76,7 @@ class JournalEntryCreate extends Component {
                                     </div>
                                     <div className="col-xs-12 col-sm-5">
                                         <div className="entryAmountWrapper">
-                                            <label className={ item.is_debit ? 'dollarSignDebit' : 'dollarSignCredit' } style={{visibility: index !== 0 && 'hidden'}}>$</label>
+                                            <label className={ item.is_debit ? 'dollarSignDebit' : 'dollarSignCredit' } style={{visibility: !item.initial_display && 'hidden'}}>$</label>
                                             <input type="number" className={ 'form-control entryAmount ' + (item.is_debit ? 'debitEntryAmount' : 'creditEntryAmount') } placeholder="0.00"
                                             onChange={this.accountAmountOnChange.bind(this, index)}/>
                                         </div>
