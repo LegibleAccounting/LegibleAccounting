@@ -5,16 +5,20 @@ class JournalEntryCreate extends Component {
     constructor(props) {
         super(props);
 
+        this.lastKey = null; // Used to uniquely identify transactions for React
+
         this.state = {
             isLoading: false,
             transactions: [
                 {
+                key: this.keygen(),
                 accountID: "",
                 amount: 0,
                 is_debit: true,
                 initial_display: true
                 },
                 {
+                key: this.keygen(),
                 accountID: "",
                 amount: 0,
                 is_debit: false,
@@ -51,7 +55,7 @@ class JournalEntryCreate extends Component {
                     <div className="col-xs-12 col-sm-10">
                         {
                             this.state.transactions.map((item, index) => (
-                                <div className="row auto-height" key={index}>
+                                <div className="row auto-height" key={item.key}>
                                     <div className="col-xs-12 col-sm-7">
                                         <div className="accountEntryDropdownWrapper">
                                             <select
@@ -101,6 +105,7 @@ class JournalEntryCreate extends Component {
 
         var newTransaction = 
         {
+            key: this.keygen(),
             accountID: "",
             amount: 0
         }
@@ -157,6 +162,15 @@ class JournalEntryCreate extends Component {
         this.setState({
             transactions: this.state.transactions
         });
+    }
+
+    keygen() {
+        if (this.lastKey === null) {
+            this.lastKey = 0;
+            return this.lastKey;
+        }
+
+        return ++this.lastKey;
     }
 }
 
