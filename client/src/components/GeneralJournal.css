@@ -2,6 +2,10 @@
 
 }
 
+.auto-height {
+	height: auto;
+}
+
 .gridHeading {
 	height: 15px;
 }
@@ -34,7 +38,6 @@
 
 .accountEntryDropdown {
 	margin-bottom: 8px;
-	width: 50%;
 	margin-right: 10px;
 }
 
@@ -131,8 +134,7 @@
 	font-size: 14px;
 	height: 100%;
 	line-height: 30px;
-	margin-right: 0px;
-	margin-left: auto;
+	margin-left: 10%;
 }
 
 .attachmentButton {

@@ -48,71 +48,69 @@ class JournalEntryCreate extends Component {
             <div>
                 <div className="row topOfEntryWrapper">
                     <div className="col-xs-12 col-sm-2 dateEntry">3/15/18</div>
-                    <div className="col-xs-12 col-sm-6">
-                            {
-                                this.state.newDebitTransactions.map((item, index) => (
-                                    <div className="accountEntryDropdownWrapper">
-                                        <select 
-                                        className='form-control accountEntryDropdown debitAccountEntryDropdown'
-                                        id={index}
-                                        value={item.accountID}
-                                        onChange={this.accountNameOnChange.bind(this, index, item.normalSide)}>
-                                            <option hidden>Select Account</option>
-                                            {
-                                                this.props.accounts.map((account, index) => (
-                                                    <option key={account.id} value={account.id}>{ account.name }</option>
-                                                ))
-                                            }
-                                        </select>
-                                        <button className="textButton" hidden={(index > 0)} value={item.normalSide === "Debit"} onClick={this.addNewTransaction}>+ Add</button>
-                                        <button className="textButton" hidden={(index === 0)} value={item.normalSide === "Debit"} onClick={this.removeTransaction.bind(this, index, item.normalSide)}>(Remove)</button>
+                    <div className="col-xs-12 col-sm-10">
+                        {
+                            this.state.newDebitTransactions.map((item, index) => (
+                                <div className="row auto-height" key={index}>
+                                    <div className="col-xs-12 col-sm-7">
+                                        <div className="accountEntryDropdownWrapper">
+                                            <select
+                                              className="form-control accountEntryDropdown"
+                                              id={index}
+                                              value={item.accountID}
+                                              onChange={this.accountNameOnChange.bind(this, index, item.normalSide)}>
+                                                <option hidden>Select Account</option>
+                                                {
+                                                    this.props.accounts.map((account, index) => (
+                                                        <option key={account.id} value={account.id}>{ account.name }</option>
+                                                    ))
+                                                }
+                                            </select>
+                                            <button className="textButton" hidden={(index > 0)} value={item.normalSide === "Debit"} onClick={this.addNewTransaction}>+ Add</button>
+                                            <button className="textButton" hidden={(index === 0)} value={item.normalSide === "Debit"} onClick={this.removeTransaction.bind(this, index, item.normalSide)}>Remove</button>
+                                        </div>
                                     </div>
-                                ))
-                            }
-
-                            {
-                                this.state.newCreditTransactions.map((item, index) => (
-                                    <div className="accountEntryDropdownWrapper">
-                                        <select 
-                                        className='form-control accountEntryDropdown creditAccountEntryDropdown'
-                                        id={index}
-                                        value={item.accountID}
-                                        onChange={this.accountNameOnChange.bind(this, index, item.normalSide)}>
-                                            <option hidden>Select Account</option>
-                                            {
-                                                this.props.accounts.map((account, index) => (
-                                                    <option key={account.id} value={account.id}>{ account.name }</option>
-                                                ))
-                                            }
-                                        </select>
-                                        <button className="textButton" hidden={(index > 0)} value={item.normalSide === "Debit"} onClick={this.addNewTransaction}>+ Add</button>
-                                        <button className="textButton" hidden={(index === 0)} value={item.normalSide === "Debit"} onClick={this.removeTransaction.bind(this, index, item.normalSide)}>(Remove)</button>
+                                    <div className="col-xs-12 col-sm-5">
+                                        <div className="entryAmountWrapper">
+                                            <label className="dollarSignDebit" style={{visibility: index !== 0 && 'hidden'}}>$</label>
+                                            <input type="number" className='form-control entryAmount debitEntryAmount' placeholder="0.00"
+                                            onChange={this.accountAmountOnChange.bind(this, index, item.normalSide)}/>
+                                        </div>
                                     </div>
-                                ))
-                            }
-                      </div>
-                      <div className="col-xs-12 col-sm-4">
-                          <div>
-                            {
-                               this.state.newDebitTransactions.map((item, index) => (
-                                    <div className="entryAmountWrapper">
-                                        <label className="dollarSignDebit" style={{visibility: index !== 0 && 'hidden'}}>$</label>
-                                        <input type="number" className='form-control entryAmount debitEntryAmount' placeholder="0.00"
-                                        onChange={this.accountAmountOnChange.bind(this, index, item.normalSide)}/>
+                                </div>
+                            ))
+                        }
+                        {
+                            this.state.newCreditTransactions.map((item, index) => (
+                                <div className="row auto-height" key={index}>
+                                    <div className="col-xs-12 col-sm-7">
+                                        <div className="accountEntryDropdownWrapper">
+                                            <select
+                                              className="form-control accountEntryDropdown creditAccountEntryDropdown"
+                                              id={index}
+                                              value={item.accountID}
+                                              onChange={this.accountNameOnChange.bind(this, index, item.normalSide)}>
+                                                <option hidden>Select Account</option>
+                                                {
+                                                    this.props.accounts.map((account, index) => (
+                                                        <option key={account.id} value={account.id}>{ account.name }</option>
+                                                    ))
+                                                }
+                                            </select>
+                                            <button className="textButton" hidden={(index > 0)} value={item.normalSide === "Debit"} onClick={this.addNewTransaction}>+ Add</button>
+                                            <button className="textButton" hidden={(index === 0)} value={item.normalSide === "Debit"} onClick={this.removeTransaction.bind(this, index, item.normalSide)}>Remove</button>
+                                        </div>
                                     </div>
-                                ))
-                             }
-
-                             {
-                                this.state.newCreditTransactions.map((item, index) => (
-                                    <div className="entryAmountWrapper">
-                                        <label className="dollarSignCredit" style={{visibility: index !== 0 && 'hidden'}}>$</label>
-                                        <input type="number" className='form-control entryAmount creditEntryAmount' placeholder="0.00"
-                                        onChange={this.accountAmountOnChange.bind(this, index, item.normalSide)}/>
+                                    <div className="col-xs-12 col-sm-offset-2 col-sm-3">
+                                        <div className="entryAmountWrapper">
+                                            <label className="dollarSignCredit" style={{visibility: index !== 0 && 'hidden'}}>$</label>
+                                            <input type="number" className='form-control entryAmount creditEntryAmount' placeholder="0.00"
+                                            onChange={this.accountAmountOnChange.bind(this, index, item.normalSide)}/>
+                                        </div>
                                     </div>
-                                ))
-                            }
-                        </div>
+                                </div>
+                            ))
+                        }
                       </div>
                 </div>
                 <div className="line"></div> 
