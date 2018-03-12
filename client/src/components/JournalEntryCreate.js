@@ -11,18 +11,18 @@ class JournalEntryCreate extends Component {
             isLoading: false,
             transactions: [
                 {
-                key: this.keygen(),
-                accountID: "",
-                amount: 0,
-                is_debit: true,
-                initial_display: true
+                    key: this.keygen(),
+                    accountID: "",
+                    amount: 0,
+                    is_debit: true,
+                    initial_display: true
                 },
                 {
-                key: this.keygen(),
-                accountID: "",
-                amount: 0,
-                is_debit: false,
-                initial_display: true
+                    key: this.keygen(),
+                    accountID: "",
+                    amount: 0,
+                    is_debit: false,
+                    initial_display: true
                 }
             ],
             newAttachments: []
@@ -78,7 +78,7 @@ class JournalEntryCreate extends Component {
                                         <div className="entryAmountWrapper">
                                             <label className={ item.is_debit ? 'dollarSignDebit' : 'dollarSignCredit' } style={{visibility: !item.initial_display && 'hidden'}}>$</label>
                                             <input type="number" className={ 'form-control entryAmount ' + (item.is_debit ? 'debitEntryAmount' : 'creditEntryAmount') } placeholder="0.00"
-                                            onChange={this.accountAmountOnChange.bind(this, index)}/>
+                                              onChange={this.accountAmountOnChange.bind(this, index)}/>
                                         </div>
                                     </div>
                                 </div>
@@ -92,8 +92,8 @@ class JournalEntryCreate extends Component {
                         <textarea type="text" className="form-control description" cols="1" rows="1" placeholder="Description"/>
                     </div>
                     <div className="col-lg-4 actionButtonsWrapper">
-                            <button className="btn cancelButton submitButton">Cancel</button>
-                            <button className="btn btn-primary submitButton">Submit</button>
+                        <button className="btn cancelButton submitButton">Cancel</button>
+                        <button className="btn btn-primary submitButton">Submit</button>
                     </div>
                 </div>
             </div>
