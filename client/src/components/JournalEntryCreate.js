@@ -74,7 +74,7 @@ class JournalEntryCreate extends Component {
                                             <button className="textButton" hidden={(item.initial_display)} value={item.is_debit === true } onClick={this.removeTransaction.bind(this, index)}>Remove</button>
                                         </div>
                                     </div>
-                                    <div className="col-xs-12 col-sm-5">
+                                    <div className={ 'col-xs-12 ' + (item.is_debit ? 'col-sm-5' : 'col-sm-3 col-sm-offset-2') }>
                                         <div className="entryAmountWrapper">
                                             <label className={ item.is_debit ? 'dollarSignDebit' : 'dollarSignCredit' } style={{visibility: !item.initial_display && 'hidden'}}>$</label>
                                             <input type="number" className={ 'form-control entryAmount ' + (item.is_debit ? 'debitEntryAmount' : 'creditEntryAmount') } placeholder="0.00"
