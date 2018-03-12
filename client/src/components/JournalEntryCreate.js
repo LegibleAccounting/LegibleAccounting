@@ -47,8 +47,8 @@ class JournalEntryCreate extends Component {
         return (
             <div>
                 <div className="row topOfEntryWrapper">
-                    <div className="col-lg-2 dateEntry">3/15/18</div>
-                        <div className="col-lg-6">
+                    <div className="col-xs-12 col-sm-2 dateEntry">3/15/18</div>
+                    <div className="col-xs-12 col-sm-6">
                             {
                                 this.state.newDebitTransactions.map((item, index) => (
                                     <div className="accountEntryDropdownWrapper">
@@ -91,7 +91,7 @@ class JournalEntryCreate extends Component {
                                 ))
                             }
                       </div>
-                      <div className="col-lg-4">
+                      <div className="col-xs-12 col-sm-4">
                           <div>
                             {
                                this.state.newDebitTransactions.map((item, index) => (

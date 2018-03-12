@@ -52,12 +52,12 @@ class GeneralJournal extends Component {
 		            	<button className="btn btn-primary" type="submit" onClick={this.search}>Search</button>
 		            </div>
 	            </div>
-                <div className=".container">
+                <div>
                     <div className="row gridHeading">
-                        <label className="col-lg-2">Date</label>
-                        <label className="col-lg-6">Accounts</label>
-                        <label className="col-lg-2">Debit</label>
-                        <label className="col-lg-2">Credit</label>
+                        <label className="hidden-xs col-sm-2">Date</label>
+                        <label className="hidden-xs col-sm-6">Accounts</label>
+                        <label className="hidden-xs col-sm-2">Debit</label>
+                        <label className="hidden-xs col-sm-2">Credit</label>
                     </div>
                     <div className="titleLine"></div> 
                     <JournalEntryCreate accounts={this.state.accounts} />
