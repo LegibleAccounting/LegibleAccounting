@@ -54,7 +54,9 @@ class JournalEntryCreate extends Component {
         return (
             <div>
                 <div className="row topOfEntryWrapper">
-                    <div className="col-xs-12 col-sm-1 dateEntry">3/15/18</div>
+                    <div className="col-xs-12 col-sm-1 dateEntry">
+                        <input type="date" className="dateWidth" />
+                    </div>
                     <div className="col-xs-12 col-sm-11">
                         {
                             this.state.transactions.map((item, index) => (

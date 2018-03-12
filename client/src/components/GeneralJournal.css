@@ -1,6 +1,9 @@
 .generalJournal {
 
 }
+.dateWidth {
+	width: 60px;
+}
 
 .auto-height {
 	height: auto;
