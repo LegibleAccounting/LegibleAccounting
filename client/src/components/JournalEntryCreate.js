@@ -15,17 +15,18 @@ class JournalEntryCreate extends Component {
                     accountID: "",
                     amount: 0,
                     is_debit: true,
-                    initial_display: true
+                    initial_display: true,
+                    receipts: []
                 },
                 {
                     key: this.keygen(),
                     accountID: "",
                     amount: 0,
                     is_debit: false,
-                    initial_display: true
+                    initial_display: true,
+                    receipts: []
                 }
             ],
-            newAttachments: []
         };
 
         if (!this.props.accounts) {
@@ -51,8 +52,8 @@ class JournalEntryCreate extends Component {
         return (
             <div>
                 <div className="row topOfEntryWrapper">
-                    <div className="col-xs-12 col-sm-2 dateEntry">3/15/18</div>
-                    <div className="col-xs-12 col-sm-10">
+                    <div className="col-xs-12 col-sm-1 dateEntry">3/15/18</div>
+                    <div className="col-xs-12 col-sm-11">
                         {
                             this.state.transactions.map((item, index) => (
                                 <div className="row auto-height" key={item.key}>
@@ -73,6 +74,9 @@ class JournalEntryCreate extends Component {
                                             <button className="textButton" hidden={(!item.initial_display)} value={item.is_debit === true } onClick={this.addNewTransaction}>+ Add</button>
                                             <button className="textButton" hidden={(item.initial_display)} value={item.is_debit === true } onClick={this.removeTransaction.bind(this, index)}>Remove</button>
                                         </div>
+                                        <div className="pad-file-input">
+                                            <input type="file" multiple />
+                                        </div>
                                     </div>
                                     <div className={ 'col-xs-12 ' + (item.is_debit ? 'col-sm-5' : 'col-sm-3 col-sm-offset-2') }>
                                         <div className="entryAmountWrapper">
@@ -88,10 +92,10 @@ class JournalEntryCreate extends Component {
                 </div>
                 <div className="line"></div> 
                 <div className="row bottomOfEntryWrapper">
-                    <div className="col-lg-8 descriptionWrapper">
+                    <div className="col-md-8 descriptionWrapper">
                         <textarea type="text" className="form-control description" cols="1" rows="1" placeholder="Description"/>
                     </div>
-                    <div className="col-lg-4 actionButtonsWrapper">
+                    <div className="col-md-4 actionButtonsWrapper">
                         <button className="btn cancelButton submitButton">Cancel</button>
                         <button className="btn btn-primary submitButton">Submit</button>
                     </div>
@@ -107,7 +111,8 @@ class JournalEntryCreate extends Component {
         {
             key: this.keygen(),
             accountID: "",
-            amount: 0
+            amount: 0,
+            receipts: []
         }
 
         if (isDebit) {

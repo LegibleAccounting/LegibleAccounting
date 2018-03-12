@@ -4,6 +4,12 @@
 
 .auto-height {
 	height: auto;
+	border-bottom: 1px solid #d7d6d7;
+	margin-bottom: 1em;
+}
+
+.pad-file-input {
+	padding: 0.5em 0.5em 1em 0.5em;
 }
 
 .gridHeading {
@@ -56,7 +62,7 @@
 }
 
 .entryAmount {
-	width: 50%;
+	width: 75px;
 	margin-bottom: 8px;
 	height: 30px;
 	text-align:right;
