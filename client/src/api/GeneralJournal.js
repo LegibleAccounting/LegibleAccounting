@@ -2,6 +2,25 @@ import { JSONAPIRequest } from './util/Request.js';
 import Auth from './Auth.js';
 
 class GeneralJournalAPI {
+    getEntryTypeOptions() {
+        if (!Auth.token) {
+            return Promise.reject();
+        }
+
+        return fetch(new JSONAPIRequest('/api/journal-entries', Auth.token), {
+            method: 'OPTIONS'
+        })
+            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
+            .then(response => response.json())
+            .then(response => {
+                return Promise.resolve(response.actions.POST.entry_type.choices);
+            })
+            .catch(response => {
+                // Consider how to handle this?
+                return Promise.reject(response);
+            });
+    }
+
 	getAll(posted) {
 		if (!Auth.token) {
             return Promise.reject();

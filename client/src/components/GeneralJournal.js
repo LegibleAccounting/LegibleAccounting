@@ -14,6 +14,7 @@ class GeneralJournal extends Component {
            isCreatingJournalEntry: false,
 	       entries: [],
 	       ogentries: [],
+           entryTypes: [],
 	       searchText: '',
            accounts: null
 	    };
@@ -22,6 +23,13 @@ class GeneralJournal extends Component {
             .then((accounts) => {
                 this.setState({
                     accounts
+                });
+            });
+
+        GeneralJournalAPI.getEntryTypeOptions()
+            .then((entryTypes) => {
+                this.setState({
+                    entryTypes
                 });
             });
 
@@ -66,7 +74,7 @@ class GeneralJournal extends Component {
                     {
 
                         this.state.isCreatingJournalEntry &&
-                            (<JournalEntryCreate accounts={this.state.accounts} onCancel={this.toggleNewJournalUI} onSubmit={this.submitNewJournalEntry} />)
+                            (<JournalEntryCreate entryTypeOptions={this.state.entryTypes} accounts={this.state.accounts} onCancel={this.toggleNewJournalUI} onSubmit={this.submitNewJournalEntry} />)
                     }
                     {
                         (!this.state.isCreatingJournalEntry && (!this.state.entries || this.state.entries.length === 0)) &&

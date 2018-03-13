@@ -12,6 +12,7 @@ class JournalEntryCreate extends Component {
 
         this.state = {
             isLoading: false,
+            entry_type: '',
             date: moment().format('YYYY-MM-DD'),
             description: '',
             transactions: [
@@ -36,7 +37,7 @@ class JournalEntryCreate extends Component {
 
         this.isCalendarOpen = false;
 
-        if (!this.props.accounts) {
+        if (!this.props.accounts || !this.props.entryTypeOptions) {
             this.state.isLoading = true;
         }
 
@@ -46,7 +47,10 @@ class JournalEntryCreate extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if ((this.props.accounts !== nextProps.accounts) && Array.isArray(nextProps.accounts)) {
+        let entryTypeOptionsLoaded = Array.isArray(this.props.entryTypeOptions) || Array.isArray(nextProps.entryTypeOptions);
+        let accountsLoaded = Array.isArray(this.props.accounts) || Array.isArray(nextProps.accounts);
+
+        if (entryTypeOptionsLoaded && accountsLoaded && this.state.isLoading === true) {
             this.setState({
                 isLoading: false
             });
@@ -65,8 +69,15 @@ class JournalEntryCreate extends Component {
                         <DateTime renderInput={this.renderDatePickerField} timeFormat={false} dateFormat="YYYY-MM-DD" value={this.state.date} onChange={this.changeDate.bind(this)} onBlur={this.setCalendarClosed.bind(this)}/>
                     </div>
                     <div className="col-xs-12 col-sm-2">
-                        <select className="form-control">
+                        <select className="form-control"
+                          value={this.state.entry_type}
+                          onChange={this.changeEntryType.bind(this)}>
                             <option hidden>Select Type</option>
+                            {
+                                this.props.entryTypeOptions.map((type, index) => (
+                                    <option key={type.value} value={type.value}>{ type.display_name }</option>
+                                ))
+                            }
                         </select>
                     </div>
                     <div className="col-xs-12 col-sm-8">
@@ -222,6 +233,12 @@ class JournalEntryCreate extends Component {
         });
     }
 
+    changeEntryType(event) {
+        this.setState({
+            entry_type: event.target.value
+        });
+    }
+
     keygen() {
         if (this.lastKey === null) {
             this.lastKey = 0;
@@ -269,6 +286,7 @@ class JournalEntryCreate extends Component {
                 }));
 
                 this.props.onSubmit({
+                    entry_type: this.state.entry_type,
                     date: this.state.date,
                     description: this.state.description,
                     transactions
