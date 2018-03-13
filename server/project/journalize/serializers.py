@@ -45,6 +45,8 @@ class ReceiptSerializer(serializers.ModelSerializer):
             allowed_types = ','.join(ReceiptFileField.ALLOWED_TYPES)
             raise serializers.ValidationError('The file must be one of the following types: ' + allowed_types)
 
+        return value
+
 
 class RetrieveTransactionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -92,6 +94,13 @@ class CreateJournalEntrySerializer(serializers.ModelSerializer):
     def validate_transactions(self, value):
         if len(value) == 0:
             raise serializers.ValidationError('There must be at least one transaction in a journal entry.')
+
+        used_accounts = set()
+        for transaction in value:
+            last_length = len(used_accounts)
+            used_accounts.add(transaction['affected_account'])
+            if (last_length == len(used_accounts)):
+                raise serializers.ValidationError('Two transactions cannot be made to the same account.')
 
         transaction_sum = reduce(lambda accumulated, update:
             accumulated + update['value'] if update['is_debit'] == True else accumulated - update['value'], value, 0)

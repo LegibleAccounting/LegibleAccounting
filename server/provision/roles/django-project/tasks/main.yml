@@ -11,3 +11,6 @@
 
 - name: Project static files will be collected.
   shell: . {{ backend_env }}/bin/activate && python manage.py collectstatic --noinput chdir={{ backend }}
+
+- name: Existing project media files will be removed.
+  file: "path={{ backend }}/media state=absent"
