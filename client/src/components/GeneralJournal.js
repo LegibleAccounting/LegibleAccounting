@@ -57,7 +57,8 @@ class GeneralJournal extends Component {
                 <div>
                     <div className="row gridHeading">
                         <label className="hidden-xs col-sm-2">Date</label>
-                        <label className="hidden-xs col-sm-6">Accounts</label>
+                        <label className="hidden-xs col-sm-2">Type</label>
+                        <label className="hidden-xs col-sm-4">Accounts</label>
                         <label className="hidden-xs col-sm-2">Debit</label>
                         <label className="hidden-xs col-sm-2">Credit</label>
                     </div>

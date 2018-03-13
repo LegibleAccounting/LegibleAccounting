@@ -64,11 +64,16 @@ class JournalEntryCreate extends Component {
                     <div className="col-xs-12 col-sm-2 dateEntry">
                         <DateTime renderInput={this.renderDatePickerField} timeFormat={false} dateFormat="YYYY-MM-DD" value={this.state.date} onChange={this.changeDate.bind(this)} onBlur={this.setCalendarClosed.bind(this)}/>
                     </div>
-                    <div className="col-xs-12 col-sm-10">
+                    <div className="col-xs-12 col-sm-2">
+                        <select className="form-control">
+                            <option hidden>Select Type</option>
+                        </select>
+                    </div>
+                    <div className="col-xs-12 col-sm-8">
                         {
                             this.state.transactions.map((item, index) => (
                                 <div className="row auto-height" key={item.key}>
-                                    <div className="col-xs-12 col-sm-7">
+                                    <div className="col-xs-12 col-sm-6">
                                         <div className="accountEntryDropdownWrapper">
                                             <select
                                               className={ 'form-control accountEntryDropdown ' + (item.is_debit ? '' : 'creditAccountEntryDropdown') }
@@ -89,7 +94,7 @@ class JournalEntryCreate extends Component {
                                             <input type="file" multiple ref={ input => item.filePicker = input } />
                                         </div>
                                     </div>
-                                    <div className={ 'col-xs-12 ' + (item.is_debit ? 'col-sm-5' : 'col-sm-3 col-sm-offset-2') }>
+                                    <div className={ 'col-xs-12 ' + (item.is_debit ? 'col-sm-6' : 'col-sm-3 col-sm-offset-3') }>
                                         <div className="entryAmountWrapper">
                                             <label className={ item.is_debit ? 'dollarSignDebit' : 'dollarSignCredit' } style={{visibility: !item.initial_display && 'hidden'}}>$</label>
                                             <input type="number" className={ 'form-control entryAmount ' + (item.is_debit ? 'debitEntryAmount' : 'creditEntryAmount') } placeholder="0.00"
