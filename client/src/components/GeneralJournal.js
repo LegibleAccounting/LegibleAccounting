@@ -33,7 +33,7 @@ class GeneralJournal extends Component {
                 });
             });
 
-        GeneralJournalAPI.getAll(false)
+        GeneralJournalAPI.getAll()
             .then((entries) => {
                 this.setState({
                     entries
