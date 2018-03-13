@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastr';
 import {Grid, Row, Col} from 'react-bootstrap';
 
+import DecorateRoute from './DecorateRoute.js';
+import GuardedAdministratorPermissionsRoute from './GuardedAdministratorPermissionsRoute.js';
+import GuardedManagerPermissionsRoute from './GuardedManagerPermissionsRoute.js';
 import Dashboard from './Dashboard.js';
 import ChartOfAccounts from './ChartOfAccounts.js';
-import AddToAccounts from './AddToAccounts.js';
+import AccountForm from './AccountForm.js';
 import AddToChartOfAccounts from './AddToChartOfAccounts.js';
-import EditAccount from './EditAccount.js';
 import Accounts from './Accounts.js';
 import Logs from './Logs.js';
 import Sidebar from './Sidebar';
@@ -23,7 +26,14 @@ class LegibleAccounting extends Component {
         currentUser: null
     };
 
+    this.toastr = null;
+
     this.requestLogout = this.requestLogout.bind(this);
+    this.notifyProps = {
+      onNotifySuccess: this.notifySuccess.bind(this),
+      onNotifyError: this.notifyError.bind(this)
+    };
+
     this.getCurrentUser();
   }
 
@@ -45,15 +55,16 @@ class LegibleAccounting extends Component {
               <Switch>
                 <Route exact path="/" component={Dashboard} />
                 <Route exact path="/chart-of-accounts" component={ChartOfAccounts} />
-                <Route exact path="/chart-of-accounts/add" component={AddToChartOfAccounts} />
+                <GuardedAdministratorPermissionsRoute exact path="/chart-of-accounts/add" component={DecorateRoute(AddToChartOfAccounts, this.notifyProps)} />
                 <Route exact path="/accounts" component={Accounts} />
-                <Route exact path="/accounts/add" component={AddToAccounts} />
-                <Route path="/accounts/:id" component={EditAccount} />
-                <Route exact path="/logs" component={Logs} />
+                <GuardedAdministratorPermissionsRoute exact path="/accounts/add" component={DecorateRoute(AccountForm, this.notifyProps)} />
+                <GuardedManagerPermissionsRoute path="/accounts/:id" component={DecorateRoute(AccountForm, this.notifyProps)} />
+                <GuardedAdministratorPermissionsRoute exact path="/logs" component={Logs} />
               </Switch>
             </Col>
           </Row>
         </Grid>
+        <ToastContainer ref={ ref => this.toastr = ref } className="toast-bottom-right" />
       </div>
     );
   }
@@ -77,6 +88,22 @@ class LegibleAccounting extends Component {
         .catch(() => {
             alert('Failed to logout.');
         });
+  }
+
+  notifySuccess(message) {
+    this.toastr.success(message, null, {
+      closeButton: true,
+      showAnimation: 'animated fadeIn',
+      hideAnimation: 'animated fadeOut'
+    });
+  }
+
+  notifyError(message) {
+    this.toastr.error(message, null, {
+      closeButton: true,
+      showAnimation: 'animated fadeIn',
+      hideAnimation: 'animated fadeOut'
+    });
   }
 }
 

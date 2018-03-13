@@ -1,0 +1,18 @@
+.chartOfAccounts {
+}
+
+.chartOfAccounts .accountNumber {
+	width: 10px;
+}
+
+.chartOfAccounts .name {
+	width: 30%;
+}
+
+.chartOfAccounts .initialBalance { 
+	width: 20px;
+}
+
+.chartOfAccounts .edits {
+	width: 40px;
+}

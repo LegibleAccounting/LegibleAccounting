@@ -5,6 +5,7 @@ import { JSONAPIRequest } from './util/Request.js';
 class Auth {
     constructor() {
         this.isAuthenticated = false;
+        this.currentUser = null;
         this.token = Cookies.get(CSRF_COOKIE_NAME);
     }
 
@@ -20,6 +21,7 @@ class Auth {
           .then(response => response = response.json())
           .then((response) => {
             this.isAuthenticated = true;
+            this.currentUser = response;
             this.token = Cookies.get(CSRF_COOKIE_NAME);
             return Promise.resolve(response);
           })
@@ -35,6 +37,7 @@ class Auth {
             .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
             .then((response) => {
                 this.isAuthenticated = false;
+                this.currentUser = null;
                 return Promise.resolve(response);
             })
             .catch((response) => {
@@ -55,6 +58,7 @@ class Auth {
             .then(response => response.json())
             .then((response) => {
                 this.isAuthenticated = true;
+                this.currentUser = response;
                 return Promise.resolve(response);
             })
             .catch((response) => {

@@ -1,0 +1,11 @@
+.logs .changed{
+	width: 200px;
+}
+
+.logs .changedBy{
+	width: 80px;
+}
+
+.logs .changedDate{
+	width: 50px;
+}
