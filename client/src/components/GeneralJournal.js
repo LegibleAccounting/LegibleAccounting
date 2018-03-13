@@ -5,6 +5,7 @@ import GeneralJournalAPI from '../api/GeneralJournal.js';
 import AccountsAPI from '../api/Accounts.js';
 
 import JournalEntryCreate from './JournalEntryCreate.js';
+import JournalEntry from './JournalEntry.js';
 
 class GeneralJournal extends Component {
     constructor(props) {
@@ -79,6 +80,11 @@ class GeneralJournal extends Component {
                     {
                         (!this.state.isCreatingJournalEntry && (!this.state.entries || this.state.entries.length === 0)) &&
                             (<h2 className="text-center pad">No Journal Entries exist.</h2>)
+                    }
+                    {
+                            this.state.entries.map((item, index) => (
+                                <JournalEntry entry={item}/>
+                            ))
                     }
                 </div>
 			</div>

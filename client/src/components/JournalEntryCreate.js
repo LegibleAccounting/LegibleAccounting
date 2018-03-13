@@ -117,7 +117,6 @@ class JournalEntryCreate extends Component {
                         }
                       </div>
                 </div>
-                <div className="line"></div> 
                 <div className="row bottomOfEntryWrapper">
                     <div className="col-md-8 descriptionWrapper">
                         <textarea type="text" className="form-control description" cols="1" rows="1" placeholder="Description" value={this.state.description} onChange={this.changeDescription.bind(this)}/>
@@ -127,6 +126,7 @@ class JournalEntryCreate extends Component {
                         <button className="btn btn-primary submitButton" onClick={this.delegateJournalEntrySubmission.bind(this)}>Submit</button>
                     </div>
                 </div>
+                <div className="line"></div> 
             </div>
         );
     }
