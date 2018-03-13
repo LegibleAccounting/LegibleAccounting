@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Glyphicon } from 'react-bootstrap';
+import DateTime from 'react-datetime';
+import moment from 'moment';
 import './JournalEntryCreate.css';
 
 class JournalEntryCreate extends Component {
@@ -9,7 +12,7 @@ class JournalEntryCreate extends Component {
 
         this.state = {
             isLoading: false,
-            date: '',
+            date: moment().format('YYYY-MM-DD'),
             description: '',
             transactions: [
                 {
@@ -31,11 +34,15 @@ class JournalEntryCreate extends Component {
             ],
         };
 
+        this.isCalendarOpen = false;
+
         if (!this.props.accounts) {
             this.state.isLoading = true;
         }
 
         this.addNewTransaction = this.addNewTransaction.bind(this);
+        this.toggleCalendar = this.toggleCalendar.bind(this);
+        this.renderDatePickerField = this.renderDatePickerField.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -54,10 +61,10 @@ class JournalEntryCreate extends Component {
         return (
             <div>
                 <div className="row topOfEntryWrapper">
-                    <div className="col-xs-12 col-sm-1 dateEntry">
-                        <input type="date" className="dateWidth" />
+                    <div className="col-xs-12 col-sm-2 dateEntry">
+                        <DateTime renderInput={this.renderDatePickerField} timeFormat={false} dateFormat="YYYY-MM-DD" value={this.state.date} onChange={this.changeDate.bind(this)} onBlur={this.setCalendarClosed.bind(this)}/>
                     </div>
-                    <div className="col-xs-12 col-sm-11">
+                    <div className="col-xs-12 col-sm-10">
                         {
                             this.state.transactions.map((item, index) => (
                                 <div className="row auto-height" key={item.key}>
@@ -106,6 +113,31 @@ class JournalEntryCreate extends Component {
                 </div>
             </div>
         );
+    }
+
+    toggleCalendar(openCalendarFn, closeCalendarFn) {
+        if (this.isCalendarOpen) {
+            closeCalendarFn();
+            this.isCalendarOpen = false;
+        } else {
+            openCalendarFn();
+            this.isCalendarOpen = true;
+        }
+    }
+
+    renderDatePickerField(props, openCalendarFn, closeCalendarFn) {
+        return (
+            <div>
+                <button className="btn btn-default" onClick={this.toggleCalendar.bind(this, openCalendarFn, closeCalendarFn)}>
+                    <Glyphicon glyph="calendar" />
+                </button>
+                <label className="date-left-margin">{ this.state.date }</label>
+            </div>
+        );
+    }
+
+    setCalendarClosed() {
+        this.isCalendarOpen = false;
     }
 
     addNewTransaction(event) {
@@ -176,6 +208,12 @@ class JournalEntryCreate extends Component {
     changeDescription(event) {
         this.setState({
             description: event.target.value
+        });
+    }
+
+    changeDate(momentValue) {
+        this.setState({
+            date: momentValue.format('YYYY-MM-DD')
         });
     }
 

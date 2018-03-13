@@ -5,6 +5,10 @@
 	width: 60px;
 }
 
+.date-left-margin {
+	margin-left: 0.25em;
+}
+
 .auto-height {
 	height: auto;
 	border-bottom: 1px solid #d7d6d7;
