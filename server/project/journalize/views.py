@@ -4,8 +4,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter
 from rest_framework.permissions import DjangoModelPermissions
+from rest_framework.response import Response
 
-from .models import JournalEntry
+from .models import JournalEntry, MANAGEMENT_JOURNAL_ENTRY_TYPES
 from .permissions import LAJournalEntryReadPermission
 from .serializers import RetrieveJournalEntrySerializer, CreateJournalEntrySerializer, UpdateJournalEntrySerializer
 
@@ -22,6 +23,14 @@ class JournalEntryViewSet(viewsets.ModelViewSet):
     }
     serializer_class = RetrieveJournalEntrySerializer
     permission_classes = (DjangoModelPermissions, LAJournalEntryReadPermission,)
+
+    def options(self, request, *args, **kwargs):
+        meta = self.metadata_class()
+        data = meta.determine_metadata(request, self)
+        if not request.user.groups.filter(name='Manager').exists():
+            data['actions']['POST']['entry_type']['choices'] = [item for item in data['actions']['POST']['entry_type']['choices'] if item['value'] not in MANAGEMENT_JOURNAL_ENTRY_TYPES]
+
+        return Response(data)
 
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
