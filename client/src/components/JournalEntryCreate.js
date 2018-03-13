@@ -21,7 +21,7 @@ class JournalEntryCreate extends Component {
                     amount: 0,
                     is_debit: true,
                     initial_display: true,
-                    receipts: []
+                    filePicker: null
                 },
                 {
                     key: this.keygen(),
@@ -29,7 +29,7 @@ class JournalEntryCreate extends Component {
                     amount: 0,
                     is_debit: false,
                     initial_display: true,
-                    receipts: []
+                    filePicker: null
                 }
             ],
         };
@@ -86,7 +86,7 @@ class JournalEntryCreate extends Component {
                                             <button className="textButton" hidden={(item.initial_display)} value={item.is_debit === true } onClick={this.removeTransaction.bind(this, index)}>Remove</button>
                                         </div>
                                         <div className={ "pad-file-input " + (item.is_debit ? '' : 'creditAccountEntryDropdown') }>
-                                            <input type="file" multiple />
+                                            <input type="file" multiple ref={ input => item.filePicker = input } />
                                         </div>
                                     </div>
                                     <div className={ 'col-xs-12 ' + (item.is_debit ? 'col-sm-5' : 'col-sm-3 col-sm-offset-2') }>
@@ -148,7 +148,7 @@ class JournalEntryCreate extends Component {
             key: this.keygen(),
             accountID: "",
             amount: 0,
-            receipts: []
+            filePicker: null
         }
 
         if (isDebit) {
@@ -226,12 +226,50 @@ class JournalEntryCreate extends Component {
         return ++this.lastKey;
     }
 
-    delegateJournalEntrySubmission() {
-        this.props.onSubmit({
-            date: this.state.date,
-            description: this.state.description,
-            transactions: this.state.transactions
+    loadFile(file) {
+        return new Promise(function(resolve, reject) {
+            let reader = new FileReader();
+
+            reader.onload = () => resolve({ file: reader.result, original_filename: file.name });
+            reader.onerror = reject;
+
+            reader.readAsDataURL(file);
         });
+    }
+
+    delegateJournalEntrySubmission() {
+        let awaitingFiles = [];
+
+        this.state.transactions.forEach(transaction => {
+            transaction.receipts = [];
+
+            for (let i = 0; i < transaction.filePicker.files.length; i++) {
+                let awaitFile = this.loadFile(transaction.filePicker.files[i])
+                    .then((fileInformation) => {
+                        transaction.receipts.push(fileInformation);
+                        return Promise.resolve();
+                    });
+
+                awaitingFiles.push(awaitFile);
+            }
+        });
+
+        Promise.all(awaitingFiles)
+            .then(() => {
+                let transactions = this.state.transactions.map(transaction => ({
+                    affected_account: transaction.accountID,
+                    value: transaction.amount,
+                    is_debit: transaction.is_debit,
+                    receipts: transaction.receipts
+                }));
+
+                this.props.onSubmit({
+                    date: this.state.date,
+                    description: this.state.description,
+                    transactions
+                });
+            });
+
     }
 }
 
