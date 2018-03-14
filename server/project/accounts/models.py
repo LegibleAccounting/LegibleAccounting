@@ -13,6 +13,7 @@ ACCOUNT_CATEGORIES = (
     (4, 'Operating Expense')
 )
 
+
 class AccountType(models.Model):
     class Meta:
         ordering = ['liquidity']
@@ -30,6 +31,7 @@ class AccountType(models.Model):
 
     def starting_number(self):
         return self.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE
+
 
 class Account(models.Model):
     class Meta:
@@ -52,10 +54,15 @@ class Account(models.Model):
     def account_number(self):
         return (self.account_type.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE) + self.order
 
-    def get_balance(self):
+    def get_balance(self, as_of=None):
         # TODO: This will be updated to return a calculated balance
         # based on all transactions that have been made to this account.
-        return self.initial_balance
-
+        value = 0
+        for t in self.transactions.all():
+            if t.journal_entry.is_approved == True and (as_of is None or as_of >= t.date):
+                value += t.get_value()
+        value *= 1 if(self.is_debit()) else -1
+        return self.initial_balance + value
 
 auditlog.register(Account)
+
