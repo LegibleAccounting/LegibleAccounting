@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Glyphicon } from 'react-bootstrap';
 import './Logs.css';
 import './CommonChart.css';
 import LogsAPI from '../api/Logs.js';
@@ -10,7 +11,9 @@ class Logs extends Component {
         this.state = {
           logs: [],
           ogLogs: [],
-          searchText: ''
+          searchText: '',
+          isLoading: true,
+          sortState: {}
         };
 
         this.searchTextChanged = this.searchTextChanged.bind(this);
@@ -20,7 +23,8 @@ class Logs extends Component {
             .then(data => {
                 this.setState({
                     logs: data,
-                    ogLogs: data
+                    ogLogs: data,
+                    isLoading: false
                 });
             });
     }
@@ -43,10 +47,43 @@ class Logs extends Component {
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                            <th className="changed">Changed</th>
+                            <th className="changed">Changed
+                            {
+                                !this.state.sortState.object_repr || this.state.sortState.object_repr === 'asc' ? (
+                                    <Glyphicon glyph="chevron-up" className={!this.state.sortState.object_repr ? 'sorter sorter-inactive' : 'sorter'}
+                                      onClick={this.sort.bind(this, 'object_repr')} />
+                                ): (
+                                    <Glyphicon glyph="chevron-down" className="sorter"
+                                      onClick={this.sort.bind(this, 'object_repr')} />
+                                )
+                            }
+                            { this.state.sortState.object_repr }
+                            </th>
                             <th className="changes">Old Value | New Value</th>
-                            <th className="changedBy">Changed By</th>
-                            <th className="changeDate">Date</th>
+                            <th className="changedBy">Changed By
+                            {
+                                !this.state.sortState.actor__username || this.state.sortState.actor__username === 'asc' ? (
+                                    <Glyphicon glyph="chevron-up" className={!this.state.sortState.actor__username ? 'sorter sorter-inactive' : 'sorter'}
+                                      onClick={this.sort.bind(this, 'actor__username')} />
+                                ): (
+                                    <Glyphicon glyph="chevron-down" className="sorter"
+                                      onClick={this.sort.bind(this, 'actor__username')} />
+                                )
+                            }
+                            { this.state.sortState.actor__username }
+                            </th>
+                            <th className="changeDate">Date
+                            {
+                                !this.state.sortState.timestamp || this.state.sortState.timestamp === 'asc' ? (
+                                    <Glyphicon glyph="chevron-up" className={!this.state.sortState.timestamp ? 'sorter sorter-inactive' : 'sorter'}
+                                      onClick={this.sort.bind(this, 'timestamp')} />
+                                ): (
+                                    <Glyphicon glyph="chevron-down" className="sorter"
+                                      onClick={this.sort.bind(this, 'timestamp')} />
+                                )
+                            }
+                            { this.state.sortState.timestamp }
+                            </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -105,6 +142,58 @@ class Logs extends Component {
         .then(data => {
             this.setState({
                 logs: data
+            });
+        });
+    }
+
+    sort(propertyName, multiSearchProps=null) {
+        this.setState({
+            isLoading: true
+        });
+
+        let awaitPromise;
+
+        if (!this.state.sortState[propertyName]) {
+             awaitPromise = LogsAPI.search(this.state.searchText, (Array.isArray(multiSearchProps) ? multiSearchProps : [propertyName]), false)
+                .then((logs) => {
+                    this.setState({
+                        logs,
+                        sortState: {
+                            [propertyName]: 'desc'
+                        }
+                    });
+                });
+        } else if (this.state.sortState[propertyName] === 'desc') {
+            awaitPromise = LogsAPI.search(this.state.searchText, (Array.isArray(multiSearchProps) ? multiSearchProps : [propertyName]), true)
+                .then((logs) => {
+                    this.setState({
+                        logs,
+                        sortState: {
+                            [propertyName]: 'asc'
+                        }
+                    });
+                });
+        } else {
+            if (!this.state.searchText) {
+                awaitPromise = Promise.resolve();
+                this.setState({
+                    logs: this.state.ogLogs,
+                    sortState: {}
+                });
+            } else {
+                awaitPromise = LogsAPI.search(this.state.searchText)
+                    .then((logs) => {
+                        this.setState({
+                            logs,
+                            sortState: {}
+                        });
+                    });
+            }
+        }
+
+        awaitPromise.finally(() => {
+            this.setState({
+                isLoading: false
             });
         });
     }
