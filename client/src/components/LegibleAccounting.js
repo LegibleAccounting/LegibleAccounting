@@ -12,6 +12,7 @@ import AccountForm from './AccountForm.js';
 import AddToChartOfAccounts from './AddToChartOfAccounts.js';
 import Accounts from './Accounts.js';
 import Logs from './Logs.js';
+import GeneralJournal from './GeneralJournal.js';
 import Sidebar from './Sidebar';
 import Auth from '../api/Auth';
 import './LegibleAccounting.css';
@@ -60,6 +61,7 @@ class LegibleAccounting extends Component {
                 <GuardedAdministratorPermissionsRoute exact path="/accounts/add" component={DecorateRoute(AccountForm, this.notifyProps)} />
                 <GuardedManagerPermissionsRoute path="/accounts/:id" component={DecorateRoute(AccountForm, this.notifyProps)} />
                 <GuardedAdministratorPermissionsRoute exact path="/logs" component={Logs} />
+                <Route exact path="/general-journal" component={DecorateRoute(GeneralJournal, this.notifyProps)} />
               </Switch>
             </Col>
           </Row>

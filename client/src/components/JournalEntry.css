@@ -1,0 +1,32 @@
+.accountEntry {
+}
+
+.creditAccountEntry {
+	margin-left: 30px;
+}
+
+.descriptionTitle {
+	margin-right: 10px;
+}
+
+.amountEntry {
+	display: flex;
+	direction: row;
+}
+
+.journalEntry .dollarSignDebit {
+	font-size: 14px;
+	height: 100%;
+	line-height: 20px;
+}
+
+.journalEntry .dollarSignCredit {
+	font-size: 14px;
+	height: 100%;
+	line-height: 20px;
+}
+
+.amountEntryValue {
+	text-align: right;
+	width: 65px;
+}

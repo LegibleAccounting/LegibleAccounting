@@ -1,7 +1,9 @@
 :root {
 	--mainBlue: #549FF7;
-  	--darkBlue: #3D7AC1;
-  	--hoverBlue: #4A90E2;
+  --darkBlue: #3D7AC1;
+  --hoverBlue: #3986DF;
+  --tableWidth: 90%;
+  --journalEntryAccountMarginBottom: 8px;
 }
 
 html, body, #root {
@@ -22,6 +24,10 @@ body {
 .btn-primary:hover {
 	border: 0px;
 	background-color: var(--hoverBlue);
+}
+
+.btn { 
+
 }
 
 h1 {
