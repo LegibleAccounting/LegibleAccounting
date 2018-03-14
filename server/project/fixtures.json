@@ -24,6 +24,28 @@
 {
     "model": "auth.permission",
     "fields": {
+        "name": "Can add journal entry",
+        "content_type": [
+            "journalize",
+            "journalentry"
+        ],
+        "codename": "add_journalentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change journal entry",
+        "content_type": [
+            "journalize",
+            "journalentry"
+        ],
+        "codename": "change_journalentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
         "name": "Can add user",
         "content_type": [
             "auth",
@@ -75,7 +97,13 @@
     "model": "auth.group",
     "fields": {
         "name": "Accountant",
-        "permissions": []
+        "permissions": [
+            [
+                "add_journalentry",
+                "journalize",
+                "journalentry"
+            ]
+        ]
     }
 },
 {
@@ -87,6 +115,16 @@
                 "change_account",
                 "accounts",
                 "account"
+            ],
+            [
+                "add_journalentry",
+                "journalize",
+                "journalentry"
+            ],
+            [
+                "change_journalentry",
+                "journalize",
+                "journalentry"
             ]
         ]
     }
