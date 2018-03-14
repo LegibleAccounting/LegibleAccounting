@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import DateTime from 'react-datetime';
 import moment from 'moment';
 import { Popover } from 'react-bootstrap';
 import { OverlayTrigger } from 'react-bootstrap';
@@ -34,8 +33,7 @@ class JournalEntry extends Component {
         };
     }
 
-
-render() {
+    render() {
         return (
             <div className="journalEntry">
                 <div className="row topOfEntryWrapper">
@@ -48,7 +46,7 @@ render() {
                     <div className="col-xs-12 col-sm-9">
                         {
                             this.props.entry.transactions.map((item, index) => (
-                                <div className="row auto-height" key={item.key}>
+                                <div className="row auto-height" key={item.affected_account.id}>
                                     <div className="col-xs-12 col-sm-6">
                                         <div className="accountNameWrapper">
                                             <OverlayTrigger
@@ -59,7 +57,7 @@ render() {
                                                   <Popover id="popover-trigger-click-root-close" title="Attachments">
                                                     {
                                                         item.receipts.map((item, index) => (
-                                                            <div className="attachment-name-overflow">
+                                                            <div key={item.file} className="attachment-name-overflow">
                                                                 <a href={item.file}>{item.original_filename}</a>
                                                             </div>
                                                         ))
@@ -79,7 +77,10 @@ render() {
                                         </div>
                                     </div>
                                     <div className={ 'amountEntry col-xs-12 ' + (item.is_debit ? 'col-sm-6' : 'col-sm-3 col-sm-offset-3') }>
-                                        <label className={ item.is_debit ? 'dollarSignDebit' : 'dollarSignCredit' }>$</label>
+                                        <label
+                                          className={ item.is_debit ? 'dollarSignDebit' : 'dollarSignCredit' }
+                                          style={{visibility: item.typeIndex !== 0 && 'hidden'}}>$
+                                        </label>
                                         <div className="amountEntryValue">{item.value}</div>
                                     </div>
                                 </div>
@@ -89,7 +90,7 @@ render() {
                 </div>
                 
                 <div className="row bottomOfEntryWrapper">
-                    <div className="col-md-8 descriptionWrapper" style={{visibility: this.props.entry.description =="" && 'hidden'}}>
+                    <div className="col-md-8 descriptionWrapper" style={{visibility: this.props.entry.description === "" && 'hidden'}}>
                         <label className="descriptionTitle">Description:</label>
                         {this.props.entry.description}
                     </div>

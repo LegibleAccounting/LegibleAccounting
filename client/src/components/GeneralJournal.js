@@ -37,7 +37,25 @@ class GeneralJournal extends Component {
         GeneralJournalAPI.getAll()
             .then((entries) => {
                 this.setState({
-                    entries
+                    entries: entries.map((entry) => {
+                        let offset = null;
+                        entry.transactions = entry.transactions
+                            .map((transaction, index) => {
+                                if (transaction.is_debit) {
+                                    transaction.typeIndex = index;
+                                } else {
+                                    if (offset === null) {
+                                        offset = index;
+                                    }
+
+                                    transaction.typeIndex = index - offset;
+                                }
+
+                                return transaction;
+                            })
+
+                        return entry;
+                    })
                 });
             });
 
@@ -83,7 +101,7 @@ class GeneralJournal extends Component {
                     }
                     {
                             this.state.entries.map((item, index) => (
-                                <JournalEntry entry={item}/>
+                                <JournalEntry key={item.date_created} entry={item}/>
                             ))
                     }
                 </div>
