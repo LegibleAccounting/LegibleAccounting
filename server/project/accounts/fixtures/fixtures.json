@@ -1100,7 +1100,7 @@
         "order": 2,
         "initial_balance": "0.00",
         "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
+        "is_active": true
     }
 },
 {
