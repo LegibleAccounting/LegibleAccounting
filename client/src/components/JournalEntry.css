@@ -30,3 +30,29 @@
 	text-align: right;
 	width: 65px;
 }
+
+.accountNameWrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+.attachmentSpace {
+	flex-grow: 1;
+}
+
+.attachmentButton {
+	width: 25px;
+	height: 25px;
+	margin-right: 0px;
+	background-color: transparent;
+}
+
+.attachment-name-overflow {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.attachment-name-overflow a {
+	width: 400px;
+}

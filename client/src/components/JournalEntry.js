@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import DateTime from 'react-datetime';
 import moment from 'moment';
+import { Popover } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 import './JournalEntry.css';
 
 class JournalEntry extends Component {
@@ -40,16 +42,40 @@ render() {
                     <div className="col-xs-12 col-sm-2 dateEntry">
                         {this.props.entry.date}
                     </div>
-                    <div className="col-xs-12 col-sm-2">
+                    <div className="col-xs-12 col-sm-1">
                         {this.props.entry.entry_type}
                     </div>
-                    <div className="col-xs-12 col-sm-8">
+                    <div className="col-xs-12 col-sm-9">
                         {
                             this.props.entry.transactions.map((item, index) => (
                                 <div className="row auto-height" key={item.key}>
                                     <div className="col-xs-12 col-sm-6">
-                                        <div className={ 'accountEntry ' + (item.is_debit ? '' : 'creditAccountEntry')}>
-                                           {item.affected_account.name}
+                                        <div className="accountNameWrapper">
+                                            <OverlayTrigger
+                                              trigger="click"
+                                              rootClose
+                                              placement="bottom"
+                                              overlay={(
+                                                  <Popover id="popover-trigger-click-root-close" title="Attachments">
+                                                    {
+                                                        item.receipts.map((item, index) => (
+                                                            <div className="attachment-name-overflow">
+                                                                <a href={item.file}>{item.original_filename}</a>
+                                                            </div>
+                                                        ))
+                                                    }
+                                                  </Popover>
+                                              )}>  
+                                                <span
+                                                    className={"glyphicon glyphicon-paperclip attachmentButton " +
+                                                    'accountEntry ' + (item.is_debit ? '' : 'creditAccountEntry')}
+                                                    style={{visibility: !item.receipts.length && 'hidden'}}>
+                                                </span>  
+                                            </OverlayTrigger>
+
+                                            <div>
+                                               {item.affected_account.name}
+                                            </div>
                                         </div>
                                     </div>
                                     <div className={ 'amountEntry col-xs-12 ' + (item.is_debit ? 'col-sm-6' : 'col-sm-3 col-sm-offset-3') }>
