@@ -38,22 +38,7 @@ class GeneralJournal extends Component {
             .then((entries) => {
                 this.setState({
                     entries: entries.map((entry) => {
-                        let offset = null;
-                        entry.transactions = entry.transactions
-                            .map((transaction, index) => {
-                                if (transaction.is_debit) {
-                                    transaction.typeIndex = index;
-                                } else {
-                                    if (offset === null) {
-                                        offset = index;
-                                    }
-
-                                    transaction.typeIndex = index - offset;
-                                }
-
-                                return transaction;
-                            })
-
+                        entry.transactions = this.getIndexedTransactions(entry.transactions);
                         return entry;
                     })
                 });
@@ -109,6 +94,24 @@ class GeneralJournal extends Component {
         );
     }
 
+    getIndexedTransactions(transactions) {
+        let offset = null;
+        return transactions
+            .map((transaction, index) => {
+                if (transaction.is_debit) {
+                    transaction.typeIndex = index;
+                } else {
+                    if (offset === null) {
+                        offset = index;
+                    }
+
+                    transaction.typeIndex = index - offset;
+                }
+
+                return transaction;
+            });
+    }
+
     toggleNewJournalUI() {
         this.setState({
             isCreatingJournalEntry: !this.state.isCreatingJournalEntry
@@ -130,11 +133,21 @@ class GeneralJournal extends Component {
 
     submitNewJournalEntry(journalEntry) {
         GeneralJournalAPI.create(journalEntry)
-            .then(() => {
+            .then((newJournalEntry) => {
                 this.props.onNotifySuccess('Journal Entry has been successfully created.');
                 this.setState({
                     isCreatingJournalEntry: false
                 });
+
+                GeneralJournalAPI.getAll()
+                    .then((entries) => {
+                        this.setState({
+                            entries: entries.map((entry) => {
+                                entry.transactions = this.getIndexedTransactions(entry.transactions);
+                                return entry;
+                            })
+                        });
+                    });
             })
             .catch(() => {
                 this.props.onNotifyError('Failed to create journal entry.');
