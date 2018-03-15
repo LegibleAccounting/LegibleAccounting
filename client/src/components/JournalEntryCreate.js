@@ -121,7 +121,8 @@ class JournalEntryCreate extends Component {
                     <div className="col-md-8 descriptionWrapper">
                         <textarea type="text" className="form-control description" cols="1" rows="1" placeholder="Description" value={this.state.description} onChange={this.changeDescription.bind(this)}/>
                     </div>
-                    <div className="col-md-4 actionButtonsWrapper">
+                    <div className="col-md-4 actionButtonsWrapper flex-row">
+                        <div className="flex-fill"></div>
                         <button className="btn cancelButton submitButton" onClick={this.props.onCancel}>Cancel</button>
                         <button className="btn btn-primary submitButton" disabled={!this.journalIsBalanced()} onClick={this.delegateJournalEntrySubmission.bind(this)}>Submit</button>
                     </div>

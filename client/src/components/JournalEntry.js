@@ -79,7 +79,8 @@ class JournalEntry extends Component {
                     </div>
                     {
                         !this.state.isRejecting ? (                        
-                        <div className="col-md-4 actionButtonsWrapper">
+                        <div className="col-md-4 actionButtonsWrapper flex-row">
+                            <div className="flex-fill"></div>
                             <button className="btn cancelButton submitButton"
                               style={{ display: (!(Auth.currentUserIsManager()) || !(this.props.entry.is_approved === null)) && 'none' }}
                               onClick={this.beginEntryRejection.bind(this)}>Reject</button>
