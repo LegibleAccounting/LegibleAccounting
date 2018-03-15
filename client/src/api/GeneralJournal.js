@@ -84,15 +84,15 @@ class GeneralJournalAPI {
         return fetch(new JSONAPIRequest(requestURL, Auth.token), {
             method: 'GET'
         })
-            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-            .then(response => response.json())
-            .then((response) => {
-                return Promise.resolve(response);
-            })
-            .catch((response) => {
-                // Consider how to handle this?
-                return Promise.reject(response);
-            });
+          .then(response => {
+            return response.json()
+                .catch(() => {
+                    return Promise.reject(response);
+                })
+                .then(data => {
+                    return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                });
+          });
     }
 
     create(data) {
@@ -104,13 +104,14 @@ class GeneralJournalAPI {
             method: 'POST',
             body: JSON.stringify(data)
         })
-          .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-          .then(response => response = response.json())
-          .then((response) => {
-            return Promise.resolve(response);
-          })
-          .catch((response) => {
-            return Promise.reject(response);
+          .then(response => {
+            return response.json()
+                .catch(() => {
+                    return Promise.reject(response);
+                })
+                .then(data => {
+                    return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                });
           });
     }
 
@@ -123,13 +124,14 @@ class GeneralJournalAPI {
             method: 'PUT',
             body: JSON.stringify(data)
         })
-          .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-          .then(response => response = response.json())
-          .then((response) => {
-            return Promise.resolve(response);
-          })
-          .catch((response) => {
-            return Promise.reject(response);
+          .then(response => {
+            return response.json()
+                .catch(() => {
+                    return Promise.reject(response);
+                })
+                .then(data => {
+                    return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                });
           });
     }
 }
