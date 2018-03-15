@@ -8,11 +8,34 @@
 }
 
 .journalEntry .approved {
-	color: green;
+	background-color: #7ED321;
+	color: white;
+	border-radius: 5px;
+	padding: 5px;
 }
 
 .journalEntry .rejected {
-	color: blue;
+	background-color: #ff6961;
+	color: white;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.rejectionReasonForm {
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.approvedWrapper { 
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.approvedRejectedWrapper {
+	margin-right: 5px;
+	margin-left: auto;
 }
 
 .accountEntry {
@@ -48,7 +71,7 @@
 }
 
 .journalEntry .actionButtonsWrapper {
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .journalEntry .dollarSignDebit {
