@@ -46,22 +46,35 @@ class AccountsAPI {
             });
     }
 
-    search(active, searchString) {
+    search(active, searchString, fieldNames, isAscending) {
     	if (!Auth.token) {
             return Promise.reject();
         }
 
-		// determine if searching active accounts
         var requestURL = '/api/accounts/';
+        let parts = [];
+
+		// determine if searching active accounts
         if (active) {
-        	requestURL += '?is_active=true&search=';
-        } else {
-        	requestURL += '?search=';
+            parts.push('is_active=true');
+        }
+
+        // determine if doing a text based search
+        if (searchString) {
+            parts.push('search=' + searchString);
+        }
+
+        // determine if there are any sorting requirements
+        if (Array.isArray(fieldNames)) {
+            if (isAscending) {
+                fieldNames = fieldNames.map(fieldName => '-' + fieldName);
+            }
+
+            parts.push('ordering=' + fieldNames.join(','));
         }
 
         // actually search
-        requestURL += searchString;
-
+        requestURL += '?' + parts.join('&');
         return fetch(new JSONAPIRequest(requestURL, Auth.token), {
             method: 'GET'
         })

@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view, parser_classes, permission_classes
-from rest_framework.filters import SearchFilter
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny, DjangoModelPermissions
@@ -48,7 +48,8 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 class LogEntryViewSet(viewsets.ModelViewSet):
     queryset = LogEntry.objects.filter(actor__is_staff=False)
-    filter_backends = (SearchFilter,)
+    filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('actor__username', 'object_repr', 'timestamp',)
+    ordering_fields = ('actor__username', 'object_repr', 'timestamp',)
     serializer_class = LogEntrySerializer
     permission_classes = (DjangoModelPermissions, LAAuthModelReadPermission,)
