@@ -16,7 +16,7 @@ class GeneralJournalAPI {
                         return Promise.reject(response);
                     })
                     .then(data => {
-                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                        return response.ok ? Promise.resolve(data.actions.POST.entry_type.choices) : Promise.reject(data);
                     });
             });
     }
