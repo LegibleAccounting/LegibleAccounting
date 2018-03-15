@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import { Popover } from 'react-bootstrap';
 import { OverlayTrigger } from 'react-bootstrap';
 import './JournalEntry.css';
@@ -8,29 +7,7 @@ class JournalEntry extends Component {
     constructor(props) {
         super(props);
 
-        this.lastKey = null; // Used to uniquely identify transactions for React
-
-        this.state = {
-            entry_type: 'type',
-            description: '',
-            date: moment().format('YYYY-MM-DD'),
-            transactions: [
-                {
-                    accountID: "Petty Cash",
-                    amount: 0,
-                    is_debit: true,
-                    initial_display: true,
-                    filePicker: null
-                },
-                {
-                    accountID: "Cash",
-                    amount: 0,
-                    is_debit: false,
-                    initial_display: true,
-                    filePicker: null
-                }
-            ],
-        };
+        this.state = {};
     }
 
     render() {
