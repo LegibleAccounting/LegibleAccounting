@@ -59,7 +59,7 @@ class Logs extends Component {
                             }
                             { this.state.sortState.object_repr }
                             </th>
-                            <th className="changes">Old Value | New Value</th>
+                            <th className="changes">(Field) Old Value -> New Value</th>
                             <th className="changedBy">Changed By
                             {
                                 !this.state.sortState.actor__username || this.state.sortState.actor__username === 'asc' ? (
@@ -97,7 +97,7 @@ class Logs extends Component {
 			                          		{item.changes ? (
 					                          	Object.keys(item.changes).map((itemName, index) => (
 					                          		<div key={index}>
-						                          		<div>{itemName} --- From: {item.changes[itemName][0]} | To: {item.changes[itemName][1]}</div>
+						                          		<div>({itemName}) <b>{item.changes[itemName][0]}</b> -> <b>{item.changes[itemName][1]}</b></div>
 						                          	</div>
 					                          	))
 					                        ) : (

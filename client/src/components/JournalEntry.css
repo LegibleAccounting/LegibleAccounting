@@ -99,6 +99,10 @@
 	overflow: hidden;
 }
 
+.accountName a {
+	color: black;
+}
+
 .transactionWrapper {
 	margin-bottom: 5px;
 }

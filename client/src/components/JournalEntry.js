@@ -53,7 +53,7 @@ class JournalEntry extends Component {
                                             </OverlayTrigger>
 
                                             <div className="accountName">
-                                               {item.affected_account.account_number + " - " + item.affected_account.name}
+                                               <a href={'/accounts/'+item.affected_account.id}>{item.affected_account.account_number}</a> - {item.affected_account.name}
                                             </div>
                                         </div>
                                     </div>
