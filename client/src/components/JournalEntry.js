@@ -24,7 +24,10 @@ class JournalEntry extends Component {
                     <div className="col-xs-12 col-sm-1">
                         <div className="typeEntry">{this.props.entry.entry_type}</div>
                     </div>
-                    <div className="col-xs-12 col-sm-9 largeWrapper">
+                    <div className="col-xs-12 col-sm-1">
+                        <div className="typeEntry">{this.props.entry.creator.username}</div>
+                    </div>
+                    <div className="col-xs-12 col-sm-8 largeWrapper">
                         {
                             this.props.entry.transactions.map((item, index) => (
                                 <div className="row auto-height transactionWrapper" key={item.affected_account.id}>
