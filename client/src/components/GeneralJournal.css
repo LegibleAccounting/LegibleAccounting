@@ -1,6 +1,11 @@
 .generalJournal {
 
 }
+
+.generalJournal .journal-filters {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
 .dateWidth {
 	width: 60px;
 }

@@ -7,7 +7,10 @@ class JournalEntry extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {};
+        this.state = {
+            isRejecting: false,
+            rejectionMemo: ''
+        };
     }
 
     render() {
@@ -67,19 +70,79 @@ class JournalEntry extends Component {
                 </div>
                 
                 <div className="row bottomOfEntryWrapper">
-                    <div className="col-md-8 descriptionWrapperWrapper" hidden={this.props.entry.description === ""}>
-                        <div className="descriptionWrapper">
+                    <div className="col-md-8 descriptionWrapperWrapper">
+                        <div className="descriptionWrapper" style={{ visibility: this.props.entry.description === "" && 'hidden' }}>
                             <div className="descriptionTitle">Description:</div>
                             <div className="description">{this.props.entry.description}</div>
                         </div>
                     </div>
-                    <div className="col-md-4 actionButtonsWrapper">
-                       
-                    </div>
+                    {
+                        !this.state.isRejecting ? (                        
+                        <div className="col-md-4 actionButtonsWrapper">
+                            <button className="btn cancelButton submitButton"
+                              style={{ display: (this.props.entry.is_approved === true || this.props.entry.is_approved === false) && 'none' }}
+                              onClick={this.beginEntryRejection.bind(this)}>Reject</button>
+                            <button
+                              style={{ display: (this.props.entry.is_approved === true || this.props.entry.is_approved === false) && 'none' }}
+                              className="btn btn-primary submitButton" onClick={this.delegateJournalEntryApproval.bind(this)}>Approve</button>
+
+                            <label style={{ display: (this.props.entry.is_approved === null) && 'none' }}>
+                                {
+                                    this.props.entry.is_approved ? (
+                                        <div className="approved">The entry has been approved.</div>
+                                    ) : (
+                                        <div className="rejected">Rejection Reason: {this.props.entry.rejection_memo}</div>
+                                    )
+                                }
+                            </label>
+                        </div>
+                        ) : (<div className="col-md-4"></div>)
+                    }
                 </div>
+                {
+                    this.state.isRejecting ? (
+                        <div className="flex-row">
+                            <input type="text" className="form-control" style={{width: '400px' }} value={this.state.rejectionMemo} onChange={this.changeRejectionMemo.bind(this)} />
+                            <div className="flex-fill"></div>
+                            <button className="btn cancelButton" onClick={this.cancelEntryRejection.bind(this)}>Cancel</button>
+                            <button className="btn btn-primary submitButton"  onClick={this.delegateJournalEntryRejection.bind(this)}>Reject</button>
+                        </div>
+                    ) : (
+                        <div></div>
+                    )
+                }
                 <div className="line"></div> 
             </div>
         );
+    }
+
+    delegateJournalEntryApproval() {
+        this.props.onApprove(this.props.entry.id);
+    }
+
+    changeRejectionMemo(event) {
+        this.setState({
+            rejectionMemo: event.target.value
+        });
+    }
+
+    beginEntryRejection() {
+        this.setState({
+            isRejecting: true
+        });
+    }
+
+    cancelEntryRejection() {
+        this.setState({
+            isRejecting: false
+        });
+    }
+
+    delegateJournalEntryRejection() {
+        this.props.onReject(this.props.entry.id, this.state.rejectionMemo);
+        this.setState({
+            isRejecting: false
+        });
     }
 }
 

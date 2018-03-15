@@ -65,21 +65,28 @@ class GeneralJournalAPI {
             });
     }
 
-    search(posted, searchString) {
+    search(approved, searchString) {
     	if (!Auth.token) {
             return Promise.reject();
         }
 
-		// determine if searching posted entries
         var requestURL = '/api/journal-entries/';
-        if (posted) {
-        	requestURL += '?status=true&search=';
-        } else {
-        	requestURL += '?search=';
+        let parts = [];
+
+        // determine if searching approved entries
+        if (approved === true) {
+            parts.push('is_approved=2');
+        } else if (approved === false) {
+            parts.push('is_approved=3');
+        }
+
+        // determine if doing a text based search
+        if (searchString) {
+            parts.push('search=' + searchString);
         }
 
         // actually search
-        requestURL += searchString;
+        requestURL += '?' + parts.join('&');
 
         return fetch(new JSONAPIRequest(requestURL, Auth.token), {
             method: 'GET'

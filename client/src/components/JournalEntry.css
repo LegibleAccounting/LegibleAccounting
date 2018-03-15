@@ -7,6 +7,14 @@
 	border-radius: 5px;
 }
 
+.journalEntry .approved {
+	color: green;
+}
+
+.journalEntry .rejected {
+	color: blue;
+}
+
 .accountEntry {
 }
 
@@ -37,6 +45,10 @@
 	display: flex;
 	direction: row;
 	font-weight: 300;
+}
+
+.journalEntry .actionButtonsWrapper {
+	margin-bottom: 10px;
 }
 
 .journalEntry .dollarSignDebit {

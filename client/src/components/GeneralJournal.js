@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Nav, NavItem } from 'react-bootstrap';
 import './GeneralJournal.css';
 import './CommonChart.css';
 import GeneralJournalAPI from '../api/GeneralJournal.js';
@@ -17,7 +18,8 @@ class GeneralJournal extends Component {
 	       ogentries: [],
            entryTypes: [],
 	       searchText: '',
-           accounts: null
+           accounts: null,
+           activeFilter: 1
 	    };
 
         AccountsAPI.getAll(true)
@@ -67,6 +69,20 @@ class GeneralJournal extends Component {
 		            </div>
 	            </div>
                 <div>
+                    <div className="flex-row journal-filters">
+                        <div className="flex-fill"></div>
+                        <Nav bsStyle="pills" activeKey={this.state.activeFilter} onSelect={this.handleJournalFilterSelection.bind(this)}>
+                            <NavItem eventKey={1}>
+                              All
+                            </NavItem>
+                            <NavItem eventKey={2}>
+                              Approved
+                            </NavItem>
+                            <NavItem eventKey={3}>
+                              Rejected
+                            </NavItem>
+                        </Nav>
+                    </div>
                     <div className="row gridHeading">
                         <label className="hidden-xs col-sm-2">Date</label>
                         <label className="hidden-xs col-sm-1">Type</label>
@@ -86,7 +102,7 @@ class GeneralJournal extends Component {
                     }
                     {
                             this.state.entries.map((item, index) => (
-                                <JournalEntry key={item.date_created} entry={item}/>
+                                <JournalEntry key={item.date_created} entry={item} onApprove={this.approveJournalEntry.bind(this)} onReject={this.rejectJournalEntry.bind(this)}/>
                             ))
                     }
                 </div>
@@ -152,6 +168,67 @@ class GeneralJournal extends Component {
             .catch(() => {
                 this.props.onNotifyError('Failed to create journal entry.');
             });
+    }
+
+    approveJournalEntry(journalEntryId) {
+        GeneralJournalAPI.update({ id: journalEntryId, is_approved: true })
+            .then(() => {
+                this.props.onNotifySuccess('Journal Entry has been successfully approved.');
+                GeneralJournalAPI.getAll()
+                    .then((entries) => {
+                        this.setState({
+                            entries: entries.map((entry) => {
+                                entry.transactions = this.getIndexedTransactions(entry.transactions);
+                                return entry;
+                            })
+                        });
+                    });
+            })
+            .catch(() => {
+                this.props.onNotifyError('Failed to approve journal entry.');
+            });
+
+    }
+
+    rejectJournalEntry(journalEntryId, rejectionMemo) {
+        GeneralJournalAPI.update({ id: journalEntryId, is_approved: false, rejection_memo: rejectionMemo })
+            .then(() => {
+                this.props.onNotifySuccess('Journal Entry has been successfully rejected.');
+                GeneralJournalAPI.getAll()
+                    .then((entries) => {
+                        this.setState({
+                            entries: entries.map((entry) => {
+                                entry.transactions = this.getIndexedTransactions(entry.transactions);
+                                return entry;
+                            })
+                        });
+                    });
+            })
+            .catch(() => {
+                this.props.onNotifyError('Failed to reject journal entry.');
+            });
+
+    }
+
+    handleJournalFilterSelection(selectedKey) {
+        let awaitPromise = null;
+        if (selectedKey === 1) {
+            awaitPromise = GeneralJournalAPI.getAll();
+        } else if (selectedKey === 2) {
+            awaitPromise = GeneralJournalAPI.search(true);
+        } else {
+            awaitPromise = GeneralJournalAPI.search(false);     
+        }
+
+        awaitPromise.then((entries) => {
+            this.setState({
+                activeFilter: selectedKey,
+                entries: entries.map((entry) => {
+                    entry.transactions = this.getIndexedTransactions(entry.transactions);
+                    return entry;
+                })
+            });
+        }); 
     }
 }
 
