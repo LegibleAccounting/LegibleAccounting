@@ -38,6 +38,7 @@
 }
 
 .topOfEntryWrapper {
+	margin-top: 5px;
 	height: auto;
 }
 
@@ -92,10 +93,10 @@
 
 .description {
 	resize: none;
-	margin-bottom: 10px;
 }
 
 .descriptionWrapper {
+	margin-bottom: 5px;
 }
 
 .attachmentsWrapper {
