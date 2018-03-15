@@ -40,4 +40,4 @@ class RetrieveAccountSerializer(AccountSerializer):
     balance = serializers.SerializerMethodField()
 
     def get_balance(self, obj):
-        return obj.get_balance()
+        return '${:,.2f}'.format(obj.get_balance())
