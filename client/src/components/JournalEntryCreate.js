@@ -63,7 +63,7 @@ class JournalEntryCreate extends Component {
         }
 
         return (
-            <div>
+            <div className="journalEntryCreate">
                 <div className="row topOfEntryWrapper">
                     <div className="col-xs-12 col-sm-2 dateEntry">
                         <DateTime renderInput={this.renderDatePickerField} timeFormat={false} dateFormat="YYYY-MM-DD" value={this.state.date} onChange={this.changeDate.bind(this)} onBlur={this.setCalendarClosed.bind(this)}/>
@@ -126,7 +126,6 @@ class JournalEntryCreate extends Component {
                         <button className="btn btn-primary submitButton" onClick={this.delegateJournalEntrySubmission.bind(this)}>Submit</button>
                     </div>
                 </div>
-                <div className="line"></div> 
             </div>
         );
     }

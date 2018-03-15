@@ -35,7 +35,6 @@
 	height: 2px;
 	background-color: #D7D6D7;
 	margin-top: 10px;
-	margin-bottom: 10px;
 }
 
 .topOfEntryWrapper {
@@ -72,7 +71,7 @@
 }
 
 .entryAmount {
-	width: 75px;
+	width: 90px;
 	margin-bottom: 8px;
 	height: 30px;
 	text-align:right;
@@ -89,7 +88,6 @@
 	width: 100%;
 	height: 1.5px;
 	background-color: #EAEAEA;
-	margin-bottom: 10px;
 }
 
 .description {

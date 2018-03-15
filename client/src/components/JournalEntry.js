@@ -41,12 +41,12 @@ class JournalEntry extends Component {
                         {this.props.entry.date}
                     </div>
                     <div className="col-xs-12 col-sm-1">
-                        {this.props.entry.entry_type}
+                        <div className="typeEntry">{this.props.entry.entry_type}</div>
                     </div>
-                    <div className="col-xs-12 col-sm-9">
+                    <div className="col-xs-12 col-sm-9 largeWrapper">
                         {
                             this.props.entry.transactions.map((item, index) => (
-                                <div className="row auto-height" key={item.affected_account.id}>
+                                <div className="row auto-height transactionWrapper" key={item.affected_account.id}>
                                     <div className="col-xs-12 col-sm-6">
                                         <div className="accountNameWrapper">
                                             <OverlayTrigger
@@ -71,8 +71,8 @@ class JournalEntry extends Component {
                                                 </span>  
                                             </OverlayTrigger>
 
-                                            <div>
-                                               {item.affected_account.name}
+                                            <div className="accountName">
+                                               {item.affected_account.account_number + " - " + item.affected_account.name}
                                             </div>
                                         </div>
                                     </div>
@@ -90,9 +90,11 @@ class JournalEntry extends Component {
                 </div>
                 
                 <div className="row bottomOfEntryWrapper">
-                    <div className="col-md-8 descriptionWrapper" style={{visibility: this.props.entry.description === "" && 'hidden'}}>
-                        <label className="descriptionTitle">Description:</label>
-                        {this.props.entry.description}
+                    <div className="col-md-8 descriptionWrapperWrapper" hidden={this.props.entry.description ==""}>
+                        <div className="descriptionWrapper">
+                            <div className="descriptionTitle">Description:</div>
+                            <div className="description">{this.props.entry.description}</div>
+                        </div>
                     </div>
                     <div className="col-md-4 actionButtonsWrapper">
                        
