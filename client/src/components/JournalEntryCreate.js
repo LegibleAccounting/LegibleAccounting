@@ -121,9 +121,10 @@ class JournalEntryCreate extends Component {
                     <div className="col-md-8 descriptionWrapper">
                         <textarea type="text" className="form-control description" cols="1" rows="1" placeholder="Description" value={this.state.description} onChange={this.changeDescription.bind(this)}/>
                     </div>
-                    <div className="col-md-4 actionButtonsWrapper">
+                    <div className="col-md-4 actionButtonsWrapper flex-row">
+                        <div className="flex-fill"></div>
                         <button className="btn cancelButton submitButton" onClick={this.props.onCancel}>Cancel</button>
-                        <button className="btn btn-primary submitButton" onClick={this.delegateJournalEntrySubmission.bind(this)}>Submit</button>
+                        <button className="btn btn-primary submitButton" disabled={!this.journalIsBalanced()} onClick={this.delegateJournalEntrySubmission.bind(this)}>Submit</button>
                     </div>
                 </div>
             </div>
@@ -213,7 +214,7 @@ class JournalEntryCreate extends Component {
         var transactionToEdit = this.state.transactions[transactionIndex];
 
         //edit transaction
-        transactionToEdit.amount = event.target.value;
+        transactionToEdit.amount = Number(event.target.value);
 
         this.setState({
             transactions: this.state.transactions
@@ -292,6 +293,16 @@ class JournalEntryCreate extends Component {
                 });
             });
 
+    }
+
+    journalIsBalanced() {
+        let balance = this.state.transactions
+            .reduce((result, transaction) => {
+                result += (transaction.is_debit ? transaction.amount : transaction.amount * -1);
+                return result;
+            }, 0);
+
+        return (balance === 0);
     }
 }
 

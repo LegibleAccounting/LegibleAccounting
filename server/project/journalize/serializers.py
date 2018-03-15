@@ -66,7 +66,9 @@ class CreateTransactionSerializer(serializers.ModelSerializer):
     receipts = ReceiptSerializer(many=True)
 
     def validate_value(self, value):
-        if value <= 0:
+        if value == 0:
+            raise serializers.ValidationError('A transaction must have a non-zero value.')
+        elif value < 0:
             raise serializers.ValidationError('A transaction cannot have a negative value.')
 
         return value

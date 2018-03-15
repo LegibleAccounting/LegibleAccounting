@@ -53,7 +53,7 @@ class JournalEntry extends Component {
                                             </OverlayTrigger>
 
                                             <div className="accountName">
-                                               {item.affected_account.account_number + " - " + item.affected_account.name}
+                                               <a href={'/accounts/'+item.affected_account.id}>{item.affected_account.account_number}</a> - {item.affected_account.name}
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +79,8 @@ class JournalEntry extends Component {
                     </div>
                     {
                         !this.state.isRejecting ? (                        
-                        <div className="col-md-4 actionButtonsWrapper">
+                        <div className="col-md-4 actionButtonsWrapper flex-row">
+                            <div className="flex-fill"></div>
                             <button className="btn cancelButton submitButton"
                               style={{ display: (!(Auth.currentUserIsManager()) || !(this.props.entry.is_approved === null)) && 'none' }}
                               onClick={this.beginEntryRejection.bind(this)}>Reject</button>
@@ -87,12 +88,12 @@ class JournalEntry extends Component {
                               style={{ display: (!(Auth.currentUserIsManager()) || !(this.props.entry.is_approved === null)) && 'none' }}
                               className="btn btn-primary submitButton" onClick={this.delegateJournalEntryApproval.bind(this)}>Approve</button>
 
-                            <label style={{ display: (this.props.entry.is_approved === null) && 'none' }}>
+                            <label className="approvedRejectedWrapper" style={{ display: (this.props.entry.is_approved === null) && 'none' }}>
                                 {
                                     this.props.entry.is_approved ? (
-                                        <div className="approved">The entry has been approved.</div>
+                                        <div className="approved">Approved</div>
                                     ) : (
-                                        <div className="rejected">Rejection Reason: {this.props.entry.rejection_memo}</div>
+                                        <div className="rejected">Rejected: {this.props.entry.rejection_memo}</div>
                                     )
                                 }
                             </label>
@@ -102,8 +103,8 @@ class JournalEntry extends Component {
                 </div>
                 {
                     this.state.isRejecting ? (
-                        <div className="flex-row">
-                            <input type="text" className="form-control" style={{width: '400px' }} value={this.state.rejectionMemo} onChange={this.changeRejectionMemo.bind(this)} />
+                        <div className="flex-row rejectionReasonForm">
+                            <input type="text" className="form-control" placeholder="Rejection Reason" style={{width: '400px' }} value={this.state.rejectionMemo} onChange={this.changeRejectionMemo.bind(this)} />
                             <div className="flex-fill"></div>
                             <button className="btn cancelButton" onClick={this.cancelEntryRejection.bind(this)}>Cancel</button>
                             <button className="btn btn-primary submitButton"  onClick={this.delegateJournalEntryRejection.bind(this)}>Reject</button>

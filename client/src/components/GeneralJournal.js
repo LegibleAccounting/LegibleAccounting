@@ -79,6 +79,9 @@ class GeneralJournal extends Component {
                               Approved
                             </NavItem>
                             <NavItem eventKey={3}>
+                                Needs Approval
+                            </NavItem>
+                            <NavItem eventKey={4}>
                               Rejected
                             </NavItem>
                         </Nav>
@@ -158,6 +161,7 @@ class GeneralJournal extends Component {
                 GeneralJournalAPI.getAll()
                     .then((entries) => {
                         this.setState({
+                            activeFilter: 1,
                             entries: entries.map((entry) => {
                                 entry.transactions = this.getIndexedTransactions(entry.transactions);
                                 return entry;
@@ -174,15 +178,7 @@ class GeneralJournal extends Component {
         GeneralJournalAPI.update({ id: journalEntryId, is_approved: true })
             .then(() => {
                 this.props.onNotifySuccess('Journal Entry has been successfully approved.');
-                GeneralJournalAPI.getAll()
-                    .then((entries) => {
-                        this.setState({
-                            entries: entries.map((entry) => {
-                                entry.transactions = this.getIndexedTransactions(entry.transactions);
-                                return entry;
-                            })
-                        });
-                    });
+                this.handleJournalFilterSelection(this.state.activeFilter);
             })
             .catch(() => {
                 this.props.onNotifyError('Failed to approve journal entry.');
@@ -194,15 +190,7 @@ class GeneralJournal extends Component {
         GeneralJournalAPI.update({ id: journalEntryId, is_approved: false, rejection_memo: rejectionMemo })
             .then(() => {
                 this.props.onNotifySuccess('Journal Entry has been successfully rejected.');
-                GeneralJournalAPI.getAll()
-                    .then((entries) => {
-                        this.setState({
-                            entries: entries.map((entry) => {
-                                entry.transactions = this.getIndexedTransactions(entry.transactions);
-                                return entry;
-                            })
-                        });
-                    });
+                this.handleJournalFilterSelection(this.state.activeFilter);
             })
             .catch(() => {
                 this.props.onNotifyError('Failed to reject journal entry.');
@@ -216,8 +204,15 @@ class GeneralJournal extends Component {
             awaitPromise = GeneralJournalAPI.getAll();
         } else if (selectedKey === 2) {
             awaitPromise = GeneralJournalAPI.search(true);
-        } else {
+        } else if (selectedKey === 4) {
             awaitPromise = GeneralJournalAPI.search(false);     
+        } else {
+            // 3
+            // TODO: Do better
+            awaitPromise = GeneralJournalAPI.getAll()
+                .then((entries) => {
+                    return entries.filter(entry => entry.is_approved === null);
+                });
         }
 
         awaitPromise.then((entries) => {

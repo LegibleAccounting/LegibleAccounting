@@ -18,7 +18,7 @@ MANAGEMENT_JOURNAL_ENTRY_TYPES = [2, 3]
 
 class JournalEntry(models.Model):
     class Meta:
-        ordering = ['-date']
+        ordering = ['-date', '-date_created']
 
     entry_type = models.SmallIntegerField(choices=JOURNAL_ENTRY_TYPE_CHOICES)
     date_created = models.DateTimeField(auto_now_add=True)
