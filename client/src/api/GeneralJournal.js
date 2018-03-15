@@ -10,14 +10,14 @@ class GeneralJournalAPI {
         return fetch(new JSONAPIRequest('/api/journal-entries', Auth.token), {
             method: 'OPTIONS'
         })
-            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-            .then(response => response.json())
             .then(response => {
-                return Promise.resolve(response.actions.POST.entry_type.choices);
-            })
-            .catch(response => {
-                // Consider how to handle this?
-                return Promise.reject(response);
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
             });
     }
 
@@ -35,14 +35,14 @@ class GeneralJournalAPI {
         return fetch(new JSONAPIRequest(requestURL, Auth.token), {
             method: 'GET'
         })
-            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-            .then(response => response.json())
-            .then((response) => {
-                return Promise.resolve(response);
-            })
-            .catch((response) => {
-                // Consider how to handle this?
-                return Promise.reject(response);
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
             });
     }
 
@@ -54,14 +54,14 @@ class GeneralJournalAPI {
         return fetch(new JSONAPIRequest(`/api/journal-entries/${id}/`, Auth.token), {
             method: 'GET'
         })
-            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-            .then(response => response.json())
-            .then((response) => {
-                return Promise.resolve(response);
-            })
-            .catch((response) => {
-                // Consider how to handle this?
-                return Promise.reject(response);
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
             });
     }
 
@@ -84,15 +84,15 @@ class GeneralJournalAPI {
         return fetch(new JSONAPIRequest(requestURL, Auth.token), {
             method: 'GET'
         })
-          .then(response => {
-            return response.json()
-                .catch(() => {
-                    return Promise.reject(response);
-                })
-                .then(data => {
-                    return response.ok ? Promise.resolve(data) : Promise.reject(data);
-                });
-          });
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
+            });
     }
 
     create(data) {
@@ -104,15 +104,15 @@ class GeneralJournalAPI {
             method: 'POST',
             body: JSON.stringify(data)
         })
-          .then(response => {
-            return response.json()
-                .catch(() => {
-                    return Promise.reject(response);
-                })
-                .then(data => {
-                    return response.ok ? Promise.resolve(data) : Promise.reject(data);
-                });
-          });
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
+            });
     }
 
     update(data) {
@@ -124,15 +124,15 @@ class GeneralJournalAPI {
             method: 'PUT',
             body: JSON.stringify(data)
         })
-          .then(response => {
-            return response.json()
-                .catch(() => {
-                    return Promise.reject(response);
-                })
-                .then(data => {
-                    return response.ok ? Promise.resolve(data) : Promise.reject(data);
-                });
-          });
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
+            });
     }
 }
 
