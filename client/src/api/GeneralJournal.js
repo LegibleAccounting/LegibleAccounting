@@ -78,6 +78,10 @@ class GeneralJournalAPI {
             parts.push('is_approved=2');
         } else if (approved === false) {
             parts.push('is_approved=3');
+        } else if (approved === null) {
+            // TODO: Need to fix this correctly,
+            // just filtering on frontend for now.
+            //parts.push('is_approved=');
         }
 
         // determine if doing a text based search
