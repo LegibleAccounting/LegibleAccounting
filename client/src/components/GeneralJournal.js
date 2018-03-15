@@ -169,8 +169,19 @@ class GeneralJournal extends Component {
                         });
                     });
             })
-            .catch(() => {
-                this.props.onNotifyError('Failed to create journal entry.');
+            .catch((response) => {
+                console.log(Object.values(response));
+                if(Object.keys(response)) {
+                    if(Object.values(response)[0].length === 1){
+                        this.props.onNotifyError(Object.values(response)[0]);
+                    }
+                    else {
+                        this.props.onNotifyError(Object.values(Object.values(Object.values(response)[0])[0])[0])
+                    }
+                }
+                else {
+                    this.props.onNotifyError('Failed to create journal entry.');
+                }
             });
     }
 
