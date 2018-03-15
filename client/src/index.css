@@ -33,3 +33,13 @@ body {
 h1 {
 	color: var(--mainBlue);
 }
+
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row > .flex-fill {
+  flex-grow: 1;
+}

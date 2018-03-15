@@ -10,14 +10,14 @@ class GeneralJournalAPI {
         return fetch(new JSONAPIRequest('/api/journal-entries', Auth.token), {
             method: 'OPTIONS'
         })
-            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-            .then(response => response.json())
             .then(response => {
-                return Promise.resolve(response.actions.POST.entry_type.choices);
-            })
-            .catch(response => {
-                // Consider how to handle this?
-                return Promise.reject(response);
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data.actions.POST.entry_type.choices) : Promise.reject(data);
+                    });
             });
     }
 
@@ -35,14 +35,14 @@ class GeneralJournalAPI {
         return fetch(new JSONAPIRequest(requestURL, Auth.token), {
             method: 'GET'
         })
-            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-            .then(response => response.json())
-            .then((response) => {
-                return Promise.resolve(response);
-            })
-            .catch((response) => {
-                // Consider how to handle this?
-                return Promise.reject(response);
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
             });
     }
 
@@ -54,44 +54,51 @@ class GeneralJournalAPI {
         return fetch(new JSONAPIRequest(`/api/journal-entries/${id}/`, Auth.token), {
             method: 'GET'
         })
-            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-            .then(response => response.json())
-            .then((response) => {
-                return Promise.resolve(response);
-            })
-            .catch((response) => {
-                // Consider how to handle this?
-                return Promise.reject(response);
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
             });
     }
 
-    search(posted, searchString) {
+    search(approved, searchString) {
     	if (!Auth.token) {
             return Promise.reject();
         }
 
-		// determine if searching posted entries
         var requestURL = '/api/journal-entries/';
-        if (posted) {
-        	requestURL += '?status=true&search=';
-        } else {
-        	requestURL += '?search=';
+        let parts = [];
+
+        // determine if searching approved entries
+        if (approved === true) {
+            parts.push('is_approved=2');
+        } else if (approved === false) {
+            parts.push('is_approved=3');
+        }
+
+        // determine if doing a text based search
+        if (searchString) {
+            parts.push('search=' + searchString);
         }
 
         // actually search
-        requestURL += searchString;
+        requestURL += '?' + parts.join('&');
 
         return fetch(new JSONAPIRequest(requestURL, Auth.token), {
             method: 'GET'
         })
-            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-            .then(response => response.json())
-            .then((response) => {
-                return Promise.resolve(response);
-            })
-            .catch((response) => {
-                // Consider how to handle this?
-                return Promise.reject(response);
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
             });
     }
 
@@ -104,14 +111,15 @@ class GeneralJournalAPI {
             method: 'POST',
             body: JSON.stringify(data)
         })
-          .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-          .then(response => response = response.json())
-          .then((response) => {
-            return Promise.resolve(response);
-          })
-          .catch((response) => {
-            return Promise.reject(response);
-          });
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
+            });
     }
 
     update(data) {
@@ -123,14 +131,15 @@ class GeneralJournalAPI {
             method: 'PUT',
             body: JSON.stringify(data)
         })
-          .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-          .then(response => response = response.json())
-          .then((response) => {
-            return Promise.resolve(response);
-          })
-          .catch((response) => {
-            return Promise.reject(response);
-          });
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
+            });
     }
 }
 

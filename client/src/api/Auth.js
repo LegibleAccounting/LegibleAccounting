@@ -66,6 +66,30 @@ class Auth {
                 return Promise.reject(response);
             });
     }
+
+    currentUserIsAccountant() {
+        if (!this.currentUser) {
+            return false;
+        }
+
+        return this.currentUser.groups.find(group => group.name === 'Accountant');
+    }
+
+    currentUserIsManager() {
+        if (!this.currentUser) {
+            return false;
+        }
+
+        return this.currentUser.groups.find(group => group.name === 'Manager');
+    }
+
+    currentUserIsAdministrator() {
+        if (!this.currentUser) {
+            return false;
+        }
+
+        return this.currentUser.groups.find(group => group.name === 'Administrator');
+    }
 }
 
 export default new Auth();

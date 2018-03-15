@@ -1,17 +1,54 @@
+.journalEntry:hover {
+	background-color: #F6F6F6;
+}
+
+.journalEntry {
+	padding-top: 5px;
+	border-radius: 5px;
+}
+
+.journalEntry .approved {
+	color: green;
+}
+
+.journalEntry .rejected {
+	color: blue;
+}
+
 .accountEntry {
 }
 
 .creditAccountEntry {
-	margin-left: 30px;
+	margin-left: 40px;
 }
 
 .descriptionTitle {
 	margin-right: 10px;
+
+}
+
+.description {
+	color: #585858;
+	font-weight: 300;
+}
+
+.descriptionWrapperWrapper {
+	margin-top: 5px;
+}
+
+.descriptionWrapper {
+	display: flex;
+	flex-direction: row;
 }
 
 .amountEntry {
 	display: flex;
 	direction: row;
+	font-weight: 300;
+}
+
+.journalEntry .actionButtonsWrapper {
+	margin-bottom: 10px;
 }
 
 .journalEntry .dollarSignDebit {
@@ -28,5 +65,56 @@
 
 .amountEntryValue {
 	text-align: right;
-	width: 65px;
+	width: 80px;
+}
+
+.accountName {
+	font-weight: bold;
+	height: 20px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.transactionWrapper {
+	margin-bottom: 5px;
+}
+
+.accountNameWrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+.attachmentSpace {
+	flex-grow: 1;
+}
+
+.attachmentButton {
+	width: 15px;
+	height: 15px;
+	margin-right: 5px;
+	background-color: transparent;
+}
+
+.attachment-name-overflow {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.attachment-name-overflow a {
+	width: 400px;
+}
+
+.typeEntry {
+	font-weight: 300;
+	color: #686868;
+}
+
+.dateEntry {
+	font-weight: 300;
+}
+
+.glyphicon {
+    font-size: 13px;
 }
