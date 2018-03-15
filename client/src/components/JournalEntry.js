@@ -90,7 +90,7 @@ class JournalEntry extends Component {
                 </div>
                 
                 <div className="row bottomOfEntryWrapper">
-                    <div className="col-md-8 descriptionWrapperWrapper" hidden={this.props.entry.description ==""}>
+                    <div className="col-md-8 descriptionWrapperWrapper" hidden={this.props.entry.description === ""}>
                         <div className="descriptionWrapper">
                             <div className="descriptionTitle">Description:</div>
                             <div className="description">{this.props.entry.description}</div>
