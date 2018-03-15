@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Popover } from 'react-bootstrap';
 import { OverlayTrigger } from 'react-bootstrap';
+import Auth from '../api/Auth.js';
 import './JournalEntry.css';
 
 class JournalEntry extends Component {
@@ -80,10 +81,10 @@ class JournalEntry extends Component {
                         !this.state.isRejecting ? (                        
                         <div className="col-md-4 actionButtonsWrapper">
                             <button className="btn cancelButton submitButton"
-                              style={{ display: (this.props.entry.is_approved === true || this.props.entry.is_approved === false) && 'none' }}
+                              style={{ display: (!(Auth.currentUserIsManager()) || !(this.props.entry.is_approved === null)) && 'none' }}
                               onClick={this.beginEntryRejection.bind(this)}>Reject</button>
                             <button
-                              style={{ display: (this.props.entry.is_approved === true || this.props.entry.is_approved === false) && 'none' }}
+                              style={{ display: (!(Auth.currentUserIsManager()) || !(this.props.entry.is_approved === null)) && 'none' }}
                               className="btn btn-primary submitButton" onClick={this.delegateJournalEntryApproval.bind(this)}>Approve</button>
 
                             <label style={{ display: (this.props.entry.is_approved === null) && 'none' }}>
