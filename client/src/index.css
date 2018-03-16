@@ -1,7 +1,9 @@
 :root {
 	--mainBlue: #549FF7;
-  	--darkBlue: #3D7AC1;
-  	--hoverBlue: #4A90E2;
+  --darkBlue: #3D7AC1;
+  --hoverBlue: #3986DF;
+  --tableWidth: 90%;
+  --journalEntryAccountMarginBottom: 8px;
 }
 
 html, body, #root {
@@ -24,6 +26,20 @@ body {
 	background-color: var(--hoverBlue);
 }
 
+.btn { 
+
+}
+
 h1 {
 	color: var(--mainBlue);
+}
+
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row > .flex-fill {
+  flex-grow: 1;
 }

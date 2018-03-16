@@ -1,0 +1,147 @@
+.journalEntry:hover {
+	background-color: #F6F6F6;
+}
+
+.journalEntry {
+	padding-top: 5px;
+	border-radius: 5px;
+}
+
+.journalEntry .approved {
+	background-color: #7ED321;
+	color: white;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.journalEntry .rejected {
+	background-color: #ff6961;
+	color: white;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.rejectionReasonForm {
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.approvedWrapper { 
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.approvedRejectedWrapper {
+	margin-right: 5px;
+	margin-left: auto;
+}
+
+.accountEntry {
+}
+
+.creditAccountEntry {
+	margin-left: 40px;
+}
+
+.descriptionTitle {
+	margin-right: 10px;
+
+}
+
+.description {
+	color: #585858;
+	font-weight: 300;
+}
+
+.descriptionWrapperWrapper {
+	margin-top: 5px;
+}
+
+.descriptionWrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+.amountEntry {
+	display: flex;
+	direction: row;
+	font-weight: 300;
+}
+
+.journalEntry .actionButtonsWrapper {
+	margin-bottom: 5px;
+}
+
+.journalEntry .dollarSignDebit {
+	font-size: 14px;
+	height: 100%;
+	line-height: 20px;
+}
+
+.journalEntry .dollarSignCredit {
+	font-size: 14px;
+	height: 100%;
+	line-height: 20px;
+}
+
+.amountEntryValue {
+	text-align: right;
+	width: 80px;
+}
+
+.accountName {
+	font-weight: bold;
+	height: 20px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.accountName a {
+	color: black;
+}
+
+.transactionWrapper {
+	margin-bottom: 5px;
+}
+
+.accountNameWrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+.attachmentSpace {
+	flex-grow: 1;
+}
+
+.attachmentButton {
+	width: 15px;
+	height: 15px;
+	margin-right: 5px;
+	background-color: transparent;
+}
+
+.attachment-name-overflow {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.attachment-name-overflow a {
+	width: 400px;
+}
+
+.typeEntry {
+	font-weight: 300;
+	color: #686868;
+}
+
+.dateEntry {
+	font-weight: 300;
+}
+
+.glyphicon {
+    font-size: 13px;
+}
