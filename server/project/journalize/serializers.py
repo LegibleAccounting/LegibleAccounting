@@ -19,7 +19,7 @@ class ReceiptFileField(Base64FileField):
             return 'docx'
         elif 'Microsoft Excel' in file_type:
             return 'xls'
-        elif 'Microsoft Word' in file_type:
+        elif 'Microsoft Word' in file_type or 'Microsoft Office Word' in file_type:
             return 'doc'
         elif 'PDF document' in file_type:
             return 'pdf'
