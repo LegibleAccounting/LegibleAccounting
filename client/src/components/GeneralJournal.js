@@ -14,13 +14,13 @@ class GeneralJournal extends Component {
 
         this.state = {
            isCreatingJournalEntry: false,
-	       entries: [],
-	       ogentries: [],
+           entries: [],
+           ogentries: [],
            entryTypes: [],
-	       searchText: '',
+           searchText: '',
            accounts: null,
            activeFilter: 1
-	    };
+        };
 
         AccountsAPI.getAll(true)
             .then((accounts) => {
@@ -46,28 +46,28 @@ class GeneralJournal extends Component {
                 });
             });
 
-		this.searchTextChanged = this.searchTextChanged.bind(this);
-    	this.search = this.search.bind(this);
+        this.searchTextChanged = this.searchTextChanged.bind(this);
+        this.search = this.search.bind(this);
         this.toggleNewJournalUI = this.toggleNewJournalUI.bind(this);
         this.submitNewJournalEntry = this.submitNewJournalEntry.bind(this);
     }
 
     render() {
         return (
-        	<div className="generalJournal">
-        		<div className="titleBar">
-		            <h1>General Journal</h1>
+            <div className="generalJournal">
+                <div className="titleBar">
+                    <h1>General Journal</h1>
                     {
-					   <button className="btn btn-primary newButton" type="button" onClick={this.toggleNewJournalUI}>+ Add</button> 
+                       <button className="btn btn-primary newButton" type="button" onClick={this.toggleNewJournalUI}>+ Add</button>
                     }
-					<div className="filler"></div>
-					<div className="searchContainer btn-group">
-						<form onSubmit={this.search}>
-		            		<input type="search" className="form-control search" onChange={this.searchTextChanged} onBlur={this.search} placeholder="Search"/>
-		            	</form>
-		            	<button className="btn btn-primary" type="submit" onClick={this.search}>Search</button>
-		            </div>
-	            </div>
+                    <div className="filler"></div>
+                    <div className="searchContainer btn-group">
+                        <form onSubmit={this.search}>
+                            <input type="search" className="form-control search" onChange={this.searchTextChanged} onBlur={this.search} placeholder="Search"/>
+                        </form>
+                        <button className="btn btn-primary" type="submit" onClick={this.search}>Search</button>
+                    </div>
+                </div>
                 <div>
                     <div className="flex-row journal-filters">
                         <div className="flex-fill"></div>
@@ -110,7 +110,7 @@ class GeneralJournal extends Component {
                             ))
                     }
                 </div>
-			</div>
+            </div>
         );
     }
 
@@ -139,16 +139,16 @@ class GeneralJournal extends Component {
     }
 
     searchTextChanged(event) {
-    	this.setState({ searchText: event.target.value });
-    	if (event.target.value === '') {
-    		this.setState({
-    			entries: this.state.ogentries
-    		});
-    	}
+        this.setState({ searchText: event.target.value });
+        if (event.target.value === '') {
+            this.setState({
+                entries: this.state.ogentries
+            });
+        }
     }
 
     search(event) {
-    	event.preventDefault();
+        event.preventDefault();
     }
 
     submitNewJournalEntry(journalEntry) {
@@ -171,16 +171,30 @@ class GeneralJournal extends Component {
                     });
             })
             .catch((response) => {
-                console.log(Object.values(response));
-                if(Object.keys(response)) {
-                    if(Object.values(response)[0].length === 1){
-                        this.props.onNotifyError(Object.values(response)[0]);
-                    }
-                    else {
-                        this.props.onNotifyError(Object.values(Object.values(Object.values(response)[0])[0])[0])
-                    }
+                let errorFields = Object.keys(response);
+                if (!errorFields.length) {
+                    this.props.onNotifyError('Failed to create journal entry.');
+                    return;
                 }
-                else {
+
+                if (response.entry_type && response.entry_type.length) {
+                    this.props.onNotifyError('Entry Type: ' + response.entry_type[0]);
+                } else if (response.transactions && response.transactions.length) {
+                    let firstTransaction = response.transactions[0];
+                    let transactionErrorFields = Object.keys(firstTransaction);
+                    if (!transactionErrorFields.length) {
+                        this.props.onNotifyError('Failed to create journal entry due to malformed transaction(s).');
+                        return;
+                    }
+
+                    if (firstTransaction.affected_account && firstTransaction.affected_account.length) {
+                        this.props.onNotifyError('Transaction - Affected Account: ' + firstTransaction.affected_account[0]);
+                    } else if (firstTransaction.value && firstTransaction.value.length) {
+                        this.props.onNotifyError('Transaction - Value: ' + firstTransaction.value[0]);
+                    } else {
+                        this.props.onNotifyError('Failed to create journal entry due to a malformed transaction.');
+                    }
+                } else {
                     this.props.onNotifyError('Failed to create journal entry.');
                 }
             });
@@ -204,8 +218,13 @@ class GeneralJournal extends Component {
                 this.props.onNotifySuccess('Journal Entry has been successfully rejected.');
                 this.handleJournalFilterSelection(this.state.activeFilter);
             })
-            .catch(() => {
-                this.props.onNotifyError('Failed to reject journal entry.');
+            .catch((response) => {
+                if (!response.length) {
+                    this.props.onNotifyError('Failed to reject journal entry.');
+                    return;
+                }
+
+                this.props.onNotifyError('Rejection Memo: ' + response[0]);
             });
 
     }
