@@ -21,12 +21,31 @@ class LogsAPI {
             });
     }
 
-    search(searchString) {
+    search(searchString, fieldNames, isAscending) {
         if (!Auth.token) {
             return Promise.reject();
         }
 
-        return fetch(new JSONAPIRequest('/api/logs/?search=' + searchString, Auth.token), {
+        var requestURL = '/api/logs/';
+        let parts = [];
+
+        // determine if doing a text based search
+        if (searchString) {
+            parts.push('search=' + searchString);
+        }
+
+        // determine if there are any sorting requirements
+        if (Array.isArray(fieldNames)) {
+            if (isAscending) {
+                fieldNames = fieldNames.map(fieldName => '-' + fieldName);
+            }
+
+            parts.push('ordering=' + fieldNames.join(','));
+        }
+
+        // actually search
+        requestURL += '?' + parts.join('&');
+        return fetch(new JSONAPIRequest(requestURL, Auth.token), {
             method: 'GET'
         })
             .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))

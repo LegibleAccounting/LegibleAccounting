@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Glyphicon } from 'react-bootstrap';
 import './ChartOfAccounts.css';
 import './CommonChart.css';
 import Auth from '../api/Auth.js';
@@ -12,7 +13,9 @@ class ChartOfAccounts extends Component {
         this.state = {
 	      accounts: [],
 	      ogAccounts: [],
-	      searchText: ''
+	      searchText: '',
+          isLoading: true,
+          sortState: {}
 	    };
 
 		this.searchTextChanged = this.searchTextChanged.bind(this);
@@ -21,6 +24,7 @@ class ChartOfAccounts extends Component {
         AccountsAPI.getAll(true)
         	.then(data => {
         		this.setState({
+                    isLoading: false,
         			accounts: data,
         			ogAccounts: data
         		});
@@ -34,7 +38,7 @@ class ChartOfAccounts extends Component {
 		            <h1>Chart of Accounts</h1>
                     {
                         Auth.currentUser.groups.find(group => group.name === 'Administrator') ? (
-					       <NavLink className="NavLink btn btn-primary newButton" to="/chart-of-accounts/add">Add +</NavLink> 
+					       <NavLink className="NavLink btn btn-primary newButton" to="/chart-of-accounts/add">+ Add</NavLink> 
                         ) : (
                             <span></span>
                         )
@@ -52,20 +56,42 @@ class ChartOfAccounts extends Component {
 			        <table className="table table-hover">
 					  <thead>
 					  	<tr>
-						    <th className="accountNumber">#</th>
-						    <th className="name">Name</th>
+						    <th className="accountNumber">#
+                            {
+                                !this.state.sortState.accountNumber || this.state.sortState.accountNumber === 'asc' ? (
+                                    <Glyphicon glyph="chevron-up" className={!this.state.sortState.accountNumber ? 'sorter sorter-inactive' : 'sorter'}
+                                      onClick={this.sort.bind(this, 'accountNumber', ['account_type__liquidity', 'order'])} />
+                                ): (
+                                    <Glyphicon glyph="chevron-down" className="sorter"
+                                      onClick={this.sort.bind(this, 'accountNumber', ['account_type__liquidity', 'order'])} />
+                                )
+                            }
+                            { this.state.sortState.accountNumber }
+                            </th>
+						    <th className="name">Name
+                            {
+                                !this.state.sortState.name || this.state.sortState.name === 'asc' ? (
+                                    <Glyphicon glyph="chevron-up" className={!this.state.sortState.name ? 'sorter sorter-inactive' : 'sorter'}
+                                      onClick={this.sort.bind(this, 'name')} />
+                                ): (
+                                    <Glyphicon glyph="chevron-down" className="sorter"
+                                      onClick={this.sort.bind(this, 'name')} />
+                                )
+                            }
+                            { this.state.sortState.name }
+                            </th>
 						    <th className="initialBalance">Balance</th>
 						    <th className="comments">Comments</th>
 						    <th className="edits"></th>
 					    </tr>
 					  </thead>
 					  <tbody>
-				       	{ this.state.accounts.length ? (
+				       	{ !this.state.isLoading && this.state.accounts.length ? (
 				          this.state.accounts.map((item, index) => (
 				             <tr key={item.id}>
 						    	<td>{item.account_number}</td>
 						    	<td>{item.name}</td>
-						    	<td align="right"></td>
+						    	<td align="right">{ item.balance }</td>
 						    	<td>{item.description}</td>
                                 <td>
                                 {
@@ -81,7 +107,7 @@ class ChartOfAccounts extends Component {
 				        ) : (
 				            <tr>
                                 <td></td>
-                                <td>No Accounts</td>
+                                <td>{ this.state.isLoading ? 'Loading...' : 'No Accounts' }</td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -110,6 +136,58 @@ class ChartOfAccounts extends Component {
         			accounts: data
         		});
         	});
+    }
+
+    sort(propertyName, multiSearchProps=null) {
+        this.setState({
+            isLoading: true
+        });
+
+        let awaitPromise;
+
+        if (!this.state.sortState[propertyName]) {
+             awaitPromise = AccountsAPI.search(true, this.state.searchText, (Array.isArray(multiSearchProps) ? multiSearchProps : [propertyName]), false)
+                .then((accounts) => {
+                    this.setState({
+                        accounts,
+                        sortState: {
+                            [propertyName]: 'desc'
+                        }
+                    });
+                });
+        } else if (this.state.sortState[propertyName] === 'desc') {
+            awaitPromise = AccountsAPI.search(true, this.state.searchText, (Array.isArray(multiSearchProps) ? multiSearchProps : [propertyName]), true)
+                .then((accounts) => {
+                    this.setState({
+                        accounts,
+                        sortState: {
+                            [propertyName]: 'asc'
+                        }
+                    });
+                });
+        } else {
+            if (!this.state.searchText) {
+                awaitPromise = Promise.resolve();
+                this.setState({
+                    accounts: this.state.ogAccounts,
+                    sortState: {}
+                });
+            } else {
+                awaitPromise = AccountsAPI.search(true, this.state.searchText)
+                    .then((accounts) => {
+                        this.setState({
+                            accounts,
+                            sortState: {}
+                        });
+                    });
+            }
+        }
+
+        awaitPromise.finally(() => {
+            this.setState({
+                isLoading: false
+            });
+        });
     }
 }
 

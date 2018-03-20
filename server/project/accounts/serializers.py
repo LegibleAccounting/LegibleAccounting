@@ -39,7 +39,7 @@ class RetrieveAccountSerializer(AccountSerializer):
     balance = serializers.SerializerMethodField()
 
     def get_balance(self, obj):
-        return obj.get_balance()
+        return '${:,.2f}'.format(obj.get_balance())
 
 
 class AccountAtTimeSerializer(serializers.Serializer):
@@ -70,6 +70,3 @@ class LedgerAccountSerializer(AccountSerializer):
 
     def get_balance(self, obj):
         return obj.get_balance()
-
-
-
