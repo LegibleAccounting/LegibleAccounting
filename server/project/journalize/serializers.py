@@ -20,7 +20,7 @@ class ReceiptFileField(Base64FileField):
             return 'docx'
         elif 'Microsoft Excel' in file_type:
             return 'xls'
-        elif 'Microsoft Word' in file_type:
+        elif 'Microsoft Word' in file_type or 'Microsoft Office Word' in file_type:
             return 'doc'
         elif 'PDF document' in file_type:
             return 'pdf'
@@ -66,7 +66,9 @@ class CreateTransactionSerializer(serializers.ModelSerializer):
     receipts = ReceiptSerializer(many=True)
 
     def validate_value(self, value):
-        if value <= 0:
+        if value == 0:
+            raise serializers.ValidationError('A transaction must have a non-zero value.')
+        elif value < 0:
             raise serializers.ValidationError('A transaction cannot have a negative value.')
 
         return value
@@ -75,7 +77,7 @@ class CreateTransactionSerializer(serializers.ModelSerializer):
 class RetrieveJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalEntry
-        fields = ('date_created', 'date', 'entry_type', 'is_approved', 'rejection_memo', 'description', 'creator', 'transactions',)
+        fields = ('id', 'date_created', 'date', 'entry_type', 'is_approved', 'rejection_memo', 'description', 'creator', 'transactions',)
 
     transactions = RetrieveTransactionSerializer(many=True)
     creator = UserSerializer()

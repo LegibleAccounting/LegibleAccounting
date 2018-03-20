@@ -30,12 +30,17 @@ class Sidebar extends Component {
                         <NavLink to="/accounts">Accounts</NavLink>
                     </li>
                     {
-                        Auth.currentUser.groups.find(group => group.name === 'Administrator') ? (
+                        (Auth.currentUserIsManager() || Auth.currentUserIsAccountant()) && (
+                            <li>
+                                <NavLink to="/general-journal">General Journal</NavLink>
+                            </li>
+                        )
+                    }
+                    {
+                        Auth.currentUserIsAdministrator() && (
                             <li>
                                 <NavLink to="/logs">Event Log</NavLink>
                             </li>
-                        ) : (
-                            <span></span>
                         )
                     }
                 </ul>
