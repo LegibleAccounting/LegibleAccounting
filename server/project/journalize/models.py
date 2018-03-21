@@ -13,7 +13,7 @@ JOURNAL_ENTRY_TYPE_CHOICES = (
     (3, 'Closing')
 )
 
-MANAGEMENT_JOURNAL_ENTRY_TYPES = [2, 3]
+MANAGEMENT_JOURNAL_ENTRY_TYPES = [3]
 
 
 class JournalEntry(models.Model):
