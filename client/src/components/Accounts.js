@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Glyphicon } from 'react-bootstrap';
 import './Accounts.css';
 import './CommonChart.css';
 import Auth from '../api/Auth.js';
@@ -10,9 +11,11 @@ class Accounts extends Component {
         super(props);
 
         this.state = {
-          accounts: [],
-          ogAccounts: [],
-          searchText: ''
+            accounts: [],
+            ogAccounts: [],
+            searchText: '',
+            isLoading: true,
+            sortState: {}
         };
 
         this.searchTextChanged = this.searchTextChanged.bind(this);
@@ -21,6 +24,7 @@ class Accounts extends Component {
         AccountsAPI.getAll()
             .then(data => {
                 this.setState({
+                    isLoading: false,
                     accounts: data,
                     ogAccounts: data
                 });
@@ -34,7 +38,7 @@ class Accounts extends Component {
                     <h1>AccountsApi</h1>
                     {
                         Auth.currentUser.groups.find(group => group.name === 'Administrator') ? (
-                            <NavLink className="NavLink btn btn-primary newButton" to="/accounts/add">New +</NavLink> 
+                            <NavLink className="NavLink btn btn-primary newButton" to="/accounts/add">+ New</NavLink> 
                         ) : (
                             <span></span>
                         )
@@ -52,15 +56,59 @@ class Accounts extends Component {
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                            <th className="accountNumber">#</th>
-                            <th className="name">Name</th>
-                            <th className="type">Type</th>
-                            <th className="subtype">Sub-Type</th>
+                            <th className="accountNumber">#
+                            {
+                                !this.state.sortState.accountNumber || this.state.sortState.accountNumber === 'asc' ? (
+                                    <Glyphicon glyph="chevron-up" className={!this.state.sortState.accountNumber ? 'sorter sorter-inactive' : 'sorter'}
+                                      onClick={this.sort.bind(this, 'accountNumber', ['account_type__liquidity', 'order'])} />
+                                ): (
+                                    <Glyphicon glyph="chevron-down" className="sorter"
+                                      onClick={this.sort.bind(this, 'accountNumber', ['account_type__liquidity', 'order'])} />
+                                )
+                            }
+                            { this.state.sortState.accountNumber }
+                            </th>
+                            <th className="name">Name
+                            {
+                                !this.state.sortState.name || this.state.sortState.name === 'asc' ? (
+                                    <Glyphicon glyph="chevron-up" className={!this.state.sortState.name ? 'sorter sorter-inactive' : 'sorter'}
+                                      onClick={this.sort.bind(this, 'name')} />
+                                ): (
+                                    <Glyphicon glyph="chevron-down" className="sorter"
+                                      onClick={this.sort.bind(this, 'name')} />
+                                )
+                            }
+                            { this.state.sortState.name }
+                            </th>
+                            <th className="type">Type
+                            {
+                                !this.state.sortState.account_type__category || this.state.sortState.account_type__category === 'asc' ? (
+                                    <Glyphicon glyph="chevron-up" className={!this.state.sortState.account_type__category ? 'sorter sorter-inactive' : 'sorter'}
+                                      onClick={this.sort.bind(this, 'account_type__category')} />
+                                ): (
+                                    <Glyphicon glyph="chevron-down" className="sorter"
+                                      onClick={this.sort.bind(this, 'account_type__category')} />
+                                )
+                            }
+                            { this.state.sortState.account_type__category }
+                            </th>
+                            <th className="subtype">Sub-Type
+                            {
+                                !this.state.sortState.account_type__name || this.state.sortState.account_type__name === 'asc' ? (
+                                    <Glyphicon glyph="chevron-up" className={!this.state.sortState.account_type__name ? 'sorter sorter-inactive' : 'sorter'}
+                                      onClick={this.sort.bind(this, 'account_type__name')} />
+                                ): (
+                                    <Glyphicon glyph="chevron-down" className="sorter"
+                                      onClick={this.sort.bind(this, 'account_type__name')} />
+                                )
+                            }
+                            { this.state.sortState.account_type__name }
+                            </th>
                             <th className="edits"></th>
                         </tr>
                       </thead>
                       <tbody>
-                        { this.state.accounts.length ? (
+                        { !this.state.isLoading && this.state.accounts.length ? (
                           this.state.accounts.map((item, index) => (
                             <tr key={item.id}>
                                 <td>{item.account_number}</td>
@@ -81,7 +129,7 @@ class Accounts extends Component {
                         ) : (
                             <tr>
                                 <td></td>
-                                <td>No Accounts</td>
+                                <td>{ this.state.isLoading ? 'Loading...' : 'No Accounts' }</td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -104,10 +152,62 @@ class Accounts extends Component {
 
     search(event) {
         event.preventDefault();
-         AccountsAPI.search(false, this.state.searchText)
+        AccountsAPI.search(false, this.state.searchText)
         .then(data => {
             this.setState({
                 accounts: data
+            });
+        });
+    }
+
+    sort(propertyName, multiSearchProps=null) {
+        this.setState({
+            isLoading: true
+        });
+
+        let awaitPromise;
+
+        if (!this.state.sortState[propertyName]) {
+             awaitPromise = AccountsAPI.search(null, this.state.searchText, (Array.isArray(multiSearchProps) ? multiSearchProps : [propertyName]), false)
+                .then((accounts) => {
+                    this.setState({
+                        accounts,
+                        sortState: {
+                            [propertyName]: 'desc'
+                        }
+                    });
+                });
+        } else if (this.state.sortState[propertyName] === 'desc') {
+            awaitPromise = AccountsAPI.search(null, this.state.searchText, (Array.isArray(multiSearchProps) ? multiSearchProps : [propertyName]), true)
+                .then((accounts) => {
+                    this.setState({
+                        accounts,
+                        sortState: {
+                            [propertyName]: 'asc'
+                        }
+                    });
+                });
+        } else {
+            if (!this.state.searchText) {
+                awaitPromise = Promise.resolve();
+                this.setState({
+                    accounts: this.state.ogAccounts,
+                    sortState: {}
+                });
+            } else {
+                awaitPromise = AccountsAPI.search(null, this.state.searchText)
+                    .then((accounts) => {
+                        this.setState({
+                            accounts,
+                            sortState: {}
+                        });
+                    });
+            }
+        }
+
+        awaitPromise.finally(() => {
+            this.setState({
+                isLoading: false
             });
         });
     }

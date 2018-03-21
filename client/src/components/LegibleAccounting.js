@@ -6,6 +6,7 @@ import {Grid, Row, Col} from 'react-bootstrap';
 import DecorateRoute from './DecorateRoute.js';
 import GuardedAdministratorPermissionsRoute from './GuardedAdministratorPermissionsRoute.js';
 import GuardedManagerPermissionsRoute from './GuardedManagerPermissionsRoute.js';
+import GuardedManagerOrAccountantPermissionsRoute from './GuardedManagerOrAccountantPermissionsRoute.js';
 import Dashboard from './Dashboard.js';
 import ChartOfAccounts from './ChartOfAccounts.js';
 import AccountForm from './AccountForm.js';
@@ -13,6 +14,7 @@ import AddToChartOfAccounts from './AddToChartOfAccounts.js';
 import Accounts from './Accounts.js';
 import Users from './Users.js'
 import Logs from './Logs.js';
+import GeneralJournal from './GeneralJournal.js';
 import Sidebar from './Sidebar';
 import Auth from '../api/Auth';
 import './LegibleAccounting.css';
@@ -63,6 +65,7 @@ class LegibleAccounting extends Component {
                 <Route exact path="/users" component={Users} />
                 <GuardedManagerPermissionsRoute path="/Users/:id" component={Users} />
                 <GuardedAdministratorPermissionsRoute exact path="/logs" component={Logs} />
+                <GuardedManagerOrAccountantPermissionsRoute exact path="/general-journal" component={DecorateRoute(GeneralJournal, this.notifyProps)} />
               </Switch>
             </Col>
           </Row>
