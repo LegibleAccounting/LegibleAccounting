@@ -11,6 +11,7 @@ class JournalEntryCreate extends Component {
         this.lastKey = null; // Used to uniquely identify transactions for React
 
         this.state = {
+            filePicker: null,
             isLoading: false,
             entry_type: '',
             date: moment().format('YYYY-MM-DD'),
@@ -64,12 +65,17 @@ class JournalEntryCreate extends Component {
 
         return (
             <div className="journalEntryCreate">
+                <div className="row gridHeading">
+                    <label className="hidden-xs col-sm-4">New Journal Entry</label>
+                    <label className="hidden-xs col-sm-4">Accounts</label>
+                    <label className="hidden-xs col-sm-2">Debit</label>
+                    <label className="hidden-xs col-sm-2">Credit</label>
+                </div>
+                <div className="titleLine"></div>
                 <div className="row topOfEntryWrapper">
-                    <div className="col-xs-12 col-sm-2 dateEntry">
+                    <div className="col-xs-12 col-sm-4 dateEntry">
                         <DateTime renderInput={this.renderDatePickerField} timeFormat={false} dateFormat="YYYY-MM-DD" value={this.state.date} onChange={this.changeDate.bind(this)} onBlur={this.setCalendarClosed.bind(this)}/>
-                    </div>
-                    <div className="col-xs-12 col-sm-2">
-                        <select className="form-control"
+                        <select className="form-control typeSelect"
                           value={this.state.entry_type}
                           onChange={this.changeEntryType.bind(this)}>
                             <option hidden>Select Type</option>
@@ -79,6 +85,12 @@ class JournalEntryCreate extends Component {
                                 ))
                             }
                         </select>
+                        <div className="descriptionWrapper">
+                            <textarea type="text" className="form-control description" cols="1" rows="1" placeholder="Description" value={this.state.description} onChange={this.changeDescription.bind(this)}/>
+                        </div>
+                        <div className="pad-file-input fileInput">
+                            <input type="file" multiple ref={ input => this.state.filePicker = input } />
+                        </div>
                     </div>
                     <div className="col-xs-12 col-sm-8">
                         {
@@ -101,9 +113,6 @@ class JournalEntryCreate extends Component {
                                             <button className="textButton" hidden={(!item.initial_display)} value={item.is_debit === true } onClick={this.addNewTransaction}>+ Add</button>
                                             <button className="textButton" hidden={(item.initial_display)} value={item.is_debit === true } onClick={this.removeTransaction.bind(this, index)}>Remove</button>
                                         </div>
-                                        <div className={ "pad-file-input " + (item.is_debit ? '' : 'creditAccountEntryDropdown') }>
-                                            <input type="file" multiple ref={ input => item.filePicker = input } />
-                                        </div>
                                     </div>
                                     <div className={ 'col-xs-12 ' + (item.is_debit ? 'col-sm-6' : 'col-sm-3 col-sm-offset-3') }>
                                         <div className="entryAmountWrapper">
@@ -118,10 +127,7 @@ class JournalEntryCreate extends Component {
                       </div>
                 </div>
                 <div className="row bottomOfEntryWrapper">
-                    <div className="col-md-8 descriptionWrapper">
-                        <textarea type="text" className="form-control description" cols="1" rows="1" placeholder="Description" value={this.state.description} onChange={this.changeDescription.bind(this)}/>
-                    </div>
-                    <div className="col-md-4 actionButtonsWrapper flex-row">
+                    <div className="col-md-12 actionButtonsWrapper flex-row">
                         <div className="flex-fill"></div>
                         <button className="btn cancelButton submitButton" onClick={this.props.onCancel}>Cancel</button>
                         <button className="btn btn-primary submitButton" disabled={!this.journalIsBalanced()} onClick={this.delegateJournalEntrySubmission.bind(this)}>Submit</button>

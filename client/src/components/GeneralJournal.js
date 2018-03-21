@@ -68,6 +68,10 @@ class GeneralJournal extends Component {
                         <button className="btn btn-primary" type="submit" onClick={this.search}>Search</button>
                     </div>
                 </div>
+                {
+                    this.state.isCreatingJournalEntry &&
+                        (<JournalEntryCreate entryTypeOptions={this.state.entryTypes} accounts={this.state.accounts} onCancel={this.toggleNewJournalUI} onSubmit={this.submitNewJournalEntry} />)
+                }
                 <div>
                     <div className="flex-row journal-filters">
                         <div className="flex-fill"></div>
@@ -95,11 +99,6 @@ class GeneralJournal extends Component {
                         <label className="hidden-xs col-sm-2">Credit</label>
                     </div>
                     <div className="titleLine"></div>
-                    {
-
-                        this.state.isCreatingJournalEntry &&
-                            (<JournalEntryCreate entryTypeOptions={this.state.entryTypes} accounts={this.state.accounts} onCancel={this.toggleNewJournalUI} onSubmit={this.submitNewJournalEntry} />)
-                    }
                     {
                         (!this.state.isCreatingJournalEntry && (!this.state.entries || this.state.entries.length === 0)) &&
                             (<h2 className="text-center pad">No Journal Entries exist.</h2>)
