@@ -60,7 +60,7 @@ def get_upload_path(receipt, filename):
     return 'transaction_{0}/{1}'.format(receipt.of_transaction.pk, filename)
 
 class Receipt(models.Model):
-    of_transaction = models.ForeignKey(Transaction, related_name="receipts", on_delete=models.CASCADE)
+    of_transaction = models.ForeignKey(JournalEntry, related_name="receipts", on_delete=models.CASCADE)
     file = models.FileField(upload_to=get_upload_path, verbose_name="Receipt File")
     original_filename = models.CharField(max_length=256)
 
@@ -77,6 +77,6 @@ auditlog.register(JournalEntry)
 # | >u< | |
 # |U   U| |
 # |     | /
-# |M   M|/  0x5352514C
+# |M   M|/  0x5351524C
 
 
