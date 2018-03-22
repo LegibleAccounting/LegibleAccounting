@@ -59,7 +59,9 @@ class Logs extends Component {
                             }
                             { this.state.sortState.object_repr }
                             </th>
-                            <th className="changes">(Field) Old Value -> New Value</th>
+                            <th className="change-fieldName">Field Changed</th>
+                            <th className="change-fromValue">From</th>
+                            <th className="change-toValue">To</th>
                             <th className="changedBy">Changed By
                             {
                                 !this.state.sortState.actor__username || this.state.sortState.actor__username === 'asc' ? (
@@ -92,17 +94,17 @@ class Logs extends Component {
 	                          	this.state.logs.map((item, index) => (
 	                          		<tr key={index}>
 		                          		<td>{item.object_repr}</td>
-				                        
-				                        <td>
-			                          		{item.changes ? (
-					                          	Object.keys(item.changes).map((itemName, index) => (
-					                          		<div key={index}>
-						                          		<div>({itemName}) <b>{item.changes[itemName][0]}</b> -> <b>{item.changes[itemName][1]}</b></div>
-						                          	</div>
-					                          	))
-					                        ) : (
-					                        	<div>No Changes</div>
-					                        )}
+
+				                        <td colSpan="3">
+                                            <ul className="list-group">
+                                                {Object.keys(item.changes).map((itemName, index) => (
+                                                    <li className="list-group-item" key={index}>
+                                                        <div className="change-Wrapper">{itemName}</div>
+                                                        <div className="change-Wrapper"><b>{item.changes[itemName][0]}</b></div>
+                                                        <div className="change-Wrapper"><b>{item.changes[itemName][1]}</b></div>
+                                                    </li>
+                                                ))}
+                                            </ul>
 				                        </td>
 
 				                        <td>{item.actor.username}</td>
