@@ -74,7 +74,7 @@ class Logs extends Component {
                             }
                             { this.state.sortState.actor__username }
                             </th>
-                            <th className="changeDate">Date
+                            <th>Date
                             {
                                 !this.state.sortState.timestamp || this.state.sortState.timestamp === 'asc' ? (
                                     <Glyphicon glyph="chevron-up" className={!this.state.sortState.timestamp ? 'sorter sorter-inactive' : 'sorter'}

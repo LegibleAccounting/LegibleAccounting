@@ -52,10 +52,6 @@
 	width: 10em;
 }
 
-.logs .changedDate {
-	width: 50px;
-}
-
 .logs .sorter {
     border: 1px solid transparent;
     border-radius: 4px;
