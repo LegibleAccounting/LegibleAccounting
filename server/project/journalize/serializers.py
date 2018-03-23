@@ -119,7 +119,7 @@ class CreateJournalEntrySerializer(serializers.ModelSerializer):
         journal_entry = JournalEntry.objects.create(**validated_data)
 
         for receipt in receipts:
-            Receipt.objects.create(of_transaction=journal_entry, **receipt)
+            Receipt.objects.create(journal_entry=journal_entry, **receipt)
 
         for transaction in transactions:
             Transaction.objects.create(journal_entry=journal_entry, **transaction)
