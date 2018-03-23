@@ -1,8 +1,5 @@
-.chartOfAccounts {
-}
-
 .chartOfAccounts .accountNumber {
-	width: 10px;
+	width: 7em;
 }
 
 .chartOfAccounts .name {
@@ -15,4 +12,19 @@
 
 .chartOfAccounts .edits {
 	width: 40px;
+}
+
+.chartOfAccounts .sorter {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-left: 0.5em;
+    padding: 0.25em;
+}
+
+.chartOfAccounts .sorter:hover {
+    border: 1px solid #ccc;
+}
+
+.chartOfAccounts .sorter-inactive {
+    color: #CCC;
 }
