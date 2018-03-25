@@ -66,7 +66,5 @@ class LedgerAccountSerializer(AccountSerializer):
     balance = serializers.SerializerMethodField()
     balances = AccountAtTimeSerializer(many=True)
 
-
-
     def get_balance(self, obj):
-        return obj.get_balance()
+        return '${:,.2f}'.format(obj.get_balance())
