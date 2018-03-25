@@ -34,7 +34,7 @@ class JournalEntry extends Component {
                                     <div className="col-xs-12 col-sm-6">
                                         <div className={"accountNameWrapper " + 'accountEntry ' + (item.is_debit ? '' : 'creditAccountEntry')}>
                                             <div className="accountName">
-                                               <a href={'/accounts/'+item.affected_account.id}>{item.affected_account.account_number}</a> - {item.affected_account.name}
+                                               <a href={'/accounts/'+item.affected_account.id + '/ledger'}>{item.affected_account.account_number}</a> - {item.affected_account.name}
                                             </div>
                                         </div>
                                     </div>
