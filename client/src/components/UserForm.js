@@ -11,6 +11,7 @@ class UserForm extends Component {
 
         this.state = {
             redirectToUsersPage: false,
+            groupsList: []
         };
 
         if (this.props.match.params.id) {
@@ -30,7 +31,6 @@ class UserForm extends Component {
         } else {
             this.state.isLoading = false;
             this.state.userModel = {
-                id: '',
                 first_name: '',
                 last_name: '',
                 username: '',
@@ -97,6 +97,7 @@ class UserForm extends Component {
                     <div className="fieldColumn container">
                         <input type="text"
                           name="username"
+                          maxLength="30"
                           className="form-control textBox"
                           placeholder="username"
                           value={this.state.userModel.username}
