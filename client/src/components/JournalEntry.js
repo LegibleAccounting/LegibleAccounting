@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Popover } from 'react-bootstrap';
 import { OverlayTrigger } from 'react-bootstrap';
 import Auth from '../api/Auth.js';
@@ -117,7 +118,7 @@ class JournalEntry extends Component {
                                     <div className="col-xs-12 col-sm-6">
                                         <div className={"accountNameWrapper " + 'accountEntry ' + (item.is_debit ? '' : 'creditAccountEntry')}>
                                             <div className="accountName">
-                                               <a href={'/accounts/'+item.affected_account.id + '/ledger'}>{item.affected_account.account_number}</a> - {item.affected_account.name}
+                                               <NavLink to={'/accounts/'+item.affected_account.id + '/ledger'}>{item.affected_account.account_number}</NavLink> - {item.affected_account.name}
                                             </div>
                                         </div>
                                     </div>
