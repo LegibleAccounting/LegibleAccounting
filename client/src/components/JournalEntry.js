@@ -32,35 +32,14 @@ class JournalEntry extends Component {
                             this.props.entry.transactions.map((item, index) => (
                                 <div className="row auto-height transactionWrapper" key={item.affected_account.id}>
                                     <div className="col-xs-12 col-sm-6">
-                                        <div className="accountNameWrapper">
-                                            <OverlayTrigger
-                                              trigger="click"
-                                              rootClose
-                                              placement="bottom"
-                                              overlay={(
-                                                  <Popover id="popover-trigger-click-root-close" title="Attachments">
-                                                    {
-                                                        item.receipts.map((item, index) => (
-                                                            <div key={item.file} className="attachment-name-overflow">
-                                                                <a href={item.file}>{item.original_filename}</a>
-                                                            </div>
-                                                        ))
-                                                    }
-                                                  </Popover>
-                                              )}>  
-                                                <span
-                                                    className={"glyphicon glyphicon-paperclip attachmentButton " +
-                                                    'accountEntry ' + (item.is_debit ? '' : 'creditAccountEntry')}
-                                                    style={{visibility: !item.receipts.length && 'hidden'}}>
-                                                </span>  
-                                            </OverlayTrigger>
-
+                                        <div className={"accountNameWrapper " + 'accountEntry ' + (item.is_debit ? '' : 'creditAccountEntry')}>
                                             <div className="accountName">
                                                <a href={'/accounts/'+item.affected_account.id}>{item.affected_account.account_number}</a> - {item.affected_account.name}
                                             </div>
                                         </div>
                                     </div>
-                                    <div className={ 'amountEntry col-xs-12 ' + (item.is_debit ? 'col-sm-6' : 'col-sm-3 col-sm-offset-3') }>
+                                    <div className={ 'amountEntry col-xs-12 ' +
+                                      (item.is_debit ? 'col-sm-6' : 'col-sm-3 col-sm-offset-3')}>
                                         <label
                                           className={ item.is_debit ? 'dollarSignDebit' : 'dollarSignCredit' }
                                           style={{visibility: item.typeIndex !== 0 && 'hidden'}}>$
@@ -80,6 +59,26 @@ class JournalEntry extends Component {
                             <div className="description">{this.props.entry.description}</div>
                         </div>
                     </div>
+                    <OverlayTrigger
+                      trigger="click"
+                      rootClose
+                      placement="bottom"
+                      overlay={(
+                          <Popover id="popover-trigger-click-root-close" title="Attachments">
+                            {
+                                this.props.entry.receipts.map((item, index) => (
+                                    <div key={item.file} className="attachment-name-overflow">
+                                        <a href={item.file}>{item.original_filename}</a>
+                                    </div>
+                                ))
+                            }
+                          </Popover>
+                      )}>  
+                        <span
+                            className="glyphicon glyphicon-paperclip attachmentButton"
+                            style={{visibility: !this.props.entry.receipts.length && 'hidden'}}>
+                        </span>  
+                    </OverlayTrigger>
                     {
                         !this.state.isRejecting ? (                        
                         <div className="col-md-4 actionButtonsWrapper flex-row">

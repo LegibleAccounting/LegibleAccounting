@@ -70,5 +70,3 @@ class LedgerAccountSerializer(AccountSerializer):
 
     def get_balance(self, obj):
         return obj.get_balance()
-
-		
