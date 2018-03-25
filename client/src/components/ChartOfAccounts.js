@@ -5,6 +5,8 @@ import './ChartOfAccounts.css';
 import './CommonChart.css';
 import Auth from '../api/Auth.js';
 import AccountsAPI from '../api/Accounts.js';
+import { Popover } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 
 class ChartOfAccounts extends Component {
     constructor(props) {
@@ -56,7 +58,7 @@ class ChartOfAccounts extends Component {
 			        <table className="table table-hover">
 					  <thead>
 					  	<tr>
-						    <th className="accountNumber">Number
+						    <th className="accountNumber">Account Number
                             {
                                 !this.state.sortState.accountNumber || this.state.sortState.accountNumber === 'asc' ? (
                                     <Glyphicon glyph="chevron-up" className={!this.state.sortState.accountNumber ? 'sorter sorter-inactive' : 'sorter'}
@@ -80,8 +82,12 @@ class ChartOfAccounts extends Component {
                             }
                             { this.state.sortState.name }
                             </th>
+                            <th className="accountType">Type</th>
+                            <th className="accountTerm">Term</th>
 						    <th className="initialBalance">Balance</th>
 						    <th className="comments">Comments</th>
+                            <th className="creator">Created By</th>
+                            <th className="createDate">Date Created</th> 
 						    <th className="edits"></th>
 					    </tr>
 					  </thead>
@@ -91,8 +97,30 @@ class ChartOfAccounts extends Component {
 				             <tr key={item.id}>
 						    	<td>{item.account_number}</td>
 						    	<td>{item.name}</td>
+                                <td>{item.account_type.name}</td>
+                                <td>Short-Term</td>
 						    	<td align="right">{ item.balance }</td>
-						    	<td>{item.description}</td>
+						    	<td align="center" className="comments"><OverlayTrigger
+                                  trigger="click"
+                                  rootClose
+                                  placement="bottom"
+                                  overlay={
+                                      <Popover id="popover-trigger-click-root-close" title="Comments">
+                                        {
+
+                                            <div className="description">{item.description}</div>
+                                        }
+                                      </Popover>
+                                  }>
+                                    <span
+                                        className="glyphicon glyphicon-list-alt glyphiconButton"
+                                        style={{ visibility: item.description === "" && 'hidden' }}>
+                                    </span>
+                                </OverlayTrigger></td>
+                                <td>administrator1</td>
+                                <td className="dateTableData">
+                                    {item.created_date.substring(0,10)}
+                                </td>
                                 <td>
                                 {
                                     Auth.currentUser.groups.find(group => group.name === 'Administrator' || group.name === 'Manager') ? (

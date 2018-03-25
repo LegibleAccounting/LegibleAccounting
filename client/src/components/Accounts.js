@@ -5,6 +5,8 @@ import './Accounts.css';
 import './CommonChart.css';
 import Auth from '../api/Auth.js';
 import AccountsAPI from '../api/Accounts.js';
+import { Popover } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 
 class Accounts extends Component {
     constructor(props) {
@@ -56,7 +58,7 @@ class Accounts extends Component {
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                            <th className="accountNumber">Number
+                            <th className="accountNumber">Account Number
                             {
                                 !this.state.sortState.accountNumber || this.state.sortState.accountNumber === 'asc' ? (
                                     <Glyphicon glyph="chevron-up" className={!this.state.sortState.accountNumber ? 'sorter sorter-inactive' : 'sorter'}
@@ -104,6 +106,8 @@ class Accounts extends Component {
                             }
                             { this.state.sortState.account_type__name }
                             </th>
+                            <th className="term">Term</th>
+                            <th className="comments">Comments</th>
                             <th className="edits"></th>
                         </tr>
                       </thead>
@@ -115,6 +119,24 @@ class Accounts extends Component {
                                 <td>{item.name}</td>
                                 <td>{item.account_type.category}</td>
                                 <td>{item.account_type.name}</td>
+                                <td>Short-Term</td>
+                                <td align="center" className="comments"><OverlayTrigger
+                                  trigger="click"
+                                  rootClose
+                                  placement="bottom"
+                                  overlay={
+                                      <Popover id="popover-trigger-click-root-close" title="Comments">
+                                        {
+
+                                            <div className="description">{item.description}</div>
+                                        }
+                                      </Popover>
+                                  }>
+                                    <span
+                                        className="glyphicon glyphicon-list-alt glyphiconButton"
+                                        style={{ visibility: item.description === "" && 'hidden' }}>
+                                    </span>
+                                </OverlayTrigger></td>
                                 <td>
                                 {
                                     Auth.currentUser.groups.find(group => group.name === 'Administrator' || group.name === 'Manager') ? (

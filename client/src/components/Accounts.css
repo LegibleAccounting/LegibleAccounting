@@ -15,6 +15,14 @@
     width: 13em;
 }
 
+.accounts .term {
+    width: 35px;
+}
+
+.accounts .comments {
+    width: 20px;
+}
+
 .accounts .edits{
 	width: 40px;
 }
