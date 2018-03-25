@@ -41,10 +41,22 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (DjangoModelPermissions, LAAuthModelReadPermission,)
 
+
+def new_user_parse(request):
+    acc = User(first_name=request.data['first_name'],
+               last_name=request.data['last_name'],
+               username=request.data['username'],
+               is_active=False, )
+
+    acc.save()
+    return Response(UserSerializer(acc, context={ 'request': request }).data)
+
+
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = (DjangoModelPermissions, LAAuthModelReadPermission,)
+
 
 class LogEntryViewSet(viewsets.ModelViewSet):
     queryset = LogEntry.objects.filter(actor__is_staff=False)

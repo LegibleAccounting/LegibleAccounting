@@ -37,7 +37,8 @@ urlpatterns = [
     url(r'^auth/', include([
         url(r'^login/', views.login_view),
         url(r'^logout/', views.logout_view),
-        url(r'^current/', views.current_view)
+        url(r'^current/', views.current_view),
+        url(r'^register/', views.new_user_parse)
     ])),
     url(r'^auth2/', include('rest_framework.urls', namespace='rest_framework'))
 ]
