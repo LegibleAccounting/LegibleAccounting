@@ -36,13 +36,15 @@ class AccountType(models.Model):
 class TransactionAtTime:
     balance = 0
     is_debit = False
-    journal_entry = None
+    journal_entry_id = None
+    journal_entry_description = None
     value = 0
 
-    def __init__(self, balance=0, is_debit=False,journal_entry=None,value=0,date=None):
+    def __init__(self, balance=0, is_debit=False,journal_entry_id=None,journal_entry_description=None, value=0,date=None):
         self.balance = balance
         self.is_debit = is_debit
-        self.journal_entry = journal_entry
+        self.journal_entry_id = journal_entry_id
+        self.journal_entry_description = journal_entry_description
         self.value = value
         self.date = date
 
@@ -72,11 +74,13 @@ class Account(models.Model):
     def balances(self):
         values = []
         value = self.initial_balance
-        transactions = self.transactions.order_by('date').all()
+        transactions = self.transactions.order_by('journal_entry__date').all()
         for t in transactions:
-            value += (t.value * pow(-1, int(self.is_debit() ^ t.is_debit)))
-            values.append(TransactionAtTime(balance=value, is_debit=t.is_debit, journal_entry=t.journal_entry.id,
-                                            value=t.value, date=t.journal_entry.date))
+            if t.journal_entry.is_approved:
+                value += (t.value * pow(-1, int(self.is_debit() ^ t.is_debit)))
+                values.append(TransactionAtTime(balance=value, is_debit=t.is_debit, journal_entry_id=t.journal_entry.id,
+                                                journal_entry_description = t.journal_entry.description,
+                                                value=t.value, date=t.journal_entry.date))
         return values
 
     def get_balance(self, as_of=None):
