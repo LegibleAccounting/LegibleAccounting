@@ -21,6 +21,37 @@
 	padding: 5px;
 }
 
+.journalInfoWrapper {
+	display: flex;
+	flex-direction: row;
+	margin-top: 10px;
+}
+
+.circle {
+	margin-top: 3px;
+	margin-left: 5px;  
+    height:13px;
+    width:13px;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+}
+
+.rejectedCircle {
+	background-color: #D0011B;
+    border:1px solid #AD0A0A;  
+}
+
+.approvedCircle {
+	background-color: #7ED321;
+    border:1px solid #679C2D;  
+}
+
+.pendingCircle {
+	background-color: #F6A623;
+    border:1px solid #C58419;  
+}
+
 .rejectionReasonForm {
 	margin-left: 10px;
 	margin-right: 10px;
@@ -116,10 +147,11 @@
 	flex-grow: 1;
 }
 
-.attachmentButton {
+.glyphiconButton {
 	width: 15px;
 	height: 15px;
-	margin-right: 5px;
+	margin-top: 2px;
+	margin-left: 10px;
 	background-color: transparent;
 }
 

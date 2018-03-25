@@ -18,8 +18,91 @@ class JournalEntry extends Component {
         return (
             <div className="journalEntry">
                 <div className="row topOfEntryWrapper">
-                    <div className="col-xs-12 col-sm-2 dateEntry">
-                        {this.props.entry.date}
+                    <div className="col-xs-12 col-sm-2">
+                        <div className="dateEntry"> {this.props.entry.date} </div>
+                        <div className="journalInfoWrapper">
+                            <OverlayTrigger
+                                  trigger="click"
+                                  rootClose
+                                  placement="bottom"
+                                  overlay={(
+                                      <Popover id="popover-trigger-click-root-close" title="Entry Status">
+                                      <div className="statusReason">       
+                                            {
+                                                this.props.entry.is_approved === null ? (
+                                                    <div>Pending</div>
+                                                ) : (
+
+                                                    this.props.entry.is_approved ? (
+                                                        <div>Approved</div>
+                                                    ) : (
+                                                        <div>Rejected: {this.props.entry.rejection_memo}</div>
+                                                    )
+                                                )
+                                            } 
+                                        </div>
+                                      </Popover>
+                                  )}> 
+
+                                    {
+                                        this.props.entry.is_approved === null ? (
+                                            <div
+                                                className="circle pendingCircle">
+                                            </div>
+
+                                        ) : (
+
+                                            this.props.entry.is_approved ? (
+                                                <div
+                                                    className="circle approvedCircle">
+                                                </div>  
+                                            ) : (
+                                                <div
+                                                    className="circle rejectedCircle">
+                                                </div> 
+                                            )
+                                        )
+                                    } 
+                                    
+                            </OverlayTrigger>
+                            <OverlayTrigger
+                                  trigger="click"
+                                  rootClose
+                                  placement="bottom"
+                                  overlay={
+                                      <Popover id="popover-trigger-click-root-close" title="Description">
+                                        {
+            
+                                            <div className="description">{this.props.entry.description}</div>
+                                        }
+                                      </Popover>
+                                  }>  
+                                    <span
+                                        className="glyphicon glyphicon-list-alt glyphiconButton"
+                                        style={{display: this.props.entry.description === "" && 'none' }}>
+                                    </span>  
+                            </OverlayTrigger>
+                            <OverlayTrigger
+                                  trigger="click"
+                                  rootClose
+                                  placement="bottom"
+                                  overlay={(
+                                      <Popover id="popover-trigger-click-root-close" title="Attachments">
+                                        {
+                                            this.props.entry.receipts.map((item, index) => (
+                                                <div key={item.file} className="attachment-name-overflow">
+                                                    <a href={item.file}>{item.original_filename}</a>
+                                                </div>
+                                            ))
+                                        }
+                                      </Popover>
+                                  )}>  
+                                    <span
+                                        className="glyphicon glyphicon-paperclip glyphiconButton"
+                                        style={{display: !this.props.entry.receipts.length && 'none'}}>
+                                    </span>  
+                            </OverlayTrigger>
+                        </div>
                     </div>
                     <div className="col-xs-12 col-sm-1">
                         <div className="typeEntry">{this.props.entry.entry_type}</div>
@@ -54,31 +137,8 @@ class JournalEntry extends Component {
                 
                 <div className="row bottomOfEntryWrapper">
                     <div className="col-md-8 descriptionWrapperWrapper">
-                        <div className="descriptionWrapper" style={{ visibility: this.props.entry.description === "" && 'hidden' }}>
-                            <div className="descriptionTitle">Description:</div>
-                            <div className="description">{this.props.entry.description}</div>
-                        </div>
+                        
                     </div>
-                    <OverlayTrigger
-                      trigger="click"
-                      rootClose
-                      placement="bottom"
-                      overlay={(
-                          <Popover id="popover-trigger-click-root-close" title="Attachments">
-                            {
-                                this.props.entry.receipts.map((item, index) => (
-                                    <div key={item.file} className="attachment-name-overflow">
-                                        <a href={item.file}>{item.original_filename}</a>
-                                    </div>
-                                ))
-                            }
-                          </Popover>
-                      )}>  
-                        <span
-                            className="glyphicon glyphicon-paperclip attachmentButton"
-                            style={{visibility: !this.props.entry.receipts.length && 'hidden'}}>
-                        </span>  
-                    </OverlayTrigger>
                     {
                         !this.state.isRejecting ? (                        
                         <div className="col-md-4 actionButtonsWrapper flex-row">
@@ -89,16 +149,6 @@ class JournalEntry extends Component {
                             <button
                               style={{ display: (!(Auth.currentUserIsManager()) || !(this.props.entry.is_approved === null)) && 'none' }}
                               className="btn btn-primary submitButton" onClick={this.delegateJournalEntryApproval.bind(this)}>Approve</button>
-
-                            <label className="approvedRejectedWrapper" style={{ display: (this.props.entry.is_approved === null) && 'none' }}>
-                                {
-                                    this.props.entry.is_approved ? (
-                                        <div className="approved">Approved</div>
-                                    ) : (
-                                        <div className="rejected">Rejected: {this.props.entry.rejection_memo}</div>
-                                    )
-                                }
-                            </label>
                         </div>
                         ) : (<div className="col-md-4"></div>)
                     }
