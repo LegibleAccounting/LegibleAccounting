@@ -108,7 +108,7 @@ class ChartOfAccounts extends Component {
 				             <tr key={item.id}>
 						    	<td>{item.account_number}</td>
 						    	<td>{item.name}</td>
-						    	<td align="right">{ ChartOfAccounts.balanceFormat(item.balance) }</td>
+						    	<td align="right">{ item.balance }</td>
 						    	<td>{item.description}</td>
                                 <td>
                                 {
