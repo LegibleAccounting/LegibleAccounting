@@ -193,6 +193,21 @@ class GeneralJournal extends Component {
                     } else {
                         this.props.onNotifyError('Failed to create journal entry due to a malformed transaction.');
                     }
+                } else if (response.receipts && response.receipts.length) {
+                    let firstReceipt = response.receipts[0];
+                    let receiptErrorFields = Object.keys(firstReceipt);
+                    if (!receiptErrorFields.length) {
+                        this.props.onNotifyError('Failed to create journal entry due to malformed receipt(s).');
+                        return;
+                    }
+
+                    if (firstReceipt.file && firstReceipt.file.length) {
+                        this.props.onNotifyError('Receipt - File: ' + firstReceipt.file[0]);
+                    } else if (firstReceipt.original_filename && firstReceipt.original_filename.length) {
+                        this.props.onNotifyError('Receipt - Filename: ' + firstReceipt.original_filename[0]);
+                    } else {
+                        this.props.onNotifyError('Failed to create journal entry due to malformed receipt.');
+                    }
                 } else {
                     this.props.onNotifyError('Failed to create journal entry.');
                 }

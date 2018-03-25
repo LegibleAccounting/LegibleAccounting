@@ -22,16 +22,14 @@ class JournalEntryCreate extends Component {
                     accountID: "",
                     amount: 0,
                     is_debit: true,
-                    initial_display: true,
-                    filePicker: null
+                    initial_display: true
                 },
                 {
                     key: this.keygen(),
                     accountID: "",
                     amount: 0,
                     is_debit: false,
-                    initial_display: true,
-                    filePicker: null
+                    initial_display: true
                 }
             ],
         };
@@ -165,13 +163,11 @@ class JournalEntryCreate extends Component {
     addNewTransaction(event) {
         var isDebit = (event.target.value === "true");
 
-        var newTransaction = 
-        {
+        var newTransaction = {
             key: this.keygen(),
             accountID: "",
-            amount: 0,
-            filePicker: null
-        }
+            amount: 0
+        };
 
         if (isDebit) {
             //is debit; have to insert after the last debit
@@ -267,35 +263,24 @@ class JournalEntryCreate extends Component {
 
     delegateJournalEntrySubmission() {
         let awaitingFiles = [];
-
-        this.state.transactions.forEach(transaction => {
-            transaction.receipts = [];
-
-            for (let i = 0; i < transaction.filePicker.files.length; i++) {
-                let awaitFile = this.loadFile(transaction.filePicker.files[i])
-                    .then((fileInformation) => {
-                        transaction.receipts.push(fileInformation);
-                        return Promise.resolve();
-                    });
-
-                awaitingFiles.push(awaitFile);
-            }
-        });
+        for (let i = 0; i < this.state.filePicker.files.length; i++) {
+            awaitingFiles.push(this.loadFile(this.state.filePicker.files[i]));
+        }
 
         Promise.all(awaitingFiles)
-            .then(() => {
+            .then((files) => {
                 let transactions = this.state.transactions.map(transaction => ({
                     affected_account: transaction.accountID,
                     value: transaction.amount,
-                    is_debit: transaction.is_debit,
-                    receipts: transaction.receipts
+                    is_debit: transaction.is_debit
                 }));
 
                 this.props.onSubmit({
                     entry_type: this.state.entry_type,
                     date: this.state.date,
                     description: this.state.description,
-                    transactions
+                    transactions,
+                    receipts: files
                 });
             });
 

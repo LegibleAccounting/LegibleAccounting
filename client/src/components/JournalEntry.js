@@ -40,7 +40,7 @@ class JournalEntry extends Component {
                                               overlay={(
                                                   <Popover id="popover-trigger-click-root-close" title="Attachments">
                                                     {
-                                                        item.receipts.map((item, index) => (
+                                                        false && item.receipts.map((item, index) => (
                                                             <div key={item.file} className="attachment-name-overflow">
                                                                 <a href={item.file}>{item.original_filename}</a>
                                                             </div>
@@ -51,7 +51,7 @@ class JournalEntry extends Component {
                                                 <span
                                                     className={"glyphicon glyphicon-paperclip attachmentButton " +
                                                     'accountEntry ' + (item.is_debit ? '' : 'creditAccountEntry')}
-                                                    style={{visibility: !item.receipts.length && 'hidden'}}>
+                                                    style={{visibility: false && !item.receipts.length && 'hidden'}}>
                                                 </span>  
                                             </OverlayTrigger>
 
