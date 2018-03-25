@@ -30,7 +30,7 @@ class JournalEntry extends Component {
                                       <div className="statusReason">       
                                             {
                                                 this.props.entry.is_approved === null ? (
-                                                    <div>Pending</div>
+                                                    <div>Needs Approval</div>
                                                 ) : (
 
                                                     this.props.entry.is_approved ? (
