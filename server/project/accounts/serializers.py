@@ -43,11 +43,18 @@ class RetrieveAccountSerializer(AccountSerializer):
 
 
 class AccountAtTimeSerializer(serializers.Serializer):
-    balance = serializers.DecimalField(max_digits=20, decimal_places=2, read_only=True, coerce_to_string=False)
-    value = serializers.DecimalField(max_digits=20, decimal_places=2, read_only=True, coerce_to_string=False)
-    journal_entry = serializers.IntegerField(read_only=True)
+    balance = serializers.SerializerMethodField()
+    value = serializers.SerializerMethodField()
+    journal_entry_id = serializers.IntegerField(read_only=True)
+    journal_entry_description = serializers.CharField(read_only=True)
     is_debit = serializers.BooleanField(read_only=True)
     date = serializers.DateField(read_only=True)
+
+    def get_balance(self, obj):
+        return '${:,.2f}'.format(obj.balance)
+
+    def get_value(self, obj):
+        return '${:,.2f}'.format(obj.value)
 
     def create(self, validated_data):
         return TransactionAtTime(**validated_data)
@@ -63,8 +70,12 @@ class LedgerAccountSerializer(AccountSerializer):
 
 
     account_type = RetrieveAccountTypeSerializer()
+    initial_balance = serializers.SerializerMethodField()
     balance = serializers.SerializerMethodField()
     balances = AccountAtTimeSerializer(many=True)
+
+    def get_initial_balance(self, obj):
+        return '${:,.2f}'.format(obj.initial_balance)
 
     def get_balance(self, obj):
         return '${:,.2f}'.format(obj.get_balance())
