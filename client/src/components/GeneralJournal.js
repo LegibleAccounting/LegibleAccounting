@@ -91,7 +91,7 @@ class GeneralJournal extends Component {
                         </Nav>
                     </div>
                     <div className="row gridHeading">
-                        <label className="hidden-xs col-sm-2">Date</label>
+                        <label className="hidden-xs col-sm-2"></label>
                         <label className="hidden-xs col-sm-1">Type</label>
                         <label className="hidden-xs col-sm-1">Creator</label>
                         <label className="hidden-xs col-sm-4">Accounts</label>

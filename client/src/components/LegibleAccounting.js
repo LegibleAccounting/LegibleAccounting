@@ -18,6 +18,7 @@ import GeneralJournal from './GeneralJournal.js';
 import Sidebar from './Sidebar';
 import Auth from '../api/Auth';
 import './LegibleAccounting.css';
+import GeneralJournalEntry from './GeneralJournalEntry.js';
 
 class LegibleAccounting extends Component {
   constructor(props) {
@@ -65,6 +66,7 @@ class LegibleAccounting extends Component {
                 <GuardedManagerPermissionsRoute path="/accounts/:id" component={DecorateRoute(AccountForm, this.notifyProps)} />
                 <GuardedAdministratorPermissionsRoute exact path="/logs" component={Logs} />
                 <GuardedManagerOrAccountantPermissionsRoute exact path="/general-journal" component={DecorateRoute(GeneralJournal, this.notifyProps)} />
+                <GuardedManagerOrAccountantPermissionsRoute path="/general-journal/:id" component={GeneralJournalEntry}/>
               </Switch>
             </Col>
           </Row>
