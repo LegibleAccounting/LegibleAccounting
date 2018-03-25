@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 from auditlog.registry import auditlog
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
 
 from accounts.models import Account
@@ -13,7 +12,7 @@ JOURNAL_ENTRY_TYPE_CHOICES = (
     (3, 'Closing')
 )
 
-MANAGEMENT_JOURNAL_ENTRY_TYPES = [2, 3]
+MANAGEMENT_JOURNAL_ENTRY_TYPES = [3]
 
 
 class JournalEntry(models.Model):
@@ -57,16 +56,16 @@ class Transaction(models.Model):
 
 
 def get_upload_path(receipt, filename):
-    return 'transaction_{0}/{1}'.format(receipt.of_transaction.pk, filename)
+    return 'journal_{0}/{1}'.format(receipt.journal_entry.pk, filename)
 
 class Receipt(models.Model):
-    of_transaction = models.ForeignKey(Transaction, related_name="receipts", on_delete=models.CASCADE)
+    journal_entry = models.ForeignKey(JournalEntry, related_name="receipts", on_delete=models.CASCADE)
     file = models.FileField(upload_to=get_upload_path, verbose_name="Receipt File")
     original_filename = models.CharField(max_length=256)
 
     def __str__(self):
         return "Receipt #{0:} for [{1:}]".format(
-            self.pk, self.of_transaction
+            self.pk, self.journal_entry
         )
 
 auditlog.register(JournalEntry)
@@ -77,6 +76,6 @@ auditlog.register(JournalEntry)
 # | >u< | |
 # |U   U| |
 # |     | /
-# |M   M|/  0x5352514C
+# |M   M|/  0x5351524C
 
 
