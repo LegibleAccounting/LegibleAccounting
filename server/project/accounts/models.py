@@ -54,6 +54,23 @@ class Account(models.Model):
     def account_number(self):
         return (self.account_type.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE) + self.order
 
+    def get_transaction_history(self):
+        transactions = []
+        post_balance = self.initial_balance
+        for t in self.transactions.all():
+            if t.journal_entry.is_approved:
+                post_balance += (t.value * pow(-1, int(self.is_debit() ^ t.is_debit)))
+                transactions.append({
+                    'balance': '${:,.2f}'.format(post_balance),
+                    'is_debit': t.is_debit,
+                    'journal_entry_id': t.journal_entry.id,
+                    'date': t.journal_entry.date,
+                    'journal_entry_description': t.journal_entry.description,
+                    'value': '${:,.2f}'.format(t.value)
+                })
+
+        return transactions
+
     def get_balance(self, as_of=None):
         # TODO: This will be updated to return a calculated balance
         # based on all transactions that have been made to this account.
@@ -65,4 +82,3 @@ class Account(models.Model):
         return self.initial_balance + value
 
 auditlog.register(Account)
-
