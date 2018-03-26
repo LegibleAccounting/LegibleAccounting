@@ -3,8 +3,10 @@ from rest_framework import viewsets
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import DjangoModelPermissions
 
+from rest_framework.decorators import detail_route
 from .models import Account, AccountType
-from .serializers import AccountSerializer, AccountTypeSerializer, RetrieveAccountSerializer, RetrieveAccountTypeSerializer
+from .serializers import AccountSerializer, AccountTypeSerializer, RetrieveAccountSerializer, RetrieveAccountTypeSerializer, LedgerAccountSerializer
+from rest_framework.response import Response
 
 
 class AccountTypeViewSet(viewsets.ReadOnlyModelViewSet):
@@ -39,4 +41,8 @@ class AccountViewSet(viewsets.ModelViewSet):
 
         return RetrieveAccountSerializer
 
+    @detail_route(methods=['get'])
+    def ledger(self, request, pk=None):
+        serializer = LedgerAccountSerializer(Account.objects.get(pk=pk))
+        return Response(serializer.data)
 

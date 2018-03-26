@@ -31,6 +31,23 @@ class ChartOfAccounts extends Component {
         	});
     }
 
+    static balanceFormat(num){
+    	num = "" + num;
+    	if(num.indexOf('.') === -1){
+    		num += ".";
+
+		}
+        while(num.indexOf('.') + 3 > num.length)
+            num += "0";
+    	let dot = num.indexOf('.');
+    	let chars = 0;
+    	for(let i = 3; dot - (i + chars) > 0; i+=3) {
+                num = num.substr(0, dot - (chars + i)) + "," + num.substr(dot - (chars + i));
+                chars++;
+        }
+        return num;
+	}
+
     render() {
         return (
         	<div className="chartOfAccounts">
