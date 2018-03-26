@@ -11,6 +11,7 @@ class JournalEntryCreate extends Component {
         this.lastKey = null; // Used to uniquely identify transactions for React
 
         this.state = {
+            filePicker: null,
             isLoading: false,
             entry_type: '',
             date: moment().format('YYYY-MM-DD'),
@@ -21,16 +22,14 @@ class JournalEntryCreate extends Component {
                     accountID: "",
                     amount: 0,
                     is_debit: true,
-                    initial_display: true,
-                    filePicker: null
+                    initial_display: true
                 },
                 {
                     key: this.keygen(),
                     accountID: "",
                     amount: 0,
                     is_debit: false,
-                    initial_display: true,
-                    filePicker: null
+                    initial_display: true
                 }
             ],
         };
@@ -64,12 +63,17 @@ class JournalEntryCreate extends Component {
 
         return (
             <div className="journalEntryCreate">
+                <div className="row gridHeading">
+                    <label className="hidden-xs col-sm-4">New Journal Entry</label>
+                    <label className="hidden-xs col-sm-4">Accounts</label>
+                    <label className="hidden-xs col-sm-2">Debit</label>
+                    <label className="hidden-xs col-sm-2">Credit</label>
+                </div>
+                <div className="titleLine"></div>
                 <div className="row topOfEntryWrapper">
-                    <div className="col-xs-12 col-sm-2 dateEntry">
+                    <div className="col-xs-12 col-sm-4 dateEntry">
                         <DateTime renderInput={this.renderDatePickerField} timeFormat={false} dateFormat="YYYY-MM-DD" value={this.state.date} onChange={this.changeDate.bind(this)} onBlur={this.setCalendarClosed.bind(this)}/>
-                    </div>
-                    <div className="col-xs-12 col-sm-2">
-                        <select className="form-control"
+                        <select className="form-control typeSelect"
                           value={this.state.entry_type}
                           onChange={this.changeEntryType.bind(this)}>
                             <option hidden>Select Type</option>
@@ -79,6 +83,12 @@ class JournalEntryCreate extends Component {
                                 ))
                             }
                         </select>
+                        <div className="descriptionWrapper">
+                            <textarea type="text" className="form-control description" cols="1" rows="1" placeholder="Description" value={this.state.description} onChange={this.changeDescription.bind(this)}/>
+                        </div>
+                        <div className="pad-file-input fileInput">
+                            <input type="file" multiple ref={ input => this.state.filePicker = input } />
+                        </div>
                     </div>
                     <div className="col-xs-12 col-sm-8">
                         {
@@ -101,9 +111,6 @@ class JournalEntryCreate extends Component {
                                             <button className="textButton" hidden={(!item.initial_display)} value={item.is_debit === true } onClick={this.addNewTransaction}>+ Add</button>
                                             <button className="textButton" hidden={(item.initial_display)} value={item.is_debit === true } onClick={this.removeTransaction.bind(this, index)}>Remove</button>
                                         </div>
-                                        <div className={ "pad-file-input " + (item.is_debit ? '' : 'creditAccountEntryDropdown') }>
-                                            <input type="file" multiple ref={ input => item.filePicker = input } />
-                                        </div>
                                     </div>
                                     <div className={ 'col-xs-12 ' + (item.is_debit ? 'col-sm-6' : 'col-sm-3 col-sm-offset-3') }>
                                         <div className="entryAmountWrapper">
@@ -118,13 +125,16 @@ class JournalEntryCreate extends Component {
                       </div>
                 </div>
                 <div className="row bottomOfEntryWrapper">
-                    <div className="col-md-8 descriptionWrapper">
-                        <textarea type="text" className="form-control description" cols="1" rows="1" placeholder="Description" value={this.state.description} onChange={this.changeDescription.bind(this)}/>
-                    </div>
-                    <div className="col-md-4 actionButtonsWrapper flex-row">
-                        <div className="flex-fill"></div>
-                        <button className="btn cancelButton submitButton" onClick={this.props.onCancel}>Cancel</button>
-                        <button className="btn btn-primary submitButton" disabled={!this.journalIsBalanced()} onClick={this.delegateJournalEntrySubmission.bind(this)}>Submit</button>
+                    <div className="col-md-12">
+                        <div className="flex-row" style={{visibility: this.journalIsBalanced() && 'hidden'}}>
+                            <div className="flex-fill"></div>
+                            <label className="debitCreditNotEqualWarning">Debits and Credits are NOT balanced</label>
+                        </div>
+                        <div className="actionButtonsWrapper flex-row">
+                            <div className="flex-fill"></div>
+                            <button className="btn cancelButton submitButton" onClick={this.props.onCancel}>Cancel</button>
+                            <button className="btn btn-primary submitButton" disabled={!this.journalIsBalanced()} onClick={this.delegateJournalEntrySubmission.bind(this)}>Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -159,13 +169,11 @@ class JournalEntryCreate extends Component {
     addNewTransaction(event) {
         var isDebit = (event.target.value === "true");
 
-        var newTransaction = 
-        {
+        var newTransaction = {
             key: this.keygen(),
             accountID: "",
-            amount: 0,
-            filePicker: null
-        }
+            amount: 0
+        };
 
         if (isDebit) {
             //is debit; have to insert after the last debit
@@ -261,35 +269,24 @@ class JournalEntryCreate extends Component {
 
     delegateJournalEntrySubmission() {
         let awaitingFiles = [];
-
-        this.state.transactions.forEach(transaction => {
-            transaction.receipts = [];
-
-            for (let i = 0; i < transaction.filePicker.files.length; i++) {
-                let awaitFile = this.loadFile(transaction.filePicker.files[i])
-                    .then((fileInformation) => {
-                        transaction.receipts.push(fileInformation);
-                        return Promise.resolve();
-                    });
-
-                awaitingFiles.push(awaitFile);
-            }
-        });
+        for (let i = 0; i < this.state.filePicker.files.length; i++) {
+            awaitingFiles.push(this.loadFile(this.state.filePicker.files[i]));
+        }
 
         Promise.all(awaitingFiles)
-            .then(() => {
+            .then((files) => {
                 let transactions = this.state.transactions.map(transaction => ({
                     affected_account: transaction.accountID,
                     value: transaction.amount,
-                    is_debit: transaction.is_debit,
-                    receipts: transaction.receipts
+                    is_debit: transaction.is_debit
                 }));
 
                 this.props.onSubmit({
                     entry_type: this.state.entry_type,
                     date: this.state.date,
                     description: this.state.description,
-                    transactions
+                    transactions,
+                    receipts: files
                 });
             });
 
