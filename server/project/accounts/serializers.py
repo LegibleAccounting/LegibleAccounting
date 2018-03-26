@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Account, AccountType, TransactionAtTime
+from .models import Account, AccountType#, TransactionAtTime
 
 
 class AccountTypeSerializer(serializers.ModelSerializer):
@@ -42,27 +42,6 @@ class RetrieveAccountSerializer(AccountSerializer):
         return '${:,.2f}'.format(obj.get_balance())
 
 
-class AccountAtTimeSerializer(serializers.Serializer):
-    balance = serializers.SerializerMethodField()
-    value = serializers.SerializerMethodField()
-    journal_entry_id = serializers.IntegerField(read_only=True)
-    journal_entry_description = serializers.CharField(read_only=True)
-    is_debit = serializers.BooleanField(read_only=True)
-    date = serializers.DateField(read_only=True)
-
-    def get_balance(self, obj):
-        return '${:,.2f}'.format(obj.balance)
-
-    def get_value(self, obj):
-        return '${:,.2f}'.format(obj.value)
-
-    def create(self, validated_data):
-        return TransactionAtTime(**validated_data)
-
-    def update(self, instance, validated_data):
-        pass
-
-
 class LedgerAccountSerializer(AccountSerializer):
     class Meta:
         model = Account
@@ -72,10 +51,13 @@ class LedgerAccountSerializer(AccountSerializer):
     account_type = RetrieveAccountTypeSerializer()
     initial_balance = serializers.SerializerMethodField()
     balance = serializers.SerializerMethodField()
-    balances = AccountAtTimeSerializer(many=True)
+    balances = serializers.SerializerMethodField()
 
     def get_initial_balance(self, obj):
         return '${:,.2f}'.format(obj.initial_balance)
 
     def get_balance(self, obj):
         return '${:,.2f}'.format(obj.get_balance())
+
+    def get_balances(self, obj):
+        return obj.get_transaction_history()
