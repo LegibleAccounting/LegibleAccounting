@@ -33,23 +33,6 @@ class AccountType(models.Model):
         return self.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE
 
 
-class TransactionAtTime:
-    balance = 0
-    is_debit = False
-    journal_entry_id = None
-    journal_entry_description = None
-    value = 0
-
-    def __init__(self, balance=0, is_debit=False,journal_entry_id=None,journal_entry_description=None, value=0,date=None):
-        self.balance = balance
-        self.is_debit = is_debit
-        self.journal_entry_id = journal_entry_id
-        self.journal_entry_description = journal_entry_description
-        self.value = value
-        self.date = date
-
-
-
 class Account(models.Model):
     class Meta:
         ordering = ['account_type__liquidity', 'order']
@@ -71,16 +54,22 @@ class Account(models.Model):
     def account_number(self):
         return (self.account_type.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE) + self.order
 
-    def balances(self):
-        values = []
-        value = self.initial_balance
+    def get_transaction_history(self):
+        transactions = []
+        post_balance = self.initial_balance
         for t in self.transactions.all():
             if t.journal_entry.is_approved:
-                value += (t.value * pow(-1, int(self.is_debit() ^ t.is_debit)))
-                values.append(TransactionAtTime(balance=value, is_debit=t.is_debit, journal_entry_id=t.journal_entry.id,
-                                                journal_entry_description = t.journal_entry.description,
-                                                value=t.value, date=t.journal_entry.date))
-        return values
+                post_balance += (t.value * pow(-1, int(self.is_debit() ^ t.is_debit)))
+                transactions.append({
+                    'balance': '${:,.2f}'.format(post_balance),
+                    'is_debit': t.is_debit,
+                    'journal_entry_id': t.journal_entry.id,
+                    'date': t.journal_entry.date,
+                    'journal_entry_description': t.journal_entry.description,
+                    'value': '${:,.2f}'.format(t.value)
+                })
+
+        return transactions
 
     def get_balance(self, as_of=None):
         # TODO: This will be updated to return a calculated balance
