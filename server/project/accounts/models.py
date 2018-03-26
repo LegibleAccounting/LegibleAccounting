@@ -82,4 +82,3 @@ class Account(models.Model):
         return self.initial_balance + value
 
 auditlog.register(Account)
-

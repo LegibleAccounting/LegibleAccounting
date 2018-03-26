@@ -45,4 +45,3 @@ class AccountViewSet(viewsets.ModelViewSet):
     def ledger(self, request, pk=None):
         serializer = LedgerAccountSerializer(Account.objects.get(pk=pk))
         return Response(serializer.data)
-
