@@ -43,10 +43,6 @@ class GeneralJournalEntry extends Component {
                 <div className="titleBar">
                     <h1>Entry # {this.state.entry.id}</h1>
                 </div>
-                {
-                    this.state.isCreatingJournalEntry &&
-                        (<JournalEntryCreate entryTypeOptions={this.state.entryTypes} accounts={this.state.accounts} onCancel={this.toggleNewJournalUI} onSubmit={this.submitNewJournalEntry} />)
-                }
                 <div>
                     <div className="row gridHeading">
                         <label className="hidden-xs col-sm-2"></label>
