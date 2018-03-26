@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Account, AccountType
+from .models import Account, AccountType#, TransactionAtTime
 
 
 class AccountTypeSerializer(serializers.ModelSerializer):
@@ -30,7 +30,6 @@ class AccountSerializer(serializers.ModelSerializer):
         return super(AccountSerializer, self).update(instance, validated_data)
 
 
-
 class RetrieveAccountSerializer(AccountSerializer):
     class Meta:
         model = Account
@@ -41,3 +40,24 @@ class RetrieveAccountSerializer(AccountSerializer):
 
     def get_balance(self, obj):
         return '${:,.2f}'.format(obj.get_balance())
+
+
+class LedgerAccountSerializer(AccountSerializer):
+    class Meta:
+        model = Account
+        fields = ACCOUNT_BASE_FIELDS + ('account_number', 'balance', 'balances')
+
+
+    account_type = RetrieveAccountTypeSerializer()
+    initial_balance = serializers.SerializerMethodField()
+    balance = serializers.SerializerMethodField()
+    balances = serializers.SerializerMethodField()
+
+    def get_initial_balance(self, obj):
+        return '${:,.2f}'.format(obj.initial_balance)
+
+    def get_balance(self, obj):
+        return '${:,.2f}'.format(obj.get_balance())
+
+    def get_balances(self, obj):
+        return obj.get_transaction_history()
