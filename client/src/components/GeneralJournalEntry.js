@@ -43,10 +43,6 @@ class GeneralJournalEntry extends Component {
                 <div className="titleBar">
                     <h1>Entry # {this.state.entry.id}</h1>
                 </div>
-                {
-                    this.state.isCreatingJournalEntry &&
-                        (<JournalEntryCreate entryTypeOptions={this.state.entryTypes} accounts={this.state.accounts} onCancel={this.toggleNewJournalUI} onSubmit={this.submitNewJournalEntry} />)
-                }
                 <div>
                     <div className="row gridHeading">
                         <label className="hidden-xs col-sm-2"></label>
@@ -66,11 +62,10 @@ class GeneralJournalEntry extends Component {
         );
     }
 
-        approveJournalEntry(journalEntryId) {
+    approveJournalEntry(journalEntryId) {
         GeneralJournalAPI.update({ id: journalEntryId, is_approved: true })
             .then(() => {
                 this.props.onNotifySuccess('Journal Entry has been successfully approved.');
-                this.handleJournalFilterSelection(this.state.activeFilter);
             })
             .catch(() => {
                 this.props.onNotifyError('Failed to approve journal entry.');
@@ -82,7 +77,6 @@ class GeneralJournalEntry extends Component {
         GeneralJournalAPI.update({ id: journalEntryId, is_approved: false, rejection_memo: rejectionMemo })
             .then(() => {
                 this.props.onNotifySuccess('Journal Entry has been successfully rejected.');
-                this.handleJournalFilterSelection(this.state.activeFilter);
             })
             .catch((response) => {
                 if (!response.length) {
