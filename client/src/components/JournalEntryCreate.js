@@ -125,10 +125,16 @@ class JournalEntryCreate extends Component {
                       </div>
                 </div>
                 <div className="row bottomOfEntryWrapper">
-                    <div className="col-md-12 actionButtonsWrapper flex-row">
-                        <div className="flex-fill"></div>
-                        <button className="btn cancelButton submitButton" onClick={this.props.onCancel}>Cancel</button>
-                        <button className="btn btn-primary submitButton" disabled={!this.journalIsBalanced()} onClick={this.delegateJournalEntrySubmission.bind(this)}>Submit</button>
+                    <div className="col-md-12">
+                        <div className="flex-row" style={{visibility: this.journalIsBalanced() && 'hidden'}}>
+                            <div className="flex-fill"></div>
+                            <label className="debitCreditNotEqualWarning">Debits and Credits are NOT balanced</label>
+                        </div>
+                        <div className="actionButtonsWrapper flex-row">
+                            <div className="flex-fill"></div>
+                            <button className="btn cancelButton submitButton" onClick={this.props.onCancel}>Cancel</button>
+                            <button className="btn btn-primary submitButton" disabled={!this.journalIsBalanced()} onClick={this.delegateJournalEntrySubmission.bind(this)}>Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>
