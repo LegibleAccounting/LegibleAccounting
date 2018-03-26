@@ -106,7 +106,9 @@ class ChartOfAccounts extends Component {
 				       	{ !this.state.isLoading && this.state.accounts.length ? (
 				          this.state.accounts.map((item, index) => (
 				             <tr key={item.id}>
-						    	<td>{item.account_number}</td>
+						    	<td>
+                                    <NavLink to={`/accounts/${item.id}/ledger`}>{item.account_number}</NavLink>
+                                </td>
 						    	<td>{item.name}</td>
 						    	<td align="right">{ item.balance }</td>
 						    	<td>{item.description}</td>
