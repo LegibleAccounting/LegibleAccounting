@@ -3,15 +3,17 @@ from django.contrib.auth.models import User, Group
 
 from rest_framework import serializers
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ('name',)
+
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'first_name', 'last_name', 'username', 'groups', 'last_login', 'is_active',)
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ('name',)
+    groups = GroupSerializer(many=True)
 
 class LogEntrySerializer(serializers.ModelSerializer):
     class Meta:
