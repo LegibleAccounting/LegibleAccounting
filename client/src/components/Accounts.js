@@ -37,7 +37,7 @@ class Accounts extends Component {
         return (
             <div className="accounts">
                 <div className="titleBar">
-                    <h1>AccountsApi</h1>
+                    <h1>Accounts</h1>
                     {
                         Auth.currentUser.groups.find(group => group.name === 'Administrator') ? (
                             <NavLink className="NavLink btn btn-primary newButton" to="/accounts/add">+ New</NavLink> 
