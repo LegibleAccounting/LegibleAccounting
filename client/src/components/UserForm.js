@@ -175,14 +175,14 @@ class UserForm extends Component {
 
         request
             .then(() => {
-                this.props.onNotifySuccess(`Users ${this.state.userModel.id === undefined ? 'created' : 'updated' } successfully.`);
+                this.props.onNotifySuccess(`User ${this.state.userModel.id === undefined ? 'created' : 'updated' } successfully.`);
 
                 this.setState({
                     redirectToUsersPage: true
                 });
             })
             .catch(() => {
-                this.props.onNotifyError(`Failed to ${this.state.userModel.id === undefined ? 'create' : 'update' } users.`);
+                this.props.onNotifyError(`Failed to ${this.state.userModel.id === undefined ? 'create' : 'update' } user.`);
             });
     }
   }
