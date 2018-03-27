@@ -26,7 +26,7 @@ class WriteUserSerializer(UserSerializer):
         instance = User.objects.create_user(
             validated_data['username'])
 
-        instance.is_active = validated_data['is_active']
+        instance.is_active = validated_data.get('is_active', False)
 
         instance.save()
 
@@ -37,8 +37,8 @@ class WriteUserSerializer(UserSerializer):
         return instance
 
     def update(self, instance, validated_data):
-        instance.username = validated_data['username']
-        instance.is_active = validated_data['is_active']
+        instance.username = validated_data.get('username', instance.username)
+        instance.is_active = validated_data.get('is_active', instance.is_active)
 
         instance.save()
         instance.groups.clear()
