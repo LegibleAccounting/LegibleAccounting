@@ -58,7 +58,7 @@ class Accounts extends Component {
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                            <th className="accountNumber">Account Number
+                            <th className="accountNumber"><div>Account</div>Number
                             {
                                 !this.state.sortState.accountNumber || this.state.sortState.accountNumber === 'asc' ? (
                                     <Glyphicon glyph="chevron-up" className={!this.state.sortState.accountNumber ? 'sorter sorter-inactive' : 'sorter'}
@@ -94,7 +94,7 @@ class Accounts extends Component {
                             }
                             { this.state.sortState.account_type__category }
                             </th>
-                            <th className="subtype">Sub-Type
+                            <th className="subtype hidden-xs hidden-sm">Sub-Type
                             {
                                 !this.state.sortState.account_type__name || this.state.sortState.account_type__name === 'asc' ? (
                                     <Glyphicon glyph="chevron-up" className={!this.state.sortState.account_type__name ? 'sorter sorter-inactive' : 'sorter'}
@@ -107,7 +107,7 @@ class Accounts extends Component {
                             { this.state.sortState.account_type__name }
                             </th>
                             <th className="term">Term</th>
-                            <th className="comments">Comments</th>
+                            <th className="comments hidden-xs hidden-sm">Comments</th>
                             <th className="edits"></th>
                         </tr>
                       </thead>
@@ -120,9 +120,9 @@ class Accounts extends Component {
                                 </td>
                                 <td>{item.name}</td>
                                 <td>{item.account_type.category}</td>
-                                <td>{item.account_type.name}</td>
-                                <td>Short-Term</td>
-                                <td align="center" className="comments"><OverlayTrigger
+                                <td className="hidden-xs hidden-sm">{item.account_type.name}</td>
+                                <td>{item.account_type.classification}</td>
+                                <td align="center" className="comments hidden-xs hidden-sm"><OverlayTrigger
                                   trigger="click"
                                   rootClose
                                   placement="bottom"

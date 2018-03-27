@@ -75,7 +75,7 @@ class ChartOfAccounts extends Component {
 			        <table className="table table-hover">
 					  <thead>
 					  	<tr>
-						    <th className="accountNumber">Account Number
+						    <th className="accountNumber"><div>Account</div>Number
                             {
                                 !this.state.sortState.accountNumber || this.state.sortState.accountNumber === 'asc' ? (
                                     <Glyphicon glyph="chevron-up" className={!this.state.sortState.accountNumber ? 'sorter sorter-inactive' : 'sorter'}
@@ -102,9 +102,9 @@ class ChartOfAccounts extends Component {
                             <th className="accountType">Type</th>
                             <th className="accountTerm">Term</th>
 						    <th className="initialBalance">Balance</th>
+                            <th className="creator hidden-xs hidden-sm">Created By</th>
+                            <th className="createDate hidden-xs hidden-sm"><div>Date</div>Created</th> 
 						    <th className="comments">Comments</th>
-                            <th className="creator">Created By</th>
-                            <th className="createDate">Date Created</th> 
 						    <th className="edits"></th>
 					    </tr>
 					  </thead>
@@ -117,8 +117,12 @@ class ChartOfAccounts extends Component {
                                 </td>
 						    	<td>{item.name}</td>
                                 <td>{item.account_type.name}</td>
-                                <td>Short-Term</td>
+                                <td>{item.account_type.classification}</td>
 						    	<td align="right">{ item.balance }</td>
+                                <td className="hidden-xs hidden-sm">administrator1</td>
+                                <td className="dateTableData hidden-xs hidden-sm">
+                                    {item.created_date.substring(0,10)}
+                                </td>
 						    	<td align="center" className="comments"><OverlayTrigger
                                   trigger="click"
                                   rootClose
@@ -136,10 +140,6 @@ class ChartOfAccounts extends Component {
                                         style={{ visibility: item.description === "" && 'hidden' }}>
                                     </span>
                                 </OverlayTrigger></td>
-                                <td>administrator1</td>
-                                <td className="dateTableData">
-                                    {item.created_date.substring(0,10)}
-                                </td>
                                 <td>
                                 {
                                     Auth.currentUser.groups.find(group => group.name === 'Administrator' || group.name === 'Manager') ? (

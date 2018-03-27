@@ -1,37 +1,37 @@
 .chartOfAccounts .accountNumber {
-	width: 7em;
+	min-width: 4rem;
 }
 
 .chartOfAccounts .name {
-	width: 200px;
+	width: auto;
 }
 
 .chartOfAccounts .accountType {
-    width: 30px;
+    min-width: 8rem;
 }
 
 .chartOfAccounts .accountTerm {
-    width: 30px;
+    min-width: 9rem;
 }
 
 .chartOfAccounts .initialBalance { 
-	width: 20px;
+	min-width: 8rem;
 }
 
 .chartOfAccounts .creator {
-    width: 30px;
+    min-width: 8rem;
 }
 
 .chartOfAccounts .createDate {
-    width: 30px;
+    min-width: 10rem;
 }
 
 .chartOfAccounts .comments {
-    width: 20px;
+    min-width: 1rem;
 }
 
 .chartOfAccounts .edits {
-	width: 40px;
+	min-width: 4rem;
 }
 
 .chartOfAccounts .dateTableData {
