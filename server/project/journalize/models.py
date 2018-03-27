@@ -23,7 +23,7 @@ class JournalEntry(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date = models.DateField()
     is_approved = models.NullBooleanField(blank=True)
-    rejection_memo = models.CharField(max_length=200, null=True, blank=True)
+    memo = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=200, null=True, blank=True)
     creator = models.ForeignKey(User, on_delete=models.PROTECT)
 

@@ -74,7 +74,7 @@ class GeneralJournalEntry extends Component {
     }
 
     rejectJournalEntry(journalEntryId, rejectionMemo) {
-        GeneralJournalAPI.update({ id: journalEntryId, is_approved: false, rejection_memo: rejectionMemo })
+        GeneralJournalAPI.update({ id: journalEntryId, is_approved: false, memo: rejectionMemo })
             .then(() => {
                 this.props.onNotifySuccess('Journal Entry has been successfully rejected.');
             })
