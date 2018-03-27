@@ -14,11 +14,13 @@ import UserForm from './UserForm.js';
 import AddToChartOfAccounts from './AddToChartOfAccounts.js';
 import Accounts from './Accounts.js';
 import Users from './Users.js'
+import AccountLedger from './AccountLedger.js';
 import Logs from './Logs.js';
 import GeneralJournal from './GeneralJournal.js';
 import Sidebar from './Sidebar';
 import Auth from '../api/Auth';
 import './LegibleAccounting.css';
+import GeneralJournalEntry from './GeneralJournalEntry.js';
 
 class LegibleAccounting extends Component {
   constructor(props) {
@@ -62,12 +64,14 @@ class LegibleAccounting extends Component {
                 <GuardedAdministratorPermissionsRoute exact path="/chart-of-accounts/add" component={DecorateRoute(AddToChartOfAccounts, this.notifyProps)} />
                 <Route exact path="/accounts" component={Accounts} />
                 <GuardedAdministratorPermissionsRoute exact path="/accounts/add" component={DecorateRoute(AccountForm, this.notifyProps)} />
+                <Route path="/accounts/:id/ledger" component={AccountLedger} />
                 <GuardedManagerPermissionsRoute path="/accounts/:id" component={DecorateRoute(AccountForm, this.notifyProps)} />
                 <Route exact path="/users" component={Users} />
                 <GuardedAdministratorPermissionsRoute exact path="/users/add" component={DecorateRoute(UserForm, this.notifyProps)} />
                 <GuardedAdministratorPermissionsRoute path="/Users/:id" component={DecorateRoute(UserForm, this.notifyProps)} />
                 <GuardedAdministratorPermissionsRoute exact path="/logs" component={Logs} />
                 <GuardedManagerOrAccountantPermissionsRoute exact path="/general-journal" component={DecorateRoute(GeneralJournal, this.notifyProps)} />
+                <GuardedManagerOrAccountantPermissionsRoute path="/general-journal/:id" component={DecorateRoute(GeneralJournalEntry, this.notifyProps)}/>
               </Switch>
             </Col>
           </Row>

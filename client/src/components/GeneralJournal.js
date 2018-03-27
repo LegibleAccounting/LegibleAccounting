@@ -68,6 +68,10 @@ class GeneralJournal extends Component {
                         <button className="btn btn-primary" type="submit" onClick={this.search}>Search</button>
                     </div>
                 </div>
+                {
+                    this.state.isCreatingJournalEntry &&
+                        (<JournalEntryCreate entryTypeOptions={this.state.entryTypes} accounts={this.state.accounts} onCancel={this.toggleNewJournalUI} onSubmit={this.submitNewJournalEntry} />)
+                }
                 <div>
                     <div className="flex-row journal-filters">
                         <div className="flex-fill"></div>
@@ -87,7 +91,7 @@ class GeneralJournal extends Component {
                         </Nav>
                     </div>
                     <div className="row gridHeading">
-                        <label className="hidden-xs col-sm-2">Date</label>
+                        <label className="hidden-xs col-sm-2"></label>
                         <label className="hidden-xs col-sm-1">Type</label>
                         <label className="hidden-xs col-sm-1">Creator</label>
                         <label className="hidden-xs col-sm-4">Accounts</label>
@@ -95,11 +99,6 @@ class GeneralJournal extends Component {
                         <label className="hidden-xs col-sm-2">Credit</label>
                     </div>
                     <div className="titleLine"></div>
-                    {
-
-                        this.state.isCreatingJournalEntry &&
-                            (<JournalEntryCreate entryTypeOptions={this.state.entryTypes} accounts={this.state.accounts} onCancel={this.toggleNewJournalUI} onSubmit={this.submitNewJournalEntry} />)
-                    }
                     {
                         (!this.state.isCreatingJournalEntry && (!this.state.entries || this.state.entries.length === 0)) &&
                             (<h2 className="text-center pad">No Journal Entries exist.</h2>)
@@ -193,6 +192,21 @@ class GeneralJournal extends Component {
                         this.props.onNotifyError('Transaction - Value: ' + firstTransaction.value[0]);
                     } else {
                         this.props.onNotifyError('Failed to create journal entry due to a malformed transaction.');
+                    }
+                } else if (response.receipts && response.receipts.length) {
+                    let firstReceipt = response.receipts[0];
+                    let receiptErrorFields = Object.keys(firstReceipt);
+                    if (!receiptErrorFields.length) {
+                        this.props.onNotifyError('Failed to create journal entry due to malformed receipt(s).');
+                        return;
+                    }
+
+                    if (firstReceipt.file && firstReceipt.file.length) {
+                        this.props.onNotifyError('Receipt - File: ' + firstReceipt.file[0]);
+                    } else if (firstReceipt.original_filename && firstReceipt.original_filename.length) {
+                        this.props.onNotifyError('Receipt - Filename: ' + firstReceipt.original_filename[0]);
+                    } else {
+                        this.props.onNotifyError('Failed to create journal entry due to malformed receipt.');
                     }
                 } else {
                     this.props.onNotifyError('Failed to create journal entry.');

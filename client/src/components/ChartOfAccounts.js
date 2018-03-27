@@ -5,6 +5,8 @@ import './ChartOfAccounts.css';
 import './CommonChart.css';
 import Auth from '../api/Auth.js';
 import AccountsAPI from '../api/AccountsApi.js';
+import { Popover } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 
 class ChartOfAccounts extends Component {
     constructor(props) {
@@ -31,6 +33,23 @@ class ChartOfAccounts extends Component {
         	});
     }
 
+    static balanceFormat(num){
+    	num = "" + num;
+    	if(num.indexOf('.') === -1){
+    		num += ".";
+
+		}
+        while(num.indexOf('.') + 3 > num.length)
+            num += "0";
+    	let dot = num.indexOf('.');
+    	let chars = 0;
+    	for(let i = 3; dot - (i + chars) > 0; i+=3) {
+                num = num.substr(0, dot - (chars + i)) + "," + num.substr(dot - (chars + i));
+                chars++;
+        }
+        return num;
+	}
+
     render() {
         return (
         	<div className="chartOfAccounts">
@@ -56,7 +75,7 @@ class ChartOfAccounts extends Component {
 			        <table className="table table-hover">
 					  <thead>
 					  	<tr>
-						    <th className="accountNumber">#
+						    <th className="accountNumber"><div>Account</div>Number
                             {
                                 !this.state.sortState.accountNumber || this.state.sortState.accountNumber === 'asc' ? (
                                     <Glyphicon glyph="chevron-up" className={!this.state.sortState.accountNumber ? 'sorter sorter-inactive' : 'sorter'}
@@ -80,7 +99,11 @@ class ChartOfAccounts extends Component {
                             }
                             { this.state.sortState.name }
                             </th>
+                            <th className="accountType">Type</th>
+                            <th className="accountTerm">Term</th>
 						    <th className="initialBalance">Balance</th>
+                            <th className="creator hidden-xs hidden-sm">Created By</th>
+                            <th className="createDate hidden-xs hidden-sm"><div>Date</div>Created</th> 
 						    <th className="comments">Comments</th>
 						    <th className="edits"></th>
 					    </tr>
@@ -89,10 +112,35 @@ class ChartOfAccounts extends Component {
 				       	{ !this.state.isLoading && this.state.accounts.length ? (
 				          this.state.accounts.map((item, index) => (
 				             <tr key={item.id}>
-						    	<td>{item.account_number}</td>
+						    	<td>
+                                    <NavLink to={`/accounts/${item.id}/ledger`}>{item.account_number}</NavLink>
+                                </td>
 						    	<td>{item.name}</td>
+                                <td>{item.account_type.name}</td>
+                                <td>{item.account_type.classification}</td>
 						    	<td align="right">{ item.balance }</td>
-						    	<td>{item.description}</td>
+                                <td className="hidden-xs hidden-sm">administrator1</td>
+                                <td className="dateTableData hidden-xs hidden-sm">
+                                    {item.created_date.substring(0,10)}
+                                </td>
+						    	<td align="center" className="comments">
+                                <OverlayTrigger
+                                  trigger="click"
+                                  rootClose
+                                  placement="bottom"
+                                  overlay={
+                                      <Popover id="popover-trigger-click-root-close" title="Comments">
+                                        {
+
+                                            <div className="description">{item.description}</div>
+                                        }
+                                      </Popover>
+                                  }>
+                                    <span
+                                        className="glyphicon glyphicon-list-alt glyphiconButton"
+                                        style={{ visibility: item.description === "" && 'hidden' }}>
+                                    </span>
+                                </OverlayTrigger></td>
                                 <td>
                                 {
                                     Auth.currentUser.groups.find(group => group.name === 'Administrator' || group.name === 'Manager') ? (

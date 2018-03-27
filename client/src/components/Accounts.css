@@ -1,22 +1,29 @@
 .accounts .accountNumber{
-	width: 4em;
+	min-width: 8rem;
 }
 
-.accounts .name{
+.accounts .name {
     width: auto;
-	flex-grow: 1;
 }
 
 .accounts .type {
-    width: 9em;
+    min-width: 9rem;
 }
 
 .accounts .subtype {
-    width: 13em;
+    min-width: 8em;
+}
+
+.accounts .term {
+    min-width: 9rem;
+}
+
+.accounts .comments {
+    min-width: 1rem;
 }
 
 .accounts .edits{
-	width: 40px;
+	min-width: 4rem;
 }
 
 .accounts .sorter {
