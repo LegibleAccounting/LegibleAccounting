@@ -23,11 +23,12 @@ class WriteUserSerializer(UserSerializer):
     groups = serializers.PrimaryKeyRelatedField(many=True, queryset=Group.objects.all())
 
     def create(self, validated_data):
-        instance = User.objects.create(
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
-            username=validated_data['username'],
-            is_active=validated_data['is_active'])
+        instance = User.objects.create_user(
+            validated_data['username'])
+
+        instance.is_active = validated_data['is_active']
+
+        instance.save()
 
         groups = validated_data.pop('groups')
         for group in groups:
@@ -36,8 +37,6 @@ class WriteUserSerializer(UserSerializer):
         return instance
 
     def update(self, instance, validated_data):
-        instance.first_name = validated_data['first_name']
-        instance.last_name = validated_data['last_name']
         instance.username = validated_data['username']
         instance.is_active = validated_data['is_active']
 

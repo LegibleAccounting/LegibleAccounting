@@ -32,11 +32,9 @@ class UserForm extends Component {
         } else {
             this.state.isLoading = false;
             this.state.userModel = {
-                first_name: '',
-                last_name: '',
                 username: '',
-                last_login: '',
-                is_active: false
+                is_active: false,
+                groups: []
             };
         }
         GroupsAPI.getAll()
@@ -64,32 +62,6 @@ class UserForm extends Component {
             <form className="form-horizontal" onSubmit={this.submitUser}>
                 <div className="titleBar">
                     <h1>{ this.state.userModel.id === undefined ? 'Add' : 'Edit' } User</h1>
-                </div>
-                <div className="form-group">
-                    <label className="col-xs-12 col-sm-2 control-label">
-                        First Name
-                    </label>
-                    <div className="col-xs-12 col-sm-10">
-                        <input type="text"
-                          name="first_name"
-                          className="form-control"
-                          placeholder="Enter First Name"
-                          value={this.state.userModel.first_name}
-                          onChange={this.changeInputState} />
-                    </div>
-                </div>
-                <div className="form-group">
-                    <label className="col-xs-12 col-sm-2 control-label">
-                        Last Name
-                    </label>
-                    <div className="col-xs-12 col-sm-10">
-                        <input type="text"
-                          name="last_name"
-                          className="form-control"
-                          placeholder="Enter Last Name"
-                          value={this.state.userModel.last_name}
-                          onChange={this.changeInputState} />
-                    </div>
                 </div>
                 <div className="form-group">
                     <label className="col-xs-12 col-sm-2 control-label">
