@@ -3,7 +3,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 import Auth from '../api/Auth.js';
 import UsersAPI from '../api/UsersApi.js';
 import './UserForm.css';
-import GroupsAPI from '../api/GroupsApi.js'
+import GroupsAPI from '../api/GroupsApi.js';
 
 class UserForm extends Component {
     constructor(props) {

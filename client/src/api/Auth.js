@@ -9,6 +9,21 @@ class Auth {
         this.token = Cookies.get(CSRF_COOKIE_NAME);
     }
 
+    register(data) {
+        return fetch(new JSONAPIRequest('/auth/register/', this.token), {
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
+          .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
+          .then(response => response = response.json())
+          .then((response) => {
+            return Promise.resolve(response);
+          })
+          .catch((response) => {
+            return Promise.reject(response);
+          });
+    }
+
     authenticate(username, password) {
         return fetch(new JSONAPIRequest('/auth/login/', this.token), {
             method: 'POST',

@@ -15,11 +15,20 @@ from .serializers import UserSerializer, WriteUserSerializer, GroupSerializer, L
 @permission_classes((AllowAny,))
 @parser_classes((JSONParser,))
 def register_view(request):
-    instance = User.objects.create(
-        first_name=request.data['first_name'],
-        last_name=request.data['last_name'],
-        username=request.data['username'],
-        is_active=False)
+    if request.data['password'] != request.data['password2']:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    instance = User.objects.create_user(
+        request.data['username'],
+        None,
+        request.data['password'])
+
+    instance.is_active = False
+    instance.save()
+
+    groups = request.data.get('groups', [])
+    for group in groups:
+        instance.groups.add(Group.objects.get(pk=group))
 
     return Response(UserSerializer(instance, context={ 'request': request }).data)
 
