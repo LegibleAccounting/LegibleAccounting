@@ -122,7 +122,8 @@ class Accounts extends Component {
                                 <td>{item.account_type.category}</td>
                                 <td className="hidden-xs hidden-sm">{item.account_type.name}</td>
                                 <td>{item.account_type.classification}</td>
-                                <td align="center" className="comments hidden-xs hidden-sm"><OverlayTrigger
+                                <td align="center" className="comments hidden-xs hidden-sm">
+                                <OverlayTrigger
                                   trigger="click"
                                   rootClose
                                   placement="bottom"

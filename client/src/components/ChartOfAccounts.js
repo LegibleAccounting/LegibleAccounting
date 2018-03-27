@@ -123,7 +123,8 @@ class ChartOfAccounts extends Component {
                                 <td className="dateTableData hidden-xs hidden-sm">
                                     {item.created_date.substring(0,10)}
                                 </td>
-						    	<td align="center" className="comments"><OverlayTrigger
+						    	<td align="center" className="comments">
+                                <OverlayTrigger
                                   trigger="click"
                                   rootClose
                                   placement="bottom"
