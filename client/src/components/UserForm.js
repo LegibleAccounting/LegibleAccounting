@@ -17,17 +17,18 @@ class UserForm extends Component {
         if (this.props.match.params.id) {
             this.state.isLoading = true;
                 UsersAPI.getOne(this.props.match.params.id)
-                .then((user) => {
-                    this.state.userModel = user;
-                })
-                .catch(() => {
-                    alert('Failed to retrieve user information.');
-                })
-                .finally(() => {
-                    this.setState({
-                        isLoading: false
+                    .then((user) => {
+                        user.groups = user.groups.map(group => group.id);
+                        this.state.userModel = user;
+                    })
+                    .catch(() => {
+                        alert('Failed to retrieve user information.');
+                    })
+                    .finally(() => {
+                        this.setState({
+                            isLoading: false
+                        });
                     });
-                });
         } else {
             this.state.isLoading = false;
             this.state.userModel = {
@@ -109,12 +110,12 @@ class UserForm extends Component {
                         Role
                     </label>
                     <div className="col-xs-12 col-sm-10">
-                        <select name="group" className="form-control" value={this.state.userModel.groups} onChange={this.changeInputState}>
+                        <select multiple name="group" className="form-control" value={this.state.userModel.groups} onChange={this.changeInputState}>
                             <option hidden>-- Select Role --</option>
                             {
                                 Array.isArray(this.state.groupsList) && 
                                 this.state.groupsList.map((item, index) => (
-                                    <option key={item.name} value={item.NAME}>{item.name} - {item.name}</option>
+                                    <option key={item.id} value={item.id}>{item.name}</option>
                                 ))
                             }
                         </select>
