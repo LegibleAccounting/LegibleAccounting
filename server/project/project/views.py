@@ -14,6 +14,18 @@ from .serializers import UserSerializer, WriteUserSerializer, GroupSerializer, L
 @api_view(['POST'])
 @permission_classes((AllowAny,))
 @parser_classes((JSONParser,))
+def register_view(request):
+    instance = User.objects.create(
+        first_name=request.data['first_name'],
+        last_name=request.data['last_name'],
+        username=request.data['username'],
+        is_active=False)
+
+    return Response(UserSerializer(instance, context={ 'request': request }).data)
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+@parser_classes((JSONParser,))
 def login_view(request):
     username = request.data['username']
     password = request.data['password']
@@ -45,16 +57,6 @@ class UserViewSet(viewsets.ModelViewSet):
             return UserSerializer
 
         return WriteUserSerializer
-
-
-def register_view(request):
-    instance = User(first_name=request.data['first_name'],
-               last_name=request.data['last_name'],
-               username=request.data['username'],
-               is_active=False, )
-
-    instance.save()
-    return Response(UserSerializer(instance, context={ 'request': request }).data)
 
 
 class GroupViewSet(viewsets.ModelViewSet):
