@@ -75,7 +75,7 @@ class CreateTransactionSerializer(serializers.ModelSerializer):
 class RetrieveJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalEntry
-        fields = ('id', 'date_created', 'date', 'entry_type', 'is_approved', 'rejection_memo', 'description', 'creator', 'transactions', 'receipts',)
+        fields = ('id', 'date_created', 'date', 'entry_type', 'is_approved', 'memo', 'description', 'creator', 'transactions', 'receipts',)
 
     receipts = ReceiptSerializer(many=True)
     transactions = RetrieveTransactionSerializer(many=True)
@@ -132,17 +132,17 @@ class CreateJournalEntrySerializer(serializers.ModelSerializer):
 class UpdateJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalEntry
-        fields = ('is_approved', 'rejection_memo',)
+        fields = ('is_approved', 'memo',)
 
     def update(self, instance, validated_data):
         if instance.is_approved is not None:
             raise serializers.ValidationError('The journal entry has already been approved/denied and can not be changed!')
 
-        if validated_data.get('is_approved') == False and len(validated_data.get('rejection_memo')) == 0:
+        if validated_data.get('is_approved') == False and len(validated_data.get('memo')) == 0:
             raise serializers.ValidationError('A rejection reason must be provided for denying the journal entry.')
 
         instance.is_approved = validated_data.get('is_approved')
-        instance.rejection_memo = validated_data.get('rejection_memo')
+        instance.memo = validated_data.get('memo')
         instance.save()
 
         return instance
