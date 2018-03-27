@@ -15,8 +15,8 @@ ACCOUNT_CATEGORIES = (
 
 ACCOUNT_CLASSIFICATIONS = (
     (0, ''),
-    (1, 'Current'),
-    (2, 'Long-Term')
+    (1, 'Current'), # NOTE: "Current" is synonymous with "Short-Term"
+    (2, 'Long-Term') # NOTE: "Long-Term" is synonymous with "Non-Current"
 )
 
 

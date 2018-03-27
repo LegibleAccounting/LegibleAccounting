@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
         "category": 0,
-        "classification": 0,
+        "classification": 1,
         "name": "Cash Related Accounts",
         "liquidity": 1,
         "created_date": "2018-02-01T00:00:00Z"
@@ -15,7 +15,7 @@
     "pk": 2,
     "fields": {
         "category": 0,
-        "classification": 0,
+        "classification": 1,
         "name": "Receivables",
         "liquidity": 2,
         "created_date": "2018-02-01T00:00:00Z"
@@ -26,7 +26,7 @@
     "pk": 3,
     "fields": {
         "category": 0,
-        "classification": 0,
+        "classification": 1,
         "name": "Inventories",
         "liquidity": 3,
         "created_date": "2018-02-01T00:00:00Z"
@@ -37,7 +37,7 @@
     "pk": 4,
     "fields": {
         "category": 0,
-        "classification": 0,
+        "classification": 1,
         "name": "Prepaid Items",
         "liquidity": 4,
         "created_date": "2018-02-01T00:00:00Z"
@@ -48,7 +48,7 @@
     "pk": 5,
     "fields": {
         "category": 0,
-        "classification": 0,
+        "classification": 2,
         "name": "Long-Term Investments",
         "liquidity": 5,
         "created_date": "2018-02-01T00:00:00Z"
@@ -59,7 +59,7 @@
     "pk": 6,
     "fields": {
         "category": 0,
-        "classification": 0,
+        "classification": 2,
         "name": "Land",
         "liquidity": 6,
         "created_date": "2018-02-01T00:00:00Z"
@@ -70,7 +70,7 @@
     "pk": 7,
     "fields": {
         "category": 0,
-        "classification": 0,
+        "classification": 2,
         "name": "Buildings",
         "liquidity": 7,
         "created_date": "2018-02-01T00:00:00Z"
@@ -81,7 +81,7 @@
     "pk": 8,
     "fields": {
         "category": 0,
-        "classification": 0,
+        "classification": 2,
         "name": "Equipment",
         "liquidity": 8,
         "created_date": "2018-02-01T00:00:00Z"
@@ -92,7 +92,7 @@
     "pk": 9,
     "fields": {
         "category": 0,
-        "classification": 0,
+        "classification": 2,
         "name": "Intangibles",
         "liquidity": 9,
         "created_date": "2018-02-01T00:00:00Z"
@@ -103,7 +103,7 @@
     "pk": 10,
     "fields": {
         "category": 1,
-        "classification": 0,
+        "classification": 1,
         "name": "Short-Term Payables",
         "liquidity": 10,
         "created_date": "2018-02-01T00:00:00Z"
@@ -114,7 +114,7 @@
     "pk": 11,
     "fields": {
         "category": 1,
-        "classification": 0,
+        "classification": 1,
         "name": "Employee Payroll Related Payables",
         "liquidity": 11,
         "created_date": "2018-02-01T00:00:00Z"
@@ -125,7 +125,7 @@
     "pk": 12,
     "fields": {
         "category": 1,
-        "classification": 0,
+        "classification": 1,
         "name": "Employer Payroll Related Payables",
         "liquidity": 12,
         "created_date": "2018-02-01T00:00:00Z"
@@ -136,7 +136,7 @@
     "pk": 13,
     "fields": {
         "category": 1,
-        "classification": 0,
+        "classification": 1,
         "name": "Sales Tax",
         "liquidity": 13,
         "created_date": "2018-02-01T00:00:00Z"
@@ -147,7 +147,7 @@
     "pk": 14,
     "fields": {
         "category": 1,
-        "classification": 0,
+        "classification": 1,
         "name": "Deferred Revenues and Current Portion of Long-Term Debt",
         "liquidity": 14,
         "created_date": "2018-02-01T00:00:00Z"
@@ -158,7 +158,7 @@
     "pk": 15,
     "fields": {
         "category": 1,
-        "classification": 0,
+        "classification": 2,
         "name": "Long-Term Liabilities",
         "liquidity": 15,
         "created_date": "2018-02-01T00:00:00Z"
