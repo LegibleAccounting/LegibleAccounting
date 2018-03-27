@@ -42,7 +42,7 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (DjangoModelPermissions, LAAuthModelReadPermission,)
 
 
-def new_user_parse(request):
+def register_view(request):
     acc = User(first_name=request.data['first_name'],
                last_name=request.data['last_name'],
                username=request.data['username'],
