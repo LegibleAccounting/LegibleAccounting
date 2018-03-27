@@ -214,8 +214,8 @@ class GeneralJournal extends Component {
             });
     }
 
-    approveJournalEntry(journalEntryId) {
-        GeneralJournalAPI.update({ id: journalEntryId, is_approved: true })
+    approveJournalEntry(journalEntryId, approvalMemo) {
+        GeneralJournalAPI.update({ id: journalEntryId, is_approved: true, memo: approvalMemo })
             .then(() => {
                 this.props.onNotifySuccess('Journal Entry has been successfully approved.');
                 this.handleJournalFilterSelection(this.state.activeFilter);
@@ -227,7 +227,7 @@ class GeneralJournal extends Component {
     }
 
     rejectJournalEntry(journalEntryId, rejectionMemo) {
-        GeneralJournalAPI.update({ id: journalEntryId, is_approved: false, rejection_memo: rejectionMemo })
+        GeneralJournalAPI.update({ id: journalEntryId, is_approved: false, memo: rejectionMemo })
             .then(() => {
                 this.props.onNotifySuccess('Journal Entry has been successfully rejected.');
                 this.handleJournalFilterSelection(this.state.activeFilter);
