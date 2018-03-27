@@ -9,7 +9,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny, DjangoModelPermissions
 
 from .permissions import LAAuthModelReadPermission
-from .serializers import UserSerializer, GroupSerializer, LogEntrySerializer
+from .serializers import UserSerializer, WriteUserSerializer, GroupSerializer, LogEntrySerializer
 
 @api_view(['POST'])
 @permission_classes((AllowAny,))
@@ -38,18 +38,23 @@ def current_view(request):
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
     permission_classes = (DjangoModelPermissions, LAAuthModelReadPermission,)
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return UserSerializer
+
+        return WriteUserSerializer
 
 
 def register_view(request):
-    acc = User(first_name=request.data['first_name'],
+    instance = User(first_name=request.data['first_name'],
                last_name=request.data['last_name'],
                username=request.data['username'],
                is_active=False, )
 
-    acc.save()
-    return Response(UserSerializer(acc, context={ 'request': request }).data)
+    instance.save()
+    return Response(UserSerializer(instance, context={ 'request': request }).data)
 
 
 class GroupViewSet(viewsets.ModelViewSet):

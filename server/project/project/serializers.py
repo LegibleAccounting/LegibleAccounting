@@ -14,21 +14,26 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'first_name', 'last_name', 'username', 'groups', 'last_login', 'is_active',)
+        read_only_fields = ('id', 'last_login',)
 
     groups = GroupSerializer(many=True)
 
+
+class WriteUserSerializer(UserSerializer):
+    groups = serializers.PrimaryKeyRelatedField(many=True, queryset=Group.objects.all())
+
     def create(self, validated_data):
-        acc = User(first_name=validated_data['first_name'],
-                   last_name=validated_data['last_name'],
-                   username=validated_data['username'],
-                   is_active=validated_data['is_active'],)
+        instance = User.objects.create(
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            username=validated_data['username'],
+            is_active=validated_data['is_active'])
 
         groups = validated_data.pop('groups')
         for group in groups:
-            acc.groups.add(Group.objects.get(pk=group))
+            instance.groups.add(group)
 
-        acc.save()
-        return acc
+        return instance
 
     def update(self, instance, validated_data):
         instance.first_name = validated_data['first_name']
@@ -36,13 +41,13 @@ class UserSerializer(serializers.ModelSerializer):
         instance.username = validated_data['username']
         instance.is_active = validated_data['is_active']
 
+        instance.save()
         instance.groups.clear()
 
         groups = validated_data.pop('groups')
         for group in groups:
-            instance.groups.add(Group.objects.get(pk=group))
+            instance.groups.add(group)
 
-        instance.save()
         return instance
 
 
