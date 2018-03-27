@@ -110,7 +110,7 @@ class UserForm extends Component {
                         Role
                     </label>
                     <div className="col-xs-12 col-sm-10">
-                        <select multiple name="group" className="form-control" value={this.state.userModel.groups} onChange={this.changeInputState}>
+                        <select multiple={true} name="groups" className="form-control" value={this.state.userModel.groups} onChange={this.changeInputState}>
                             <option hidden>-- Select Role --</option>
                             {
                                 Array.isArray(this.state.groupsList) && 
@@ -148,10 +148,20 @@ class UserForm extends Component {
     }
 
     changeInputState(event) {
+        let value;
+        if (event.target.type === 'checkbox') {
+            value = event.target.checked;
+        } else if (event.target.type === 'select-multiple') {
+            value = [...event.target.options]
+                .filter(opt => opt.selected)
+                .map(opt => opt.value);
+        } else {
+            value = event.target.value;
+        }
+
         this.setState({
             userModel: Object.assign({}, this.state.userModel, {
-                [event.target.name]: event.target.type === 'checkbox' ?
-                    event.target.checked : event.target.value
+                [event.target.name]: value
             })
         });
     }
