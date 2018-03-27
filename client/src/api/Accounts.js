@@ -46,6 +46,25 @@ class AccountsAPI {
             });
     }
 
+    getLedger(id) {
+        if (!Auth.token) {
+            return Promise.reject();
+        }
+
+        return fetch(new JSONAPIRequest(`/api/accounts/${id}/ledger/`, Auth.token), {
+            method: 'GET'
+        })
+            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
+            .then(response => response.json())
+            .then((response) => {
+                return Promise.resolve(response);
+            })
+            .catch((response) => {
+                // Consider how to handle this?
+                return Promise.reject(response);
+            });
+    }
+
     search(active, searchString, fieldNames, isAscending) {
     	if (!Auth.token) {
             return Promise.reject();

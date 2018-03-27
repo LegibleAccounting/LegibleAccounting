@@ -115,7 +115,9 @@ class Accounts extends Component {
                         { !this.state.isLoading && this.state.accounts.length ? (
                           this.state.accounts.map((item, index) => (
                             <tr key={item.id}>
-                                <td>{item.account_number}</td>
+                                <td>
+                                    <NavLink to={`/accounts/${item.id}/ledger`}>{item.account_number}</NavLink>
+                                </td>
                                 <td>{item.name}</td>
                                 <td>{item.account_type.category}</td>
                                 <td>{item.account_type.name}</td>
@@ -140,7 +142,7 @@ class Accounts extends Component {
                                 <td>
                                 {
                                     Auth.currentUser.groups.find(group => group.name === 'Administrator' || group.name === 'Manager') ? (
-                                        <NavLink className="NavLink btn btn-primary newButton" to={`/accounts/${item.id}`}>Edit</NavLink>
+                                        <NavLink className="btn btn-primary newButton" to={`/accounts/${item.id}`}>Edit</NavLink>
                                     ) : (
                                         <span></span>
                                     )

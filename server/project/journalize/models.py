@@ -38,6 +38,9 @@ class JournalEntry(models.Model):
 
 
 class Transaction(models.Model):
+    class Meta:
+        ordering = ['journal_entry__date', 'date']
+
     affected_account = models.ForeignKey(Account, related_name="transactions", on_delete=models.PROTECT)
     journal_entry = models.ForeignKey(JournalEntry, related_name="transactions", on_delete=models.PROTECT)
     value = models.DecimalField(max_digits=20, decimal_places=2)
@@ -77,5 +80,4 @@ auditlog.register(JournalEntry)
 # |U   U| |
 # |     | /
 # |M   M|/  0x5351524C
-
 
