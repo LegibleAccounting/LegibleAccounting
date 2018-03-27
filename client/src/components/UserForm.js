@@ -60,87 +60,88 @@ class UserForm extends Component {
         }
 
         return (
-            <form className="userForm" onSubmit={this.submitUser}>
+            <form className="form-horizontal" onSubmit={this.submitUser}>
                 <div className="titleBar">
                     <h1>{ this.state.userModel.id === undefined ? 'Add' : 'Edit' } User</h1>
                 </div>
-                <div className="row">
-                    <div className="textColumn container">
-                        User first_name
-                    </div>
-                    <div className="fieldColumn container">
+                <div className="form-group">
+                    <label className="col-xs-12 col-sm-2 control-label">
+                        First Name
+                    </label>
+                    <div className="col-xs-12 col-sm-10">
                         <input type="text"
                           name="first_name"
-                          className="form-control textBox"
-                          placeholder="First Name"
+                          className="form-control"
+                          placeholder="Enter First Name"
                           value={this.state.userModel.first_name}
                           onChange={this.changeInputState} />
                     </div>
                 </div>
-                <div className="row">
-                    <div className="textColumn container">
-                        User last_name
-                    </div>
-                    <div className="fieldColumn container">
+                <div className="form-group">
+                    <label className="col-xs-12 col-sm-2 control-label">
+                        Last Name
+                    </label>
+                    <div className="col-xs-12 col-sm-10">
                         <input type="text"
                           name="last_name"
-                          className="form-control textBox"
-                          placeholder="Last Name"
+                          className="form-control"
+                          placeholder="Enter Last Name"
                           value={this.state.userModel.last_name}
                           onChange={this.changeInputState} />
                     </div>
                 </div>
-                <div className="row">
-                    <div className="textColumn container">
-                        User username
-                    </div>
-                    <div className="fieldColumn container">
+                <div className="form-group">
+                    <label className="col-xs-12 col-sm-2 control-label">
+                        Username
+                    </label>
+                    <div className="col-xs-12 col-sm-10">
                         <input type="text"
                           name="username"
                           maxLength="30"
-                          className="form-control textBox"
-                          placeholder="username"
+                          className="form-control"
+                          placeholder="Enter Username"
                           value={this.state.userModel.username}
                           onChange={this.changeInputState} />
                     </div>
                 </div>
-				<div className="row">
-					<div className="textColumn container">
-						User is_active
-					</div>
-					<div className="fieldColumn container">
-						<input 	type="checkbox" 
-								name="is_active"
-								className="userActiveCheckBox"
+                <div className="form-group">
+                    <label className="col-xs-12 col-sm-2 control-label">
+                        Role
+                    </label>
+                    <div className="col-xs-12 col-sm-10">
+                        <select name="group" className="form-control" value={this.state.userModel.groups} onChange={this.changeInputState}>
+                            <option hidden>-- Select Role --</option>
+                            {
+                                Array.isArray(this.state.groupsList) && 
+                                this.state.groupsList.map((item, index) => (
+                                    <option key={item.name} value={item.NAME}>{item.name} - {item.name}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label className="col-xs-12 col-sm-2 control-label">
+                        Active?
+                    </label>
+                    <div className="col-xs-12 col-sm-10">
+                        <input type="checkbox" 
+                                name="is_active"
+                                className="userActiveCheckBox"
                                 checked={this.state.userModel.is_active}
-								value={this.state.userModel.is_active}
+                                value={this.state.userModel.is_active}
                                 disabled={ !Auth.currentUser.groups.find(group => group.name === 'Administrator') }
                                 onChange={this.changeInputState} />
-					</div>
-                    <div className="row">
-                        <div className="textColumn container">
-                            User Group
-                        </div>
-                        <div className="fieldColumn container">
-                            <select name="group" className="form-control textBox" value={this.state.userModel.groups} onChange={this.changeInputState}>
-                                <option hidden>-- Select User Group --</option>
-                                {
-                                    Array.isArray(this.state.groupsList) && 
-                                    this.state.groupsList.map((item, index) => (
-                                        <option key={item.name} value={item.NAME}>{item.name} - {item.name}</option>
-                                    ))
-                                }
-                            </select>
-                        </div>
                     </div>
-				</div>
-				<div>
-					<input type="submit" value={ this.state.userModel.id === undefined ? 'Create' : 'Update' } className="btn btn-primary createButton"/>
-				</div>
-        		<div className="fillSpace"></div>
-				<div>
-					<NavLink className="NavLink btn btn-primary newButton" to="/users">&lt; Back to Users</NavLink>
-				</div>
+                </div>
+                <div className="form-group">
+                    <div className="col-xs-12 col-sm-10 col-xs-offset-0 col-sm-offset-2">
+                        <input type="submit" value={ this.state.userModel.id === undefined ? 'Create' : 'Update' } className="btn btn-primary createButton" />
+                    </div>
+                </div>
+                <div style={{ paddingTop: '2em' }}>
+                    <NavLink className="NavLink btn btn-primary newButton" to="/users">&lt; Back to Users</NavLink>
+                </div>
             </form>
 		);
     }
