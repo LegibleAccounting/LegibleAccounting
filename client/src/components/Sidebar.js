@@ -28,14 +28,17 @@ class Sidebar extends Component {
                     <li>
                         <NavLink to="/accounts">Accounts</NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/users">Users</NavLink>
-                    </li>                   
-
                     {
                         (Auth.currentUserIsManager() || Auth.currentUserIsAccountant()) && (
                             <li>
                                 <NavLink to="/general-journal">General Journal</NavLink>
+                            </li>
+                        )
+                    }
+                    {
+                        Auth.currentUserIsAdministrator() && (
+                            <li>
+                                <NavLink to="/users">Users</NavLink>
                             </li>
                         )
                     }

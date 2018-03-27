@@ -32,13 +32,7 @@ class Users extends Component {
             <div className="users">
                 <div className="titleBar">
                     <h1>Users</h1>
-                    {
-                        Auth.currentUser.groups.find(group => group.name === 'Administrator') ? (
-                            <NavLink className="NavLink btn btn-primary newButton" to="/users/add">New +</NavLink> 
-                        ) : (
-                            <span></span>
-                        )
-                    }
+                    <NavLink className="NavLink btn btn-primary newButton" to="/users/add">New +</NavLink>
                     <div className="filler"></div>
                     <div className="searchContainer btn-group">
                         <form onSubmit={this.search}>
@@ -52,9 +46,9 @@ class Users extends Component {
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                            <th className="username">Name</th>
+                            <th className="username">Username</th>
                             <th className="type">Type</th>
-                            <th className="is_active">Is Active</th>
+                            <th className="is_active">Active?</th>
                             <th className="edits"></th>
                         </tr>
                       </thead>
@@ -66,20 +60,14 @@ class Users extends Component {
 			                        
 			                        <td>
 		                          	{
-		                          		item.groups.map((group) => group.name)
+		                          		item.groups.map((group, index) => group.name + (index !== item.groups.length - 1 ? ', ': ''))
 		                          	}	
   				                     </td>
 
-			                        <td>{item.is_active ? "yes" : "no"}</td>
-			                                                        <td>
-                                {
-                                    Auth.currentUser.groups.find(group => group.name === 'Administrator' || group.name === 'Manager') ? (
+			                        <td>{item.is_active ? "Yes" : "No"}</td>
+                                    <td>
                                         <NavLink className="NavLink btn btn-primary newButton" to={`/users/${item.id}`}>Edit</NavLink>
-                                    ) : (
-                                        <span></span>
-                                    )
-                                }
-                                </td>
+                                    </td>
 		                    	</tr>
                           	))
 	                        
@@ -102,12 +90,12 @@ class Users extends Component {
 
     search(event) {
         event.preventDefault();
-         UsersAPI.search(false, this.state.searchText)
-        .then(data => {
-            this.setState({
-                users: data
+        UsersAPI.search(false, this.state.searchText)
+            .then(data => {
+                this.setState({
+                    users: data
+                });
             });
-        });
     }
 }
 
