@@ -13,12 +13,19 @@ ACCOUNT_CATEGORIES = (
     (4, 'Operating Expense')
 )
 
+ACCOUNT_CLASSIFICATIONS = (
+    (0, ''),
+    (1, 'Current'),
+    (2, 'Long-Term')
+)
+
 
 class AccountType(models.Model):
     class Meta:
         ordering = ['liquidity']
 
     category = models.SmallIntegerField(choices=ACCOUNT_CATEGORIES)
+    classification = models.SmallIntegerField(choices=ACCOUNT_CLASSIFICATIONS)
     name = models.CharField(max_length=100, unique=True)
     liquidity = models.PositiveIntegerField(unique=True, verbose_name='liquidity Value (1 represents highest liquidity)')
     created_date = models.DateTimeField(auto_now_add=True, verbose_name='date Created')

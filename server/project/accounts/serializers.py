@@ -1,18 +1,22 @@
 from rest_framework import serializers
-from .models import Account, AccountType#, TransactionAtTime
+from .models import Account, AccountType
 
 
 class AccountTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = AccountType
-        fields = ('id', 'category', 'name', 'starting_number',)
+        fields = ('id', 'category', 'classification', 'name', 'starting_number',)
 
 
 class RetrieveAccountTypeSerializer(AccountTypeSerializer):
     category = serializers.SerializerMethodField()
+    classification = serializers.SerializerMethodField()
 
     def get_category(self, obj):
         return obj.get_category_display()
+
+    def get_classification(self, obj):
+        return obj.get_classification_display()
 
 
 ACCOUNT_BASE_FIELDS = ('id', 'account_type', 'name', 'description', 'initial_balance', 'created_date', 'is_active', 'order',)
