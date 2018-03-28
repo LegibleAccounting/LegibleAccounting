@@ -31,7 +31,7 @@ class AccountViewSet(viewsets.ModelViewSet):
         'account_type__name': ['icontains'],
         'is_active': ['exact']
     }
-    ordering_fields = ('name', 'account_type__name', 'account_type__category', 'account_type__liquidity', 'order',)
+    ordering_fields = ('name', 'account_type__name', 'account_type__category', 'account_type__order', 'order',)
     serializer_class = AccountSerializer
     permission_classes = (DjangoModelPermissions,)
 
