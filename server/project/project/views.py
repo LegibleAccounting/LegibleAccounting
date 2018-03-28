@@ -9,7 +9,40 @@ from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny, DjangoModelPermissions
 
 from .permissions import LAAuthModelReadPermission
-from .serializers import UserSerializer, GroupSerializer, LogEntrySerializer
+from .serializers import UserSerializer, WriteUserSerializer, GroupSerializer, LogEntrySerializer
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+@parser_classes((JSONParser,))
+def register_view(request):
+    if len(request.data['username']) == 0:
+        return Response({
+            'username': ['The username must be provided.']
+        }, status=status.HTTP_400_BAD_REQUEST)
+
+    if len(request.data['password']) == 0:
+        return Response({
+            'password': ['The password must be provided.']
+        }, status=status.HTTP_400_BAD_REQUEST)
+
+    if request.data['password'] != request.data['password2']:
+        return Response({
+            'password': ['The passwords do not match.']
+        }, status=status.HTTP_400_BAD_REQUEST)
+
+    instance = User.objects.create_user(
+        request.data['username'],
+        None,
+        request.data['password'])
+
+    instance.is_active = False
+    instance.save()
+
+    groups = request.data.get('groups', [])
+    for group in groups:
+        instance.groups.add(Group.objects.get(pk=group))
+
+    return Response(UserSerializer(instance, context={ 'request': request }).data)
 
 @api_view(['POST'])
 @permission_classes((AllowAny,))
@@ -38,13 +71,23 @@ def current_view(request):
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    filter_backends = (SearchFilter, OrderingFilter,)
+    search_fields = ('username', 'groups__name',)
+    ordering_fields = ('username', 'is_active', 'groups__name',)
     permission_classes = (DjangoModelPermissions, LAAuthModelReadPermission,)
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return UserSerializer
+
+        return WriteUserSerializer
+
 
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = (DjangoModelPermissions, LAAuthModelReadPermission,)
+
 
 class LogEntryViewSet(viewsets.ModelViewSet):
     queryset = LogEntry.objects.filter(actor__is_staff=False)

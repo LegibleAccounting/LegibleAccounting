@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Auth from '../api/Auth.js';
@@ -33,6 +32,13 @@ class Sidebar extends Component {
                         (Auth.currentUserIsManager() || Auth.currentUserIsAccountant()) && (
                             <li>
                                 <NavLink to="/general-journal">General Journal</NavLink>
+                            </li>
+                        )
+                    }
+                    {
+                        Auth.currentUserIsAdministrator() && (
+                            <li>
+                                <NavLink to="/users">Users</NavLink>
                             </li>
                         )
                     }

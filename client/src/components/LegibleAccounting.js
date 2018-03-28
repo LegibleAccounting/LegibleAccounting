@@ -10,8 +10,10 @@ import GuardedManagerOrAccountantPermissionsRoute from './GuardedManagerOrAccoun
 import Dashboard from './Dashboard.js';
 import ChartOfAccounts from './ChartOfAccounts.js';
 import AccountForm from './AccountForm.js';
+import UserForm from './UserForm.js';
 import AddToChartOfAccounts from './AddToChartOfAccounts.js';
 import Accounts from './Accounts.js';
+import Users from './Users.js'
 import AccountLedger from './AccountLedger.js';
 import Logs from './Logs.js';
 import GeneralJournal from './GeneralJournal.js';
@@ -43,7 +45,7 @@ class LegibleAccounting extends Component {
 
   render() {
     let destination = { pathname: '/login' };
-    if (this.state.redirectToHome) {
+    if (this.state.redirectToHome) { 
         return <Redirect to={destination} />;
     }
 
@@ -64,6 +66,9 @@ class LegibleAccounting extends Component {
                 <GuardedAdministratorPermissionsRoute exact path="/accounts/add" component={DecorateRoute(AccountForm, this.notifyProps)} />
                 <Route path="/accounts/:id/ledger" component={AccountLedger} />
                 <GuardedManagerPermissionsRoute path="/accounts/:id" component={DecorateRoute(AccountForm, this.notifyProps)} />
+                <GuardedAdministratorPermissionsRoute exact path="/users" component={Users} />
+                <GuardedAdministratorPermissionsRoute exact path="/users/add" component={DecorateRoute(UserForm, this.notifyProps)} />
+                <GuardedAdministratorPermissionsRoute path="/users/:id" component={DecorateRoute(UserForm, this.notifyProps)} />
                 <GuardedAdministratorPermissionsRoute exact path="/logs" component={Logs} />
                 <GuardedManagerOrAccountantPermissionsRoute exact path="/general-journal" component={DecorateRoute(GeneralJournal, this.notifyProps)} />
                 <GuardedManagerOrAccountantPermissionsRoute path="/general-journal/:id" component={DecorateRoute(GeneralJournalEntry, this.notifyProps)}/>

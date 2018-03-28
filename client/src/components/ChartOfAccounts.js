@@ -4,7 +4,7 @@ import { Glyphicon } from 'react-bootstrap';
 import './ChartOfAccounts.css';
 import './CommonChart.css';
 import Auth from '../api/Auth.js';
-import AccountsAPI from '../api/Accounts.js';
+import AccountsAPI from '../api/AccountsApi.js';
 import { Popover } from 'react-bootstrap';
 import { OverlayTrigger } from 'react-bootstrap';
 

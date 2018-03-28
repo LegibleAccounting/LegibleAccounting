@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import AccountsAPI from '../api/Accounts.js';
+import AccountsAPI from '../api/AccountsApi.js';
 
 class AccountLedger extends Component {
     constructor(props) {
