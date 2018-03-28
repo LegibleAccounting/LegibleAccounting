@@ -40,12 +40,12 @@ class UsersApi {
             });
     }
 
-    search(query) {
+    search(searchQuery, orderingQuery) {
     	if (!Auth.token) {
             return Promise.reject();
         }
 
-        return fetch(new JSONAPIRequest(`/api/users/?search=${query}`, Auth.token), {
+        return fetch(new JSONAPIRequest(`/api/users/?search=${searchQuery}&ordering=${orderingQuery}`, Auth.token), {
             method: 'GET'
         })
             .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))

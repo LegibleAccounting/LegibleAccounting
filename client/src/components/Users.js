@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Glyphicon } from 'react-bootstrap';
+import SortWidget from './SortWidget.js';
 import './Users.css';
 import './CommonChart.css';
 import Auth from '../api/Auth.js';
@@ -10,9 +12,10 @@ class Users extends Component {
         super(props);
 
         this.state = {
-          users: [],
-          ogUsers: [],
-          searchText: ''
+            users: [],
+            ogUsers: [],
+            searchText: '',
+            sortState: {}
         };
 
         this.searchTextChanged = this.searchTextChanged.bind(this);
@@ -46,9 +49,18 @@ class Users extends Component {
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                            <th className="username">Username</th>
-                            <th className="type">Type</th>
-                            <th className="is_active">Active?</th>
+                            <th className="username">Username <SortWidget
+                              state={this.state.sortState.username}
+                              onClick={this.sortByUsername.bind(this)} />
+                            </th>
+                            <th className="type">Type <SortWidget
+                              state={this.state.sortState.groups__name}
+                              onClick={this.sortByGroupsName.bind(this)} />
+                            </th>
+                            <th className="is_active">Active? <SortWidget
+                              state={this.state.sortState.is_active}
+                              onClick={this.sortByIsActive.bind(this)} />
+                            </th>
                             <th className="edits"></th>
                         </tr>
                       </thead>
@@ -90,12 +102,47 @@ class Users extends Component {
 
     search(event) {
         event.preventDefault();
-        UsersAPI.search(false, this.state.searchText)
+        UsersAPI.search(this.state.searchText)
             .then(data => {
                 this.setState({
                     users: data
                 });
             });
+    }
+
+    _sort(fieldName) {
+        let promise, nextSortState;
+        if (!this.state.sortState[fieldName]) {
+            promise = UsersAPI.search(this.state.searchText, `${fieldName}`);
+            nextSortState = 'desc';
+        } else if (this.state.sortState[fieldName] === 'desc') {
+            promise = UsersAPI.search(this.state.searchText, `-${fieldName}`);
+            nextSortState = 'asc';
+        } else {
+            promise = UsersAPI.search(this.state.searchText);
+            nextSortState = null;
+        }
+
+        promise.then((users) => {
+            this.setState({
+                users,
+                sortState: {
+                    [fieldName]: nextSortState
+                }
+            })
+        });
+    }
+
+    sortByUsername() {
+        this._sort('username');
+    }
+
+    sortByGroupsName() {
+        this._sort('groups__name');
+    }
+
+    sortByIsActive() {
+        this._sort('is_active');
     }
 }
 

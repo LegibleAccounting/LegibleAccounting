@@ -1,0 +1,14 @@
+.sort-widget .sorter {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-left: 0.5em;
+    padding: 0.25em;
+}
+
+.sort-widget .sorter:hover {
+    border: 1px solid #ccc;
+}
+
+.sort-widget .sorter-inactive {
+    color: #CCC;
+}

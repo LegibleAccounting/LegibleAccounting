@@ -59,6 +59,9 @@ def current_view(request):
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
+    filter_backends = (SearchFilter, OrderingFilter,)
+    search_fields = ('username', 'groups__name',)
+    ordering_fields = ('username', 'is_active', 'groups__name',)
     permission_classes = (DjangoModelPermissions, LAAuthModelReadPermission,)
 
     def get_serializer_class(self):
