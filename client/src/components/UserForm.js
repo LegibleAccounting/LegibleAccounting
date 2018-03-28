@@ -153,8 +153,18 @@ class UserForm extends Component {
                     redirectToUsersPage: true
                 });
             })
-            .catch(() => {
-                this.props.onNotifyError(`Failed to ${this.state.userModel.id === undefined ? 'create' : 'update' } user.`);
+            .catch((response) => {
+                let errorFields = Object.keys(response);
+                if (!errorFields.length) {
+                    this.props.onNotifyError(`Failed to ${this.state.userModel.id === undefined ? 'create' : 'update' } user.`);
+                    return;
+                }
+
+                if (response.username && response.username.length) {
+                    this.props.onNotifyError('Username: ' + response.username[0]);
+                } else {
+                    this.props.onNotifyError(`Failed to ${this.state.userModel.id === undefined ? 'create' : 'update' } user.`);
+                }
             });
     }
   }

@@ -68,14 +68,15 @@ class UsersApi {
             method: 'POST',
             body: JSON.stringify(data)
         })
-          .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-          .then(response => response = response.json())
-          .then((response) => {
-            return Promise.resolve(response);
-          })
-          .catch((response) => {
-            return Promise.reject(response);
-          });
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
+            });
     }
 
     update(data) {
@@ -87,14 +88,15 @@ class UsersApi {
             method: 'PUT',
             body: JSON.stringify(data)
         })
-          .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-          .then(response => response = response.json())
-          .then((response) => {
-            return Promise.resolve(response);
-          })
-          .catch((response) => {
-            return Promise.reject(response);
-          });
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
+            })
     }
 }
 
