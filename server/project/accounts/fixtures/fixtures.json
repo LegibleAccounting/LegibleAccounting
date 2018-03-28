@@ -6,7 +6,7 @@
         "category": 0,
         "classification": 1,
         "name": "Cash Related Accounts",
-        "liquidity": 1,
+        "order": 1,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -17,7 +17,7 @@
         "category": 0,
         "classification": 1,
         "name": "Receivables",
-        "liquidity": 2,
+        "order": 2,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -28,7 +28,7 @@
         "category": 0,
         "classification": 1,
         "name": "Inventories",
-        "liquidity": 3,
+        "order": 3,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -39,7 +39,7 @@
         "category": 0,
         "classification": 1,
         "name": "Prepaid Items",
-        "liquidity": 4,
+        "order": 4,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -50,7 +50,7 @@
         "category": 0,
         "classification": 2,
         "name": "Long-Term Investments",
-        "liquidity": 5,
+        "order": 5,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -61,7 +61,7 @@
         "category": 0,
         "classification": 2,
         "name": "Land",
-        "liquidity": 6,
+        "order": 6,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -72,7 +72,7 @@
         "category": 0,
         "classification": 2,
         "name": "Buildings",
-        "liquidity": 7,
+        "order": 7,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -83,7 +83,7 @@
         "category": 0,
         "classification": 2,
         "name": "Equipment",
-        "liquidity": 8,
+        "order": 8,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -94,7 +94,7 @@
         "category": 0,
         "classification": 2,
         "name": "Intangibles",
-        "liquidity": 9,
+        "order": 9,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -105,7 +105,7 @@
         "category": 1,
         "classification": 1,
         "name": "Short-Term Payables",
-        "liquidity": 10,
+        "order": 10,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -116,7 +116,7 @@
         "category": 1,
         "classification": 1,
         "name": "Employee Payroll Related Payables",
-        "liquidity": 11,
+        "order": 11,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -127,7 +127,7 @@
         "category": 1,
         "classification": 1,
         "name": "Employer Payroll Related Payables",
-        "liquidity": 12,
+        "order": 12,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -138,7 +138,7 @@
         "category": 1,
         "classification": 1,
         "name": "Sales Tax",
-        "liquidity": 13,
+        "order": 13,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -149,7 +149,7 @@
         "category": 1,
         "classification": 1,
         "name": "Deferred Revenues and Current Portion of Long-Term Debt",
-        "liquidity": 14,
+        "order": 14,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -160,7 +160,7 @@
         "category": 1,
         "classification": 2,
         "name": "Long-Term Liabilities",
-        "liquidity": 15,
+        "order": 15,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -171,7 +171,7 @@
         "category": 2,
         "classification": 0,
         "name": "Owner's Equity",
-        "liquidity": 16,
+        "order": 16,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -182,7 +182,7 @@
         "category": 3,
         "classification": 0,
         "name": "Operating Revenues",
-        "liquidity": 17,
+        "order": 17,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -193,7 +193,7 @@
         "category": 3,
         "classification": 0,
         "name": "Other Revenues",
-        "liquidity": 18,
+        "order": 18,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -204,7 +204,7 @@
         "category": 4,
         "classification": 0,
         "name": "Cost of Goods Sold",
-        "liquidity": 19,
+        "order": 19,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -215,7 +215,7 @@
         "category": 4,
         "classification": 0,
         "name": "Selling Expenses",
-        "liquidity": 20,
+        "order": 20,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -226,7 +226,7 @@
         "category": 4,
         "classification": 0,
         "name": "General and Administrative Expenses",
-        "liquidity": 21,
+        "order": 21,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
@@ -237,7 +237,7 @@
         "category": 4,
         "classification": 0,
         "name": "Other Expenses",
-        "liquidity": 22,
+        "order": 22,
         "created_date": "2018-02-01T00:00:00Z"
     }
 },
