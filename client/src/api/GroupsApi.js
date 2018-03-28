@@ -3,7 +3,7 @@ import Auth from './Auth.js';
 
 class GroupsApi {
     getAll() {
-		if (!Auth.token) {
+        if (!Auth.token) {
             return Promise.reject();
         }
 
