@@ -15,8 +15,20 @@ from .serializers import UserSerializer, WriteUserSerializer, GroupSerializer, L
 @permission_classes((AllowAny,))
 @parser_classes((JSONParser,))
 def register_view(request):
+    if len(request.data['username']) == 0:
+        return Response({
+            'username': ['The username must be provided.']
+        }, status=status.HTTP_400_BAD_REQUEST)
+
+    if len(request.data['password']) == 0:
+        return Response({
+            'password': ['The password must be provided.']
+        }, status=status.HTTP_400_BAD_REQUEST)
+
     if request.data['password'] != request.data['password2']:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response({
+            'password': ['The passwords do not match.']
+        }, status=status.HTTP_400_BAD_REQUEST)
 
     instance = User.objects.create_user(
         request.data['username'],

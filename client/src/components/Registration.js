@@ -93,8 +93,20 @@ class Registration extends Component {
                     registered: true
                 });
             })
-            .catch(() => {
-                alert('Failed to submit Account Request.');
+            .catch((response) => {
+                let errorFields = Object.keys(response);
+                if (!errorFields.length) {
+                    alert('Failed to submit Account Request.');
+                    return;
+                }
+
+                if (response.username && response.username.length) {
+                  alert('Username: ' + response.username[0]);
+                } else if (response.password && response.password.length) {
+                  alert('Password: ' + response.password[0]);
+                } else {
+                  alert('Failed to submit Account Request.');
+                }
             });
     }
 }
