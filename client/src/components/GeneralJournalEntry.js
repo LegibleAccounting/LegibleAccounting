@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import { Nav, NavItem } from 'react-bootstrap';
 import './GeneralJournal.css';
 import './CommonChart.css';
 import GeneralJournalAPI from '../api/GeneralJournal.js';
-import AccountsAPI from '../api/AccountsApi.js';
 
-import JournalEntryCreate from './JournalEntryCreate.js';
 import JournalEntry from './JournalEntry.js';
 
 class GeneralJournalEntry extends Component {

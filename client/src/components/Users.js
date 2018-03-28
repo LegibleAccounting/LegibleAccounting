@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Glyphicon } from 'react-bootstrap';
 import SortWidget from './SortWidget.js';
 import './Users.css';
 import './CommonChart.css';
-import Auth from '../api/Auth.js';
 import UsersAPI from '../api/UsersApi.js';
 
 class Users extends Component {

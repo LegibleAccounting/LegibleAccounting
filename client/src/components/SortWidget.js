@@ -4,10 +4,6 @@ import { Glyphicon } from 'react-bootstrap';
 import './SortWidget.css';
 
 class SortWidget extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <span className="sort-widget">
