@@ -2,18 +2,12 @@ import { JSONAPIRequest } from './util/Request.js';
 import Auth from './Auth.js';
 
 class GroupsApi {
-    getAll(active) {
+    getAll() {
 		if (!Auth.token) {
             return Promise.reject();
         }
 
-        // determine if searching active users
-        var requestURL = '/api/groups/';
-        if (active === true || active === false) {
-            requestURL += '?is_active=' + (active ? 'true' : 'false');
-        }
-
-        return fetch(new JSONAPIRequest(requestURL, Auth.token), {
+        return fetch(new JSONAPIRequest('/api/groups/', Auth.token), {
             method: 'GET'
         })
             .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
