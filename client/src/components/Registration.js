@@ -23,9 +23,10 @@ class Registration extends Component {
     render() {
         if (this.state.registered) {
             return (
-                <div>
+                <div className="Login">
                     <h1>Your registration request has been processed successfully.</h1>
                     <p>A system administrator will have to review your request before you may use the system.</p>
+                    <NavLink style={{ 'color': 'white' }} to="/">Back to Homepage</NavLink>
                 </div>
             );
         }
