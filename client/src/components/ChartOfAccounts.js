@@ -116,7 +116,7 @@ class ChartOfAccounts extends Component {
                                     <NavLink to={`/accounts/${item.id}/ledger`}>{item.account_number}</NavLink>
                                 </td>
 						    	<td>{item.name}</td>
-                                <td>{item.account_type.name}</td>
+                                <td>{item.account_type.category}</td>
                                 <td>{item.account_type.classification}</td>
 						    	<td align="right">{ item.balance }</td>
                                 <td className="hidden-xs hidden-sm">administrator1</td>
