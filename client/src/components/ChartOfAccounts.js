@@ -79,10 +79,10 @@ class ChartOfAccounts extends Component {
                             {
                                 !this.state.sortState.accountNumber || this.state.sortState.accountNumber === 'asc' ? (
                                     <Glyphicon glyph="chevron-up" className={!this.state.sortState.accountNumber ? 'sorter sorter-inactive' : 'sorter'}
-                                      onClick={this.sort.bind(this, 'accountNumber', ['account_type__liquidity', 'order'])} />
+                                      onClick={this.sort.bind(this, 'accountNumber', ['account_type__order', 'order'])} />
                                 ): (
                                     <Glyphicon glyph="chevron-down" className="sorter"
-                                      onClick={this.sort.bind(this, 'accountNumber', ['account_type__liquidity', 'order'])} />
+                                      onClick={this.sort.bind(this, 'accountNumber', ['account_type__order', 'order'])} />
                                 )
                             }
                             { this.state.sortState.accountNumber }
