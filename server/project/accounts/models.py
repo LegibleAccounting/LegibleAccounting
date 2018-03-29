@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from auditlog.registry import auditlog
 from django.db import models
 
+from .utils import format_currency
+
 NUM_ACCOUNTS_PER_ACCOUNT_TYPE = 100
 
 ACCOUNT_CATEGORIES = (
@@ -68,12 +70,12 @@ class Account(models.Model):
             if t.journal_entry.is_approved:
                 post_balance += (t.value * pow(-1, int(self.is_debit() ^ t.is_debit)))
                 transactions.append({
-                    'balance': '${:,.2f}'.format(post_balance),
+                    'balance': format_currency(post_balance),
                     'is_debit': t.is_debit,
                     'journal_entry_id': t.journal_entry.id,
                     'date': t.journal_entry.date,
                     'journal_entry_description': t.journal_entry.description,
-                    'value': '${:,.2f}'.format(t.value)
+                    'value': format_currency(t.value)
                 })
 
         return transactions
