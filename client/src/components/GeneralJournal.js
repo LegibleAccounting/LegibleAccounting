@@ -56,7 +56,7 @@ class GeneralJournal extends Component {
         return (
             <div className="generalJournal">
                 <div className="titleBar">
-                    <h1>General Journal</h1>
+                    <h1>Journalize</h1>
                     {
                        <button className="btn btn-primary newButton" type="button" onClick={this.toggleNewJournalUI}>+ Add</button>
                     }

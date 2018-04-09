@@ -31,7 +31,7 @@ class Sidebar extends Component {
                     {
                         (Auth.currentUserIsManager() || Auth.currentUserIsAccountant()) && (
                             <li>
-                                <NavLink to="/general-journal">General Journal</NavLink>
+                                <NavLink to="/general-journal">Journalize</NavLink>
                             </li>
                         )
                     }
