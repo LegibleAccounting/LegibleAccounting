@@ -59,7 +59,7 @@ class AccountLedger extends Component {
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>{this.state.ledger.initial_balance}</td>
+                                <td align="right">{this.state.ledger.initial_balance}</td>
                             </tr>
                             {!this.state.isLoading && this.state.ledger.balances.length ? (
                                 this.state.ledger.balances.map((item, index) => (
@@ -69,9 +69,9 @@ class AccountLedger extends Component {
                                             <NavLink to={`/general-journal/${item.journal_entry_id}`}>{item.journal_entry_id}</NavLink>
                                         </td>
                                         <td>{item.journal_entry_description}</td>
-                                        <td>{item.is_debit ? item.value : ''}</td>
-                                        <td>{!item.is_debit ? item.value : ''}</td>
-                                        <td>{item.balance}</td>
+                                        <td align="right">{item.is_debit ? item.value : ''}</td>
+                                        <td align="right">{!item.is_debit ? item.value : ''}</td>
+                                        <td align="right">{item.balance}</td>
                                     </tr>
                                 ))
                             ) : (
