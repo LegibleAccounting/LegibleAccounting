@@ -16,7 +16,7 @@ class JournalEntryViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend,)
     search_fields = ('date', 'description', 'creator__username',)
     filter_fields = {
-        'date': ['icontains'],
+        'date': ['range'],
         'description': ['icontains'],
         'creator__username': ['icontains'],
         'is_approved': ['exact']
