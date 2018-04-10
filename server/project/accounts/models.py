@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from auditlog.registry import auditlog
 from django.db import models
 
-from .utils import format_currency
+from project.utils import format_currency
 
 NUM_ACCOUNTS_PER_ACCOUNT_TYPE = 100
 

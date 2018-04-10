@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import JournalEntry, Transaction, Receipt
 from accounts.serializers import RetrieveAccountSerializer
 from project.serializers import UserSerializer
+from project.utils import format_currency
 
 from drf_extra_fields.fields import Base64FileField
 
@@ -55,6 +56,10 @@ class RetrieveTransactionSerializer(serializers.ModelSerializer):
         fields = ('date', 'affected_account', 'journal_entry', 'value', 'is_debit')
 
     affected_account = RetrieveAccountSerializer()
+    value = serializers.SerializerMethodField()
+
+    def get_value(self, obj):
+        return format_currency(obj.value, False)
 
 
 class CreateTransactionSerializer(serializers.ModelSerializer):

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Account, AccountType
-from .utils import format_currency
+from project.utils import format_currency
 
 
 class AccountTypeSerializer(serializers.ModelSerializer):
