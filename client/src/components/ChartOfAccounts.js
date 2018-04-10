@@ -101,7 +101,7 @@ class ChartOfAccounts extends Component {
                             </th>
                             <th className="accountType">Type</th>
                             <th className="accountTerm">Term</th>
-						    <th className="initialBalance">Balance</th>
+						    <th className="initialBalance text-right">Balance</th>
                             <th className="creator hidden-xs hidden-sm">Created By</th>
                             <th className="createDate hidden-xs hidden-sm"><div>Date</div>Created</th> 
 						    <th className="comments">Comments</th>

@@ -47,9 +47,9 @@ class AccountLedger extends Component {
                                 <th>Date</th>
                                 <th>Reference No.</th>
                                 <th>Description</th>
-                                <th>Debit</th>
-                                <th>Credit</th>
-                                <th>Balance</th>
+                                <th className="text-right">Debit</th>
+                                <th className="text-right">Credit</th>
+                                <th className="text-right">Balance</th>
                             </tr>
                         </thead>
                         <tbody>
