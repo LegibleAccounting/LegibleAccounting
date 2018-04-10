@@ -18,6 +18,8 @@ class GeneralJournalEntry extends Component {
         if (id) {
 	        GeneralJournalAPI.getOne(id)
 	            .then((entry) => {
+                    entry.transactions = this.getIndexedTransactions(entry.transactions);
+
 	                this.setState({
 	                    entry
 	                });
@@ -57,6 +59,24 @@ class GeneralJournalEntry extends Component {
                 </div>
             </div>
         );
+    }
+
+    getIndexedTransactions(transactions) {
+        let offset = null;
+        return transactions
+            .map((transaction, index) => {
+                if (transaction.is_debit) {
+                    transaction.typeIndex = index;
+                } else {
+                    if (offset === null) {
+                        offset = index;
+                    }
+
+                    transaction.typeIndex = index - offset;
+                }
+
+                return transaction;
+            });
     }
 
     approveJournalEntry(journalEntryId) {
