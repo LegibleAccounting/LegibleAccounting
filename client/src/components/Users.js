@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import SortWidget from './SortWidget.js';
 import './Users.css';
 import './CommonChart.css';
-import Auth from '../api/Auth.js';
 import UsersAPI from '../api/UsersApi.js';
 
 class Users extends Component {
@@ -10,9 +10,10 @@ class Users extends Component {
         super(props);
 
         this.state = {
-          users: [],
-          ogUsers: [],
-          searchText: ''
+            users: [],
+            ogUsers: [],
+            searchText: '',
+            sortState: {}
         };
 
         this.searchTextChanged = this.searchTextChanged.bind(this);
@@ -32,13 +33,7 @@ class Users extends Component {
             <div className="users">
                 <div className="titleBar">
                     <h1>Users</h1>
-                    {
-                        Auth.currentUser.groups.find(group => group.name === 'Administrator') ? (
-                            <NavLink className="NavLink btn btn-primary newButton" to="/users/add">New +</NavLink> 
-                        ) : (
-                            <span></span>
-                        )
-                    }
+                    <NavLink className="NavLink btn btn-primary newButton" to="/users/add">New +</NavLink>
                     <div className="filler"></div>
                     <div className="searchContainer btn-group">
                         <form onSubmit={this.search}>
@@ -52,38 +47,41 @@ class Users extends Component {
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                            <th className="usersNumber">#</th>
-                            <th className="name">Name</th>
-                            <th className="type">Type</th>
+                            <th className="username">Username <SortWidget
+                              state={this.state.sortState.username}
+                              onClick={this.sortByUsername.bind(this)} />
+                            </th>
+                            <th className="type">Type <SortWidget
+                              state={this.state.sortState.groups__name}
+                              onClick={this.sortByGroupsName.bind(this)} />
+                            </th>
+                            <th className="is_active">Active? <SortWidget
+                              state={this.state.sortState.is_active}
+                              onClick={this.sortByIsActive.bind(this)} />
+                            </th>
                             <th className="edits"></th>
                         </tr>
                       </thead>
-                      <tbody>
-                        { this.state.users.length ? (
-                          this.state.users.map((item, index) => (
-                            <tr key={item.id}>
-                                <td>{item.user_number}</td>
-                                <td>{item.name}</td>
-                                <td>{item.user_type.category}</td>
-                                <td>
-                                {
-                                    Auth.currentUser.groups.find(group => group.name === 'Administrator' || group.name === 'Manager') ? (
+                       <tbody>
+                        { 
+                          	this.state.users.map((item, index) => (
+                          		<tr key={index}>
+	                          		<td>{item.username}</td>
+			                        
+			                        <td>
+		                          	{
+		                          		item.groups.map((group, index) => group.name + (index !== item.groups.length - 1 ? ', ': ''))
+		                          	}	
+  				                     </td>
+
+			                        <td>{item.is_active ? "Yes" : "No"}</td>
+                                    <td>
                                         <NavLink className="NavLink btn btn-primary newButton" to={`/users/${item.id}`}>Edit</NavLink>
-                                    ) : (
-                                        <span></span>
-                                    )
-                                }
-                                </td>
-                            </tr>
-                          ))
-                        ) : (
-                            <tr>
-                                <td></td>
-                                <td>No Users</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        )}
+                                    </td>
+		                    	</tr>
+                          	))
+	                        
+                   		}
                        </tbody>
                     </table>
                 </div>
@@ -102,12 +100,47 @@ class Users extends Component {
 
     search(event) {
         event.preventDefault();
-         UsersAPI.search(false, this.state.searchText)
-        .then(data => {
-            this.setState({
-                users: data
+        UsersAPI.search(this.state.searchText)
+            .then(data => {
+                this.setState({
+                    users: data
+                });
             });
+    }
+
+    _sort(fieldName) {
+        let promise, nextSortState;
+        if (!this.state.sortState[fieldName]) {
+            promise = UsersAPI.search(this.state.searchText, `${fieldName}`);
+            nextSortState = 'desc';
+        } else if (this.state.sortState[fieldName] === 'desc') {
+            promise = UsersAPI.search(this.state.searchText, `-${fieldName}`);
+            nextSortState = 'asc';
+        } else {
+            promise = UsersAPI.search(this.state.searchText);
+            nextSortState = null;
+        }
+
+        promise.then((users) => {
+            this.setState({
+                users,
+                sortState: {
+                    [fieldName]: nextSortState
+                }
+            })
         });
+    }
+
+    sortByUsername() {
+        this._sort('username');
+    }
+
+    sortByGroupsName() {
+        this._sort('groups__name');
+    }
+
+    sortByIsActive() {
+        this._sort('is_active');
     }
 }
 

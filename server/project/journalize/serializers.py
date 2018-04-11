@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import JournalEntry, Transaction, Receipt
 from accounts.serializers import RetrieveAccountSerializer
 from project.serializers import UserSerializer
+from project.utils import format_currency
 
 from drf_extra_fields.fields import Base64FileField
 
@@ -11,6 +12,7 @@ class ReceiptFileField(Base64FileField):
     ALLOWED_TYPES = ['xlsx', 'xls', 'docx', 'doc', 'pdf', 'txt']
 
     def get_file_extension(self, filename, decoded_file):
+
         file_type = magic.from_buffer(decoded_file)
 
         if file_type == 'Microsoft Excel 2007+':
@@ -19,7 +21,7 @@ class ReceiptFileField(Base64FileField):
             return 'docx'
         elif 'Microsoft Excel' in file_type:
             return 'xls'
-        elif 'Microsoft Word' in file_type:
+        elif 'Microsoft Word' in file_type or 'Microsoft Office Word' in file_type:
             return 'doc'
         elif 'PDF document' in file_type:
             return 'pdf'
@@ -51,18 +53,20 @@ class ReceiptSerializer(serializers.ModelSerializer):
 class RetrieveTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ('date', 'affected_account', 'journal_entry', 'value', 'is_debit', 'receipts',)
+        fields = ('date', 'affected_account', 'journal_entry', 'value', 'is_debit')
 
     affected_account = RetrieveAccountSerializer()
-    receipts = ReceiptSerializer(many=True)
+    value = serializers.SerializerMethodField()
+
+    def get_value(self, obj):
+        return format_currency(obj.value, False)
 
 
 class CreateTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ('affected_account', 'value', 'is_debit', 'receipts',)
+        fields = ('affected_account', 'value', 'is_debit')
 
-    receipts = ReceiptSerializer(many=True)
 
     def validate_value(self, value):
         if value == 0:
@@ -76,8 +80,9 @@ class CreateTransactionSerializer(serializers.ModelSerializer):
 class RetrieveJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalEntry
-        fields = ('id', 'date_created', 'date', 'entry_type', 'is_approved', 'rejection_memo', 'description', 'creator', 'transactions',)
+        fields = ('id', 'date_created', 'date', 'entry_type', 'is_approved', 'memo', 'description', 'creator', 'transactions', 'receipts',)
 
+    receipts = ReceiptSerializer(many=True)
     transactions = RetrieveTransactionSerializer(many=True)
     creator = UserSerializer()
     entry_type = serializers.SerializerMethodField()
@@ -89,9 +94,10 @@ class RetrieveJournalEntrySerializer(serializers.ModelSerializer):
 class CreateJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalEntry
-        fields = ('date', 'entry_type', 'description', 'transactions',)
+        fields = ('date', 'entry_type', 'description', 'transactions', 'receipts',)
 
     transactions = CreateTransactionSerializer(many=True)
+    receipts = ReceiptSerializer(many=True)
 
     def validate_transactions(self, value):
         if len(value) == 0:
@@ -101,7 +107,7 @@ class CreateJournalEntrySerializer(serializers.ModelSerializer):
         for transaction in value:
             last_length = len(used_accounts)
             used_accounts.add(transaction['affected_account'])
-            if (last_length == len(used_accounts)):
+            if last_length == len(used_accounts):
                 raise serializers.ValidationError('Two transactions cannot be made to the same account.')
 
         transaction_sum = reduce(lambda accumulated, update:
@@ -114,15 +120,16 @@ class CreateJournalEntrySerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         transactions = validated_data.pop('transactions')
+        receipts = validated_data.pop('receipts')
 
         journal_entry = JournalEntry.objects.create(**validated_data)
 
-        for transaction in transactions:
-            receipts = transaction.pop('receipts')
-            transaction = Transaction.objects.create(journal_entry=journal_entry, **transaction)
+        for receipt in receipts:
+            Receipt.objects.create(journal_entry=journal_entry, **receipt)
 
-            for receipt in receipts:
-                Receipt.objects.create(of_transaction=transaction, **receipt)
+        for transaction in transactions:
+            Transaction.objects.create(journal_entry=journal_entry, **transaction)
+
 
         return journal_entry
 
@@ -130,17 +137,17 @@ class CreateJournalEntrySerializer(serializers.ModelSerializer):
 class UpdateJournalEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalEntry
-        fields = ('is_approved', 'rejection_memo',)
+        fields = ('is_approved', 'memo',)
 
     def update(self, instance, validated_data):
         if instance.is_approved is not None:
             raise serializers.ValidationError('The journal entry has already been approved/denied and can not be changed!')
 
-        if (validated_data.get('is_approved') == False and len(validated_data.get('rejection_memo')) == 0):
+        if validated_data.get('is_approved') == False and len(validated_data.get('memo')) == 0:
             raise serializers.ValidationError('A rejection reason must be provided for denying the journal entry.')
 
         instance.is_approved = validated_data.get('is_approved')
-        instance.rejection_memo = validated_data.get('rejection_memo')
+        instance.memo = validated_data.get('memo')
         instance.save()
 
         return instance

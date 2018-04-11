@@ -1,18 +1,23 @@
 from rest_framework import serializers
 from .models import Account, AccountType
+from project.utils import format_currency
 
 
 class AccountTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = AccountType
-        fields = ('id', 'category', 'name', 'starting_number',)
+        fields = ('id', 'category', 'classification', 'name', 'starting_number',)
 
 
 class RetrieveAccountTypeSerializer(AccountTypeSerializer):
     category = serializers.SerializerMethodField()
+    classification = serializers.SerializerMethodField()
 
     def get_category(self, obj):
         return obj.get_category_display()
+
+    def get_classification(self, obj):
+        return obj.get_classification_display()
 
 
 ACCOUNT_BASE_FIELDS = ('id', 'account_type', 'name', 'description', 'initial_balance', 'created_date', 'is_active', 'order',)
@@ -30,7 +35,6 @@ class AccountSerializer(serializers.ModelSerializer):
         return super(AccountSerializer, self).update(instance, validated_data)
 
 
-
 class RetrieveAccountSerializer(AccountSerializer):
     class Meta:
         model = Account
@@ -40,4 +44,25 @@ class RetrieveAccountSerializer(AccountSerializer):
     balance = serializers.SerializerMethodField()
 
     def get_balance(self, obj):
-        return '${:,.2f}'.format(obj.get_balance())
+        return format_currency(obj.get_balance())
+
+
+class LedgerAccountSerializer(AccountSerializer):
+    class Meta:
+        model = Account
+        fields = ACCOUNT_BASE_FIELDS + ('account_number', 'balance', 'balances')
+
+
+    account_type = RetrieveAccountTypeSerializer()
+    initial_balance = serializers.SerializerMethodField()
+    balance = serializers.SerializerMethodField()
+    balances = serializers.SerializerMethodField()
+
+    def get_initial_balance(self, obj):
+        return format_currency(obj.initial_balance)
+
+    def get_balance(self, obj):
+        return format_currency(obj.get_balance())
+
+    def get_balances(self, obj):
+        return obj.get_transaction_history()

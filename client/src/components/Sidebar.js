@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Auth from '../api/Auth.js';
@@ -29,17 +28,25 @@ class Sidebar extends Component {
                     <li>
                         <NavLink to="/accounts">Accounts</NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/users">Users</NavLink>
-                    </li>                   
-
                     {
-                        Auth.currentUser.groups.find(group => group.name === 'Administrator') ? (
+                        (Auth.currentUserIsManager() || Auth.currentUserIsAccountant()) && (
+                            <li>
+                                <NavLink to="/general-journal">Journalize</NavLink>
+                            </li>
+                        )
+                    }
+                    {
+                        Auth.currentUserIsAdministrator() && (
+                            <li>
+                                <NavLink to="/users">Users</NavLink>
+                            </li>
+                        )
+                    }
+                    {
+                        Auth.currentUserIsAdministrator() && (
                             <li>
                                 <NavLink to="/logs">Event Log</NavLink>
                             </li>
-                        ) : (
-                            <span></span>
                         )
                     }
                 </ul>

@@ -1,18 +1,56 @@
-.chartOfAccounts {
-}
-
 .chartOfAccounts .accountNumber {
-	width: 10px;
+	min-width: 4rem;
 }
 
 .chartOfAccounts .name {
-	width: 30%;
+	width: auto;
+}
+
+.chartOfAccounts .accountType {
+    min-width: 9rem;
+}
+
+.chartOfAccounts .accountTerm {
+    min-width: 9rem;
 }
 
 .chartOfAccounts .initialBalance { 
-	width: 20px;
+	min-width: 8rem;
+}
+
+.chartOfAccounts .creator {
+    min-width: 8rem;
+}
+
+.chartOfAccounts .createDate {
+    min-width: 10rem;
+}
+
+.chartOfAccounts .comments {
+    min-width: 1rem;
 }
 
 .chartOfAccounts .edits {
-	width: 40px;
+	min-width: 4rem;
+}
+
+.chartOfAccounts .dateTableData {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chartOfAccounts .sorter {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-left: 0.5em;
+    padding: 0.25em;
+}
+
+.chartOfAccounts .sorter:hover {
+    border: 1px solid #ccc;
+}
+
+.chartOfAccounts .sorter-inactive {
+    color: #CCC;
 }

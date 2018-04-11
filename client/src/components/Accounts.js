@@ -5,6 +5,8 @@ import './Accounts.css';
 import './CommonChart.css';
 import Auth from '../api/Auth.js';
 import AccountsAPI from '../api/AccountsApi.js';
+import { Popover } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 
 class Accounts extends Component {
     constructor(props) {
@@ -35,10 +37,10 @@ class Accounts extends Component {
         return (
             <div className="accounts">
                 <div className="titleBar">
-                    <h1>AccountsApi</h1>
+                    <h1>Accounts</h1>
                     {
                         Auth.currentUser.groups.find(group => group.name === 'Administrator') ? (
-                            <NavLink className="NavLink btn btn-primary newButton" to="/accounts/add">New +</NavLink> 
+                            <NavLink className="NavLink btn btn-primary newButton" to="/accounts/add">+ New</NavLink> 
                         ) : (
                             <span></span>
                         )
@@ -56,14 +58,14 @@ class Accounts extends Component {
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                            <th className="accountNumber">#
+                            <th className="accountNumber"><div>Account</div>Number
                             {
                                 !this.state.sortState.accountNumber || this.state.sortState.accountNumber === 'asc' ? (
                                     <Glyphicon glyph="chevron-up" className={!this.state.sortState.accountNumber ? 'sorter sorter-inactive' : 'sorter'}
-                                      onClick={this.sort.bind(this, 'accountNumber', ['account_type__liquidity', 'order'])} />
+                                      onClick={this.sort.bind(this, 'accountNumber', ['account_type__order', 'order'])} />
                                 ): (
                                     <Glyphicon glyph="chevron-down" className="sorter"
-                                      onClick={this.sort.bind(this, 'accountNumber', ['account_type__liquidity', 'order'])} />
+                                      onClick={this.sort.bind(this, 'accountNumber', ['account_type__order', 'order'])} />
                                 )
                             }
                             { this.state.sortState.accountNumber }
@@ -92,7 +94,7 @@ class Accounts extends Component {
                             }
                             { this.state.sortState.account_type__category }
                             </th>
-                            <th className="subtype">Sub-Type
+                            <th className="subtype hidden-xs hidden-sm">Sub-Type
                             {
                                 !this.state.sortState.account_type__name || this.state.sortState.account_type__name === 'asc' ? (
                                     <Glyphicon glyph="chevron-up" className={!this.state.sortState.account_type__name ? 'sorter sorter-inactive' : 'sorter'}
@@ -104,6 +106,8 @@ class Accounts extends Component {
                             }
                             { this.state.sortState.account_type__name }
                             </th>
+                            <th className="term">Term</th>
+                            <th className="comments hidden-xs hidden-sm">Comments</th>
                             <th className="edits"></th>
                         </tr>
                       </thead>
@@ -111,14 +115,35 @@ class Accounts extends Component {
                         { !this.state.isLoading && this.state.accounts.length ? (
                           this.state.accounts.map((item, index) => (
                             <tr key={item.id}>
-                                <td>{item.account_number}</td>
+                                <td>
+                                    <NavLink to={`/accounts/${item.id}/ledger`}>{item.account_number}</NavLink>
+                                </td>
                                 <td>{item.name}</td>
                                 <td>{item.account_type.category}</td>
-                                <td>{item.account_type.name}</td>
+                                <td className="hidden-xs hidden-sm">{item.account_type.name}</td>
+                                <td>{item.account_type.classification}</td>
+                                <td align="center" className="comments hidden-xs hidden-sm">
+                                <OverlayTrigger
+                                  trigger="click"
+                                  rootClose
+                                  placement="bottom"
+                                  overlay={
+                                      <Popover id="popover-trigger-click-root-close" title="Comments">
+                                        {
+
+                                            <div className="description">{item.description}</div>
+                                        }
+                                      </Popover>
+                                  }>
+                                    <span
+                                        className="glyphicon glyphicon-list-alt glyphiconButton"
+                                        style={{ visibility: item.description === "" && 'hidden' }}>
+                                    </span>
+                                </OverlayTrigger></td>
                                 <td>
                                 {
                                     Auth.currentUser.groups.find(group => group.name === 'Administrator' || group.name === 'Manager') ? (
-                                        <NavLink className="NavLink btn btn-primary newButton" to={`/accounts/${item.id}`}>Edit</NavLink>
+                                        <NavLink className="btn btn-primary newButton" to={`/accounts/${item.id}`}>Edit</NavLink>
                                     ) : (
                                         <span></span>
                                     )

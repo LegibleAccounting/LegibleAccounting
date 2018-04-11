@@ -1,0 +1,203 @@
+.generalJournal {
+
+}
+
+.generalJournal .journal-filters {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.dateWidth {
+	width: 60px;
+}
+
+.date-left-margin {
+	margin-left: 0.25em;
+}
+
+.auto-height {
+	height: auto;
+	margin-bottom: 1em;
+}
+
+.pad {
+	padding: 1em;
+}
+
+.pad-file-input {
+	padding: 0.5em 0.5em 1em 0.5em;
+}
+
+.gridHeading {
+	height: 15px;
+}
+
+.generalJournal .container {
+	width: var(--tableWidth);
+}
+
+.titleLine {
+	width: 100%;
+	height: 2px;
+	background-color: #D7D6D7;
+	margin-top: 10px;
+}
+
+.topOfEntryWrapper {
+	margin-top: 10px;
+	height: auto;
+}
+
+.bottomOfEntryWrapper {
+	height: auto;
+	overflow: hidden;
+}
+
+.accountEntryDropdownWrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+.accountEntryDropdown {
+	margin-bottom: 8px;
+	margin-right: 10px;
+}
+
+.debitAccountEntryDropdown {
+
+}
+
+.creditAccountEntryDropdown {
+	margin-left: 10%;
+}
+
+.accountEntryDropdown {
+	margin-bottom: 8px;
+	width: 50%;
+	height: 30px;
+}
+
+.entryAmount {
+	width: 90px;
+	margin-bottom: 8px;
+	height: 30px;
+	text-align:right;
+	margin-left: 10px;
+}
+
+.creditEntryAmount {
+}
+
+.debitEntryAmount {
+}
+
+.line {
+	width: 100%;
+	height: 1.5px;
+	background-color: #EAEAEA;
+}
+
+.description {
+	resize: none;
+}
+
+.descriptionWrapper {
+	margin-bottom: 10px;
+	margin-top: 10px;
+	width: 100%;
+	height: 100px;
+}
+
+.attachmentsWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.attachmentsTitleWrapper {
+	display: flex;
+	flex-direction: row;
+	height: 20px;
+}
+
+.attachmentsTitle {
+	margin-right: 15px;
+}
+
+.attachmentsContentWrapper {
+	margin-top: 10px;
+	margin-left: 10px;
+	overflow-y: scroll;
+	height: 85px;
+}
+
+.textButton {
+	color: var(--mainBlue);
+	background:none;
+    border:none;
+    padding:0;
+    text-align: left;
+}
+
+.textButton:hover {
+	color: var(--hoverBlue);
+}
+
+.entryAmountWrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+.dollarSignDebit {
+	font-size: 14px;
+	height: 100%;
+	line-height: 30px;
+}
+
+.dollarSignCredit {
+	font-size: 14px;
+	height: 100%;
+	line-height: 30px;
+}
+
+.attachmentButton {
+	 width: 180px;
+	 margin-bottom: 5px;
+}
+
+.removeAttachmentButton {
+	margin-left: 5px;
+}
+
+.addEntityButton:hover {
+	color: var(--hoverBlue);
+}
+
+.actionButtonsWrapper {
+	justify-content: center;
+	align-items: center;
+}
+
+.cancelButton {
+	background-color: white;
+	color: var(--mainBlue);
+	border-color: var(--mainBlue);
+	margin-right: 20px;
+}
+
+.cancelButton:hover{
+	color: var(--hoverBlue);
+	border-color: var(--hoverBlue);
+}
+
+.submitButton {
+	width: 130px;
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

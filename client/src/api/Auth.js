@@ -9,6 +9,22 @@ class Auth {
         this.token = Cookies.get(CSRF_COOKIE_NAME);
     }
 
+    register(data) {
+        return fetch(new JSONAPIRequest('/auth/register/', this.token), {
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
+            });
+    }
+
     authenticate(username, password) {
         return fetch(new JSONAPIRequest('/auth/login/', this.token), {
             method: 'POST',
@@ -65,6 +81,30 @@ class Auth {
                 // Consider how to handle this?
                 return Promise.reject(response);
             });
+    }
+
+    currentUserIsAccountant() {
+        if (!this.currentUser) {
+            return false;
+        }
+
+        return this.currentUser.groups.find(group => group.name === 'Accountant');
+    }
+
+    currentUserIsManager() {
+        if (!this.currentUser) {
+            return false;
+        }
+
+        return this.currentUser.groups.find(group => group.name === 'Manager');
+    }
+
+    currentUserIsAdministrator() {
+        if (!this.currentUser) {
+            return false;
+        }
+
+        return this.currentUser.groups.find(group => group.name === 'Administrator');
     }
 }
 

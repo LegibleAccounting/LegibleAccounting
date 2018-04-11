@@ -3,17 +3,11 @@ import Auth from './Auth.js';
 
 class UsersApi {
     getAll(active) {
-		if (!Auth.token) {
+        if (!Auth.token) {
             return Promise.reject();
         }
 
-        // determine if searching active users
-        var requestURL = '/api/users/';
-        if (active === true || active === false) {
-            requestURL += '?is_active=' + (active ? 'true' : 'false');
-        }
-
-        return fetch(new JSONAPIRequest(requestURL, Auth.token), {
+        return fetch(new JSONAPIRequest('/api/users/', Auth.token), {
             method: 'GET'
         })
             .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
@@ -46,23 +40,12 @@ class UsersApi {
             });
     }
 
-    search(active, searchString) {
+    search(searchQuery, orderingQuery) {
     	if (!Auth.token) {
             return Promise.reject();
         }
 
-		// determine if searching active users
-        var requestURL = '/api/users/';
-        if (active) {
-        	requestURL += '?is_active=true&search=';
-        } else {
-        	requestURL += '?search=';
-        }
-
-        // actually search
-        requestURL += searchString;
-
-        return fetch(new JSONAPIRequest(requestURL, Auth.token), {
+        return fetch(new JSONAPIRequest(`/api/users/?search=${searchQuery}&ordering=${orderingQuery}`, Auth.token), {
             method: 'GET'
         })
             .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
@@ -85,14 +68,15 @@ class UsersApi {
             method: 'POST',
             body: JSON.stringify(data)
         })
-          .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-          .then(response => response = response.json())
-          .then((response) => {
-            return Promise.resolve(response);
-          })
-          .catch((response) => {
-            return Promise.reject(response);
-          });
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
+            });
     }
 
     update(data) {
@@ -104,14 +88,15 @@ class UsersApi {
             method: 'PUT',
             body: JSON.stringify(data)
         })
-          .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
-          .then(response => response = response.json())
-          .then((response) => {
-            return Promise.resolve(response);
-          })
-          .catch((response) => {
-            return Promise.reject(response);
-          });
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
+            })
     }
 }
 

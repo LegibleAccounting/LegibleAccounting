@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from auditlog.registry import auditlog
 from django.db import models
 
+from project.utils import format_currency
+
 NUM_ACCOUNTS_PER_ACCOUNT_TYPE = 100
 
 ACCOUNT_CATEGORIES = (
@@ -13,29 +15,36 @@ ACCOUNT_CATEGORIES = (
     (4, 'Operating Expense')
 )
 
+ACCOUNT_CLASSIFICATIONS = (
+    (0, ''),
+    (1, 'Current'), # NOTE: "Current" is synonymous with "Short-Term"
+    (2, 'Long-Term') # NOTE: "Long-Term" is synonymous with "Non-Current"
+)
+
 
 class AccountType(models.Model):
     class Meta:
-        ordering = ['liquidity']
+        ordering = ['order']
 
     category = models.SmallIntegerField(choices=ACCOUNT_CATEGORIES)
+    classification = models.SmallIntegerField(choices=ACCOUNT_CLASSIFICATIONS)
     name = models.CharField(max_length=100, unique=True)
-    liquidity = models.PositiveIntegerField(unique=True, verbose_name='liquidity Value (1 represents highest liquidity)')
+    order = models.PositiveIntegerField(unique=True, verbose_name='order Value (1 represents highest order)')
     created_date = models.DateTimeField(auto_now_add=True, verbose_name='date Created')
 
     def __str__(self):
-        return "{0}: {1}".format(self.liquidity, self.name)
+        return "{0}: {1}".format(self.order, self.name)
 
     def is_debit(self):
         return True if (self.category == 0 or self.category == 4) else False
 
     def starting_number(self):
-        return self.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE
+        return self.order * NUM_ACCOUNTS_PER_ACCOUNT_TYPE
 
 
 class Account(models.Model):
     class Meta:
-        ordering = ['account_type__liquidity', 'order']
+        ordering = ['account_type__order', 'order']
 
     account_type = models.ForeignKey(AccountType, on_delete=models.PROTECT)
     name = models.CharField(max_length=100, unique=True)
@@ -52,7 +61,24 @@ class Account(models.Model):
         return self.account_type.is_debit()
 
     def account_number(self):
-        return (self.account_type.liquidity * NUM_ACCOUNTS_PER_ACCOUNT_TYPE) + self.order
+        return (self.account_type.order * NUM_ACCOUNTS_PER_ACCOUNT_TYPE) + self.order
+
+    def get_transaction_history(self):
+        transactions = []
+        post_balance = self.initial_balance
+        for t in self.transactions.all():
+            if t.journal_entry.is_approved:
+                post_balance += (t.value * pow(-1, int(self.is_debit() ^ t.is_debit)))
+                transactions.append({
+                    'balance': format_currency(post_balance),
+                    'is_debit': t.is_debit,
+                    'journal_entry_id': t.journal_entry.id,
+                    'date': t.journal_entry.date,
+                    'journal_entry_description': t.journal_entry.description,
+                    'value': format_currency(t.value)
+                })
+
+        return transactions
 
     def get_balance(self, as_of=None):
         # TODO: This will be updated to return a calculated balance
@@ -65,4 +91,3 @@ class Account(models.Model):
         return self.initial_balance + value
 
 auditlog.register(Account)
-

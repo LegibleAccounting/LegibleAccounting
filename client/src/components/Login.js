@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import "./Login.css";
 import Auth from '../api/Auth.js';
 import logo from '../logo.png'
@@ -46,6 +46,11 @@ class Login extends Component {
             <button className ="button btn-primary" type = "submit">
               Login
             </button>
+          </div>
+          <div className = "Spacer">
+            <NavLink style={{color: 'white'}} to="/register">
+              Request Access
+            </NavLink>
           </div>
       </form>
     );
