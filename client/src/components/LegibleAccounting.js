@@ -21,6 +21,7 @@ import Sidebar from './Sidebar';
 import Auth from '../api/Auth';
 import './LegibleAccounting.css';
 import GeneralJournalEntry from './GeneralJournalEntry.js';
+import TrialBalance from './TrialBalance.js';
 
 class LegibleAccounting extends Component {
   constructor(props) {
@@ -65,6 +66,7 @@ class LegibleAccounting extends Component {
                 <Route exact path="/accounts" component={Accounts} />
                 <GuardedAdministratorPermissionsRoute exact path="/accounts/add" component={DecorateRoute(AccountForm, this.notifyProps)} />
                 <Route path="/accounts/:id/ledger" component={AccountLedger} />
+                <Route exact path="/trial-balance" component={TrialBalance} />
                 <GuardedManagerPermissionsRoute path="/accounts/:id" component={DecorateRoute(AccountForm, this.notifyProps)} />
                 <GuardedAdministratorPermissionsRoute exact path="/users" component={Users} />
                 <GuardedAdministratorPermissionsRoute exact path="/users/add" component={DecorateRoute(UserForm, this.notifyProps)} />

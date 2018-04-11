@@ -1,0 +1,5 @@
+.doubleUnderline {
+    padding-bottom: 1px;
+    border-bottom: double 5px;
+    width: 50px;
+}
