@@ -70,23 +70,6 @@ class JournalEntry extends Component {
                                   trigger="click"
                                   rootClose
                                   placement="bottom"
-                                  overlay={
-                                      <Popover id="popover-trigger-click-root-close" title="Description">
-                                        {
-            
-                                            <div className="description">{this.props.entry.description}</div>
-                                        }
-                                      </Popover>
-                                  }>  
-                                    <span
-                                        className="glyphicon glyphicon-list-alt glyphiconButton"
-                                        style={{display: this.props.entry.description === "" && 'none' }}>
-                                    </span>  
-                            </OverlayTrigger>
-                            <OverlayTrigger
-                                  trigger="click"
-                                  rootClose
-                                  placement="bottom"
                                   overlay={(
                                       <Popover id="popover-trigger-click-root-close" title="Attachments">
                                         {
@@ -138,7 +121,9 @@ class JournalEntry extends Component {
                 
                 <div className="row bottomOfEntryWrapper">
                     <div className="col-md-8 descriptionWrapperWrapper">
-                        
+                        <div className="description">
+                            <strong>Description: </strong>{this.props.entry.description}
+                        </div>
                     </div>
                     {
                         this.state.managementMode === 0 ? (                        

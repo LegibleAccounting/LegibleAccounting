@@ -78,16 +78,16 @@
 
 .descriptionTitle {
 	margin-right: 10px;
-
+	font-weight: bold;
 }
 
 .description {
-	color: #585858;
 	font-weight: 300;
 }
 
 .descriptionWrapperWrapper {
 	margin-top: 5px;
+	padding-left: 34.6%;
 }
 
 .descriptionWrapper {
