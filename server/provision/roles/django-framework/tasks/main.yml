@@ -15,10 +15,6 @@
 
 - name: Python Django package will be present in the Virtual Environment.
   pip: name=Django version=1.11 state=present virtualenv={{ backend_env }}
-  become: yes
-  become_method: sudo
 
 - name: Python PsycoPG package will be present in the Virtual Environment.
   pip: name=psycopg2-binary state=present virtualenv={{ backend_env }}
-  become: yes
-  become_method: sudo
