@@ -21,10 +21,15 @@ ACCOUNT_CLASSIFICATIONS = (
     (2, 'Long-Term') # NOTE: "Long-Term" is synonymous with "Non-Current"
 )
 
+class AccountTypeManager(models.Manager):
+    def get_by_natural_key(self, name):
+        return self.get(name=name)
 
 class AccountType(models.Model):
     class Meta:
         ordering = ['order']
+
+    objects = AccountTypeManager()
 
     category = models.SmallIntegerField(choices=ACCOUNT_CATEGORIES)
     classification = models.SmallIntegerField(choices=ACCOUNT_CLASSIFICATIONS)
@@ -35,16 +40,24 @@ class AccountType(models.Model):
     def __str__(self):
         return "{0}: {1}".format(self.order, self.name)
 
+    def natural_key(self):
+        return (self.name,)
+
     def is_debit(self):
         return True if (self.category == 0 or self.category == 4) else False
 
     def starting_number(self):
         return self.order * NUM_ACCOUNTS_PER_ACCOUNT_TYPE
 
+class AccountManager(models.Manager):
+    def get_by_natural_key(self, name):
+        return self.get(name=name)
 
 class Account(models.Model):
     class Meta:
         ordering = ['account_type__order', 'order']
+
+    objects = AccountManager()
 
     account_type = models.ForeignKey(AccountType, on_delete=models.PROTECT)
     name = models.CharField(max_length=100, unique=True)
@@ -56,6 +69,9 @@ class Account(models.Model):
 
     def __str__(self):
         return 'Account #' + "{:03}: ".format(self.account_number()) + self.name
+
+    def natural_key(self):
+        return (self.name,)
 
     def is_debit(self):
         return self.account_type.is_debit()

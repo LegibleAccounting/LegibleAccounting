@@ -1,7 +1,6 @@
 [
 {
     "model": "accounts.accounttype",
-    "pk": 1,
     "fields": {
         "category": 0,
         "classification": 1,
@@ -12,7 +11,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 2,
     "fields": {
         "category": 0,
         "classification": 1,
@@ -23,7 +21,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 3,
     "fields": {
         "category": 0,
         "classification": 1,
@@ -34,7 +31,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 4,
     "fields": {
         "category": 0,
         "classification": 1,
@@ -45,7 +41,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 5,
     "fields": {
         "category": 0,
         "classification": 2,
@@ -56,7 +51,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 6,
     "fields": {
         "category": 0,
         "classification": 2,
@@ -67,7 +61,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 7,
     "fields": {
         "category": 0,
         "classification": 2,
@@ -78,7 +71,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 8,
     "fields": {
         "category": 0,
         "classification": 2,
@@ -89,7 +81,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 9,
     "fields": {
         "category": 0,
         "classification": 2,
@@ -100,7 +91,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 10,
     "fields": {
         "category": 1,
         "classification": 1,
@@ -111,7 +101,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 11,
     "fields": {
         "category": 1,
         "classification": 1,
@@ -122,7 +111,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 12,
     "fields": {
         "category": 1,
         "classification": 1,
@@ -133,7 +121,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 13,
     "fields": {
         "category": 1,
         "classification": 1,
@@ -144,7 +131,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 14,
     "fields": {
         "category": 1,
         "classification": 1,
@@ -155,7 +141,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 15,
     "fields": {
         "category": 1,
         "classification": 2,
@@ -166,7 +151,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 16,
     "fields": {
         "category": 2,
         "classification": 0,
@@ -177,7 +161,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 17,
     "fields": {
         "category": 3,
         "classification": 0,
@@ -188,7 +171,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 18,
     "fields": {
         "category": 3,
         "classification": 0,
@@ -199,7 +181,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 19,
     "fields": {
         "category": 4,
         "classification": 0,
@@ -210,7 +191,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 20,
     "fields": {
         "category": 4,
         "classification": 0,
@@ -221,7 +201,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 21,
     "fields": {
         "category": 4,
         "classification": 0,
@@ -232,7 +211,6 @@
 },
 {
     "model": "accounts.accounttype",
-    "pk": 22,
     "fields": {
         "category": 4,
         "classification": 0,
@@ -243,1822 +221,1976 @@
 },
 {
     "model": "accounts.account",
-    "pk": 1,
     "fields": {
-        "account_type": 1,
+        "account_type": [
+            "Cash Related Accounts"
+        ],
         "name": "Cash",
         "description": "",
         "order": 0,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 2,
-    "fields": {
-        "account_type": 1,
-        "name": "Petty Cash",
-        "description": "",
-        "order": 1,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 3,
-    "fields": {
-        "account_type": 2,
-        "name": "Notes Receivable",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 4,
-    "fields": {
-        "account_type": 2,
-        "name": "Accounts Receivable",
-        "description": "",
-        "order": 1,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 5,
-    "fields": {
-        "account_type": 2,
-        "name": "Allowance for Bad Debts",
-        "description": "",
-        "order": 2,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 6,
-    "fields": {
-        "account_type": 2,
-        "name": "Interest Receivable (Also Accrued Interest Receivable)",
-        "description": "",
-        "order": 3,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 7,
-    "fields": {
-        "account_type": 2,
-        "name": "Common Stock Subscriptions Receivable",
-        "description": "",
-        "order": 4,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 8,
-    "fields": {
-        "account_type": 2,
-        "name": "Preferred Stock Subscriptions Receivable",
-        "description": "",
-        "order": 5,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 9,
-    "fields": {
-        "account_type": 3,
-        "name": "Merchandise Inventory",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 10,
-    "fields": {
-        "account_type": 3,
-        "name": "Raw Materials",
-        "description": "",
-        "order": 1,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 11,
-    "fields": {
-        "account_type": 3,
-        "name": "Work in Process",
-        "description": "",
-        "order": 2,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 12,
-    "fields": {
-        "account_type": 3,
-        "name": "Finished Goods",
-        "description": "",
-        "order": 3,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 13,
-    "fields": {
-        "account_type": 4,
-        "name": "Supplies (Specialty Items like Medical, Bicycle, Tailoring, etc.)",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 14,
-    "fields": {
-        "account_type": 4,
-        "name": "Office Supplies",
-        "description": "",
-        "order": 1,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 15,
-    "fields": {
-        "account_type": 4,
-        "name": "Food  Supplies",
-        "description": "",
-        "order": 2,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 16,
-    "fields": {
-        "account_type": 4,
-        "name": "Prepaid Insurance",
-        "description": "",
-        "order": 3,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 17,
-    "fields": {
-        "account_type": 5,
-        "name": "Bond Sinking Fund",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 18,
-    "fields": {
-        "account_type": 6,
-        "name": "Land",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 19,
-    "fields": {
-        "account_type": 6,
-        "name": "Natural Resources",
-        "description": "",
-        "order": 1,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 20,
-    "fields": {
-        "account_type": 6,
-        "name": "Accumulated Depletion",
-        "description": "",
-        "order": 2,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 21,
-    "fields": {
-        "account_type": 7,
-        "name": "Buildings",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 22,
-    "fields": {
-        "account_type": 7,
-        "name": "Accumulated Depreciation--Buildings",
-        "description": "",
-        "order": 1,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 23,
-    "fields": {
-        "account_type": 8,
-        "name": "Office Equipment (Also Store Equipment)",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 24,
-    "fields": {
-        "account_type": 8,
-        "name": "Accumulated Depreciation--Office Equipment (Also Store Equipment)",
-        "description": "",
-        "order": 1,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 25,
-    "fields": {
-        "account_type": 8,
-        "name": "Office Furniture",
-        "description": "",
-        "order": 2,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 26,
-    "fields": {
-        "account_type": 8,
-        "name": "Accumulated Depreciation--Office Furniture",
-        "description": "",
-        "order": 3,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 27,
-    "fields": {
-        "account_type": 8,
-        "name": "Athletic Equipment (Also Tailoring, Lawn, Cleaning)",
-        "description": "",
-        "order": 4,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 28,
-    "fields": {
-        "account_type": 8,
-        "name": "Accumulated Depreciation--Athletic Equipment (Also Tailoring, Lawn, Cleaning)",
-        "description": "",
-        "order": 5,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 29,
-    "fields": {
-        "account_type": 8,
-        "name": "Tennis Facilities (Also Basketball Facilities)",
-        "description": "",
-        "order": 6,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 30,
-    "fields": {
-        "account_type": 8,
-        "name": "Accumulated Depreciation--Tennis Facilities (Also Basketball Facilities)",
-        "description": "",
-        "order": 7,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 31,
-    "fields": {
-        "account_type": 8,
-        "name": "Delivery Equipment (Also Medical, Van)",
-        "description": "",
-        "order": 8,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 32,
-    "fields": {
-        "account_type": 8,
-        "name": "Accumulated Depreciation--Delivery Equipment (Also Medical, Van)",
-        "description": "",
-        "order": 9,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 33,
-    "fields": {
-        "account_type": 8,
-        "name": "Exercise Equipment",
-        "description": "",
-        "order": 10,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 34,
-    "fields": {
-        "account_type": 8,
-        "name": "Accumulated Depreciation--Exercise Equipment",
-        "description": "",
-        "order": 11,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 35,
-    "fields": {
-        "account_type": 8,
-        "name": "Computer Equipment",
-        "description": "",
-        "order": 12,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 36,
-    "fields": {
-        "account_type": 8,
-        "name": "Accumulated Depreciation--Computer Equipment",
-        "description": "",
-        "order": 13,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 37,
-    "fields": {
-        "account_type": 9,
-        "name": "Patents",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 38,
-    "fields": {
-        "account_type": 9,
-        "name": "Copyrights",
-        "description": "",
-        "order": 1,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 39,
-    "fields": {
-        "account_type": 9,
-        "name": "Organization Costs",
-        "description": "",
-        "order": 2,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 40,
-    "fields": {
-        "account_type": 10,
-        "name": "Notes Payable",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 41,
-    "fields": {
-        "account_type": 10,
-        "name": "Discount on Notes Payable",
-        "description": "",
-        "order": 1,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 42,
-    "fields": {
-        "account_type": 10,
-        "name": "Accounts Payable (Also Vouchers Payable)",
-        "description": "",
-        "order": 2,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 43,
-    "fields": {
-        "account_type": 10,
-        "name": "United Way Contribution Payable",
-        "description": "",
-        "order": 3,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 44,
-    "fields": {
-        "account_type": 10,
-        "name": "Income Tax Payable",
-        "description": "",
-        "order": 4,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 45,
-    "fields": {
-        "account_type": 10,
-        "name": "Common Dividends Payable",
-        "description": "",
-        "order": 5,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 46,
-    "fields": {
-        "account_type": 10,
-        "name": "Preferred Dividends Payable",
-        "description": "",
-        "order": 6,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 47,
-    "fields": {
-        "account_type": 10,
-        "name": "Interest Payable (Also Bond Interest Payable)",
-        "description": "",
-        "order": 7,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 48,
-    "fields": {
-        "account_type": 11,
-        "name": "Employee Income Tax Payable",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 49,
-    "fields": {
-        "account_type": 11,
-        "name": "Social Security Tax Payable",
-        "description": "",
-        "order": 1,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 50,
-    "fields": {
-        "account_type": 11,
-        "name": "Medicare Tax Payable",
-        "description": "",
-        "order": 2,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 51,
-    "fields": {
-        "account_type": 11,
-        "name": "City Earnings Tax Payable",
-        "description": "",
-        "order": 3,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 52,
-    "fields": {
-        "account_type": 11,
-        "name": "Health Insurance Premiums Payable",
-        "description": "",
-        "order": 4,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 53,
-    "fields": {
-        "account_type": 11,
-        "name": "Credit Union Payable",
-        "description": "",
-        "order": 5,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 54,
-    "fields": {
-        "account_type": 11,
-        "name": "Savings Bond Deductions Payable",
-        "description": "",
-        "order": 6,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 55,
-    "fields": {
-        "account_type": 11,
-        "name": "Wages Payable",
-        "description": "",
-        "order": 7,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 56,
-    "fields": {
-        "account_type": 12,
-        "name": "FUTA Tax Payable",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 57,
-    "fields": {
-        "account_type": 12,
-        "name": "SUTA Tax Payable",
-        "description": "",
-        "order": 1,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 58,
-    "fields": {
-        "account_type": 12,
-        "name": "Workers' Compensation Insurance Payable",
-        "description": "",
-        "order": 2,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 59,
-    "fields": {
-        "account_type": 13,
-        "name": "Sales Tax Payable",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 60,
-    "fields": {
-        "account_type": 14,
-        "name": "Unearned Subscription Revenue (Also Unearned Ticket Revenue, Unearned Repair Fees)",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 61,
-    "fields": {
-        "account_type": 14,
-        "name": "Current Portion of Mortgage Payable",
-        "description": "",
-        "order": 1,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 62,
-    "fields": {
-        "account_type": 15,
-        "name": "Mortgage Payable",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 63,
-    "fields": {
-        "account_type": 15,
-        "name": "Bonds Payable",
-        "description": "",
-        "order": 1,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 64,
-    "fields": {
-        "account_type": 15,
-        "name": "Discount on Bonds Payable",
-        "description": "",
-        "order": 2,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 65,
-    "fields": {
-        "account_type": 15,
-        "name": "Premium on Bonds Payable",
-        "description": "",
-        "order": 3,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 66,
-    "fields": {
-        "account_type": 16,
-        "name": "Jessica Jane, Capital",
-        "description": "",
-        "order": 0,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 67,
-    "fields": {
-        "account_type": 16,
-        "name": "Jessica Jane, Drawing",
-        "description": "",
-        "order": 1,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
-    }
-},
-{
-    "model": "accounts.account",
-    "pk": 68,
-    "fields": {
-        "account_type": 16,
-        "name": "Income Summary",
-        "description": "",
-        "order": 2,
-        "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": true
     }
 },
 {
     "model": "accounts.account",
-    "pk": 69,
     "fields": {
-        "account_type": 16,
+        "account_type": [
+            "Cash Related Accounts"
+        ],
+        "name": "Petty Cash",
+        "description": "",
+        "order": 1,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Receivables"
+        ],
+        "name": "Notes Receivable",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Receivables"
+        ],
+        "name": "Accounts Receivable",
+        "description": "",
+        "order": 1,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Receivables"
+        ],
+        "name": "Allowance for Bad Debts",
+        "description": "",
+        "order": 2,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Receivables"
+        ],
+        "name": "Interest Receivable (Also Accrued Interest Receivable)",
+        "description": "",
+        "order": 3,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Receivables"
+        ],
+        "name": "Common Stock Subscriptions Receivable",
+        "description": "",
+        "order": 4,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Receivables"
+        ],
+        "name": "Preferred Stock Subscriptions Receivable",
+        "description": "",
+        "order": 5,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Inventories"
+        ],
+        "name": "Merchandise Inventory",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Inventories"
+        ],
+        "name": "Raw Materials",
+        "description": "",
+        "order": 1,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Inventories"
+        ],
+        "name": "Work in Process",
+        "description": "",
+        "order": 2,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Inventories"
+        ],
+        "name": "Finished Goods",
+        "description": "",
+        "order": 3,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Prepaid Items"
+        ],
+        "name": "Supplies (Specialty Items like Medical, Bicycle, Tailoring, etc.)",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Prepaid Items"
+        ],
+        "name": "Office Supplies",
+        "description": "",
+        "order": 1,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Prepaid Items"
+        ],
+        "name": "Food  Supplies",
+        "description": "",
+        "order": 2,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Prepaid Items"
+        ],
+        "name": "Prepaid Insurance",
+        "description": "",
+        "order": 3,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Long-Term Investments"
+        ],
+        "name": "Bond Sinking Fund",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Land"
+        ],
+        "name": "Land",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Land"
+        ],
+        "name": "Natural Resources",
+        "description": "",
+        "order": 1,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Land"
+        ],
+        "name": "Accumulated Depletion",
+        "description": "",
+        "order": 2,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Buildings"
+        ],
+        "name": "Buildings",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Buildings"
+        ],
+        "name": "Accumulated Depreciation--Buildings",
+        "description": "",
+        "order": 1,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Equipment"
+        ],
+        "name": "Office Equipment (Also Store Equipment)",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Equipment"
+        ],
+        "name": "Accumulated Depreciation--Office Equipment (Also Store Equipment)",
+        "description": "",
+        "order": 1,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Equipment"
+        ],
+        "name": "Office Furniture",
+        "description": "",
+        "order": 2,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Equipment"
+        ],
+        "name": "Accumulated Depreciation--Office Furniture",
+        "description": "",
+        "order": 3,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Equipment"
+        ],
+        "name": "Athletic Equipment (Also Tailoring, Lawn, Cleaning)",
+        "description": "",
+        "order": 4,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Equipment"
+        ],
+        "name": "Accumulated Depreciation--Athletic Equipment (Also Tailoring, Lawn, Cleaning)",
+        "description": "",
+        "order": 5,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Equipment"
+        ],
+        "name": "Tennis Facilities (Also Basketball Facilities)",
+        "description": "",
+        "order": 6,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Equipment"
+        ],
+        "name": "Accumulated Depreciation--Tennis Facilities (Also Basketball Facilities)",
+        "description": "",
+        "order": 7,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Equipment"
+        ],
+        "name": "Delivery Equipment (Also Medical, Van)",
+        "description": "",
+        "order": 8,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Equipment"
+        ],
+        "name": "Accumulated Depreciation--Delivery Equipment (Also Medical, Van)",
+        "description": "",
+        "order": 9,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Equipment"
+        ],
+        "name": "Exercise Equipment",
+        "description": "",
+        "order": 10,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Equipment"
+        ],
+        "name": "Accumulated Depreciation--Exercise Equipment",
+        "description": "",
+        "order": 11,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Equipment"
+        ],
+        "name": "Computer Equipment",
+        "description": "",
+        "order": 12,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Equipment"
+        ],
+        "name": "Accumulated Depreciation--Computer Equipment",
+        "description": "",
+        "order": 13,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Intangibles"
+        ],
+        "name": "Patents",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Intangibles"
+        ],
+        "name": "Copyrights",
+        "description": "",
+        "order": 1,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Intangibles"
+        ],
+        "name": "Organization Costs",
+        "description": "",
+        "order": 2,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Short-Term Payables"
+        ],
+        "name": "Notes Payable",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Short-Term Payables"
+        ],
+        "name": "Discount on Notes Payable",
+        "description": "",
+        "order": 1,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Short-Term Payables"
+        ],
+        "name": "Accounts Payable (Also Vouchers Payable)",
+        "description": "",
+        "order": 2,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Short-Term Payables"
+        ],
+        "name": "United Way Contribution Payable",
+        "description": "",
+        "order": 3,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Short-Term Payables"
+        ],
+        "name": "Income Tax Payable",
+        "description": "",
+        "order": 4,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Short-Term Payables"
+        ],
+        "name": "Common Dividends Payable",
+        "description": "",
+        "order": 5,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Short-Term Payables"
+        ],
+        "name": "Preferred Dividends Payable",
+        "description": "",
+        "order": 6,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Short-Term Payables"
+        ],
+        "name": "Interest Payable (Also Bond Interest Payable)",
+        "description": "",
+        "order": 7,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Employee Payroll Related Payables"
+        ],
+        "name": "Employee Income Tax Payable",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Employee Payroll Related Payables"
+        ],
+        "name": "Social Security Tax Payable",
+        "description": "",
+        "order": 1,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Employee Payroll Related Payables"
+        ],
+        "name": "Medicare Tax Payable",
+        "description": "",
+        "order": 2,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Employee Payroll Related Payables"
+        ],
+        "name": "City Earnings Tax Payable",
+        "description": "",
+        "order": 3,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Employee Payroll Related Payables"
+        ],
+        "name": "Health Insurance Premiums Payable",
+        "description": "",
+        "order": 4,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Employee Payroll Related Payables"
+        ],
+        "name": "Credit Union Payable",
+        "description": "",
+        "order": 5,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Employee Payroll Related Payables"
+        ],
+        "name": "Savings Bond Deductions Payable",
+        "description": "",
+        "order": 6,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Employee Payroll Related Payables"
+        ],
+        "name": "Wages Payable",
+        "description": "",
+        "order": 7,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Employer Payroll Related Payables"
+        ],
+        "name": "FUTA Tax Payable",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Employer Payroll Related Payables"
+        ],
+        "name": "SUTA Tax Payable",
+        "description": "",
+        "order": 1,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Employer Payroll Related Payables"
+        ],
+        "name": "Workers' Compensation Insurance Payable",
+        "description": "",
+        "order": 2,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Sales Tax"
+        ],
+        "name": "Sales Tax Payable",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Deferred Revenues and Current Portion of Long-Term Debt"
+        ],
+        "name": "Unearned Subscription Revenue (Also Unearned Service/Ticket Revenue, Unearned Repair Fees)",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Deferred Revenues and Current Portion of Long-Term Debt"
+        ],
+        "name": "Current Portion of Mortgage Payable",
+        "description": "",
+        "order": 1,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Long-Term Liabilities"
+        ],
+        "name": "Mortgage Payable",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Long-Term Liabilities"
+        ],
+        "name": "Bonds Payable",
+        "description": "",
+        "order": 1,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Long-Term Liabilities"
+        ],
+        "name": "Discount on Bonds Payable",
+        "description": "",
+        "order": 2,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Long-Term Liabilities"
+        ],
+        "name": "Premium on Bonds Payable",
+        "description": "",
+        "order": 3,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Owner's Equity"
+        ],
+        "name": "John Addams, Capital",
+        "description": "",
+        "order": 0,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Owner's Equity"
+        ],
+        "name": "John Addams, Drawing",
+        "description": "",
+        "order": 1,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Owner's Equity"
+        ],
+        "name": "Income Summary",
+        "description": "",
+        "order": 2,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Owner's Equity"
+        ],
         "name": "Common Stock",
         "description": "",
         "order": 3,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 70,
     "fields": {
-        "account_type": 16,
+        "account_type": [
+            "Owner's Equity"
+        ],
         "name": "Common Treasury Stock",
         "description": "",
         "order": 4,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 71,
     "fields": {
-        "account_type": 16,
+        "account_type": [
+            "Owner's Equity"
+        ],
         "name": "Paid in Capital in Excess of Par/Stated Value--Common Stock",
         "description": "",
         "order": 5,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 72,
     "fields": {
-        "account_type": 16,
+        "account_type": [
+            "Owner's Equity"
+        ],
         "name": "Preferred Stock",
         "description": "",
         "order": 6,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 73,
     "fields": {
-        "account_type": 16,
+        "account_type": [
+            "Owner's Equity"
+        ],
         "name": "Preferred Treasury Stock",
         "description": "",
         "order": 7,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 74,
     "fields": {
-        "account_type": 16,
+        "account_type": [
+            "Owner's Equity"
+        ],
         "name": "Discount on Preferred Stock",
         "description": "",
         "order": 8,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 75,
     "fields": {
-        "account_type": 16,
+        "account_type": [
+            "Owner's Equity"
+        ],
         "name": "Paid in Capital in Excess of Par/Stated Value--Preferred Stock",
         "description": "",
         "order": 9,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 76,
     "fields": {
-        "account_type": 16,
+        "account_type": [
+            "Owner's Equity"
+        ],
         "name": "Retained Earnings",
         "description": "",
         "order": 10,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 77,
     "fields": {
-        "account_type": 16,
+        "account_type": [
+            "Owner's Equity"
+        ],
         "name": "Retained Earnings Appropriated for...",
         "description": "",
         "order": 11,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 78,
     "fields": {
-        "account_type": 16,
+        "account_type": [
+            "Owner's Equity"
+        ],
         "name": "Common Stock Subscribed",
         "description": "",
         "order": 12,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 79,
     "fields": {
-        "account_type": 16,
+        "account_type": [
+            "Owner's Equity"
+        ],
         "name": "Preferred Stock Subscribed",
         "description": "",
         "order": 13,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 80,
     "fields": {
-        "account_type": 16,
+        "account_type": [
+            "Owner's Equity"
+        ],
         "name": "Paid in Capital from Sale of Treasury Stock",
         "description": "",
         "order": 14,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 81,
     "fields": {
-        "account_type": 17,
+        "account_type": [
+            "Operating Revenues"
+        ],
         "name": "Delivery Fees",
         "description": "",
         "order": 0,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 82,
     "fields": {
-        "account_type": 17,
+        "account_type": [
+            "Operating Revenues"
+        ],
         "name": "Appraisal Fees",
         "description": "",
         "order": 1,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 83,
     "fields": {
-        "account_type": 17,
+        "account_type": [
+            "Operating Revenues"
+        ],
         "name": "Medical Fees",
         "description": "",
         "order": 2,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 84,
     "fields": {
-        "account_type": 17,
+        "account_type": [
+            "Operating Revenues"
+        ],
         "name": "Service Fees",
         "description": "",
         "order": 3,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
     }
 },
 {
     "model": "accounts.account",
-    "pk": 85,
     "fields": {
-        "account_type": 17,
+        "account_type": [
+            "Operating Revenues"
+        ],
         "name": "Repair Fees",
         "description": "",
         "order": 4,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 86,
     "fields": {
-        "account_type": 17,
+        "account_type": [
+            "Operating Revenues"
+        ],
         "name": "Sales",
         "description": "",
         "order": 5,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 87,
     "fields": {
-        "account_type": 17,
+        "account_type": [
+            "Operating Revenues"
+        ],
         "name": "Sales Returns and Allowances",
         "description": "",
         "order": 6,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 88,
     "fields": {
-        "account_type": 17,
+        "account_type": [
+            "Operating Revenues"
+        ],
         "name": "Sales Discounts",
         "description": "",
         "order": 7,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 89,
     "fields": {
-        "account_type": 17,
+        "account_type": [
+            "Operating Revenues"
+        ],
         "name": "Boarding and Grooming Revenue",
         "description": "",
         "order": 8,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 90,
     "fields": {
-        "account_type": 17,
+        "account_type": [
+            "Operating Revenues"
+        ],
         "name": "Subscriptions Revenue (if main line of business)",
         "description": "",
         "order": 19,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 91,
     "fields": {
-        "account_type": 18,
+        "account_type": [
+            "Other Revenues"
+        ],
         "name": "Interest Revenue",
         "description": "",
         "order": 0,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 92,
     "fields": {
-        "account_type": 18,
+        "account_type": [
+            "Other Revenues"
+        ],
         "name": "Rent Revenue",
         "description": "",
         "order": 1,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 93,
     "fields": {
-        "account_type": 18,
+        "account_type": [
+            "Other Revenues"
+        ],
         "name": "Subscriptions Revenue (if not main line of business)",
         "description": "",
         "order": 2,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 94,
     "fields": {
-        "account_type": 18,
+        "account_type": [
+            "Other Revenues"
+        ],
         "name": "Sinking Fund Earnings",
         "description": "",
         "order": 3,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 95,
     "fields": {
-        "account_type": 18,
+        "account_type": [
+            "Other Revenues"
+        ],
         "name": "Uncollectible Accounts Recovered",
         "description": "",
         "order": 4,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 96,
     "fields": {
-        "account_type": 18,
+        "account_type": [
+            "Other Revenues"
+        ],
         "name": "Gain on Sale/Exchange of Equipment",
         "description": "",
         "order": 5,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 97,
     "fields": {
-        "account_type": 18,
+        "account_type": [
+            "Other Revenues"
+        ],
         "name": "Gain on Bonds Redeemed",
         "description": "",
         "order": 6,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 98,
     "fields": {
-        "account_type": 19,
+        "account_type": [
+            "Cost of Goods Sold"
+        ],
         "name": "Purchases",
         "description": "",
         "order": 0,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 99,
     "fields": {
-        "account_type": 19,
+        "account_type": [
+            "Cost of Goods Sold"
+        ],
         "name": "Purchases Returns and Allowances",
         "description": "",
         "order": 1,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 100,
     "fields": {
-        "account_type": 19,
+        "account_type": [
+            "Cost of Goods Sold"
+        ],
         "name": "Purchases Discounts",
         "description": "",
         "order": 2,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 101,
     "fields": {
-        "account_type": 19,
+        "account_type": [
+            "Cost of Goods Sold"
+        ],
         "name": "Freight-In",
         "description": "",
         "order": 3,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 102,
     "fields": {
-        "account_type": 19,
+        "account_type": [
+            "Cost of Goods Sold"
+        ],
         "name": "Overhead",
         "description": "",
         "order": 4,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 103,
     "fields": {
-        "account_type": 19,
+        "account_type": [
+            "Cost of Goods Sold"
+        ],
         "name": "Cost of Goods Sold",
         "description": "",
         "order": 5,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 104,
     "fields": {
-        "account_type": 20,
+        "account_type": [
+            "Selling Expenses"
+        ],
         "name": "Wages Expense (Also Wages and Salaries Expense)",
         "description": "",
         "order": 0,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
     }
 },
 {
     "model": "accounts.account",
-    "pk": 105,
     "fields": {
-        "account_type": 20,
+        "account_type": [
+            "Selling Expenses"
+        ],
         "name": "Advertising Expense",
         "description": "",
         "order": 1,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
     }
 },
 {
     "model": "accounts.account",
-    "pk": 106,
     "fields": {
-        "account_type": 20,
+        "account_type": [
+            "Selling Expenses"
+        ],
         "name": "Bank Credit Card Expense",
         "description": "",
         "order": 2,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 107,
     "fields": {
-        "account_type": 20,
+        "account_type": [
+            "Selling Expenses"
+        ],
         "name": "Store Supplies Expense",
         "description": "",
         "order": 3,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
     }
 },
 {
     "model": "accounts.account",
-    "pk": 108,
     "fields": {
-        "account_type": 20,
+        "account_type": [
+            "Selling Expenses"
+        ],
         "name": "Travel and Entertainment Expense",
         "description": "",
         "order": 4,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 109,
     "fields": {
-        "account_type": 20,
+        "account_type": [
+            "Selling Expenses"
+        ],
         "name": "Cash Short and Over",
         "description": "",
         "order": 5,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 110,
     "fields": {
-        "account_type": 20,
+        "account_type": [
+            "Selling Expenses"
+        ],
         "name": "Depreciation Expense--Store Equipment and Fixtures",
         "description": "",
         "order": 6,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 111,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Rent Expense",
         "description": "",
         "order": 0,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
     }
 },
 {
     "model": "accounts.account",
-    "pk": 112,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Office Salaries Expense",
         "description": "",
         "order": 1,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 113,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Office Supplies Expense (Also Medical)",
         "description": "",
         "order": 2,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 114,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Other Supplies: Food Supplies Expense (Also Medical)",
         "description": "",
         "order": 3,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 115,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Telephone Expense",
         "description": "",
         "order": 4,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
     }
 },
 {
     "model": "accounts.account",
-    "pk": 116,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Transportation/Automobile Expense (also Laboratory, Travel)",
         "description": "",
         "order": 5,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 117,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Collection Expense",
         "description": "",
         "order": 6,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 118,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Inventory Short and Over",
         "description": "",
         "order": 7,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 119,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Loss on Write Down of Inventory",
         "description": "",
         "order": 8,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 120,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Payroll Taxes Expense",
         "description": "",
         "order": 9,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 121,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Workers' Compensation Insurance Expense",
         "description": "",
         "order": 10,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 122,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Bad Debt Expense",
         "description": "",
         "order": 11,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 123,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Electricity Expense, Utilities Expense",
         "description": "",
         "order": 12,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
     }
 },
 {
     "model": "accounts.account",
-    "pk": 124,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Charitable Contributions Expense",
         "description": "",
         "order": 13,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 125,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Insurance Expense",
         "description": "",
         "order": 14,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
     }
 },
 {
     "model": "accounts.account",
-    "pk": 126,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Postage Expense",
         "description": "",
         "order": 15,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 127,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Repair Expense",
         "description": "",
         "order": 16,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 128,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Oil and Gas Expense (Also Automobile Expense)",
         "description": "",
         "order": 17,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 129,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Depreciation Expense--Building",
         "description": "",
         "order": 18,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 130,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Depreciation Expense--Equipment (Also Tennis Facilities, Delivery Equip, Office Equip, Furniture)",
         "description": "",
         "order": 19,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
-        "is_active": false
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
     }
 },
 {
     "model": "accounts.account",
-    "pk": 131,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Depreciation Expense--Other Equipment (Medical Equipment, Exercise Equipment, Computer Equipment)",
         "description": "",
         "order": 20,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 132,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Depletion Expense",
         "description": "",
         "order": 21,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 133,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Patent Amortization",
         "description": "",
         "order": 22,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 134,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Amortization of Organization Costs",
         "description": "",
         "order": 23,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 135,
     "fields": {
-        "account_type": 21,
+        "account_type": [
+            "General and Administrative Expenses"
+        ],
         "name": "Miscellaneous Expense",
         "description": "",
         "order": 24,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 136,
     "fields": {
-        "account_type": 22,
+        "account_type": [
+            "Other Expenses"
+        ],
         "name": "Interest Expense (Also Bond Interest Expense)",
         "description": "",
         "order": 0,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 137,
     "fields": {
-        "account_type": 22,
+        "account_type": [
+            "Other Expenses"
+        ],
         "name": "Loss on Discarded Equipment",
         "description": "",
         "order": 1,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 138,
     "fields": {
-        "account_type": 22,
+        "account_type": [
+            "Other Expenses"
+        ],
         "name": "Loss on Sale/Exchange of Equipment",
         "description": "",
         "order": 2,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 139,
     "fields": {
-        "account_type": 22,
+        "account_type": [
+            "Other Expenses"
+        ],
         "name": "Loss on Bonds Redeemed",
         "description": "",
         "order": 3,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
     }
 },
 {
     "model": "accounts.account",
-    "pk": 140,
     "fields": {
-        "account_type": 22,
+        "account_type": [
+            "Other Expenses"
+        ],
         "name": "Income Tax Expense",
         "description": "",
         "order": 4,
         "initial_balance": "0.00",
-        "created_date": "2018-02-01T00:00:00.000Z",
+        "created_date": "2018-02-01T00:00:00Z",
         "is_active": false
+    }
+},
+{
+    "model": "accounts.account",
+    "fields": {
+        "account_type": [
+            "Prepaid Items"
+        ],
+        "name": "Prepaid Rent",
+        "description": "",
+        "order": 4,
+        "initial_balance": "0.00",
+        "created_date": "2018-02-01T00:00:00Z",
+        "is_active": true
     }
 }
 ]
