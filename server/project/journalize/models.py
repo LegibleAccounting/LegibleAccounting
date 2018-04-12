@@ -14,10 +14,15 @@ JOURNAL_ENTRY_TYPE_CHOICES = (
 
 MANAGEMENT_JOURNAL_ENTRY_TYPES = [3]
 
+class JournalEntryManager(models.Manager):
+    def get_by_natural_key(self, creator_username, date_created):
+        return self.get(creator__username=creator_username, date_created=date_created)
 
 class JournalEntry(models.Model):
     class Meta:
         ordering = ['-date', '-date_created']
+
+    objects = JournalEntryManager()
 
     entry_type = models.SmallIntegerField(choices=JOURNAL_ENTRY_TYPE_CHOICES)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -36,10 +41,20 @@ class JournalEntry(models.Model):
     def __str__(self):
         return "Journal Entry {0:03d}".format(self.pk)
 
+    def natural_key(self):
+        return (self.creator.username, self.date_created)
+
+    natural_key.dependencies = ['auth.user']
+
+class TransactionManager(models.Manager):
+    def get_by_natural_key(self, journal_entry_date_created, affected_account_name):
+        return self.get(journal_entry__date_created=journal_entry__date_created, affected_account__name=affected_account__name)
 
 class Transaction(models.Model):
     class Meta:
         ordering = ['journal_entry__date', 'date']
+
+    objects = TransactionManager()
 
     affected_account = models.ForeignKey(Account, related_name="transactions", on_delete=models.PROTECT)
     journal_entry = models.ForeignKey(JournalEntry, related_name="transactions", on_delete=models.PROTECT)
@@ -56,6 +71,11 @@ class Transaction(models.Model):
         return "{0:} - Journal Entry {3:03d} - {1:} - ${2:.2f}".format(
             self.affected_account.name, is_debit, self.value, self.journal_entry.pk if self.journal_entry is not None else -1
         )
+
+    def natural_key(self):
+        return (self.journal_entry.date_created ) + self.affected_account.natural_key()
+
+    natural_key.dependencies = ['journalize.journalentry', 'accounts.account']
 
 
 def get_upload_path(receipt, filename):
