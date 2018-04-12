@@ -1,5 +1,9 @@
-.doubleUnderline {
+.trialBalance .doubleUnderline {
     padding-bottom: 1px;
     border-bottom: double 5px;
-    width: 50px;
+}
+
+.trialBalance .debitCol,
+.trialBalance .creditCol {
+    min-width: 10rem;
 }

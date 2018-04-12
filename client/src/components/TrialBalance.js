@@ -37,8 +37,8 @@ class TrialBalance extends Component {
                       <thead>
                         <tr>
                             <th className="accountName">Account Name</th>
-                            <th className="debit">Debit</th>
-                            <th className="credit">Credit</th> 
+                            <th className="debitCol text-right">Debit</th>
+                            <th className="creditCol text-right">Credit</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -51,8 +51,8 @@ class TrialBalance extends Component {
                                     </NavLink>
                                     <span> - {item.account_name}</span>
                                 </td>
-                                <td className="debit">{item.is_debit && item.balance}</td>
-                                <td className="credit">{!item.is_debit && item.balance}</td>
+                                <td className="debit" align="right">{item.is_debit && item.balance}</td>
+                                <td className="credit" align="right">{!item.is_debit && item.balance}</td>
                             </tr>
                         ))): (
                             <tr>
@@ -63,8 +63,8 @@ class TrialBalance extends Component {
                         )}
                             <tr>
                                 <td><label>Total</label></td>
-                                <td><label className="doubleUnderline">{this.state.data.debit_total}</label></td>
-                                <td><label className="doubleUnderline">{this.state.data.credit_total}</label></td>
+                                <td align="right"><label className="doubleUnderline">{this.state.data.debit_total}</label></td>
+                                <td align="right"><label className="doubleUnderline">{this.state.data.credit_total}</label></td>
                             </tr>
                         </tbody>
                     </table>
