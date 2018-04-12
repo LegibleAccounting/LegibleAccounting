@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Auth from '../api/Auth.js';
 import './TrialBalance.css';
-import TrialBalanceAPI from '../api/TrialBalance.js';
+import AccountsAPI from '../api/AccountsApi.js';
 
 class TrialBalance extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class TrialBalance extends Component {
             data: []
         };
 
-        TrialBalanceAPI.getTrialBalance()
+        AccountsAPI.getTrialBalance()
             .then(data => {
                 this.setState({
                     isLoading: false,
