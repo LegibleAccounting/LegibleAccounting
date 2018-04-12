@@ -70,23 +70,6 @@ class JournalEntry extends Component {
                                   trigger="click"
                                   rootClose
                                   placement="bottom"
-                                  overlay={
-                                      <Popover id="popover-trigger-click-root-close" title="Description">
-                                        {
-            
-                                            <div className="description">{this.props.entry.description}</div>
-                                        }
-                                      </Popover>
-                                  }>  
-                                    <span
-                                        className="glyphicon glyphicon-list-alt glyphiconButton"
-                                        style={{display: this.props.entry.description === "" && 'none' }}>
-                                    </span>  
-                            </OverlayTrigger>
-                            <OverlayTrigger
-                                  trigger="click"
-                                  rootClose
-                                  placement="bottom"
                                   overlay={(
                                       <Popover id="popover-trigger-click-root-close" title="Attachments">
                                         {
@@ -137,8 +120,10 @@ class JournalEntry extends Component {
                 </div>
                 
                 <div className="row bottomOfEntryWrapper">
-                    <div className="col-md-8 descriptionWrapperWrapper">
-                        
+                    <div className="col-md-offset-4 col-md-4 descriptionWrapperWrapper">
+                        <div className="description">
+                            <strong>Description: </strong>{this.props.entry.description}
+                        </div>
                     </div>
                     {
                         this.state.managementMode === 0 ? (                        
@@ -166,7 +151,6 @@ class JournalEntry extends Component {
                         <div></div>
                     )
                 }
-                <div className="line"></div> 
             </div>
         );
     }
