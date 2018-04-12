@@ -102,7 +102,7 @@ class AccountViewSet(viewsets.ModelViewSet):
             'revenues': revenues,
             'expenses_total': format_currency(expenses_total),
             'revenues_total': format_currency(revenues_total),
-            'income': format_currency(revenues_total - expenses_total)
+            'net_profit': format_currency(revenues_total - expenses_total)
         }
 
         return Response(response)
