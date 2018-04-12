@@ -384,8 +384,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-04T04:30:34.441Z"
+            "2002-04-04T04:30:34.441Z",
+            "accountant1"
         ],
         "value": "10000.00",
         "is_debit": true,
@@ -399,8 +399,8 @@
             "Accounts Receivable"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-04T04:30:34.441Z"
+            "2002-04-04T04:30:34.441Z",
+            "accountant1"
         ],
         "value": "1500.00",
         "is_debit": true,
@@ -414,8 +414,8 @@
             "Supplies (Specialty Items like Medical, Bicycle, Tailoring, etc.)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-04T04:30:34.441Z"
+            "2002-04-04T04:30:34.441Z",
+            "accountant1"
         ],
         "value": "1250.00",
         "is_debit": true,
@@ -429,8 +429,8 @@
             "Office Equipment (Also Store Equipment)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-04T04:30:34.441Z"
+            "2002-04-04T04:30:34.441Z",
+            "accountant1"
         ],
         "value": "7500.00",
         "is_debit": true,
@@ -444,8 +444,8 @@
             "John Addams, Capital"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-04T04:30:34.441Z"
+            "2002-04-04T04:30:34.441Z",
+            "accountant1"
         ],
         "value": "20250.00",
         "is_debit": false,
@@ -459,8 +459,8 @@
             "Prepaid Rent"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-04T04:31:51.566Z"
+            "2002-04-04T04:31:51.566Z",
+            "accountant1"
         ],
         "value": "4500.00",
         "is_debit": true,
@@ -474,8 +474,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-04T04:31:51.566Z"
+            "2002-04-04T04:31:51.566Z",
+            "accountant1"
         ],
         "value": "4500.00",
         "is_debit": false,
@@ -489,8 +489,8 @@
             "Prepaid Insurance"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-04T04:33:09.041Z"
+            "2002-04-04T04:33:09.041Z",
+            "accountant1"
         ],
         "value": "1800.00",
         "is_debit": true,
@@ -504,8 +504,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-04T04:33:09.041Z"
+            "2002-04-04T04:33:09.041Z",
+            "accountant1"
         ],
         "value": "1800.00",
         "is_debit": false,
@@ -519,8 +519,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-06T04:34:27.653Z"
+            "2002-04-06T04:34:27.653Z",
+            "accountant1"
         ],
         "value": "3000.00",
         "is_debit": true,
@@ -534,8 +534,8 @@
             "Unearned Subscription Revenue (Also Unearned Service/Ticket Revenue, Unearned Repair Fees)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-06T04:34:27.653Z"
+            "2002-04-06T04:34:27.653Z",
+            "accountant1"
         ],
         "value": "3000.00",
         "is_debit": false,
@@ -549,8 +549,8 @@
             "Office Equipment (Also Store Equipment)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-07T04:36:05.868Z"
+            "2002-04-07T04:36:05.868Z",
+            "accountant1"
         ],
         "value": "1800.00",
         "is_debit": true,
@@ -564,8 +564,8 @@
             "Accounts Payable (Also Vouchers Payable)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-07T04:36:05.868Z"
+            "2002-04-07T04:36:05.868Z",
+            "accountant1"
         ],
         "value": "1800.00",
         "is_debit": false,
@@ -579,8 +579,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-08T04:37:29.449Z"
+            "2002-04-08T04:37:29.449Z",
+            "accountant1"
         ],
         "value": "800.00",
         "is_debit": true,
@@ -594,8 +594,8 @@
             "Accounts Receivable"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-08T04:37:29.449Z"
+            "2002-04-08T04:37:29.449Z",
+            "accountant1"
         ],
         "value": "800.00",
         "is_debit": false,
@@ -609,8 +609,8 @@
             "Advertising Expense"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-11T04:39:14.609Z"
+            "2002-04-11T04:39:14.609Z",
+            "accountant1"
         ],
         "value": "120.00",
         "is_debit": true,
@@ -624,8 +624,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-11T04:39:14.609Z"
+            "2002-04-11T04:39:14.609Z",
+            "accountant1"
         ],
         "value": "120.00",
         "is_debit": false,
@@ -639,8 +639,8 @@
             "Accounts Payable (Also Vouchers Payable)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-12T04:40:59.243Z"
+            "2002-04-12T04:40:59.243Z",
+            "accountant1"
         ],
         "value": "800.00",
         "is_debit": true,
@@ -654,8 +654,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-12T04:40:59.243Z"
+            "2002-04-12T04:40:59.243Z",
+            "accountant1"
         ],
         "value": "800.00",
         "is_debit": false,
@@ -669,8 +669,8 @@
             "Accounts Receivable"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-15T04:43:12.124Z"
+            "2002-04-15T04:43:12.124Z",
+            "accountant1"
         ],
         "value": "2250.00",
         "is_debit": true,
@@ -684,8 +684,8 @@
             "Service Fees"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-15T04:43:12.124Z"
+            "2002-04-15T04:43:12.124Z",
+            "accountant1"
         ],
         "value": "2250.00",
         "is_debit": false,
@@ -699,8 +699,8 @@
             "Wages Expense (Also Wages and Salaries Expense)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-15T04:44:36.560Z"
+            "2002-04-15T04:44:36.560Z",
+            "accountant1"
         ],
         "value": "400.00",
         "is_debit": true,
@@ -714,8 +714,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-15T04:44:36.560Z"
+            "2002-04-15T04:44:36.560Z",
+            "accountant1"
         ],
         "value": "400.00",
         "is_debit": false,
@@ -729,8 +729,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-15T04:46:56.136Z"
+            "2002-04-15T04:46:56.136Z",
+            "accountant1"
         ],
         "value": "3175.00",
         "is_debit": true,
@@ -744,8 +744,8 @@
             "Service Fees"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-15T04:46:56.136Z"
+            "2002-04-15T04:46:56.136Z",
+            "accountant1"
         ],
         "value": "3175.00",
         "is_debit": false,
@@ -759,8 +759,8 @@
             "Supplies (Specialty Items like Medical, Bicycle, Tailoring, etc.)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-18T04:47:56.036Z"
+            "2002-04-18T04:47:56.036Z",
+            "accountant1"
         ],
         "value": "750.00",
         "is_debit": true,
@@ -774,8 +774,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-18T04:47:56.036Z"
+            "2002-04-18T04:47:56.036Z",
+            "accountant1"
         ],
         "value": "750.00",
         "is_debit": false,
@@ -789,8 +789,8 @@
             "Accounts Receivable"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-22T04:49:52.835Z"
+            "2002-04-22T04:49:52.835Z",
+            "accountant1"
         ],
         "value": "1100.00",
         "is_debit": true,
@@ -804,8 +804,8 @@
             "Service Fees"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-22T04:49:52.835Z"
+            "2002-04-22T04:49:52.835Z",
+            "accountant1"
         ],
         "value": "1100.00",
         "is_debit": false,
@@ -819,8 +819,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-22T04:51:16.518Z"
+            "2002-04-22T04:51:16.518Z",
+            "accountant1"
         ],
         "value": "1850.00",
         "is_debit": true,
@@ -834,8 +834,8 @@
             "Service Fees"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-22T04:51:16.518Z"
+            "2002-04-22T04:51:16.518Z",
+            "accountant1"
         ],
         "value": "1850.00",
         "is_debit": false,
@@ -849,8 +849,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-25T04:52:09.548Z"
+            "2002-04-25T04:52:09.548Z",
+            "accountant1"
         ],
         "value": "1600.00",
         "is_debit": true,
@@ -864,8 +864,8 @@
             "Accounts Receivable"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-25T04:52:09.548Z"
+            "2002-04-25T04:52:09.548Z",
+            "accountant1"
         ],
         "value": "1600.00",
         "is_debit": false,
@@ -879,8 +879,8 @@
             "Wages Expense (Also Wages and Salaries Expense)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-27T04:53:22.166Z"
+            "2002-04-27T04:53:22.166Z",
+            "accountant1"
         ],
         "value": "400.00",
         "is_debit": true,
@@ -894,8 +894,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-27T04:53:22.166Z"
+            "2002-04-27T04:53:22.166Z",
+            "accountant1"
         ],
         "value": "400.00",
         "is_debit": false,
@@ -909,8 +909,8 @@
             "Telephone Expense"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-28T04:54:41.783Z"
+            "2002-04-28T04:54:41.783Z",
+            "accountant1"
         ],
         "value": "130.00",
         "is_debit": true,
@@ -924,8 +924,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-28T04:54:41.783Z"
+            "2002-04-28T04:54:41.783Z",
+            "accountant1"
         ],
         "value": "130.00",
         "is_debit": false,
@@ -939,8 +939,8 @@
             "Electricity Expense, Utilities Expense"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-29T04:55:44.156Z"
+            "2002-04-29T04:55:44.156Z",
+            "accountant1"
         ],
         "value": "200.00",
         "is_debit": true,
@@ -954,8 +954,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-29T04:55:44.156Z"
+            "2002-04-29T04:55:44.156Z",
+            "accountant1"
         ],
         "value": "200.00",
         "is_debit": false,
@@ -969,8 +969,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-29T04:57:17.309Z"
+            "2002-04-29T04:57:17.309Z",
+            "accountant1"
         ],
         "value": "2050.00",
         "is_debit": true,
@@ -984,8 +984,8 @@
             "Service Fees"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-29T04:57:17.309Z"
+            "2002-04-29T04:57:17.309Z",
+            "accountant1"
         ],
         "value": "2050.00",
         "is_debit": false,
@@ -999,8 +999,8 @@
             "Accounts Receivable"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-29T04:58:16.464Z"
+            "2002-04-29T04:58:16.464Z",
+            "accountant1"
         ],
         "value": "1000.00",
         "is_debit": true,
@@ -1014,8 +1014,8 @@
             "Service Fees"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-29T04:58:16.464Z"
+            "2002-04-29T04:58:16.464Z",
+            "accountant1"
         ],
         "value": "1000.00",
         "is_debit": false,
@@ -1029,8 +1029,8 @@
             "Wages Expense (Also Wages and Salaries Expense)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-29T04:59:14.596Z"
+            "2002-04-29T04:59:14.596Z",
+            "accountant1"
         ],
         "value": "4500.00",
         "is_debit": true,
@@ -1044,8 +1044,8 @@
             "Cash"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-29T04:59:14.596Z"
+            "2002-04-29T04:59:14.596Z",
+            "accountant1"
         ],
         "value": "4500.00",
         "is_debit": false,
@@ -1059,8 +1059,8 @@
             "Insurance Expense"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-30T05:03:14.618Z"
+            "2002-04-30T05:03:14.618Z",
+            "accountant1"
         ],
         "value": "150.00",
         "is_debit": true,
@@ -1074,8 +1074,8 @@
             "Prepaid Insurance"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-30T05:03:14.618Z"
+            "2002-04-30T05:03:14.618Z",
+            "accountant1"
         ],
         "value": "150.00",
         "is_debit": false,
@@ -1089,8 +1089,8 @@
             "Store Supplies Expense"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-30T05:05:28.830Z"
+            "2002-04-30T05:05:28.830Z",
+            "accountant1"
         ],
         "value": "980.00",
         "is_debit": true,
@@ -1104,8 +1104,8 @@
             "Supplies (Specialty Items like Medical, Bicycle, Tailoring, etc.)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-30T05:05:28.830Z"
+            "2002-04-30T05:05:28.830Z",
+            "accountant1"
         ],
         "value": "980.00",
         "is_debit": false,
@@ -1119,8 +1119,8 @@
             "Depreciation Expense--Equipment (Also Tennis Facilities, Delivery Equip, Office Equip, Furniture)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-30T05:09:16.046Z"
+            "2002-04-30T05:09:16.046Z",
+            "accountant1"
         ],
         "value": "500.00",
         "is_debit": true,
@@ -1134,8 +1134,8 @@
             "Accumulated Depreciation--Office Equipment (Also Store Equipment)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-30T05:09:16.046Z"
+            "2002-04-30T05:09:16.046Z",
+            "accountant1"
         ],
         "value": "500.00",
         "is_debit": false,
@@ -1149,8 +1149,8 @@
             "Wages Expense (Also Wages and Salaries Expense)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-30T05:11:55.133Z"
+            "2002-04-30T05:11:55.133Z",
+            "accountant1"
         ],
         "value": "20.00",
         "is_debit": true,
@@ -1164,8 +1164,8 @@
             "Wages Payable"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-30T05:11:55.133Z"
+            "2002-04-30T05:11:55.133Z",
+            "accountant1"
         ],
         "value": "20.00",
         "is_debit": false,
@@ -1179,8 +1179,8 @@
             "Rent Expense"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-30T05:13:12.182Z"
+            "2002-04-30T05:13:12.182Z",
+            "accountant1"
         ],
         "value": "1500.00",
         "is_debit": true,
@@ -1194,8 +1194,8 @@
             "Prepaid Rent"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-30T05:13:12.182Z"
+            "2002-04-30T05:13:12.182Z",
+            "accountant1"
         ],
         "value": "1500.00",
         "is_debit": false,
@@ -1209,8 +1209,8 @@
             "Unearned Subscription Revenue (Also Unearned Service/Ticket Revenue, Unearned Repair Fees)"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-30T05:15:03.897Z"
+            "2002-04-30T05:15:03.897Z",
+            "accountant1"
         ],
         "value": "2000.00",
         "is_debit": true,
@@ -1224,8 +1224,8 @@
             "Service Fees"
         ],
         "journal_entry": [
-            "accountant1",
-            "2002-04-30T05:15:03.897Z"
+            "2002-04-30T05:15:03.897Z",
+            "accountant1"
         ],
         "value": "2000.00",
         "is_debit": false,
