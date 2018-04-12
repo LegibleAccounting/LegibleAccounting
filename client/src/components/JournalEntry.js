@@ -120,7 +120,7 @@ class JournalEntry extends Component {
                 </div>
                 
                 <div className="row bottomOfEntryWrapper">
-                    <div className="col-md-8 descriptionWrapperWrapper">
+                    <div className="col-md-offset-4 col-md-4 descriptionWrapperWrapper">
                         <div className="description">
                             <strong>Description: </strong>{this.props.entry.description}
                         </div>
@@ -151,7 +151,6 @@ class JournalEntry extends Component {
                         <div></div>
                     )
                 }
-                <div className="line"></div> 
             </div>
         );
     }

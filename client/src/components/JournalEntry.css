@@ -3,8 +3,11 @@
 }
 
 .journalEntry {
-	padding-top: 5px;
-	border-radius: 5px;
+	padding: 5px 0;
+}
+
+.journalEntry:not(:last-of-type) {
+	border-bottom: 2px solid #EAEAEA;
 }
 
 .journalEntry .approved {
@@ -87,7 +90,6 @@
 
 .descriptionWrapperWrapper {
 	margin-top: 5px;
-	padding-left: 34.6%;
 }
 
 .descriptionWrapper {
