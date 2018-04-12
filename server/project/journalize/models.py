@@ -15,8 +15,8 @@ JOURNAL_ENTRY_TYPE_CHOICES = (
 MANAGEMENT_JOURNAL_ENTRY_TYPES = [3]
 
 class JournalEntryManager(models.Manager):
-    def get_by_natural_key(self, creator_username, date_created):
-        return self.get(creator__username=creator_username, date_created=date_created)
+    def get_by_natural_key(self, date_created, creator_username):
+        return self.get(date_created=date_created, creator__username=creator_username)
 
 class JournalEntry(models.Model):
     class Meta:
@@ -42,13 +42,12 @@ class JournalEntry(models.Model):
         return "Journal Entry {0:03d}".format(self.pk)
 
     def natural_key(self):
-        return (self.creator.username, self.date_created)
+        return (self.date_created,) + self.creator.natural_key()
 
-    natural_key.dependencies = ['auth.user']
 
 class TransactionManager(models.Manager):
     def get_by_natural_key(self, journal_entry_date_created, affected_account_name):
-        return self.get(journal_entry__date_created=journal_entry__date_created, affected_account__name=affected_account__name)
+        return self.get(journal_entry__date_created=journal_entry_date_created, affected_account__name=affected_account_name)
 
 class Transaction(models.Model):
     class Meta:
@@ -73,7 +72,7 @@ class Transaction(models.Model):
         )
 
     def natural_key(self):
-        return (self.journal_entry.date_created ) + self.affected_account.natural_key()
+        return (self.journal_entry.date_created,) + self.affected_account.natural_key()
 
     natural_key.dependencies = ['journalize.journalentry', 'accounts.account']
 
