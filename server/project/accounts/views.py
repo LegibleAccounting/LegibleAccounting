@@ -4,7 +4,7 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import DjangoModelPermissions
 
 from rest_framework.decorators import list_route, detail_route
-from .models import Account, AccountType
+from .models import Account, AccountType, ACCOUNT_CATEGORIES
 from .serializers import AccountSerializer, AccountTypeSerializer, RetrieveAccountSerializer, RetrieveAccountTypeSerializer, LedgerAccountSerializer
 from rest_framework.response import Response
 from project.utils import format_currency
@@ -71,6 +71,38 @@ class AccountViewSet(viewsets.ModelViewSet):
             'accounts': nonzero_accounts,
             'debit_total': format_currency(debit_total),
             'credit_total': format_currency(credit_total)
+        }
+
+        return Response(response)
+
+    @list_route(methods=['get'])
+    def income_statement(self, request):
+        active_accounts = Account.objects.all().filter(is_active=True)
+        expenses = []
+        revenues = []
+        expenses_total = 0
+        revenues_total = 0
+        for account in active_accounts:
+            account_balance = account.get_balance()
+            if account_balance != 0:
+                account_summary = {
+                        'account_id': account.pk,
+                        'account_number': account.account_number(),
+                        'account_name': account.name,
+                        'balance': format_currency(account_balance),
+                    }
+                if account.account_type.category == 3:  #3 is Revenues
+                    revenues.append(account_summary)
+                    revenues_total += account_balance
+                elif account.account_type.category == 4:  #4 is Expenses
+                    expenses.append(account_summary)
+                    expenses_total += account_balance
+        response = {
+            'expenses': expenses,
+            'revenues': revenues,
+            'expenses_total': format_currency(expenses_total),
+            'revenues_total': format_currency(revenues_total),
+            'income': format_currency(revenues_total - expenses_total)
         }
 
         return Response(response)
