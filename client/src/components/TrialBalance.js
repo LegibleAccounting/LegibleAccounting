@@ -36,7 +36,7 @@ class TrialBalance extends Component {
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                            <th className="accountName">Account Name</th>
+                            <th className="accountName">Account</th>
                             <th className="debitCol text-right">Debit</th>
                             <th className="creditCol text-right">Credit</th>
                         </tr>
@@ -56,7 +56,7 @@ class TrialBalance extends Component {
                             </tr>
                         ))): (
                             <tr>
-                                <td>{ this.state.isLoading ? 'Loading...' : 'No Accounts' }</td>
+                                <td>{ this.state.isLoading ? 'Loading...' : 'No Data' }</td>
                                 <td></td>
                                 <td></td>
                             </tr>
