@@ -45,7 +45,12 @@ class TrialBalance extends Component {
                         { this.state.data.accounts.length ? (
                           this.state.data.accounts.map((item, index) => (
                             <tr key={item.account_id}>
-                                <td>{item.account_name}</td>
+                                <td>
+                                    <NavLink to={`/accounts/${item.account_id}/ledger`}>
+                                        {item.account_number}
+                                    </NavLink>
+                                    <span> - {item.account_name}</span>
+                                </td>
                                 <td className="debit">{item.is_debit && item.balance}</td>
                                 <td className="credit">{!item.is_debit && item.balance}</td>
                             </tr>
