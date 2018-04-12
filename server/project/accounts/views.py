@@ -86,15 +86,15 @@ class AccountViewSet(viewsets.ModelViewSet):
             account_balance = account.get_balance()
             if account_balance != 0:
                 account_summary = {
-                        'account_id': account.pk,
-                        'account_number': account.account_number(),
-                        'account_name': account.name,
-                        'balance': format_currency(account_balance),
-                    }
-                if account.account_type.category == 3:  #3 is Revenues
+                    'account_id': account.pk,
+                    'account_number': account.account_number(),
+                    'account_name': account.name,
+                    'balance': format_currency(account_balance),
+                }
+                if account.account_type.category == 3:  # 3 is Revenues
                     revenues.append(account_summary)
                     revenues_total += account_balance
-                elif account.account_type.category == 4:  #4 is Expenses
+                elif account.account_type.category == 4:  # 4 is Expenses
                     expenses.append(account_summary)
                     expenses_total += account_balance
         response = {
@@ -106,3 +106,68 @@ class AccountViewSet(viewsets.ModelViewSet):
         }
 
         return Response(response)
+
+    @list_route(methods=['get'])
+    def balance_sheet(self, request):
+        active_accounts = Account.objects.all().filter(is_active=True)
+        current_assets = []
+        current_assets_total = 0
+        noncurrent_assets = []
+        noncurrent_assets_total = 0
+        current_liabilities = []
+        current_liabilities_total = 0
+        noncurrent_liabilities = []
+        noncurrent_liabilities_total = 0
+
+        expenses_total = 0
+        revenues_total = 0
+        equity = []
+        equity_total = 0
+        for account in active_accounts:
+            account_balance = account.get_balance()
+            if account_balance != 0:
+                account_summary = {
+                    'account_id': account.pk,
+                    'account_number': account.account_number(),
+                    'account_name': account.name,
+                    'balance': format_currency(account_balance),
+                }
+                if account.account_type.category == 0:  # 0 is Assets
+                    if account.account_type.classification == 1:  # 1 is Current
+                        current_assets.append(account_summary)
+                        current_assets_total += account_balance
+                    else:
+                        noncurrent_assets.append(account_summary)
+                        noncurrent_assets_total += account_balance
+                        
+                elif account.account_type.category == 1:  # 1 is Liabilities
+                    if account.account_type.classification == 1:  # 1 is Current
+                        current_liabilities.append(account_summary)
+                        current_liabilities_total += account_balance
+                    else:
+                        noncurrent_liabilities.append(account_summary)
+                        noncurrent_liabilities_total += account_balance
+                elif account.account_type.category == 2:  # 2 is Equity
+                    equity.append(account_summary)
+                    equity_total += account_balance
+                elif account.account_type.category == 3:  # 3 is Revenues
+                    revenues_total += account_balance
+                elif account.account_type.category == 4:  # 4 is Expenses
+                    expenses_total += account_balance
+                    
+        response = {
+            'current_assets': current_assets,
+            'current_liabilities': current_liabilities,
+            'noncurrent_assets': noncurrent_assets,
+            'noncurrent_liabilities': noncurrent_liabilities,
+            'equity': equity,
+            'current_assets_total': format_currency(current_assets_total),
+            'noncurrent_assets_total': format_currency(noncurrent_assets_total),
+            'current_liabilities_total': format_currency(current_liabilities_total),
+            'noncurrent_liabilities_total': format_currency(noncurrent_liabilities_total),
+            'equity_total': format_currency(equity_total + revenues_total - expenses_total)  # THIS IS A HACKY SOLUTION DO NOT TRUST
+        }
+
+        return Response(response)
+
+
