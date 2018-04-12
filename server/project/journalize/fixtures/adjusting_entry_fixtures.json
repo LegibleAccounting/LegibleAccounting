@@ -1,0 +1,266 @@
+[
+{
+    "model": "journalize.journalentry",
+    "fields": {
+        "entry_type": 2,
+        "date_created": "2002-04-30T05:03:14.618Z",
+        "date": "2002-04-30",
+        "is_approved": true,
+        "memo": "",
+        "description": "Insurance utilized for the month of April.",
+        "creator": [
+            "accountant1"
+        ]
+    }
+},
+{
+    "model": "journalize.journalentry",
+    "fields": {
+        "entry_type": 2,
+        "date_created": "2002-04-30T05:05:28.830Z",
+        "date": "2002-04-30",
+        "is_approved": true,
+        "memo": "",
+        "description": "Supplies on hand as of April 29.",
+        "creator": [
+            "accountant1"
+        ]
+    }
+},
+{
+    "model": "journalize.journalentry",
+    "fields": {
+        "entry_type": 2,
+        "date_created": "2002-04-30T05:09:16.046Z",
+        "date": "2002-04-30",
+        "is_approved": true,
+        "memo": "",
+        "description": "Depreciation of office equipment for the month of April.",
+        "creator": [
+            "accountant1"
+        ]
+    }
+},
+{
+    "model": "journalize.journalentry",
+    "fields": {
+        "entry_type": 2,
+        "date_created": "2002-04-30T05:11:55.133Z",
+        "date": "2002-04-30",
+        "is_approved": true,
+        "memo": "",
+        "description": "Accrued receptionist salary as of April 30.",
+        "creator": [
+            "accountant1"
+        ]
+    }
+},
+{
+    "model": "journalize.journalentry",
+    "fields": {
+        "entry_type": 2,
+        "date_created": "2002-04-30T05:13:12.182Z",
+        "date": "2002-04-30",
+        "is_approved": true,
+        "memo": "",
+        "description": "Rent for the month of April.",
+        "creator": [
+            "accountant1"
+        ]
+    }
+},
+{
+    "model": "journalize.journalentry",
+    "fields": {
+        "entry_type": 2,
+        "date_created": "2002-04-30T05:15:03.897Z",
+        "date": "2002-04-30",
+        "is_approved": true,
+        "memo": "",
+        "description": "Earned service revenue for services that were previously paid for on April 6.",
+        "creator": [
+            "accountant1"
+        ]
+    }
+},
+{
+    "model": "journalize.transaction",
+    "fields": {
+        "affected_account": [
+            "Insurance Expense"
+        ],
+        "journal_entry": [
+            "2002-04-30T05:03:14.618Z",
+            "accountant1"
+        ],
+        "value": "150.00",
+        "is_debit": true,
+        "date": "2002-04-30T05:03:14.632Z"
+    }
+},
+{
+    "model": "journalize.transaction",
+    "fields": {
+        "affected_account": [
+            "Prepaid Insurance"
+        ],
+        "journal_entry": [
+            "2002-04-30T05:03:14.618Z",
+            "accountant1"
+        ],
+        "value": "150.00",
+        "is_debit": false,
+        "date": "2002-04-30T05:03:14.634Z"
+    }
+},
+{
+    "model": "journalize.transaction",
+    "fields": {
+        "affected_account": [
+            "Store Supplies Expense"
+        ],
+        "journal_entry": [
+            "2002-04-30T05:05:28.830Z",
+            "accountant1"
+        ],
+        "value": "980.00",
+        "is_debit": true,
+        "date": "2002-04-30T05:05:28.843Z"
+    }
+},
+{
+    "model": "journalize.transaction",
+    "fields": {
+        "affected_account": [
+            "Supplies (Specialty Items like Medical, Bicycle, Tailoring, etc.)"
+        ],
+        "journal_entry": [
+            "2002-04-30T05:05:28.830Z",
+            "accountant1"
+        ],
+        "value": "980.00",
+        "is_debit": false,
+        "date": "2002-04-30T05:05:28.846Z"
+    }
+},
+{
+    "model": "journalize.transaction",
+    "fields": {
+        "affected_account": [
+            "Depreciation Expense--Equipment (Also Tennis Facilities, Delivery Equip, Office Equip, Furniture)"
+        ],
+        "journal_entry": [
+            "2002-04-30T05:09:16.046Z",
+            "accountant1"
+        ],
+        "value": "500.00",
+        "is_debit": true,
+        "date": "2002-04-30T05:09:16.060Z"
+    }
+},
+{
+    "model": "journalize.transaction",
+    "fields": {
+        "affected_account": [
+            "Accumulated Depreciation--Office Equipment (Also Store Equipment)"
+        ],
+        "journal_entry": [
+            "2002-04-30T05:09:16.046Z",
+            "accountant1"
+        ],
+        "value": "500.00",
+        "is_debit": false,
+        "date": "2002-04-30T05:09:16.062Z"
+    }
+},
+{
+    "model": "journalize.transaction",
+    "fields": {
+        "affected_account": [
+            "Wages Expense (Also Wages and Salaries Expense)"
+        ],
+        "journal_entry": [
+            "2002-04-30T05:11:55.133Z",
+            "accountant1"
+        ],
+        "value": "20.00",
+        "is_debit": true,
+        "date": "2002-04-30T05:11:55.147Z"
+    }
+},
+{
+    "model": "journalize.transaction",
+    "fields": {
+        "affected_account": [
+            "Wages Payable"
+        ],
+        "journal_entry": [
+            "2002-04-30T05:11:55.133Z",
+            "accountant1"
+        ],
+        "value": "20.00",
+        "is_debit": false,
+        "date": "2002-04-30T05:11:55.149Z"
+    }
+},
+{
+    "model": "journalize.transaction",
+    "fields": {
+        "affected_account": [
+            "Rent Expense"
+        ],
+        "journal_entry": [
+            "2002-04-30T05:13:12.182Z",
+            "accountant1"
+        ],
+        "value": "1500.00",
+        "is_debit": true,
+        "date": "2002-04-30T05:13:12.189Z"
+    }
+},
+{
+    "model": "journalize.transaction",
+    "fields": {
+        "affected_account": [
+            "Prepaid Rent"
+        ],
+        "journal_entry": [
+            "2002-04-30T05:13:12.182Z",
+            "accountant1"
+        ],
+        "value": "1500.00",
+        "is_debit": false,
+        "date": "2002-04-30T05:13:12.192Z"
+    }
+},
+{
+    "model": "journalize.transaction",
+    "fields": {
+        "affected_account": [
+            "Unearned Subscription Revenue (Also Unearned Service/Ticket Revenue, Unearned Repair Fees)"
+        ],
+        "journal_entry": [
+            "2002-04-30T05:15:03.897Z",
+            "accountant1"
+        ],
+        "value": "2000.00",
+        "is_debit": true,
+        "date": "2002-04-30T05:15:03.912Z"
+    }
+},
+{
+    "model": "journalize.transaction",
+    "fields": {
+        "affected_account": [
+            "Service Fees"
+        ],
+        "journal_entry": [
+            "2002-04-30T05:15:03.897Z",
+            "accountant1"
+        ],
+        "value": "2000.00",
+        "is_debit": false,
+        "date": "2002-04-30T05:15:03.914Z"
+    }
+}
+]
