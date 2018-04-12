@@ -6,7 +6,10 @@
 - name: Project schema shall be applied to database engine.
   shell: . {{ backend_env }}/bin/activate && python manage.py migrate chdir={{ backend }}
 
-- name: Project database will contain fixture data.
+- name: Project database will contain base fixture data.
+  shell: . {{ backend_env }}/bin/activate && python manage.py loaddata base_fixtures.json chdir={{ backend }}
+
+- name: Project database will contain fixture data for testing.
   shell: . {{ backend_env }}/bin/activate && python manage.py loaddata fixtures.json chdir={{ backend }}
 
 - name: Project static files will be collected.
