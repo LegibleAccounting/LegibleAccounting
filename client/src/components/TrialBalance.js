@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import Auth from '../api/Auth.js';
 import './TrialBalance.css';
 import AccountsAPI from '../api/AccountsApi.js';
 
@@ -45,7 +44,7 @@ class TrialBalance extends Component {
                       <tbody>
                         { this.state.data.accounts.length ? (
                           this.state.data.accounts.map((item, index) => (
-                            <tr>
+                            <tr key={item.account_id}>
                                 <td>{item.account_name}</td>
                                 <td className="debit">{item.is_debit && item.balance}</td>
                                 <td className="credit">{!item.is_debit && item.balance}</td>
