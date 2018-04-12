@@ -29,7 +29,7 @@ class Sidebar extends Component {
                         <NavLink to="/accounts">Accounts</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/trial-balance">Trial Balance</NavLink>
+                        <NavLink to="/accounts/trial-balance">Trial Balance</NavLink>
                     </li>
                     {
                         (Auth.currentUserIsManager() || Auth.currentUserIsAccountant()) && (
