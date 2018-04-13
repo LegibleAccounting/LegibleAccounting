@@ -2,12 +2,13 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import DjangoModelPermissions
-
+from django.utils import timezone
 from rest_framework.decorators import list_route, detail_route
 from .models import Account, AccountType, ACCOUNT_CATEGORIES
 from .serializers import AccountSerializer, AccountTypeSerializer, RetrieveAccountSerializer, RetrieveAccountTypeSerializer, LedgerAccountSerializer
 from rest_framework.response import Response
 from project.utils import format_currency
+from journalize.models import JournalEntry, Transaction
 
 
 class AccountTypeViewSet(viewsets.ReadOnlyModelViewSet):
@@ -169,5 +170,27 @@ class AccountViewSet(viewsets.ModelViewSet):
         }
 
         return Response(response)
+
+
+def close_accounts(user):
+    active_accounts = Account.objects.all().filter(is_active=True)
+    credit_val = 0
+    income_account = Account.objects.get_by_natural_key('Income Summary')
+    closing_journal = JournalEntry(date=timezone.now(), creator=user, description="Auto-generated closing journal",
+                                   entry_type=3, is_approved=True)
+    for account in active_accounts:
+        closer = Transaction(affected_account=account, journal_entry=closing_journal, value=account.get_balance())
+        if account.account_type.category == 3 or account.account_type.category == 4:
+            if account.account_type.category == 3:
+                closer.is_debit = True
+            elif account.account_type.category == 4:
+                closer.is_debit = False
+            credit_val += closer.get_value()
+            closer.save()
+    income_adjuster = Transaction(affected_account=income_account, journal_entry=closing_journal, value=abs(credit_val))
+    income_adjuster.is_debit = credit_val > 0
+    income_adjuster.save()
+    closing_journal.save()
+
 
 
