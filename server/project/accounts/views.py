@@ -50,12 +50,14 @@ class AccountViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['get'])
     def trial_balance(self, request):
-        active_accounts = Account.objects.all().filter(is_active=True)
+        active_accounts = Account.objects.filter(is_active=True)
         nonzero_accounts = []
         debit_total = 0
         credit_total = 0
+
         for account in active_accounts:
             account_balance = account.get_balance()
+
             if account_balance != 0:
                 nonzero_accounts.append({
                     'account_id': account.pk,
@@ -64,17 +66,17 @@ class AccountViewSet(viewsets.ModelViewSet):
                     'balance': format_currency(account_balance),
                     'is_debit': account.is_debit(),
                 })
+
                 if account.is_debit():
                     debit_total += account_balance
                 else:
                     credit_total += account_balance
-        response = {
+
+        return Response({
             'accounts': nonzero_accounts,
             'debit_total': format_currency(debit_total),
             'credit_total': format_currency(credit_total)
-        }
-
-        return Response(response)
+        })
 
     @list_route(methods=['get'])
     def income_statement(self, request):
