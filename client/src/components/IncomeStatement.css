@@ -45,6 +45,6 @@
 	width: 90%;
 }
 
-th, td {
+.income-statement th, td {
     padding: 8px;
 }
