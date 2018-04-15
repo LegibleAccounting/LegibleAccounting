@@ -28,11 +28,12 @@ class TrialBalance extends Component {
         }
 
         return (
-            <div className="trialBalance">
-                <div className="text-center">
-                    <h1 className="trial-balance-main-heading">Trial Balance</h1>
-                    <h2 className="business-name">Addams & Family Inc.</h2>
-                    <h3>As of {moment(this.state.data.as_of_date).format('MMMM Do YYYY')}</h3>
+            <div className="trial-balance">
+
+                <div className="text-center title-heading">
+                    <div className="income-statement-main-heading">Trial Balance</div>
+                    <div className="business-name">Addams & Family Inc.</div>
+                    <div className="as-of-date ">As of {moment(this.state.data.as_of_date).format('MMMM Do YYYY')}</div>
                 </div>
 
                 <div className="tableWrapper .table-responsive">

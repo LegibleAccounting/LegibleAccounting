@@ -1,12 +1,28 @@
-.trialBalance {
+.trial-balance {
     padding-top: 2rem;
+    width: 90%;
+    margin: auto;
 }
 
-.trialBalance h1.trial-balance-main-heading {
-    color: black;
+.title-heading {
+	background-color: var(--darkBlue);
+	border-radius: 5px;
+	color: white;
+	margin-bottom: 20px;
+	padding: 10px;
 }
 
-.trialBalance h2.business-name {
+.trial-balance .income-statement-main-heading {
+	font-size: 26px;
+}
+
+.trial-balance .business-name {
+	font-size: 18px;
+    margin-top: 1rem;
+}
+
+.trial-balance .as-of-date {
+	font-size: 16px;
     margin-top: 1rem;
 }
 

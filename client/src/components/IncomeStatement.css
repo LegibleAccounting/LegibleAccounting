@@ -1,11 +1,50 @@
 .income-statement {
     padding-top: 2rem;
+    width: 90%;
+    margin: auto;
 }
 
-.income-statement h1.income-statement-main-heading {
-    color: black;
+.title-heading {
+	background-color: var(--darkBlue);
+	border-radius: 5px;
+	color: white;
+	margin-bottom: 20px;
+	padding: 10px;
 }
 
-.income-statement h2.business-name {
+.income-statement .income-statement-main-heading {
+	font-size: 26px;
+}
+
+.income-statement .business-name {
+	font-size: 18px;
     margin-top: 1rem;
+}
+
+.income-statement .as-of-date {
+	font-size: 16px;
+    margin-top: 1rem;
+}
+
+.income-statement-heading {
+	margin-top: 0px;
+	margin-left: 20px;
+	font-size: 20px;
+	color: var(--mainBlue);
+}
+
+.accountNameCol {
+	width: 80%;
+}
+
+.debitCol, .creditCol {
+    min-width: 10rem;
+}
+
+.income-statement-table {
+	width: 90%;
+}
+
+th, td {
+    padding: 8px;
 }
