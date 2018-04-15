@@ -3,11 +3,12 @@ from rest_framework import viewsets
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import DjangoModelPermissions
 
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import detail_route, list_route
 from .models import Account, AccountType
 from .serializers import AccountSerializer, AccountTypeSerializer, RetrieveAccountSerializer, RetrieveAccountTypeSerializer, LedgerAccountSerializer
 from rest_framework.response import Response
-
+from decimal import *
+getcontext().prec = 2
 
 class AccountTypeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = AccountType.objects.all()
@@ -45,3 +46,29 @@ class AccountViewSet(viewsets.ModelViewSet):
     def ledger(self, request, pk=None):
         serializer = LedgerAccountSerializer(Account.objects.get(pk=pk))
         return Response(serializer.data)
+
+    @list_route(methods=['get'])
+    #Current Ratio is the current total of assets divided by the current total of liabilities
+    def current_ratio(self, request):
+        cr = {
+            "status" : "",
+            "ratio" : 0
+        }
+
+        all_accounts = Account.objects.all()
+        total_assets = 0
+        total_liabilities = 0
+        for i in all_accounts:
+            if i.account_type.category == 0:
+                total_assets += i.get_balance()
+            elif i.account_type.category == 1:
+                total_liabilities += i.get_balance()
+        cr["ratio"] = Decimal(total_assets/total_liabilities)
+        if cr["ratio"] < 0.02:
+            cr["status"] = "red"
+        elif cr["ratio"] >= 0.02 and cr["ratio"] <= 0.05:
+            cr["status"] = "yellow"
+        else:
+            cr["status"] = "green"
+
+        return Response(cr)
