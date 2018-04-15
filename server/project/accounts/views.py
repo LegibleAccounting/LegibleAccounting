@@ -108,7 +108,7 @@ class AccountViewSet(viewsets.ModelViewSet):
         return Response({
             'expenses': expenses,
             'revenues': revenues,
-            'expenses_total': format_currency(expenses_total),
+            'expenses_total': format_currency(expenses_total * -1),
             'revenues_total': format_currency(revenues_total),
             'net_profit': format_currency(revenues_total - expenses_total),
             'as_of_date': timezone.now()
