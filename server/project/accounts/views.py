@@ -241,7 +241,7 @@ class AccountViewSet(viewsets.ModelViewSet):
             'equity_total': format_currency(equity_total + revenues_total - expenses_total),  # THIS IS A HACKY SOLUTION DO NOT TRUST
             #'cheaty': format_currency( revenues_total - expenses_total),
             'asset_total': format_currency(current_assets_total + noncurrent_assets_total),
-            'liability_total': format_currency(equity_total + current_liabilities_total + noncurrent_liabilities_total)
+            'liability_total': format_currency(equity_total + current_liabilities_total + noncurrent_liabilities_total + revenues_total - expenses_total)
 
         }
 
