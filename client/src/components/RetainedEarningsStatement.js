@@ -42,16 +42,12 @@ class RetainedEarningsStatement extends Component {
                                 <td className="amount" align="right"><label>{this.state.data.retained_earnings_beginning}</label></td>
                             </tr>
                             <tr>
-                                <td className="subjectTitle">Capital contributed during the year</td>
-                                <td className="amount" align="right"><label>{this.state.data.capital}</label></td>
-                            </tr>
-                            <tr>
                                 <td className="subjectTitle">Profit for the year</td>
                                 <td className="amount" align="right"><label>{this.state.data.net_profit}</label></td>
                             </tr>
                             <tr>
                                 <td className="subjectTitle">Drawings</td>
-                                <td className="amount" align="right"><label>{this.state.data.dividends_total}</label></td>
+                                <td className="amount" align="right"><label>{this.state.data.dividends_paid}</label></td>
                             </tr>
                             <tr>
                                 <td className="subjectTitle">Balance at the end of the year</td>
