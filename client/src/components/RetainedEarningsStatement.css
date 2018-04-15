@@ -1,0 +1,11 @@
+.retained-earnings-statement {
+    padding-top: 2rem;
+}
+
+.retained-earnings-statement h1.retained-earnings-statement-main-heading {
+    color: black;
+}
+
+.retained-earnings-statement h2.business-name {
+    margin-top: 1rem;
+}

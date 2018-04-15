@@ -86,6 +86,7 @@ class AccountViewSet(viewsets.ModelViewSet):
         revenues = []
         expenses_total = 0
         revenues_total = 0
+
         for account in active_accounts:
             account_balance = account.get_balance()
             if account_balance != 0:
@@ -94,6 +95,7 @@ class AccountViewSet(viewsets.ModelViewSet):
                     'account_number': account.account_number(),
                     'account_name': account.name,
                     'balance': format_currency(account_balance),
+                    'is_debit': account.is_debit()
                 }
                 if account.account_type.category == 3:  # 3 is Revenues
                     revenues.append(account_summary)
@@ -101,15 +103,14 @@ class AccountViewSet(viewsets.ModelViewSet):
                 elif account.account_type.category == 4:  # 4 is Expenses
                     expenses.append(account_summary)
                     expenses_total += account_balance
-        response = {
+
+        return Response({
             'expenses': expenses,
             'revenues': revenues,
             'expenses_total': format_currency(expenses_total),
             'revenues_total': format_currency(revenues_total),
             'net_profit': format_currency(revenues_total - expenses_total)
-        }
-
-        return Response(response)
+        })
 
     @list_route(methods=['get'])
     def balance_sheet(self, request):
