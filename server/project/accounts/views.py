@@ -1,15 +1,17 @@
+from decimal import *
+from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
+from journalize.models import JournalEntry, Transaction
 from rest_framework import viewsets
+from rest_framework.decorators import detail_route, list_route
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import DjangoModelPermissions
-from django.utils import timezone
-from rest_framework.decorators import list_route, detail_route
-from .models import Account, AccountType, ACCOUNT_CATEGORIES
-from .serializers import AccountSerializer, AccountTypeSerializer, RetrieveAccountSerializer, RetrieveAccountTypeSerializer, LedgerAccountSerializer
 from rest_framework.response import Response
 from project.utils import format_currency
-from journalize.models import JournalEntry, Transaction
+from .models import Account, AccountType, ACCOUNT_CATEGORIES
+from .serializers import AccountSerializer, AccountTypeSerializer, RetrieveAccountSerializer, RetrieveAccountTypeSerializer, LedgerAccountSerializer
 
+getcontext().prec = 2
 
 class AccountTypeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = AccountType.objects.all()
@@ -47,6 +49,32 @@ class AccountViewSet(viewsets.ModelViewSet):
     def ledger(self, request, pk=None):
         serializer = LedgerAccountSerializer(Account.objects.get(pk=pk))
         return Response(serializer.data)
+
+    #Current Ratio is the current total of assets divided by the current total of liabilities
+    @list_route(methods=['get'])
+    def current_ratio(self, request):
+        cr = {
+            "status" : "",
+            "ratio" : 0
+        }
+
+        all_accounts = Account.objects.all()
+        total_assets = 0
+        total_liabilities = 0
+        for i in all_accounts:
+            if i.account_type.category == 0:
+                total_assets += i.get_balance()
+            elif i.account_type.category == 1:
+                total_liabilities += i.get_balance()
+        cr["ratio"] = Decimal(total_assets/total_liabilities)
+        if cr["ratio"] < 0.02:
+            cr["status"] = "red"
+        elif cr["ratio"] >= 0.02 and cr["ratio"] <= 0.05:
+            cr["status"] = "yellow"
+        else:
+            cr["status"] = "green"
+
+        return Response(cr)
 
     @list_route(methods=['get'])
     def trial_balance(self, request):
@@ -211,7 +239,10 @@ class AccountViewSet(viewsets.ModelViewSet):
             'current_liabilities_total': format_currency(current_liabilities_total),
             'noncurrent_liabilities_total': format_currency(noncurrent_liabilities_total),
             'equity_total': format_currency(equity_total + revenues_total - expenses_total),  # THIS IS A HACKY SOLUTION DO NOT TRUST
-            'cheaty': format_currency( revenues_total - expenses_total)
+            #'cheaty': format_currency( revenues_total - expenses_total),
+            'asset_total': format_currency(current_assets_total + noncurrent_assets_total),
+            'liability_total': format_currency(equity_total + current_liabilities_total + noncurrent_liabilities_total)
+
         }
 
         return Response(response)
@@ -236,6 +267,3 @@ def close_accounts(user):
     income_adjuster.is_debit = credit_val > 0
     income_adjuster.save()
     closing_journal.save()
-
-
-
