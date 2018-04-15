@@ -156,9 +156,8 @@ class AccountForm extends Component {
 				<div>
 					<input type="submit" value={ this.state.accountModel.id === undefined ? 'Create' : 'Update' } className="btn btn-primary createButton"/>
 				</div>
-        		<div className="fillSpace"></div>
 				<div>
-					<NavLink className="NavLink btn btn-primary newButton" to="/accounts">&lt; Back to Accounts</NavLink>
+					<NavLink className="NavLink btn btn-primary backButton" to="/accounts">&lt; Back to Accounts</NavLink>
 				</div>
             </form>
 		);

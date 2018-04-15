@@ -21,6 +21,10 @@ import Sidebar from './Sidebar';
 import Auth from '../api/Auth';
 import './LegibleAccounting.css';
 import GeneralJournalEntry from './GeneralJournalEntry.js';
+import TrialBalance from './TrialBalance.js';
+import IncomeStatement from './IncomeStatement.js';
+import BalanceSheet from './BalanceSheet.js';
+import RetainedEarningsStatement from './RetainedEarningsStatement.js';
 
 class LegibleAccounting extends Component {
   constructor(props) {
@@ -72,6 +76,10 @@ class LegibleAccounting extends Component {
                 <GuardedAdministratorPermissionsRoute exact path="/logs" component={Logs} />
                 <GuardedManagerOrAccountantPermissionsRoute exact path="/general-journal" component={DecorateRoute(GeneralJournal, this.notifyProps)} />
                 <GuardedManagerOrAccountantPermissionsRoute path="/general-journal/:id" component={DecorateRoute(GeneralJournalEntry, this.notifyProps)}/>
+                <GuardedManagerOrAccountantPermissionsRoute exact path="/trial-balance" component={TrialBalance} />
+                <GuardedManagerOrAccountantPermissionsRoute exact path="/income-statement" component={IncomeStatement} />
+                <GuardedManagerOrAccountantPermissionsRoute eaact path="/balance-sheet" component={BalanceSheet} />
+                <GuardedManagerOrAccountantPermissionsRoute exact path="/retained-earnings-statement" component={RetainedEarningsStatement} />
               </Switch>
             </Col>
           </Row>
