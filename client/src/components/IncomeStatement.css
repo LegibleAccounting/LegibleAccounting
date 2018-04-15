@@ -1,0 +1,11 @@
+.income-statement {
+    padding-top: 2rem;
+}
+
+.income-statement h1.income-statement-main-heading {
+    color: black;
+}
+
+.income-statement h2.business-name {
+    margin-top: 1rem;
+}
