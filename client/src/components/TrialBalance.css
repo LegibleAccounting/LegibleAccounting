@@ -1,7 +1,9 @@
 .trial-balance {
-    padding-top: 2rem;
     width: 90%;
     margin: auto;
+    margin-top: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
 }
 
 .title-heading {
