@@ -119,7 +119,7 @@ class AccountViewSet(viewsets.ModelViewSet):
     def retained_earnings(self, request):
         active_accounts = Account.objects.filter(is_active=True)
         retained_earnings_beginning = 0
-        capital = 0
+        #capital = 0
         net_profit = 0
         dividends_total = 0
 
@@ -129,9 +129,11 @@ class AccountViewSet(viewsets.ModelViewSet):
             if account.account_type.category == 2:  # Equity Account
                 if account.name == 'Retained Earnings':
                     retained_earnings_beginning = account_balance
-                elif account.name == "John Addams, Capital":
-                    capital = account_balance
-                elif account.name != "Income Summary":
+                elif account.name == "Paid in Capital in Excess of Par/Stated Value--Common Stock" or \
+                        account.name == 'Paid in Capital in Excess of Par/Stated Value--Preferred Stock' or \
+                        account.name == 'Paid in Capital from Sale of Treasury Stock':
+                    #capital = account_balance
+                #elif account.name != "Income Summary":
                     dividends_total += account_balance
             elif account.account_type.category == 3:  # Revenue Account
                 net_profit += account_balance
@@ -141,9 +143,9 @@ class AccountViewSet(viewsets.ModelViewSet):
         return Response({
             'retained_earnings_beginning': format_currency(retained_earnings_beginning),
             'net_profit': format_currency(net_profit),
-            'capital': format_currency(capital),
-            'dividends_total': format_currency(dividends_total),
-            'retained_earnings_ending': format_currency(retained_earnings_beginning + capital + net_profit - dividends_total)
+            #'capital': format_currency(capital),
+            'dividends_paid': format_currency(dividends_total),
+            'retained_earnings_ending': format_currency(retained_earnings_beginning + net_profit - dividends_total)
         })
 
     @list_route(methods=['get'])
