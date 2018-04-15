@@ -17,9 +17,16 @@ h1 {
 	flex-grow: 1;
 }
 
- .newButton {
+.newButton {
 	margin-left: 20px;
 	margin-right: 20px;
+}
+
+.backButton {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 100px;
+	margin-top: 30px;
 }
 
  .search {
