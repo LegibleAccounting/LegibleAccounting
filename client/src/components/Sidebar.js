@@ -26,7 +26,7 @@ class Sidebar extends Component {
                         <NavLink to="/chart-of-accounts">Chart of Accounts</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/accounts">Accounts Library</NavLink>
+                        <NavLink to="/accounts">Accounts</NavLink>
                     </li>
                     {
                         (Auth.currentUserIsManager() || Auth.currentUserIsAccountant()) && (
