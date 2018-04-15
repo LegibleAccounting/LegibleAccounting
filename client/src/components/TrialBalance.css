@@ -28,12 +28,12 @@
     margin-top: 1rem;
 }
 
-.trialBalance .doubleUnderline {
+.trial-balance .doubleUnderline {
     padding-bottom: 1px;
     border-bottom: double 5px;
 }
 
-.trialBalance .debitCol,
-.trialBalance .creditCol {
+.trial-balance .debitCol,
+.trial-balance .creditCol {
     min-width: 10rem;
 }

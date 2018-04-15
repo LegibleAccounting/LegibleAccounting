@@ -57,7 +57,7 @@ class IncomeStatement extends Component {
                             <tr>
                                 <td className="accountNameCol"><label>Revenue Total</label></td>
                                 <td className="debitCol" align="right"></td>
-                                <td className="creditCol" align="right"><label className="doubleUnderline">{this.state.data.revenues_total}</label></td>
+                                <td className="creditCol" align="right"><label>{this.state.data.revenues_total}</label></td>
                             </tr>
                         </tbody>
                     </table>
@@ -86,7 +86,7 @@ class IncomeStatement extends Component {
                             <tr>
                                 <td className="accountNameCol"><label>Expenses Total</label></td>
                                 <td className="debitCol" align="right"></td>
-                                <td className="creditCol" align="right"><label className="doubleUnderline">{this.state.data.expenses_total}</label></td>
+                                <td className="creditCol" align="right"><label>{this.state.data.expenses_total}</label></td>
                             </tr>
                         </tbody>
                     </table>
@@ -99,7 +99,7 @@ class IncomeStatement extends Component {
                             <tr>
                                 <td className="accountNameCol"><label>Net Income Total</label></td>
                                 <td className="debitCol" align="right"></td>
-                                <td className="creditCol" align="right"><label className="doubleUnderline">{this.state.data.net_profit}</label></td>
+                                <td className="creditCol" align="right"><label>{this.state.data.net_profit}</label></td>
                             </tr>
                         </tbody>
                     </table>

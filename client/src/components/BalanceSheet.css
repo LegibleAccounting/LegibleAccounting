@@ -1,11 +1,53 @@
 .balance-sheet {
-    padding-top: 2rem;
+    width: 90%;
+    margin: auto;
+    margin-top: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
 }
 
-.balance-sheet h1.balance-sheet-main-heading {
-    color: black;
+.title-heading {
+	background-color: var(--darkBlue);
+	border-radius: 5px;
+	color: white;
+	margin-bottom: 20px;
+	padding: 10px;
 }
 
-.balance-sheet h2.business-name {
+.balance-sheet .main-heading {
+	font-size: 26px;
+}
+
+.data-heading {
+	margin-top: 0px;
+	margin-left: 10px;
+	font-size: 20px;
+	color: var(--mainBlue);
+}
+
+.data-subheading {
+	padding-left: 30px;
+}
+
+.data-total {
+	text-decoration: underline overline;
+	font-weight: 600;
+}
+
+.data-row {
+	padding-left: 45px;
+}
+
+.balance-sheet .business-name {
+	font-size: 18px;
     margin-top: 1rem;
+}
+
+.balance-sheet .as-of-date {
+	font-size: 16px;
+    margin-top: 1rem;
+}
+
+.balance-sheet-table {
+	width: 100%;
 }
