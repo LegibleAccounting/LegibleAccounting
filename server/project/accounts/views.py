@@ -75,7 +75,8 @@ class AccountViewSet(viewsets.ModelViewSet):
         return Response({
             'accounts': nonzero_accounts,
             'debit_total': format_currency(debit_total),
-            'credit_total': format_currency(credit_total)
+            'credit_total': format_currency(credit_total),
+            'as_of_date': timezone.now()
         })
 
     @list_route(methods=['get'])

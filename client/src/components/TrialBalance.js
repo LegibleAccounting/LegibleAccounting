@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import moment from 'moment';
 import './TrialBalance.css';
 import AccountsAPI from '../api/AccountsApi.js';
 
@@ -30,6 +31,10 @@ class TrialBalance extends Component {
             <div className="trialBalance">
                 <div className="titleBar">
                     <h1>Trial Balance</h1>
+                </div>
+                <div className="text-center">
+                    <h2>Addams & Family Inc.</h2>
+                    <h3>As of {moment(this.state.data.as_of_date).format('MMMM Do YYYY')}</h3>
                 </div>
 
                 <div className="tableWrapper .table-responsive">
