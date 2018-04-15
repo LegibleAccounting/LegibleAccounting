@@ -11,8 +11,6 @@ from project.utils import format_currency
 from .models import Account, AccountType, ACCOUNT_CATEGORIES
 from .serializers import AccountSerializer, AccountTypeSerializer, RetrieveAccountSerializer, RetrieveAccountTypeSerializer, LedgerAccountSerializer
 
-getcontext().prec = 2
-
 class AccountTypeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = AccountType.objects.all()
     serializer_class = AccountTypeSerializer
@@ -58,10 +56,10 @@ class AccountViewSet(viewsets.ModelViewSet):
             "ratio" : 0
         }
 
-        all_accounts = Account.objects.all()
+        active_accounts = Account.objects.filter(is_active=True)
         total_assets = 0
         total_liabilities = 0
-        for i in all_accounts:
+        for i in active_accounts:
             if i.account_type.category == 0:
                 total_assets += i.get_balance()
             elif i.account_type.category == 1:
@@ -75,6 +73,68 @@ class AccountViewSet(viewsets.ModelViewSet):
             cr["status"] = "green"
 
         return Response(cr)
+
+    @list_route(methods=['get'])
+    def return_on_assets(self, request):
+        ratio = 0
+        status = ""
+        net_profit = 0
+        total_assets = 0
+        active_accounts = Account.objects.filter(is_active=True)
+
+        for account in active_accounts:
+            account_balance = account.get_balance()
+            if account.account_type.category == 0:  # 0 is Asset
+                total_assets += account_balance
+            elif account.account_type.category == 3:  # 3 is Revenues
+                net_profit += account_balance
+            elif account.account_type.category == 4:  # 4 is Expenses
+                net_profit -= account_balance
+
+        output = Decimal(net_profit / total_assets)
+
+        if output < 0.05:
+            status = "red"
+        elif output >= 0.05 and output < 0.1:
+            status = "yellow"
+        else:
+            status = "green"
+
+        return Response({
+            'ratio': output,
+            'status': status
+        })
+
+    @list_route(methods=['get'])
+    def return_on_equity(self, request):
+        ratio = 0
+        status = ""
+        net_profit = 0
+        total_equity = 0
+        active_accounts = Account.objects.filter(is_active=True)
+
+        for account in active_accounts:
+            account_balance = account.get_balance()
+            if account.account_type.category == 2:  # 2 is Equity
+                total_equity += account_balance
+            elif account.account_type.category == 3:  # 3 is Revenues
+                net_profit += account_balance
+            elif account.account_type.category == 4:  # 4 is Expenses
+                net_profit -= account_balance
+
+        output = Decimal(net_profit / total_equity)
+
+        if output < 0.05:
+            status = "red"
+        elif output >= 0.05 and output < 0.1:
+            status = "yellow"
+        else:
+            status = "green"
+
+        return Response({
+            'ratio': output,
+            'status': status
+        })
 
     @list_route(methods=['get'])
     def trial_balance(self, request):
@@ -241,7 +301,7 @@ class AccountViewSet(viewsets.ModelViewSet):
             'equity_total': format_currency(equity_total + revenues_total - expenses_total),  # THIS IS A HACKY SOLUTION DO NOT TRUST
             #'cheaty': format_currency( revenues_total - expenses_total),
             'asset_total': format_currency(current_assets_total + noncurrent_assets_total),
-            'liability_total': format_currency(equity_total + current_liabilities_total + noncurrent_liabilities_total)
+            'liability_total': format_currency(equity_total + current_liabilities_total + noncurrent_liabilities_total + revenues_total - expenses_total)
 
         }
 
