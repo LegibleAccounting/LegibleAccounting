@@ -1,3 +1,15 @@
+.trialBalance {
+    padding-top: 2rem;
+}
+
+.trialBalance h1.trial-balance-main-heading {
+    color: black;
+}
+
+.trialBalance h2.business-name {
+    margin-top: 1rem;
+}
+
 .trialBalance .doubleUnderline {
     padding-bottom: 1px;
     border-bottom: double 5px;
