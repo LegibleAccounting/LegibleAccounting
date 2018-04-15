@@ -114,6 +114,38 @@ class AccountViewSet(viewsets.ModelViewSet):
             'as_of_date': timezone.now()
         })
 
+    # Determine the Income Summary / Retained Earnings
+    @list_route(methods=['get'])
+    def retained_earnings(self, request):
+        active_accounts = Account.objects.filter(is_active=True)
+        retained_earnings_beginning = 0
+        capital = 0
+        net_profit = 0
+        dividends_total = 0
+
+        for account in active_accounts:
+            account_balance = account.get_balance()
+
+            if account.account_type.category == 2: # Equity Account
+                if account.name == 'Retained Earnings':
+                    retained_earnings_beginning = account_balance
+                elif account.name != "Income Summary" and account.name != "John Addams, Capital":
+                    dividends_total = account_balance
+                elif account.name == "John Addams, Capital":
+                    capital = account_balance
+            elif account.account_type.category == 3: # Revenue Account
+                net_profit += account_balance
+            elif account.account_type.category == 4: # Expense Account
+                net_profit -= account_balance
+
+        return Response({
+            'retained_earnings_beginning': format_currency(retained_earnings_beginning),
+            'net_profit': format_currency(net_profit),
+            'capital': format_currency(capital),
+            'dividends_total': format_currency(dividends_total),
+            'retained_earnings_ending': format_currency(retained_earnings_beginning + capital + net_profit - dividends_total)
+        })
+
     @list_route(methods=['get'])
     def balance_sheet(self, request):
         active_accounts = Account.objects.all().filter(is_active=True)
@@ -154,11 +186,14 @@ class AccountViewSet(viewsets.ModelViewSet):
                     else:
                         noncurrent_liabilities.append(account_summary)
                         noncurrent_liabilities_total += account_balance
+
                 elif account.account_type.category == 2:  # 2 is Equity
                     equity.append(account_summary)
                     equity_total += account_balance
+
                 elif account.account_type.category == 3:  # 3 is Revenues
                     revenues_total += account_balance
+
                 elif account.account_type.category == 4:  # 4 is Expenses
                     expenses_total += account_balance
                     
