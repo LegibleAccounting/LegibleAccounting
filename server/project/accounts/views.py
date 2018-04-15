@@ -97,6 +97,7 @@ class AccountViewSet(viewsets.ModelViewSet):
                     'balance': format_currency(account_balance),
                     'is_debit': account.is_debit()
                 }
+
                 if account.account_type.category == 3:  # 3 is Revenues
                     revenues.append(account_summary)
                     revenues_total += account_balance
@@ -109,7 +110,8 @@ class AccountViewSet(viewsets.ModelViewSet):
             'revenues': revenues,
             'expenses_total': format_currency(expenses_total),
             'revenues_total': format_currency(revenues_total),
-            'net_profit': format_currency(revenues_total - expenses_total)
+            'net_profit': format_currency(revenues_total - expenses_total),
+            'as_of_date': timezone.now()
         })
 
     @list_route(methods=['get'])
