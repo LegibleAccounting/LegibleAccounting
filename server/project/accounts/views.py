@@ -126,16 +126,16 @@ class AccountViewSet(viewsets.ModelViewSet):
         for account in active_accounts:
             account_balance = account.get_balance()
 
-            if account.account_type.category == 2: # Equity Account
+            if account.account_type.category == 2:  # Equity Account
                 if account.name == 'Retained Earnings':
                     retained_earnings_beginning = account_balance
-                elif account.name != "Income Summary" and account.name != "John Addams, Capital":
-                    dividends_total = account_balance
                 elif account.name == "John Addams, Capital":
                     capital = account_balance
-            elif account.account_type.category == 3: # Revenue Account
+                elif account.name != "Income Summary":
+                    dividends_total += account_balance
+            elif account.account_type.category == 3:  # Revenue Account
                 net_profit += account_balance
-            elif account.account_type.category == 4: # Expense Account
+            elif account.account_type.category == 4:  # Expense Account
                 net_profit -= account_balance
 
         return Response({
@@ -207,7 +207,8 @@ class AccountViewSet(viewsets.ModelViewSet):
             'noncurrent_assets_total': format_currency(noncurrent_assets_total),
             'current_liabilities_total': format_currency(current_liabilities_total),
             'noncurrent_liabilities_total': format_currency(noncurrent_liabilities_total),
-            'equity_total': format_currency(equity_total + revenues_total - expenses_total)  # THIS IS A HACKY SOLUTION DO NOT TRUST
+            'equity_total': format_currency(equity_total + revenues_total - expenses_total),  # THIS IS A HACKY SOLUTION DO NOT TRUST
+            'cheaty': format_currency( revenues_total - expenses_total)
         }
 
         return Response(response)
