@@ -137,6 +137,98 @@ class AccountViewSet(viewsets.ModelViewSet):
         })
 
     @list_route(methods=['get'])
+    def net_profit_margin(self, request):
+        ratio = 0
+        status = ""
+        net_profit = 0
+        total_sales = 0
+        active_accounts = Account.objects.filter(is_active=True)
+
+        for account in active_accounts:
+            account_balance = account.get_balance()
+            if account.account_type.category == 3:  # 3 is Revenue. TODO make sure it is correct to use all revenues for this
+                total_sales += account_balance
+                net_profit += account_balance
+            elif account.account_type.category == 4:  # 4 is Expenses
+                net_profit -= account_balance
+
+        output = Decimal(net_profit / total_sales)
+
+        if output < 0.05:
+            status = "red"
+        elif output >= 0.05 and output < 0.1:
+            status = "yellow"
+        else:
+            status = "green"
+
+        return Response({
+            'ratio': output,
+            'status': status
+        })
+
+    @list_route(methods=['get'])
+    def asset_turnover(self, request):
+        ratio = 0
+        status = ""
+        total_assets = 0
+        total_sales = 0
+        active_accounts = Account.objects.filter(is_active=True)
+
+        for account in active_accounts:
+            account_balance = account.get_balance()
+            if account.account_type.category == 0:  # 0 is Assets
+                total_assets += account_balance
+            elif account.account_type.category == 3:  # 3 is Revenue. TODO make sure it is correct to use all revenues for this
+                total_sales += account_balance
+
+        output = Decimal(total_sales / total_assets)
+
+        if output < 0.03:
+            status = "red"
+        elif output >= 0.03 and output < 0.07:
+            status = "yellow"
+        else:
+            status = "green"
+
+        return Response({
+            'ratio': output,
+            'status': status
+        })
+    
+    @list_route(methods=['get'])
+    def quick_ratio(self, request):
+        ratio = 0
+        status = ""
+        total_assets = 0
+        total_liabilities = 0
+        total_inventory = 0
+        active_accounts = Account.objects.filter(is_active=True)
+
+        for account in active_accounts:
+            account_balance = account.get_balance()
+            if account.account_type.category == 0:  # 0 is Assets
+                total_assets += account_balance
+                if account.account_type.name == "Inventories":
+                    total_inventory += account_balance
+
+            elif account.account_type.category == 1:  # 1 is Liabilities
+                total_liabilities += account_balance
+
+        output = Decimal((total_assets - total_inventory) / total_liabilities)
+
+        if output < 0.02:
+            status = "red"
+        elif output >= 0.02 and output < 0.04:
+            status = "yellow"
+        else:
+            status = "green"
+
+        return Response({
+            'ratio': output,
+            'status': status
+        })      
+
+    @list_route(methods=['get'])
     def trial_balance(self, request):
         active_accounts = Account.objects.filter(is_active=True)
         nonzero_accounts = []
