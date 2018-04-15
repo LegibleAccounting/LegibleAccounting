@@ -131,6 +131,7 @@ class AccountViewSet(viewsets.ModelViewSet):
                     retained_earnings_beginning = account_balance
                 elif account.name == "Paid in Capital in Excess of Par/Stated Value--Common Stock" or \
                         account.name == 'Paid in Capital in Excess of Par/Stated Value--Preferred Stock' or \
+                        account.name == 'John Addams, Drawing' or \
                         account.name == 'Paid in Capital from Sale of Treasury Stock':
                     #capital = account_balance
                 #elif account.name != "Income Summary":
