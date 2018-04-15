@@ -287,7 +287,14 @@ class AccountViewSet(viewsets.ModelViewSet):
 
                 elif account.account_type.category == 4:  # 4 is Expenses
                     expenses_total += account_balance
-                    
+        #Part of Cheaty Method
+        equity.append({
+            'account_id': 0,
+            'account_number': 0,
+            'account_name': 'Income Estimation',
+            'balance': format_currency(revenues_total - expenses_total),
+        })
+        #####################
         response = {
             'current_assets': current_assets,
             'current_liabilities': current_liabilities,
