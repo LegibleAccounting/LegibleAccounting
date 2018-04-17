@@ -205,6 +205,24 @@ class AccountsAPI {
             return Promise.reject(response);
           });
     }
+
+    closeAccounts() {
+        if (!Auth.token) {
+            return Promise.reject();
+        }
+
+        return fetch(new JSONAPIRequest('/api/accounts/close_accounts/', Auth.token), {
+            method: 'POST'
+        })
+          .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
+          .then(response => response = response.json())
+          .then((response) => {
+            return Promise.resolve(response);
+          })
+          .catch((response) => {
+            return Promise.reject(response);
+          });
+    }
 }
 
 export default new AccountsAPI();

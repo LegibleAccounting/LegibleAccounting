@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Nav, NavItem } from 'react-bootstrap';
 import './GeneralJournal.css';
 import './CommonChart.css';
+import AuthAPI from '../api/Auth.js';
 import GeneralJournalAPI from '../api/GeneralJournal.js';
 import AccountsAPI from '../api/AccountsApi.js';
 
@@ -13,6 +14,7 @@ class GeneralJournal extends Component {
         super(props);
 
         this.state = {
+           isLoading: true,
            isCreatingJournalEntry: false,
            entries: [],
            ogentries: [],
@@ -44,21 +46,36 @@ class GeneralJournal extends Component {
                         return entry;
                     })
                 });
+            })
+            .finally(() => {
+                this.setState({
+                    isLoading: false
+                });
             });
 
         this.searchTextChanged = this.searchTextChanged.bind(this);
         this.search = this.search.bind(this);
         this.toggleNewJournalUI = this.toggleNewJournalUI.bind(this);
         this.submitNewJournalEntry = this.submitNewJournalEntry.bind(this);
+        this.closeJournal = this.closeJournal.bind(this);
     }
 
     render() {
+        if (this.state.isLoading) {
+            return (
+                <div className="full-height flex-row flex-h-center flex-v-center">
+                    <h1>Loading Journal...</h1>
+                </div>
+            );
+        }
+
         return (
             <div className="generalJournal">
                 <div className="titleBar">
                     <h1>Journalize</h1>
+                    <button className="btn btn-primary newButton" type="button" onClick={this.toggleNewJournalUI}>+ Add</button>
                     {
-                       <button className="btn btn-primary newButton" type="button" onClick={this.toggleNewJournalUI}>+ Add</button>
+                        AuthAPI.currentUserIsManager() && (<button className="btn btn-danger" type="button" onClick={this.closeJournal}>Close Accounts</button>)
                     }
                     <div className="filler"></div>
                     <div className="searchContainer btn-group">
@@ -111,6 +128,16 @@ class GeneralJournal extends Component {
                 </div>
             </div>
         );
+    }
+
+    closeJournal() {
+        AccountsAPI.closeAccounts()
+            .then(() => {
+                this.props.onNotifySuccess('Accounts have been closed.');
+            })
+            .catch(() => {
+                this.props.onNotifyError('An error occurred when attempting to close accounts.');
+            });
     }
 
     getIndexedTransactions(transactions) {

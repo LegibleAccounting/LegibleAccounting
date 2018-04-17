@@ -5,7 +5,7 @@ from journalize.models import JournalEntry, Transaction
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.permissions import DjangoModelPermissions
+from rest_framework.permissions import AllowAny, DjangoModelPermissions
 from rest_framework.response import Response
 from project.utils import format_currency, format_percent
 from .models import Account, AccountType, ACCOUNT_CATEGORIES
@@ -418,23 +418,28 @@ class AccountViewSet(viewsets.ModelViewSet):
 
         return Response(response)
 
+    @list_route(methods=['post'], permission_classes=[AllowAny])
+    def close_accounts(self, request):
+        active_accounts = Account.objects.all().filter(is_active=True)
+        credit_val = 0
+        income_account = Account.objects.get_by_natural_key('Income Summary')
 
-def close_accounts(user):
-    active_accounts = Account.objects.all().filter(is_active=True)
-    credit_val = 0
-    income_account = Account.objects.get_by_natural_key('Income Summary')
-    closing_journal = JournalEntry(date=timezone.now(), creator=user, description="Auto-generated closing journal",
-                                   entry_type=3, is_approved=True)
-    for account in active_accounts:
-        closer = Transaction(affected_account=account, journal_entry=closing_journal, value=account.get_balance())
-        if account.account_type.category == 3 or account.account_type.category == 4:
-            if account.account_type.category == 3:
-                closer.is_debit = True
-            elif account.account_type.category == 4:
-                closer.is_debit = False
-            credit_val += closer.get_value()
-            closer.save()
-    income_adjuster = Transaction(affected_account=income_account, journal_entry=closing_journal, value=abs(credit_val))
-    income_adjuster.is_debit = credit_val > 0
-    income_adjuster.save()
-    closing_journal.save()
+        closing_journal = JournalEntry(date=timezone.now(), creator=request.user, description="Auto-generated closing journal",
+                                       entry_type=3, is_approved=True)
+        closing_journal.save()
+
+        for account in active_accounts:
+            closer = Transaction(affected_account=account, journal_entry=closing_journal, value=account.get_balance())
+            if account.account_type.category == 3 or account.account_type.category == 4:
+                if account.account_type.category == 3:
+                    closer.is_debit = True
+                elif account.account_type.category == 4:
+                    closer.is_debit = False
+                credit_val += closer.get_value()
+                closer.save()
+
+        income_adjuster = Transaction(affected_account=income_account, journal_entry=closing_journal, value=abs(credit_val))
+        income_adjuster.is_debit = credit_val > 0
+        income_adjuster.save()
+
+        return Response({ 'message': 'Success' })
