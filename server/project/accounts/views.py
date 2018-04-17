@@ -429,8 +429,9 @@ class AccountViewSet(viewsets.ModelViewSet):
         closing_journal.save()
 
         for account in active_accounts:
-            closer = Transaction(affected_account=account, journal_entry=closing_journal, value=account.get_balance())
-            if account.account_type.category == 3 or account.account_type.category == 4:
+            balance = account.get_balance();
+            closer = Transaction(affected_account=account, journal_entry=closing_journal, value=balance)
+            if (account.account_type.category == 3 or account.account_type.category == 4) and balance > 0:
                 if account.account_type.category == 3:
                     closer.is_debit = True
                 elif account.account_type.category == 4:
@@ -439,7 +440,7 @@ class AccountViewSet(viewsets.ModelViewSet):
                 closer.save()
 
         income_adjuster = Transaction(affected_account=income_account, journal_entry=closing_journal, value=abs(credit_val))
-        income_adjuster.is_debit = credit_val > 0
+        income_adjuster.is_debit = credit_val < 0  # if credit_val is positive, it debits the Income Summary else credits
         income_adjuster.save()
 
         return Response({ 'message': 'Success' })
