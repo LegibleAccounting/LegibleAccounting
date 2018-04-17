@@ -427,8 +427,9 @@ class AccountViewSet(viewsets.ModelViewSet):
 
         closing_journal = JournalEntry(date=timezone.now(), creator=request.user, description="Auto-generated closing journal",
                                        entry_type=3, is_approved=True)
-        closing_journal.save()
 
+        closing_journal.save()
+        valid_accounts = 0
         for account in active_accounts:
             balance = account.get_balance();
             closer = Transaction(affected_account=account, journal_entry=closing_journal, value=balance)
@@ -439,9 +440,14 @@ class AccountViewSet(viewsets.ModelViewSet):
                     closer.is_debit = False
                 credit_val += closer.get_value()
                 closer.save()
+                valid_accounts += 1
 
-        income_adjuster = Transaction(affected_account=income_account, journal_entry=closing_journal, value=abs(credit_val))
-        income_adjuster.is_debit = credit_val < 0  # if credit_val is positive, it debits the Income Summary else credits
-        income_adjuster.save()
+        if valid_accounts > 0:
+            income_adjuster = Transaction(affected_account=income_account, journal_entry=closing_journal, value=abs(credit_val))
+            income_adjuster.is_debit = credit_val < 0  # if credit_val is positive, it debits the Income Summary else credits
+            income_adjuster.save()
 
-        return Response({ 'message': 'Success' })
+            return Response({'message': 'Success'})
+
+        closing_journal.delete()
+        return Response({'message': 'No Accounts to close'})
