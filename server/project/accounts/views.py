@@ -7,7 +7,7 @@ from rest_framework.decorators import detail_route, list_route
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import DjangoModelPermissions
 from rest_framework.response import Response
-from project.utils import format_currency
+from project.utils import format_currency, format_percent
 from .models import Account, AccountType, ACCOUNT_CATEGORIES
 from .serializers import AccountSerializer, AccountTypeSerializer, RetrieveAccountSerializer, RetrieveAccountTypeSerializer, LedgerAccountSerializer
 
@@ -72,6 +72,8 @@ class AccountViewSet(viewsets.ModelViewSet):
         else:
             cr["status"] = "green"
 
+        cr["ratio"] = format_percent(cr["ratio"] * 100)
+
         return Response(cr)
 
     @list_route(methods=['get'])
@@ -99,6 +101,8 @@ class AccountViewSet(viewsets.ModelViewSet):
             status = "yellow"
         else:
             status = "green"
+
+        output = format_percent(output * 100)
 
         return Response({
             'ratio': output,
@@ -131,6 +135,8 @@ class AccountViewSet(viewsets.ModelViewSet):
         else:
             status = "green"
 
+        output = format_percent(output * 100)
+
         return Response({
             'ratio': output,
             'status': status
@@ -161,6 +167,8 @@ class AccountViewSet(viewsets.ModelViewSet):
         else:
             status = "green"
 
+        output = format_percent(output * 100)
+
         return Response({
             'ratio': output,
             'status': status
@@ -189,6 +197,8 @@ class AccountViewSet(viewsets.ModelViewSet):
             status = "yellow"
         else:
             status = "green"
+
+        output = format_percent(output * 100)
 
         return Response({
             'ratio': output,
@@ -222,6 +232,8 @@ class AccountViewSet(viewsets.ModelViewSet):
             status = "yellow"
         else:
             status = "green"
+
+        output = format_percent(output * 100)
 
         return Response({
             'ratio': output,
