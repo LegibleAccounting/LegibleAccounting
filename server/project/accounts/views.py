@@ -427,7 +427,7 @@ class AccountViewSet(viewsets.ModelViewSet):
 
         closing_journal = JournalEntry(date=timezone.now(), creator=request.user, description="Auto-generated closing journal",
                                        entry_type=3, is_approved=True)
-
+        credits = []
         closing_journal.save()
         valid_accounts = 0
         for account in active_accounts:
@@ -436,16 +436,19 @@ class AccountViewSet(viewsets.ModelViewSet):
             if (account.account_type.category == 3 or account.account_type.category == 4) and balance > 0:
                 if account.account_type.category == 3:
                     closer.is_debit = True
+                    closer.save()
                 elif account.account_type.category == 4:
                     closer.is_debit = False
+                    credits.append(closer)
                 credit_val += closer.get_value()
-                closer.save()
                 valid_accounts += 1
-
         if valid_accounts > 0:
             income_adjuster = Transaction(affected_account=income_account, journal_entry=closing_journal, value=abs(credit_val))
             income_adjuster.is_debit = credit_val < 0  # if credit_val is positive, it debits the Income Summary else credits
             income_adjuster.save()
+
+            for transaction in credits:
+                transaction.save()
 
             return Response({'message': 'Success'})
 
