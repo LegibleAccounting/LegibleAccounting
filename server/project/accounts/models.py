@@ -100,8 +100,6 @@ class Account(models.Model):
         return transactions
 
     def get_balance(self, as_of=None):
-        # TODO: This will be updated to return a calculated balance
-        # based on all transactions that have been made to this account.
         value = 0
         for t in self.transactions.all():
             if t.journal_entry.is_approved == True and (as_of is None or as_of >= t.date):

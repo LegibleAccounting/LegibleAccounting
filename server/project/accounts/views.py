@@ -362,6 +362,9 @@ class AccountViewSet(viewsets.ModelViewSet):
         equity_total = 0
         for account in active_accounts:
             account_balance = account.get_balance()
+            if (account.account_type.category == 0 and account.name.find("Depreciation") != -1):
+                account_balance = account_balance * -1
+
             if account_balance != 0:
                 account_summary = {
                     'account_id': account.pk,
