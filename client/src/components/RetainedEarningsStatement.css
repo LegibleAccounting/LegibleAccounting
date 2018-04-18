@@ -15,11 +15,12 @@
 }
 
 .retained-earnings-statement .income-statement-main-heading {
-	font-size: 26px;
+	font-size: 18px;
+	margin-top: 1rem;
 }
 
 .retained-earnings-statement .business-name {
-	font-size: 18px;
+	font-size: 26px;
     margin-top: 1rem;
 }
 
@@ -47,4 +48,10 @@
 
 .subjectTitle {
 	font-size: 16px;
+}
+
+.total {
+	text-decoration: overline;
+	padding-bottom: 1px;
+	border-bottom: double 5px;
 }

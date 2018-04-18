@@ -29,29 +29,29 @@ class RetainedEarningsStatement extends Component {
         return (
             <div className="retained-earnings-statement">
                 <div className="text-center title-heading">
-                    <div className="income-statement-main-heading">Statement of Retained Earnings</div>
                     <div className="business-name">Addams & Family Inc.</div>
-                    <div className="as-of-date ">As of {moment(this.state.data.as_of_date).format('MMMM Do YYYY')}</div>
+                    <div className="income-statement-main-heading">Statement of Retained Earnings</div>
+                    <div className="as-of-date ">For the period ending {moment(this.state.data.as_of_date).format('MMMM Do, YYYY')}</div>
                 </div>
 
                 <div className="tableWrapper .table-responsive">
                     <table className="retained-earnings-statement-table">
                       <tbody>
                             <tr>
-                                <td className="subjectTitle">Balance at the beginning of the year</td>
+                                <td className="subjectTitle">Beginning Balance</td>
                                 <td className="amount" align="right"><label>{this.state.data.retained_earnings_beginning}</label></td>
                             </tr>
                             <tr>
-                                <td className="subjectTitle">Profit for the year</td>
+                                <td className="subjectTitle">Net Income</td>
                                 <td className="amount" align="right"><label>{this.state.data.net_profit}</label></td>
                             </tr>
                             <tr>
-                                <td className="subjectTitle">Drawings</td>
+                                <td className="subjectTitle">Less Drawings</td>
                                 <td className="amount" align="right"><label>{this.state.data.dividends_paid}</label></td>
                             </tr>
                             <tr>
-                                <td className="subjectTitle">Balance at the end of the year</td>
-                                <td className="amount" align="right"><label>{this.state.data.retained_earnings_ending}</label></td>
+                                <td className="subjectTitle">Ending Balance</td>
+                                <td className="amount" align="right"><label className="total">{this.state.data.retained_earnings_ending}</label></td>
                             </tr>
                         </tbody>
                     </table>
