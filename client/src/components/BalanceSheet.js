@@ -30,8 +30,8 @@ class BalanceSheet extends Component {
         return (
             <div className="balance-sheet">
                 <div className="text-center title-heading">
-                    <div className="main-heading">Balance Sheet</div>
                     <div className="business-name">Addams & Family Inc.</div>
+                    <div className="main-heading">Balance Sheet</div>
                     <div className="as-of-date ">As of {moment(this.state.data.as_of_date).format('MMMM Do YYYY')}</div>
                 </div>
 

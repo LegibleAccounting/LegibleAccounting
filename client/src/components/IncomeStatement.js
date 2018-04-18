@@ -30,11 +30,10 @@ class IncomeStatement extends Component {
         return (
             <div className="income-statement">
                 <div className="text-center title-heading">
-                    <div className="income-statement-main-heading">Income Statement</div>
                     <div className="business-name">Addams & Family Inc.</div>
-                    <div className="as-of-date ">As of {moment(this.state.data.as_of_date).format('MMMM Do YYYY')}</div>
+                    <div className="income-statement-main-heading">Income Statement</div>
+                    <div className="as-of-date ">For the period ending {moment(this.state.data.as_of_date).format('MMMM Do, YYYY')}</div>
                 </div>
-
 
                 <div className="income-statement-heading">Revenue</div>
                 <div className="tableWrapper .table-responsive">
@@ -57,7 +56,7 @@ class IncomeStatement extends Component {
                             <tr>
                                 <td className="accountNameCol"><label>Revenue Total</label></td>
                                 <td className="debitCol" align="right"></td>
-                                <td className="creditCol" align="right"><label>{this.state.data.revenues_total}</label></td>
+                                <td className="creditCol" align="right"><label className="subtotal">{this.state.data.revenues_total}</label></td>
                             </tr>
                         </tbody>
                     </table>
@@ -86,7 +85,7 @@ class IncomeStatement extends Component {
                             <tr>
                                 <td className="accountNameCol"><label>Expenses Total</label></td>
                                 <td className="debitCol" align="right"></td>
-                                <td className="creditCol" align="right"><label>{this.state.data.expenses_total}</label></td>
+                                <td className="creditCol" align="right"><label className="subtotal">{this.state.data.expenses_total}</label></td>
                             </tr>
                         </tbody>
                     </table>
@@ -99,7 +98,7 @@ class IncomeStatement extends Component {
                             <tr>
                                 <td className="accountNameCol"><label>Net Income Total</label></td>
                                 <td className="debitCol" align="right"></td>
-                                <td className="creditCol" align="right"><label>{this.state.data.net_profit}</label></td>
+                                <td className="creditCol" align="right"><label className="total">{this.state.data.net_profit}</label></td>
                             </tr>
                         </tbody>
                     </table>
