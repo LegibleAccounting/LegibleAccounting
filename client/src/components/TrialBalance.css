@@ -15,11 +15,12 @@
 }
 
 .trial-balance .income-statement-main-heading {
-	font-size: 26px;
+	font-size: 18px;
+    margin-top: 1rem;
 }
 
 .trial-balance .business-name {
-	font-size: 18px;
+    font-size: 26px;
     margin-top: 1rem;
 }
 
@@ -29,6 +30,7 @@
 }
 
 .trial-balance .doubleUnderline {
+    text-decoration: overline;
     padding-bottom: 1px;
     border-bottom: double 5px;
 }
