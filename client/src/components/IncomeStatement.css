@@ -15,11 +15,12 @@
 }
 
 .income-statement .income-statement-main-heading {
-	font-size: 26px;
+	font-size: 18px;
+    margin-top: 1rem;
 }
 
 .income-statement .business-name {
-	font-size: 18px;
+	font-size: 26px;
     margin-top: 1rem;
 }
 
@@ -41,6 +42,16 @@
 
 .debitCol, .creditCol {
     min-width: 10rem;
+}
+
+.subtotal {
+	text-decoration: overline underline;
+}
+
+.total {
+	text-decoration: overline;
+	padding-bottom: 1px;
+	border-bottom: double 5px;
 }
 
 .income-statement-table {

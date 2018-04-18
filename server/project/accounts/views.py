@@ -403,20 +403,23 @@ class AccountViewSet(viewsets.ModelViewSet):
                 'balance': format_currency(revenues_total - expenses_total),
             })
         #####################
+        hacky_equity_total = equity_total + revenues_total - expenses_total # THIS IS A HACKY SOLUTION DO NOT TRUST
+        asset_total = current_assets_total + noncurrent_assets_total
+        liability_total = equity_total + current_liabilities_total + noncurrent_liabilities_total + revenues_total - expenses_total
         response = {
             'current_assets': current_assets,
             'current_liabilities': current_liabilities,
             'noncurrent_assets': noncurrent_assets,
             'noncurrent_liabilities': noncurrent_liabilities,
             'equity': equity,
-            'current_assets_total': format_currency(current_assets_total),
-            'noncurrent_assets_total': format_currency(noncurrent_assets_total),
-            'current_liabilities_total': format_currency(current_liabilities_total),
-            'noncurrent_liabilities_total': format_currency(noncurrent_liabilities_total),
-            'equity_total': format_currency(equity_total + revenues_total - expenses_total),  # THIS IS A HACKY SOLUTION DO NOT TRUST
+            'current_assets_total': format_currency(current_assets_total) if current_assets_total is not 0 else None,
+            'noncurrent_assets_total': format_currency(noncurrent_assets_total) if noncurrent_assets_total is not 0 else None,
+            'current_liabilities_total': format_currency(current_liabilities_total) if current_liabilities_total is not 0 else None,
+            'noncurrent_liabilities_total': format_currency(noncurrent_liabilities_total) if noncurrent_liabilities_total is not 0 else None,
+            'equity_total': format_currency(hacky_equity_total) if hacky_equity_total is not 0 else None,
             #'cheaty': format_currency( revenues_total - expenses_total),
-            'asset_total': format_currency(current_assets_total + noncurrent_assets_total),
-            'liability_total': format_currency(equity_total + current_liabilities_total + noncurrent_liabilities_total + revenues_total - expenses_total)
+            'asset_total': format_currency(asset_total),
+            'liability_total': format_currency(liability_total)
 
         }
 
