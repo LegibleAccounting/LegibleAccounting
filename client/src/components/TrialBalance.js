@@ -31,8 +31,8 @@ class TrialBalance extends Component {
             <div className="trial-balance">
 
                 <div className="text-center title-heading">
-                    <div className="income-statement-main-heading">Trial Balance</div>
                     <div className="business-name">Addams & Family Inc.</div>
+                    <div className="income-statement-main-heading">Trial Balance</div>
                     <div className="as-of-date ">As of {moment(this.state.data.as_of_date).format('MMMM Do YYYY')}</div>
                 </div>
 
