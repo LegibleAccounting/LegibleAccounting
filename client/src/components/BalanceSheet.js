@@ -39,11 +39,17 @@ class BalanceSheet extends Component {
                 <div className="tableWrapper .table-responsive">
                     <table className="balance-sheet-table">
                       <tbody>
-                        <tr>
-                            <td className="data-subheading accountNameCol"><label>Non-current Assets</label></td>
-                            <td className="debitCol" align="right"></td>
-                            <td className="creditCol" align="right">{this.state.data.noncurrent_assets_total}</td>
-                        </tr>
+                        {
+                            this.state.data.noncurrent_assets_total ? (
+                                <tr>
+                                    <td className="data-subheading accountNameCol"><label>Non-current Assets</label></td>
+                                    <td className="debitCol" align="right"></td>
+                                    <td className="creditCol" align="right">{this.state.data.noncurrent_assets_total}</td>
+                                </tr>
+                            ) : (
+                                <tr></tr>
+                            )
+                        }
                         { this.state.data.noncurrent_assets.length ? (
                           this.state.data.noncurrent_assets.map((item, index) => (
                             <tr>
@@ -56,11 +62,17 @@ class BalanceSheet extends Component {
                             </tr>
                         )}
 
-                        <tr>
-                            <td className="data-subheading accountNameCol"><label>Current Assets</label></td>
-                            <td className="debitCol" align="right"></td>
-                            <td className="creditCol" align="right">{this.state.data.current_assets_total}</td>
-                        </tr>
+                        {
+                            this.state.data.current_assets_total ? (
+                                <tr>
+                                    <td className="data-subheading accountNameCol"><label>Current Assets</label></td>
+                                    <td className="debitCol" align="right"></td>
+                                    <td className="creditCol" align="right">{this.state.data.current_assets_total}</td>
+                                </tr>
+                            ) : (
+                                <tr></tr>
+                            )
+                        }
                         { this.state.data.current_assets.length ? (
                           this.state.data.current_assets.map((item, index) => (
                             <tr>
@@ -72,7 +84,7 @@ class BalanceSheet extends Component {
                             <tr>
                             </tr>
                         )}
-                         <tr>
+                        <tr>
                             <td className="data-subheading accountNameCol"><label>Total Assets</label></td>
                             <td className="debitCol" align="right"></td>
                             <td className="data-total creditCol" align="right">{this.state.data.asset_total}</td>
@@ -85,11 +97,17 @@ class BalanceSheet extends Component {
                 <div className="tableWrapper .table-responsive">
                     <table className="balance-sheet-table">
                       <tbody>
-                        <tr>
-                            <td className="data-subheading accountNameCol"><label>Owners Equity</label></td>
-                            <td className="debitCol" align="right"></td>
-                            <td className="creditCol" align="right">{this.state.data.equity_total}</td>
-                        </tr>
+                        {
+                            this.state.data.equity_total ? (
+                                <tr>
+                                    <td className="data-subheading accountNameCol"><label>Owners Equity</label></td>
+                                    <td className="debitCol" align="right"></td>
+                                    <td className="creditCol" align="right">{this.state.data.equity_total}</td>
+                                </tr>
+                            ) : (
+                                <tr></tr>
+                            )
+                        }
                         { this.state.data.equity.length ? (
                           this.state.data.equity.map((item, index) => (
                             <tr>
@@ -102,11 +120,17 @@ class BalanceSheet extends Component {
                             </tr>
                         )}
 
-                        <tr>
-                            <td className="data-subheading accountNameCol"><label>Non-current Liabilities</label></td>
-                            <td className="debitCol" align="right"></td>
-                            <td className="creditCol" align="right">{this.state.data.noncurrent_liabilities_total}</td>
-                        </tr>
+                        {
+                            this.state.data.noncurrent_liabilities_total ? (
+                                <tr>
+                                    <td className="data-subheading accountNameCol"><label>Non-current Liabilities</label></td>
+                                    <td className="debitCol" align="right"></td>
+                                    <td className="creditCol" align="right">{this.state.data.noncurrent_liabilities_total}</td>
+                                </tr>
+                            ) : (
+                                <tr></tr>
+                            )
+                        }
                         { this.state.data.noncurrent_liabilities.length ? (
                           this.state.data.noncurrent_liabilities.map((item, index) => (
                             <tr>
@@ -118,11 +142,17 @@ class BalanceSheet extends Component {
                             <tr>
                             </tr>
                         )}
-                        <tr>
-                            <td className="data-subheading accountNameCol"><label>Current Liabilities</label></td>
-                            <td className="debitCol" align="right"></td>
-                            <td className="creditCol" align="right">{this.state.data.current_liabilities_total}</td>
-                        </tr>
+                        {
+                            this.state.data.current_liabilities_total ? (
+                                <tr>
+                                    <td className="data-subheading accountNameCol"><label>Current Liabilities</label></td>
+                                    <td className="debitCol" align="right"></td>
+                                    <td className="creditCol" align="right">{this.state.data.current_liabilities_total}</td>
+                                </tr>
+                            ) : (
+                                <tr></tr>
+                            )
+                        }
                         { this.state.data.current_liabilities.length ? (
                           this.state.data.current_liabilities.map((item, index) => (
                             <tr>
@@ -137,7 +167,7 @@ class BalanceSheet extends Component {
                          <tr>
                             <td className="data-subheading accountNameCol"><label>Total Equity & Liabilities</label></td>
                             <td className="debitCol" align="right"></td>
-                            <td className="data-total creditCol" align="right">{this.state.data.asset_total}</td>
+                            <td className="data-total creditCol" align="right">{this.state.data.liability_total}</td>
                         </tr>
                         </tbody>
                     </table>
