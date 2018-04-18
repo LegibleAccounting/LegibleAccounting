@@ -219,12 +219,12 @@ class AccountViewSet(viewsets.ModelViewSet):
 
         for account in active_accounts:
             account_balance = account.get_balance()
-            if account.account_type.category == 0:  # 0 is Assets
+            if account.account_type.category == 0 and account.account_type.classification == 1:  # 0 is Assets
                 total_assets += account_balance
                 if account.account_type.name == "Inventories":
                     total_inventory += account_balance
 
-            elif account.account_type.category == 1:  # 1 is Liabilities
+            elif account.account_type.category == 1 and account.account_type.classification == 1:  # 1 is Liabilities
                 total_liabilities += account_balance
 
         output = Decimal((total_assets - total_inventory) / total_liabilities)
