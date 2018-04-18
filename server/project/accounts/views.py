@@ -59,12 +59,15 @@ class AccountViewSet(viewsets.ModelViewSet):
         active_accounts = Account.objects.filter(is_active=True)
         total_assets = 0
         total_liabilities = 0
+
         for i in active_accounts:
-            if i.account_type.category == 0:
+            if i.account_type.category == 0 and i.account_type.classification == 1:
                 total_assets += i.get_balance()
-            elif i.account_type.category == 1:
+            elif i.account_type.category == 1 and i.account_type.classification == 1:
                 total_liabilities += i.get_balance()
+
         cr["ratio"] = Decimal(total_assets/total_liabilities)
+
         if cr["ratio"] < 0.02:
             cr["status"] = "red"
         elif cr["ratio"] >= 0.02 and cr["ratio"] <= 0.05:
