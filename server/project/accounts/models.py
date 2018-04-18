@@ -74,7 +74,7 @@ class Account(models.Model):
         return (self.name,)
 
     def is_debit(self):
-        return self.account_type.is_debit()
+        return self.account_type.is_debit() and self.name.find("Depreciation") is -1
 
     def account_number(self):
         return (self.account_type.order * NUM_ACCOUNTS_PER_ACCOUNT_TYPE) + self.order
