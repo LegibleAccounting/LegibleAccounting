@@ -426,7 +426,7 @@ class AccountViewSet(viewsets.ModelViewSet):
     def close_accounts(self, request):
         active_accounts = Account.objects.all().filter(is_active=True)
         credit_val = 0
-        income_account = Account.objects.get_by_natural_key('Income Summary')
+        income_account = Account.objects.get_by_natural_key('Retained Earnings')
 
         closing_journal = JournalEntry(date=timezone.now(), creator=request.user, description="Auto-generated closing journal",
                                        entry_type=3, is_approved=True)
