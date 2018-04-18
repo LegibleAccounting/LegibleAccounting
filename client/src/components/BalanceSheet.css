@@ -15,7 +15,8 @@
 }
 
 .balance-sheet .main-heading {
-	font-size: 26px;
+	font-size: 18px;
+    margin-top: 1rem;
 }
 
 .data-heading {
@@ -39,7 +40,7 @@
 }
 
 .balance-sheet .business-name {
-	font-size: 18px;
+	font-size: 26px;
     margin-top: 1rem;
 }
 
