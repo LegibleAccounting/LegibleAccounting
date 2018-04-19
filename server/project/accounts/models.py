@@ -76,7 +76,8 @@ class Account(models.Model):
     def is_debit(self):
         if self.account_type.category == 0 and self.name.find("Depreciation") != -1:
             return False
-
+        if self.account_type.category == 2 and self.name.find("Drawing") != -1:
+            return True
         return self.account_type.is_debit()
 
     def account_number(self):

@@ -450,7 +450,8 @@ class AccountViewSet(viewsets.ModelViewSet):
                                        entry_type=3, is_approved=True)
         credits = []
         closing_journal.save()
-        valid_accounts = 0
+        is_worth = False
+        has_income = False
         for account in active_accounts:
             balance = account.get_balance();
             closer = Transaction(affected_account=account, journal_entry=closing_journal, value=abs(balance))
@@ -465,11 +466,22 @@ class AccountViewSet(viewsets.ModelViewSet):
                 else:
                     credits.append(closer)
                 credit_val += closer.get_value()
-                valid_accounts += 1
-        if valid_accounts > 0:
-            income_adjuster = Transaction(affected_account=income_account, journal_entry=closing_journal, value=abs(credit_val))
-            income_adjuster.is_debit = credit_val < 0  # if credit_val is positive, it debits the Income Summary else credits
-            income_adjuster.save()
+                has_income = True
+                is_worth = True
+
+            if account.account_type.category == 2 and balance != 0 and account.name.find("Drawing") != -1:
+                target = "%s%s" % (account.name[:-9], ", Capital")
+                target = Account.objects.get_by_natural_key(target)
+                closer.is_debit = False
+                credits.append(closer)
+                Transaction(affected_account=target, journal_entry=closing_journal, value=abs(balance), is_debit=True).save()
+                is_worth = True
+
+        if is_worth:
+            if has_income:
+                income_adjuster = Transaction(affected_account=income_account, journal_entry=closing_journal, value=abs(credit_val))
+                income_adjuster.is_debit = credit_val < 0  # if credit_val is positive, it debits the Income Summary else credits
+                income_adjuster.save()
 
             for transaction in credits:
                 transaction.save()
