@@ -161,7 +161,9 @@ class AccountViewSet(viewsets.ModelViewSet):
             elif account.account_type.category == 4:  # 4 is Expenses
                 net_profit -= account_balance
 
-        output = Decimal(net_profit / total_sales)
+        output = 0
+        if total_sales != 0:
+            output = Decimal(net_profit / total_sales)
 
         if output < 0.05:
             status = "red"
