@@ -438,13 +438,16 @@ class AccountViewSet(viewsets.ModelViewSet):
         valid_accounts = 0
         for account in active_accounts:
             balance = account.get_balance();
-            closer = Transaction(affected_account=account, journal_entry=closing_journal, value=balance)
-            if (account.account_type.category == 3 or account.account_type.category == 4) and balance > 0:
+            closer = Transaction(affected_account=account, journal_entry=closing_journal, value=abs(balance))
+            if (account.account_type.category == 3 or account.account_type.category == 4) and balance != 0:
                 if account.account_type.category == 3:
-                    closer.is_debit = True
-                    closer.save()
+                    closer.is_debit = True  # ^ (balance < 0)
                 elif account.account_type.category == 4:
-                    closer.is_debit = False
+                    closer.is_debit = False  # ^ (balance < 0)
+                    credits.append(closer)
+                if closer.is_debit:
+                    closer.save()
+                else:
                     credits.append(closer)
                 credit_val += closer.get_value()
                 valid_accounts += 1
