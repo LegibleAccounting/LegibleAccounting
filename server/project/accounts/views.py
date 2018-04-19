@@ -66,7 +66,9 @@ class AccountViewSet(viewsets.ModelViewSet):
             elif i.account_type.category == 1 and i.account_type.classification == 1:
                 total_liabilities += i.get_balance()
 
-        cr["ratio"] = Decimal(total_assets/total_liabilities)
+        cr["ratio"] = 0
+        if (total_liabilities != 0):
+            cr["ratio"] = Decimal(total_assets / total_liabilities)
 
         if cr["ratio"] < 0.02:
             cr["status"] = "red"
@@ -96,7 +98,9 @@ class AccountViewSet(viewsets.ModelViewSet):
             elif account.account_type.category == 4:  # 4 is Expenses
                 net_profit -= account_balance
 
-        output = Decimal(net_profit / total_assets)
+        output = 0
+        if total_assets != 0:
+            output = Decimal(net_profit / total_assets)
 
         if output < 0.05:
             status = "red"
@@ -129,7 +133,9 @@ class AccountViewSet(viewsets.ModelViewSet):
             elif account.account_type.category == 4:  # 4 is Expenses
                 net_profit -= account_balance
 
-        output = Decimal(net_profit / total_equity)
+        output = 0
+        if total_equity != 0:
+            output = Decimal(net_profit / total_equity)
 
         if output < 0.05:
             status = "red"
@@ -161,7 +167,9 @@ class AccountViewSet(viewsets.ModelViewSet):
             elif account.account_type.category == 4:  # 4 is Expenses
                 net_profit -= account_balance
 
-        output = Decimal(net_profit / total_sales)
+        output = 0
+        if total_sales != 0:
+            output = Decimal(net_profit / total_sales)
 
         if output < 0.05:
             status = "red"
@@ -192,7 +200,9 @@ class AccountViewSet(viewsets.ModelViewSet):
             elif account.account_type.category == 3:  # 3 is Revenue. TODO make sure it is correct to use all revenues for this
                 total_sales += account_balance
 
-        output = Decimal(total_sales / total_assets)
+        output = 0
+        if total_assets != 0:
+            output = Decimal(total_sales / total_assets)
 
         if output < 0.03:
             status = "red"
@@ -227,7 +237,9 @@ class AccountViewSet(viewsets.ModelViewSet):
             elif account.account_type.category == 1 and account.account_type.classification == 1:  # 1 is Liabilities
                 total_liabilities += account_balance
 
-        output = Decimal((total_assets - total_inventory) / total_liabilities)
+        output = 0
+        if total_liabilities != 0:
+            output = Decimal((total_assets - total_inventory) / total_liabilities)
 
         if output < 0.02:
             status = "red"
@@ -362,6 +374,9 @@ class AccountViewSet(viewsets.ModelViewSet):
         equity_total = 0
         for account in active_accounts:
             account_balance = account.get_balance()
+            if (account.account_type.category == 0 and account.name.find("Depreciation") != -1):
+                account_balance = account_balance * -1
+
             if account_balance != 0:
                 account_summary = {
                     'account_id': account.pk,

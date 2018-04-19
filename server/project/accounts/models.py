@@ -74,7 +74,10 @@ class Account(models.Model):
         return (self.name,)
 
     def is_debit(self):
-        return self.account_type.is_debit() and self.name.find("Depreciation") is -1
+        if self.account_type.category == 0 and self.name.find("Depreciation") != -1:
+            return False
+
+        return self.account_type.is_debit()
 
     def account_number(self):
         return (self.account_type.order * NUM_ACCOUNTS_PER_ACCOUNT_TYPE) + self.order
@@ -97,8 +100,6 @@ class Account(models.Model):
         return transactions
 
     def get_balance(self, as_of=None):
-        # TODO: This will be updated to return a calculated balance
-        # based on all transactions that have been made to this account.
         value = 0
         for t in self.transactions.all():
             if t.journal_entry.is_approved == True and (as_of is None or as_of >= t.date):
