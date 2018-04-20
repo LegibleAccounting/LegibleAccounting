@@ -217,7 +217,7 @@ class AccountViewSet(viewsets.ModelViewSet):
             'ratio': output,
             'status': status
         })
-    
+
     @list_route(methods=['get'])
     def quick_ratio(self, request):
         ratio = 0
@@ -253,7 +253,7 @@ class AccountViewSet(viewsets.ModelViewSet):
         return Response({
             'ratio': output,
             'status': status
-        })      
+        })
 
     @list_route(methods=['get'])
     def trial_balance(self, request):
@@ -375,7 +375,11 @@ class AccountViewSet(viewsets.ModelViewSet):
         equity_total = 0
         for account in active_accounts:
             account_balance = account.get_balance()
-            if (account.account_type.category == 0 and account.name.find("Depreciation") != -1):
+
+            if account.is_contra:
+                # Since we are calculating total valuation for each category/classification
+                # of account, we need to make sure that the balances of any contra
+                # accounts are subtracted from the totals.
                 account_balance = account_balance * -1
 
             if account_balance != 0:
@@ -392,7 +396,7 @@ class AccountViewSet(viewsets.ModelViewSet):
                     else:
                         noncurrent_assets.append(account_summary)
                         noncurrent_assets_total += account_balance
-                        
+
                 elif account.account_type.category == 1:  # 1 is Liabilities
                     if account.account_type.classification == 1:  # 1 is Current
                         current_liabilities.append(account_summary)
@@ -410,6 +414,7 @@ class AccountViewSet(viewsets.ModelViewSet):
 
                 elif account.account_type.category == 4:  # 4 is Expenses
                     expenses_total += account_balance
+
         #Part of Cheaty Method
         if revenues_total - expenses_total != 0:
             equity.append({
