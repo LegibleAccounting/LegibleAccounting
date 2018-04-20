@@ -66,6 +66,7 @@ class Account(models.Model):
     initial_balance = models.DecimalField(max_digits=20, decimal_places=2, default=0)
     created_date = models.DateTimeField(auto_now_add=True, verbose_name='date Created')
     is_active = models.BooleanField(default=False, verbose_name="active?")
+    is_contra = models.BooleanField(default=False, verbose_name="contra?")
 
     def __str__(self):
         return 'Account #' + "{:03}: ".format(self.account_number()) + self.name
@@ -74,10 +75,9 @@ class Account(models.Model):
         return (self.name,)
 
     def is_debit(self):
-        if self.account_type.category == 0 and self.name.find("Depreciation") != -1:
-            return False
-        if self.account_type.category == 2 and self.name.find("Drawing") != -1:
-            return True
+        if self.is_contra:
+            return not self.account_type.is_debit()
+
         return self.account_type.is_debit()
 
     def account_number(self):
