@@ -353,7 +353,8 @@ class AccountViewSet(viewsets.ModelViewSet):
             'net_profit': format_currency(net_profit),
             #'capital': format_currency(capital),
             'dividends_paid': format_currency(dividends_total),
-            'retained_earnings_ending': format_currency(retained_earnings_beginning + net_profit - dividends_total)
+            'retained_earnings_ending': format_currency(retained_earnings_beginning + net_profit - dividends_total),
+            'as_of_date': timezone.now()
         })
 
     @list_route(methods=['get'])
@@ -434,8 +435,8 @@ class AccountViewSet(viewsets.ModelViewSet):
             'equity_total': format_currency(hacky_equity_total) if hacky_equity_total is not 0 else None,
             #'cheaty': format_currency( revenues_total - expenses_total),
             'asset_total': format_currency(asset_total),
-            'liability_total': format_currency(liability_total)
-
+            'liability_total': format_currency(liability_total),
+            'as_of_date': timezone.now()
         }
 
         return Response(response)
