@@ -132,11 +132,11 @@ class GeneralJournal extends Component {
 
     closeJournal() {
         AccountsAPI.closeAccounts()
-            .then(() => {
-                this.props.onNotifySuccess('Accounts have been closed.');
+            .then(({ message }) => {
+                this.props.onNotifySuccess(message);
             })
-            .catch(() => {
-                this.props.onNotifyError('An error occurred when attempting to close accounts.');
+            .catch((response ) => {
+                this.props.onNotifyError(response.message || response.detail || 'An error occurred.');
             });
     }
 
@@ -277,7 +277,7 @@ class GeneralJournal extends Component {
         } else if (selectedKey === 2) {
             awaitPromise = GeneralJournalAPI.search(true);
         } else if (selectedKey === 4) {
-            awaitPromise = GeneralJournalAPI.search(false);     
+            awaitPromise = GeneralJournalAPI.search(false);
         } else {
             // 3
             // TODO: Do better
@@ -295,7 +295,7 @@ class GeneralJournal extends Component {
                     return entry;
                 })
             });
-        }); 
+        });
     }
 }
 
