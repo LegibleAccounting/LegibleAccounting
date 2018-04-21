@@ -447,6 +447,7 @@ class AccountViewSet(viewsets.ModelViewSet):
                     expenses_total += account_balance
 
         #Part of Cheaty Method
+        # FIXME
         if revenues_total - expenses_total != 0:
             equity.append({
                 'account_id': 0,
@@ -455,7 +456,7 @@ class AccountViewSet(viewsets.ModelViewSet):
                 'balance': format_currency(revenues_total - expenses_total),
             })
         #####################
-        hacky_equity_total = equity_total + revenues_total - expenses_total # THIS IS A HACKY SOLUTION DO NOT TRUST
+        hacky_equity_total = equity_total + revenues_total - expenses_total # FIXME: THIS IS A HACKY SOLUTION DO NOT TRUST
         asset_total = current_assets_total + noncurrent_assets_total
         liability_total = equity_total + current_liabilities_total + noncurrent_liabilities_total + revenues_total - expenses_total
         response = {
