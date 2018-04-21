@@ -464,13 +464,11 @@ class AccountViewSet(viewsets.ModelViewSet):
             if (account.account_type.category == 3 or account.account_type.category == 4) and balance != 0:
                 if account.account_type.category == 3:
                     closer.is_debit = True  # ^ (balance < 0)
+                    closer.save()
                 elif account.account_type.category == 4:
                     closer.is_debit = False  # ^ (balance < 0)
                     credits.append(closer)
-                if closer.is_debit:
-                    closer.save()
-                else:
-                    credits.append(closer)
+
                 credit_val += closer.get_value()
                 has_income = True
                 is_worth = True
