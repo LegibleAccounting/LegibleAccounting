@@ -40,7 +40,7 @@ class Dashboard extends Component {
             .then((ratio_info) => {
                 this.setState({ assetTurnover: ratio_info});
             });
-        
+
         DashboardAPI.getQuickRatio()
             .then((ratio_info) => {
                 this.setState({ quickRatio: ratio_info});
@@ -78,13 +78,13 @@ class Dashboard extends Component {
                             </div>
                             <div className="panel-body">
                                 <h3 className="ratio-value">{this.state.returnOnAssets.ratio}</h3>
-                                {(this.state.currentRatio.status === 'yellow' &&
+                                {(this.state.returnOnAssets.status === 'yellow' &&
                                     (<div className="ratio warning"></div>)
                                 )}
-                                {(this.state.currentRatio.status === 'red' &&
+                                {(this.state.returnOnAssets.status === 'red' &&
                                     (<div className="ratio bad"></div>)
                                 )}
-                                {(this.state.currentRatio.status === 'green' &&
+                                {(this.state.returnOnAssets.status === 'green' &&
                                     (<div className="ratio good"></div>)
                                 )}
                             </div>
@@ -97,13 +97,13 @@ class Dashboard extends Component {
                             </div>
                             <div className="panel-body">
                                 <h3 className="ratio-value">{this.state.returnOnEquity.ratio}</h3>
-                                {(this.state.currentRatio.status === 'yellow' &&
+                                {(this.state.returnOnEquity.status === 'yellow' &&
                                     (<div className="ratio warning"></div>)
                                 )}
-                                {(this.state.currentRatio.status === 'red' &&
+                                {(this.state.returnOnEquity.status === 'red' &&
                                     (<div className="ratio bad"></div>)
                                 )}
-                                {(this.state.currentRatio.status === 'green' &&
+                                {(this.state.returnOnEquity.status === 'green' &&
                                     (<div className="ratio good"></div>)
                                 )}
                             </div>
@@ -116,13 +116,13 @@ class Dashboard extends Component {
                             </div>
                             <div className="panel-body">
                                 <h3 className="ratio-value">{this.state.netProfitMargin.ratio}</h3>
-                                {(this.state.currentRatio.status === 'yellow' &&
+                                {(this.state.netProfitMargin.status === 'yellow' &&
                                     (<div className="ratio warning"></div>)
                                 )}
-                                {(this.state.currentRatio.status === 'red' &&
+                                {(this.state.netProfitMargin.status === 'red' &&
                                     (<div className="ratio bad"></div>)
                                 )}
-                                {(this.state.currentRatio.status === 'green' &&
+                                {(this.state.netProfitMargin.status === 'green' &&
                                     (<div className="ratio good"></div>)
                                 )}
                             </div>
@@ -137,13 +137,13 @@ class Dashboard extends Component {
                             </div>
                             <div className="panel-body">
                                 <h3 className="ratio-value">{this.state.assetTurnover.ratio}</h3>
-                                {(this.state.currentRatio.status === 'yellow' &&
+                                {(this.state.assetTurnover.status === 'yellow' &&
                                     (<div className="ratio warning"></div>)
                                 )}
-                                {(this.state.currentRatio.status === 'red' &&
+                                {(this.state.assetTurnover.status === 'red' &&
                                     (<div className="ratio bad"></div>)
                                 )}
-                                {(this.state.currentRatio.status === 'green' &&
+                                {(this.state.assetTurnover.status === 'green' &&
                                     (<div className="ratio good"></div>)
                                 )}
                             </div>
@@ -156,13 +156,13 @@ class Dashboard extends Component {
                             </div>
                             <div className="panel-body">
                                 <h3 className="ratio-value">{this.state.quickRatio.ratio}</h3>
-                                {(this.state.currentRatio.status === 'yellow' &&
+                                {(this.state.quickRatio.status === 'yellow' &&
                                     (<div className="ratio warning"></div>)
                                 )}
-                                {(this.state.currentRatio.status === 'red' &&
+                                {(this.state.quickRatio.status === 'red' &&
                                     (<div className="ratio bad"></div>)
                                 )}
-                                {(this.state.currentRatio.status === 'green' &&
+                                {(this.state.quickRatio.status === 'green' &&
                                     (<div className="ratio good"></div>)
                                 )}
                             </div>
