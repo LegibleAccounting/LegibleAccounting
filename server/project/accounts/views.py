@@ -2,6 +2,7 @@ from decimal import *
 from django.db.models import Model
 from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
+from journalize.enums import JournalEntryTypes
 from journalize.models import JournalEntry, Transaction
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route, list_route
@@ -489,7 +490,7 @@ class AccountViewSet(viewsets.ModelViewSet):
         has_income_adjustment = False
 
         closing_journal = JournalEntry(date=timezone.now(), creator=request.user, description="Auto-generated closing journal",
-                                       entry_type=3, is_approved=True)
+                                       entry_type=JournalEntryTypes.CLOSING, is_approved=True)
         closing_journal.save()
 
         for account in accounts:
