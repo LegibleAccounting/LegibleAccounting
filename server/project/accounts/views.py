@@ -454,6 +454,7 @@ class AccountViewSet(viewsets.ModelViewSet):
 
         closing_journal = JournalEntry(date=timezone.now(), creator=request.user, description="Auto-generated closing journal",
                                        entry_type=3, is_approved=True)
+        debits = []
         credits = []
         closing_journal.save()
         is_worth = False
@@ -464,7 +465,7 @@ class AccountViewSet(viewsets.ModelViewSet):
             if (account.account_type.category == 3 or account.account_type.category == 4) and balance != 0:
                 if account.account_type.category == 3:
                     closer.is_debit = True  # ^ (balance < 0)
-                    closer.save()
+                    debits.append(closer)
                 elif account.account_type.category == 4:
                     closer.is_debit = False  # ^ (balance < 0)
                     credits.append(closer)
@@ -476,17 +477,19 @@ class AccountViewSet(viewsets.ModelViewSet):
             if account.account_type.category == 2 and balance != 0 and account.name.find("Drawing") != -1:
                 target = "%s%s" % (account.name[:-9], ", Capital")
                 target = Account.objects.get_by_natural_key(target)
+                debits.append(Transaction(affected_account=target, journal_entry=closing_journal, value=abs(balance), is_debit=True))
                 closer.is_debit = False
                 credits.append(closer)
-                Transaction(affected_account=target, journal_entry=closing_journal, value=abs(balance), is_debit=True).save()
                 is_worth = True
 
         if is_worth:
             if has_income:
                 income_adjuster = Transaction(affected_account=income_account, journal_entry=closing_journal, value=abs(credit_val))
                 income_adjuster.is_debit = credit_val < 0  # if credit_val is positive, it debits the Income Summary else credits
-                income_adjuster.save()
+                debits.append(income_adjuster)
 
+            for transaction in debits:
+                transaction.save()
             for transaction in credits:
                 transaction.save()
 
