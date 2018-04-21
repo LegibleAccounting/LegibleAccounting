@@ -436,7 +436,6 @@ class AccountViewSet(viewsets.ModelViewSet):
             'current_liabilities_total': format_currency(current_liabilities_total) if current_liabilities_total is not 0 else None,
             'noncurrent_liabilities_total': format_currency(noncurrent_liabilities_total) if noncurrent_liabilities_total is not 0 else None,
             'equity_total': format_currency(hacky_equity_total) if hacky_equity_total is not 0 else None,
-            #'cheaty': format_currency( revenues_total - expenses_total),
             'asset_total': format_currency(asset_total),
             'liability_total': format_currency(liability_total),
             'as_of_date': timezone.now()
