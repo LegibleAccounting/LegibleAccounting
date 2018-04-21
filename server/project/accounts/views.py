@@ -1,4 +1,5 @@
 from decimal import *
+from django.db.models import Model
 from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
 from journalize.models import JournalEntry, Transaction
@@ -9,6 +10,7 @@ from rest_framework.permissions import AllowAny, DjangoModelPermissions
 from rest_framework.response import Response
 from project.utils import format_currency, format_percent
 from .models import Account, AccountType, ACCOUNT_CATEGORIES
+from .permissions import LAAccountsClosingPermission
 from .serializers import AccountSerializer, AccountTypeSerializer, RetrieveAccountSerializer, RetrieveAccountTypeSerializer, LedgerAccountSerializer
 
 class AccountTypeViewSet(viewsets.ReadOnlyModelViewSet):
@@ -288,7 +290,7 @@ class AccountViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['get'])
     def income_statement(self, request):
-        active_accounts = Account.objects.all().filter(is_active=True)
+        active_accounts = Account.objects.filter(is_active=True)
         expenses = []
         revenues = []
         expenses_total = 0
@@ -359,7 +361,7 @@ class AccountViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['get'])
     def balance_sheet(self, request):
-        active_accounts = Account.objects.all().filter(is_active=True)
+        active_accounts = Account.objects.filter(is_active=True)
         current_assets = []
         current_assets_total = 0
         noncurrent_assets = []
@@ -446,54 +448,85 @@ class AccountViewSet(viewsets.ModelViewSet):
 
         return Response(response)
 
-    @list_route(methods=['post'], permission_classes=[AllowAny])
+    @list_route(methods=['post'], permission_classes=[LAAccountsClosingPermission])
     def close_accounts(self, request):
-        active_accounts = Account.objects.all().filter(is_active=True)
-        credit_val = 0
-        income_account = Account.objects.get_by_natural_key('Retained Earnings')
+        accounts = Account.objects.filter(is_active=True, account_type__category__in=[2, 3, 4])
+        income_value = 0
+        debits = []
+        credits = []
+        has_income_adjustment = False
 
         closing_journal = JournalEntry(date=timezone.now(), creator=request.user, description="Auto-generated closing journal",
                                        entry_type=3, is_approved=True)
-        debits = []
-        credits = []
         closing_journal.save()
-        is_worth = False
-        has_income = False
-        for account in active_accounts:
+
+        for account in accounts:
             balance = account.get_balance();
-            closer = Transaction(affected_account=account, journal_entry=closing_journal, value=abs(balance))
-            if (account.account_type.category == 3 or account.account_type.category == 4) and balance != 0:
-                if account.account_type.category == 3:
-                    closer.is_debit = True  # ^ (balance < 0)
+            if balance == 0:
+                # No need to close an account that does not have a balance
+                continue
+
+            closer = Transaction(affected_account=account, journal_entry=closing_journal, is_debit=not account.is_debit(),
+                                 value=abs(balance))
+
+            if account.account_type.category == 3 or account.account_type.category == 4:
+                has_income_adjustment = True
+
+                if closer.is_debit:
                     debits.append(closer)
-                elif account.account_type.category == 4:
-                    closer.is_debit = False  # ^ (balance < 0)
+                else:
                     credits.append(closer)
 
-                credit_val += closer.get_value()
-                has_income = True
-                is_worth = True
+                income_value += closer.get_value()
 
-            if account.account_type.category == 2 and balance != 0 and account.name.find("Drawing") != -1:
-                target = "%s%s" % (account.name[:-9], ", Capital")
-                target = Account.objects.get_by_natural_key(target)
-                debits.append(Transaction(affected_account=target, journal_entry=closing_journal, value=abs(balance), is_debit=True))
-                closer.is_debit = False
+            elif account.account_type.category == 2 and "Drawing" in account.name:
+                try:
+                    equity_adjuster = Account.objects.get_by_natural_key(account.name.replace("Drawing", "Capital"))
+
+                    if not equity_adjuster.is_active:
+                        equity_adjuster.is_active = True
+                        equity_adjuster.save()
+
+                except Model.DoesNotExist:
+                    closing_journal.delete()
+
+                    return Response({
+                        'message': 'The Drawing account "%s" does not have a corresponding Capital account to adjust. No accounts were closed.' % \
+                            account.name }, status=403)
+
+                debits.append(Transaction(affected_account=equity_adjuster, journal_entry=closing_journal,
+                                          value=abs(balance), is_debit=True))
                 credits.append(closer)
-                is_worth = True
 
-        if is_worth:
-            if has_income:
-                income_adjuster = Transaction(affected_account=income_account, journal_entry=closing_journal, value=abs(credit_val))
-                income_adjuster.is_debit = credit_val < 0  # if credit_val is positive, it debits the Income Summary else credits
+        if not len(debits) and not len(credits):
+            closing_journal.delete()
+            return Response({ 'message': 'Account have already been closed.' }, status=200)
+
+        if has_income_adjustment:
+            try:
+                income_account = Account.objects.get_by_natural_key('Retained Earnings')
+
+                if not income_account.is_active:
+                    income_account.is_active = True
+                    income_account.save()
+
+            except Model.DoesNotExist:
+                closing_journal.delete()
+
+                return Response({
+                    'message': 'There is no acccount named "Retaining Earnings". No accounts were closed.'
+                }, status=403)
+
+            income_adjuster = Transaction(affected_account=income_account, journal_entry=closing_journal, value=abs(income_value))
+            income_adjuster.is_debit = income_value < 0  # if income_value is positive, it debits the Retained Earnings else credits
+
+            if income_adjuster.is_debit:
                 debits.append(income_adjuster)
+            else:
+                credits.append(income_adjuster)
 
-            for transaction in debits:
-                transaction.save()
-            for transaction in credits:
-                transaction.save()
+        transaction_list = debits + credits
+        for transaction in transaction_list:
+            transaction.save()
 
-            return Response({'message': 'Success'})
-
-        closing_journal.delete()
-        return Response({'message': 'No Accounts to close'})
+        return Response({'message': 'Accounts have been closed.'}, status=200)
