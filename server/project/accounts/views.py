@@ -323,12 +323,10 @@ class AccountViewSet(viewsets.ModelViewSet):
             'as_of_date': timezone.now()
         })
 
-    # Determine the Income Summary / Retained Earnings
     @list_route(methods=['get'])
     def retained_earnings(self, request):
         active_accounts = Account.objects.filter(is_active=True)
         retained_earnings_beginning = 0
-        #capital = 0
         net_profit = 0
         dividends_total = 0
 
@@ -338,12 +336,11 @@ class AccountViewSet(viewsets.ModelViewSet):
             if account.account_type.category == 2:  # Equity Account
                 if account.name == 'Retained Earnings':
                     retained_earnings_beginning = account_balance
-                elif account.name == "Paid in Capital in Excess of Par/Stated Value--Common Stock" or \
-                        account.name == 'Paid in Capital in Excess of Par/Stated Value--Preferred Stock' or \
-                        account.name == 'John Addams, Drawing' or \
-                        account.name == 'Paid in Capital from Sale of Treasury Stock':
-                    #capital = account_balance
-                #elif account.name != "Income Summary":
+                elif 'Drawing' in account.name:
+                        # or account.name == "Paid in Capital in Excess of Par/Stated Value--Common Stock" \
+                        # or account.name == 'Paid in Capital in Excess of Par/Stated Value--Preferred Stock' \
+                        # or account.name == 'Paid in Capital from Sale of Treasury Stock':
+                    # NOTE: We are only accounting for business owner equity here, not shareholders equity.
                     dividends_total += account_balance
             elif account.account_type.category == 3:  # Revenue Account
                 net_profit += account_balance
@@ -353,7 +350,6 @@ class AccountViewSet(viewsets.ModelViewSet):
         return Response({
             'retained_earnings_beginning': format_currency(retained_earnings_beginning),
             'net_profit': format_currency(net_profit),
-            #'capital': format_currency(capital),
             'dividends_paid': format_currency(dividends_total),
             'retained_earnings_ending': format_currency(retained_earnings_beginning + net_profit - dividends_total),
             'as_of_date': timezone.now()
@@ -480,6 +476,7 @@ class AccountViewSet(viewsets.ModelViewSet):
                 income_value += closer.get_value()
 
             elif account.account_type.category == 2 and "Drawing" in account.name:
+                # NOTE: We are only accounting for business owner equity here, not shareholders equity.
                 try:
                     equity_adjuster = Account.objects.get_by_natural_key(account.name.replace("Drawing", "Capital"))
 
