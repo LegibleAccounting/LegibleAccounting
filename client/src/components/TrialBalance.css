@@ -1,0 +1,41 @@
+.trial-balance {
+    width: 90%;
+    margin: auto;
+    margin-top: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.title-heading {
+	background-color: var(--darkBlue);
+	border-radius: 5px;
+	color: white;
+	margin-bottom: 20px;
+	padding: 10px;
+}
+
+.trial-balance .income-statement-main-heading {
+	font-size: 18px;
+    margin-top: 1rem;
+}
+
+.trial-balance .business-name {
+    font-size: 26px;
+    margin-top: 1rem;
+}
+
+.trial-balance .as-of-date {
+	font-size: 16px;
+    margin-top: 1rem;
+}
+
+.trial-balance .doubleUnderline {
+    text-decoration: overline;
+    padding-bottom: 1px;
+    border-bottom: double 5px;
+}
+
+.trial-balance .debitCol,
+.trial-balance .creditCol {
+    min-width: 10rem;
+}

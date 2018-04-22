@@ -57,7 +57,7 @@ class ChartOfAccounts extends Component {
 		            <h1>Chart of Accounts</h1>
                     {
                         Auth.currentUser.groups.find(group => group.name === 'Administrator') ? (
-					       <NavLink className="NavLink btn btn-primary newButton" to="/chart-of-accounts/add">+ Add</NavLink> 
+					       <NavLink className="NavLink btn btn-primary newButton" to="/chart-of-accounts/add">+ Add</NavLink>
                         ) : (
                             <span></span>
                         )
@@ -71,7 +71,7 @@ class ChartOfAccounts extends Component {
 		            </div>
 	            </div>
 
-	            <div className="tableWrapper .table-responsive">
+	            <div className="tableWrapper">
 			        <table className="table table-hover">
 					  <thead>
 					  	<tr>
@@ -103,7 +103,7 @@ class ChartOfAccounts extends Component {
                             <th className="accountTerm">Term</th>
 						    <th className="initialBalance text-right">Balance</th>
                             <th className="creator hidden-xs hidden-sm">Created By</th>
-                            <th className="createDate hidden-xs hidden-sm"><div>Date</div>Created</th> 
+                            <th className="createDate hidden-xs hidden-sm"><div>Date</div>Created</th>
 						    <th className="comments">Comments</th>
 						    <th className="edits"></th>
 					    </tr>

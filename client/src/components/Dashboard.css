@@ -1,0 +1,32 @@
+.dashboard {
+    margin-top: 3rem;
+    margin-left: 3rem;
+}
+
+.dashboard-heading {
+    margin-bottom: 4rem;
+}
+
+.dashboard .ratio-value,
+.dashboard .ratio {
+    display: inline-block;
+}
+
+.dashboard .ratio {
+    margin-left: 1rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+
+.dashboard .ratio.good {
+    background-color: green;
+}
+
+.dashboard .ratio.warning {
+    background-color: yellow;
+}
+
+.dashboard .ratio.bad {
+    background-color: red;
+}

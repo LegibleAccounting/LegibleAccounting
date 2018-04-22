@@ -38,7 +38,8 @@ class AccountForm extends Component {
                 name: '',
                 description: '',
                 initial_balance: '',
-                is_active: false
+                is_active: false,
+                is_contra: false
             };
         }
 
@@ -95,7 +96,7 @@ class AccountForm extends Component {
                                 value={this.state.accountModel.name}
                                 onChange={this.changeInputState} />
 					</div>
-				</div>	
+				</div>
                 <div className="row">
                     <div className="textColumn container">
                         Account Order
@@ -116,15 +117,28 @@ class AccountForm extends Component {
 						Account Active
 					</div>
 					<div className="fieldColumn container">
-						<input 	type="checkbox" 
+						<input 	type="checkbox"
 								name="is_active"
-								className="accountActiveCheckBox"
+								className="account-form-checkbox"
                                 checked={this.state.accountModel.is_active}
 								value={this.state.accountModel.is_active}
                                 disabled={ !Auth.currentUser.groups.find(group => group.name === 'Administrator') }
                                 onChange={this.changeInputState} />
 					</div>
 				</div>
+                <div className="row">
+                    <div className="textColumn container">
+                        Is Contra Account
+                    </div>
+                    <div className="fieldColumn container">
+                        <input type="checkbox"
+                          name="is_contra"
+                          className="account-form-checkbox"
+                          checked={this.state.accountModel.is_contra}
+                          value={this.state.accountModel.is_contra}
+                          onChange={this.changeInputState} />
+                    </div>
+                </div>
 				<div className="row">
 					<div className="textColumn container">
 						Initial Balance
@@ -152,13 +166,12 @@ class AccountForm extends Component {
                                 value={this.state.accountModel.description}
                                 onChange={this.changeInputState} />
 					</div>
-				</div>	
+				</div>
 				<div>
 					<input type="submit" value={ this.state.accountModel.id === undefined ? 'Create' : 'Update' } className="btn btn-primary createButton"/>
 				</div>
-        		<div className="fillSpace"></div>
 				<div>
-					<NavLink className="NavLink btn btn-primary newButton" to="/accounts">&lt; Back to Accounts</NavLink>
+					<NavLink className="NavLink btn btn-primary backButton" to="/accounts">&lt; Back to Accounts</NavLink>
 				</div>
             </form>
 		);
