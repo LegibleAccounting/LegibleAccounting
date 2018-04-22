@@ -113,7 +113,7 @@ class UserForm extends Component {
                     </div>
                 </div>
                 <div style={{ paddingTop: '2em' }}>
-                    <NavLink className="NavLink btn btn-primary newButton" to="/users">&lt; Back to Users</NavLink>
+                    <NavLink className="NavLink btn btn-primary backButton" to="/users">&lt; Back to Users</NavLink>
                 </div>
             </form>
 		);

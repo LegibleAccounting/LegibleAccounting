@@ -2,10 +2,10 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin-top: 40px;
+	margin-top: 3rem;
 	margin-bottom: 20px;
-	margin-left: 45px;
-	margin-right: 20px;
+	margin-left: 3rem;
+	margin-right: 3rem;
 }
 
 h1 {
@@ -17,9 +17,16 @@ h1 {
 	flex-grow: 1;
 }
 
- .newButton {
+.newButton {
 	margin-left: 20px;
 	margin-right: 20px;
+}
+
+.backButton {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 100px;
+	margin-top: 30px;
 }
 
  .search {

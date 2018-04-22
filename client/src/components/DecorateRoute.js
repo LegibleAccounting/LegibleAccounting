@@ -6,7 +6,7 @@ const DecorateRoute = (WrappedComponent, extraProps) => {
         render() {
             let props = Object.assign({}, this.props, extraProps);
             return (
-                <div>
+                <div className="full-height">
                     <WrappedComponent {...props} />
                 </div>
             );

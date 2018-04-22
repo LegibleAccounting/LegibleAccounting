@@ -1,0 +1,63 @@
+.income-statement {
+    width: 90%;
+    margin: auto;
+    margin-top: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.title-heading {
+	background-color: var(--darkBlue);
+	border-radius: 5px;
+	color: white;
+	margin-bottom: 20px;
+	padding: 10px;
+}
+
+.income-statement .income-statement-main-heading {
+	font-size: 18px;
+    margin-top: 1rem;
+}
+
+.income-statement .business-name {
+	font-size: 26px;
+    margin-top: 1rem;
+}
+
+.income-statement .as-of-date {
+	font-size: 16px;
+    margin-top: 1rem;
+}
+
+.income-statement-heading {
+	margin-top: 0px;
+	margin-left: 50px;
+	font-size: 20px;
+	color: var(--mainBlue);
+}
+
+.accountNameCol {
+	width: 80%;
+}
+
+.debitCol, .creditCol {
+    min-width: 10rem;
+}
+
+.subtotal {
+	text-decoration: overline underline;
+}
+
+.total {
+	text-decoration: overline;
+	padding-bottom: 1px;
+	border-bottom: double 5px;
+}
+
+.income-statement-table {
+	width: 90%;
+}
+
+.income-statement th, td {
+    padding: 8px;
+}

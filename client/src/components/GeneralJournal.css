@@ -90,12 +90,6 @@
 .debitEntryAmount {
 }
 
-.line {
-	width: 100%;
-	height: 1.5px;
-	background-color: #EAEAEA;
-}
-
 .description {
 	resize: none;
 }

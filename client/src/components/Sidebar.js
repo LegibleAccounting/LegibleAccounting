@@ -19,9 +19,9 @@ class Sidebar extends Component {
                     </div>
                 </div>
                 <ul className="nav nav-stacked nav-pills stack">
-                    {/**<li>
+                    <li>
                         <NavLink exact to="/">Dashboard</NavLink>
-                    </li>**/}
+                    </li>
                     <li>
                         <NavLink to="/chart-of-accounts">Chart of Accounts</NavLink>
                     </li>
@@ -32,6 +32,34 @@ class Sidebar extends Component {
                         (Auth.currentUserIsManager() || Auth.currentUserIsAccountant()) && (
                             <li>
                                 <NavLink to="/general-journal">Journalize</NavLink>
+                            </li>
+                        )
+                    }
+                    {
+                        (Auth.currentUserIsManager() || Auth.currentUserIsAccountant()) && (
+                            <li>
+                                <NavLink to="/trial-balance">Trial Balance</NavLink>
+                            </li>
+                        )
+                    }
+                    {
+                        (Auth.currentUserIsManager() || Auth.currentUserIsAccountant()) && (
+                            <li>
+                                <NavLink to="/income-statement">Income Statement</NavLink>
+                            </li>
+                        )
+                    }
+                    {
+                        (Auth.currentUserIsManager() || Auth.currentUserIsAccountant()) && (
+                            <li>
+                                <NavLink to="/balance-sheet">Balance Sheet</NavLink>
+                            </li>
+                        )
+                    }
+                    {
+                        (Auth.currentUserIsManager() || Auth.currentUserIsAccountant()) && (
+                            <li>
+                                <NavLink to="/retained-earnings-statement">Statement of Retained Earnings</NavLink>
                             </li>
                         )
                     }

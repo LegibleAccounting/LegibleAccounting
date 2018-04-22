@@ -61,7 +61,7 @@ class AddToChartOfAccounts extends Component {
                     </div>
                 </div>
                 <div style={{ paddingTop: '2em' }}>
-                    <NavLink className="NavLink btn btn-primary" to="/chart-of-accounts">&lt; Back to Chart of Accounts</NavLink>
+                    <NavLink className="NavLink btn btn-primary backButton" to="/chart-of-accounts">&lt; Back to Chart of Accounts</NavLink>
                 </div>
             </form>
         );

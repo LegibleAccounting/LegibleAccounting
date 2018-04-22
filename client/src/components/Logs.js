@@ -43,7 +43,7 @@ class Logs extends Component {
                     </div>
                 </div>
 
-                <div className="tableWrapper .table-responsive">
+                <div className="tableWrapper">
                     <table className="table table-hover">
                       <thead>
                         <tr>
@@ -89,7 +89,7 @@ class Logs extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        { 
+                        {
                         	this.state.logs.length ? (
 	                          	this.state.logs.map((item, index) => (
 	                          		<tr key={index}>

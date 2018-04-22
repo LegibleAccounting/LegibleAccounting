@@ -65,6 +65,180 @@ class AccountsAPI {
             });
     }
 
+    getTrialBalance() {
+        return fetch(new JSONAPIRequest('/api/accounts/trial_balance/', Auth.token), {
+            method: 'GET'
+        })
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
+            });
+    }
+
+    getIncomeStatement() {
+        return fetch(new JSONAPIRequest('/api/accounts/income_statement/', Auth.token), {
+            method: 'GET'
+        })
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
+            });
+    }
+
+    getRetainedEarningsStatement() {
+        return fetch(new JSONAPIRequest('/api/accounts/retained_earnings/', Auth.token), {
+            method: 'GET'
+        })
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
+            });
+    }
+
+    getBalanceSheet() {
+        return fetch(new JSONAPIRequest('/api/accounts/balance_sheet/', Auth.token), {
+            method: 'GET'
+        })
+            .then(response => {
+                return response.json()
+                    .catch(() => {
+                        return Promise.reject(response);
+                    })
+                    .then(data => {
+                        return response.ok ? Promise.resolve(data) : Promise.reject(data);
+                    });
+            });
+    }
+
+    getCurrentRatio() {
+        if (!Auth.token) {
+            return Promise.reject();
+        }
+
+        return fetch(new JSONAPIRequest('/api/accounts/current_ratio/', Auth.token), {
+            method: 'GET'
+        })
+            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
+            .then(response => response.json())
+            .then((response) => {
+                return Promise.resolve(response);
+            })
+            .catch((response) => {
+                // Consider how to handle this?
+                return Promise.reject(response);
+            });
+    }
+
+    getReturnOnAssets() {
+        if (!Auth.token) {
+            return Promise.reject();
+        }
+
+        return fetch(new JSONAPIRequest('/api/accounts/return_on_assets/', Auth.token), {
+            method: 'GET'
+        })
+            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
+            .then(response => response.json())
+            .then((response) => {
+                return Promise.resolve(response);
+            })
+            .catch((response) => {
+                // Consider how to handle this?
+                return Promise.reject(response);
+            });
+    }
+
+    getReturnOnEquity() {
+        if (!Auth.token) {
+            return Promise.reject();
+        }
+
+        return fetch(new JSONAPIRequest('/api/accounts/return_on_equity/', Auth.token), {
+            method: 'GET'
+        })
+            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
+            .then(response => response.json())
+            .then((response) => {
+                return Promise.resolve(response);
+            })
+            .catch((response) => {
+                // Consider how to handle this?
+                return Promise.reject(response);
+            });
+    }
+
+    getNetProfitMargin() {
+        if (!Auth.token) {
+            return Promise.reject();
+        }
+
+        return fetch(new JSONAPIRequest('/api/accounts/net_profit_margin/', Auth.token), {
+            method: 'GET'
+        })
+            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
+            .then(response => response.json())
+            .then((response) => {
+                return Promise.resolve(response);
+            })
+            .catch((response) => {
+                // Consider how to handle this?
+                return Promise.reject(response);
+            });
+    }
+
+    getAssetTurnover() {
+        if (!Auth.token) {
+            return Promise.reject();
+        }
+
+        return fetch(new JSONAPIRequest('/api/accounts/asset_turnover/', Auth.token), {
+            method: 'GET'
+        })
+            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
+            .then(response => response.json())
+            .then((response) => {
+                return Promise.resolve(response);
+            })
+            .catch((response) => {
+                // Consider how to handle this?
+                return Promise.reject(response);
+            });
+    }
+
+    getQuickRatio() {
+        if (!Auth.token) {
+            return Promise.reject();
+        }
+
+        return fetch(new JSONAPIRequest('/api/accounts/quick_ratio/', Auth.token), {
+            method: 'GET'
+        })
+            .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
+            .then(response => response.json())
+            .then((response) => {
+                return Promise.resolve(response);
+            })
+            .catch((response) => {
+                // Consider how to handle this?
+                return Promise.reject(response);
+            });
+    }
+
     search(active, searchString, fieldNames, isAscending) {
     	if (!Auth.token) {
             return Promise.reject();
@@ -135,6 +309,24 @@ class AccountsAPI {
         return fetch(new JSONAPIRequest(`/api/accounts/${data.id}/`, Auth.token), {
             method: 'PUT',
             body: JSON.stringify(data)
+        })
+          .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
+          .then(response => response = response.json())
+          .then((response) => {
+            return Promise.resolve(response);
+          })
+          .catch((response) => {
+            return Promise.reject(response);
+          });
+    }
+
+    closeAccounts() {
+        if (!Auth.token) {
+            return Promise.reject();
+        }
+
+        return fetch(new JSONAPIRequest('/api/accounts/close_accounts/', Auth.token), {
+            method: 'POST'
         })
           .then(response => response.ok ? Promise.resolve(response) : Promise.reject(response))
           .then(response => response = response.json())

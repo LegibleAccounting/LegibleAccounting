@@ -4,22 +4,9 @@ from auditlog.registry import auditlog
 from django.db import models
 
 from project.utils import format_currency
+from .enums import AccountCategories, AccountClassifications
 
 NUM_ACCOUNTS_PER_ACCOUNT_TYPE = 100
-
-ACCOUNT_CATEGORIES = (
-    (0, 'Asset'),
-    (1, 'Liability'),
-    (2, 'Equity'),
-    (3, 'Revenue'),
-    (4, 'Operating Expense')
-)
-
-ACCOUNT_CLASSIFICATIONS = (
-    (0, ''),
-    (1, 'Current'), # NOTE: "Current" is synonymous with "Short-Term"
-    (2, 'Long-Term') # NOTE: "Long-Term" is synonymous with "Non-Current"
-)
 
 class AccountTypeManager(models.Manager):
     def get_by_natural_key(self, name):
@@ -31,8 +18,20 @@ class AccountType(models.Model):
 
     objects = AccountTypeManager()
 
-    category = models.SmallIntegerField(choices=ACCOUNT_CATEGORIES)
-    classification = models.SmallIntegerField(choices=ACCOUNT_CLASSIFICATIONS)
+    category = models.SmallIntegerField(choices=(
+        (AccountCategories.ASSET, 'Asset'),
+        (AccountCategories.LIABILITY, 'Liability'),
+        (AccountCategories.EQUITY, 'Equity'),
+        (AccountCategories.REVENUE, 'Revenue'),
+        (AccountCategories.EXPENSE, 'Operating Expense')
+    ))
+
+    classification = models.SmallIntegerField(choices=(
+        (AccountClassifications.NONE, ''),
+        (AccountClassifications.CURRENT, 'Current'),
+        (AccountClassifications.NONCURRENT, 'Long-Term')
+    ))
+
     name = models.CharField(max_length=100, unique=True)
     order = models.PositiveIntegerField(unique=True, verbose_name='order Value (1 represents highest order)')
     created_date = models.DateTimeField(auto_now_add=True, verbose_name='date Created')
@@ -66,6 +65,7 @@ class Account(models.Model):
     initial_balance = models.DecimalField(max_digits=20, decimal_places=2, default=0)
     created_date = models.DateTimeField(auto_now_add=True, verbose_name='date Created')
     is_active = models.BooleanField(default=False, verbose_name="active?")
+    is_contra = models.BooleanField(default=False, verbose_name="contra?")
 
     def __str__(self):
         return 'Account #' + "{:03}: ".format(self.account_number()) + self.name
@@ -74,6 +74,9 @@ class Account(models.Model):
         return (self.name,)
 
     def is_debit(self):
+        if self.is_contra:
+            return not self.account_type.is_debit()
+
         return self.account_type.is_debit()
 
     def account_number(self):
@@ -97,8 +100,6 @@ class Account(models.Model):
         return transactions
 
     def get_balance(self, as_of=None):
-        # TODO: This will be updated to return a calculated balance
-        # based on all transactions that have been made to this account.
         value = 0
         for t in self.transactions.all():
             if t.journal_entry.is_approved == True and (as_of is None or as_of >= t.date):
