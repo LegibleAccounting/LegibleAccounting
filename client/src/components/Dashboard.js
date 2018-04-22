@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ChartOfAccounts from './ChartOfAccounts.js';
 import AccountsAPI from '../api/AccountsApi.js';
 import './Dashboard.css';
 
@@ -170,7 +169,6 @@ class Dashboard extends Component {
                     </div>
                 </div>
             </div>
-            /*<ChartOfAccounts />*/
         );
     }
 }
