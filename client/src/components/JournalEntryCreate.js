@@ -108,7 +108,7 @@ class JournalEntryCreate extends Component {
                                                     ))
                                                 }
                                             </select>
-                                            <button className="textButton" value={item.is_debit === true } onClick={this.addNewTransaction}>+</button>
+                                            <button className="textButton" style={{ marginRight: '5px' }} value={item.is_debit === true } onClick={this.addNewTransaction}>+</button>
                                          	<button className="textButton" value={item.is_debit === true } onClick={this.removeTransaction.bind(this, index)}>-</button>
                                         </div>
                                     </div>
