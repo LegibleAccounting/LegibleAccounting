@@ -95,7 +95,7 @@ class JournalEntryCreate extends Component {
                             this.state.transactions.map((item, index) => (
                                 <div className="row auto-height" key={item.key}>
                                     <div className="col-xs-12 col-sm-6">
-                                        <div className="accountEntryDropdownWrapper">
+                                        <div className="flex-row flex-v-center">
                                             <select
                                               className={ 'form-control accountEntryDropdown ' + (item.is_debit ? '' : 'creditAccountEntryDropdown') }
                                               id={index}
