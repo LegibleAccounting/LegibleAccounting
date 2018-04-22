@@ -20,8 +20,8 @@
 }
 
 .data-heading {
-	margin-top: 0px;
-	margin-left: 10px;
+    margin-top: 0px;
+    margin-left: 50px;
 	font-size: 20px;
 	color: var(--mainBlue);
 }
@@ -50,5 +50,5 @@
 }
 
 .balance-sheet-table {
-	width: 100%;
+	width: 90%;
 }

@@ -6,7 +6,7 @@ import AccountsAPI from '../api/AccountsApi.js';
 class BalanceSheet extends Component {
     constructor() {
         super();
-        
+
         this.state = {
             isLoading: true,
             data: [
@@ -34,9 +34,22 @@ class BalanceSheet extends Component {
                     <div className="main-heading">Balance Sheet</div>
                     <div className="as-of-date ">As of {moment(this.state.data.as_of_date).format('MMMM Do YYYY')}</div>
                 </div>
-
+                <div className="tableWrapper">
+                    <table className="table balance-sheet-table">
+                        <thead>
+                            <tr>
+                                <th className="accountNameCol"></th>
+                                <th className="debitCol"></th>
+                                <th className="creditCol">Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div className="data-heading">Assets</div>
-                <div className="tableWrapper .table-responsive">
+                <div className="tableWrapper">
                     <table className="balance-sheet-table">
                       <tbody>
                         {
@@ -52,7 +65,7 @@ class BalanceSheet extends Component {
                         }
                         { this.state.data.noncurrent_assets.length ? (
                           this.state.data.noncurrent_assets.map((item, index) => (
-                            <tr>
+                            <tr key={item.account_id}>
                                 <td className="data-row accountNameCol">{item.account_name}</td>
                                 <td className="debitCol" align="right">{item.balance}</td>
                                 <td className="creditCol" align="right"></td>
@@ -75,7 +88,7 @@ class BalanceSheet extends Component {
                         }
                         { this.state.data.current_assets.length ? (
                           this.state.data.current_assets.map((item, index) => (
-                            <tr>
+                            <tr key={item.account_id}>
                                 <td className="data-row accountNameCol">{item.account_name}</td>
                                 <td className="debitCol" align="right">{item.balance}</td>
                                 <td className="creditCol" align="right"></td>
@@ -110,7 +123,7 @@ class BalanceSheet extends Component {
                         }
                         { this.state.data.equity.length ? (
                           this.state.data.equity.map((item, index) => (
-                            <tr>
+                            <tr key={item.account_id}>
                                 <td className="data-row accountNameCol">{item.account_name}</td>
                                 <td className="debitCol" align="right">{item.balance}</td>
                                 <td className="creditCol" align="right"></td>
@@ -133,7 +146,7 @@ class BalanceSheet extends Component {
                         }
                         { this.state.data.noncurrent_liabilities.length ? (
                           this.state.data.noncurrent_liabilities.map((item, index) => (
-                            <tr>
+                            <tr key={item.account_id}>
                                 <td className="data-row accountNameCol">{item.account_name}</td>
                                 <td className="debitCol" align="right">{item.balance}</td>
                                 <td className="creditCol" align="right"></td>
@@ -155,7 +168,7 @@ class BalanceSheet extends Component {
                         }
                         { this.state.data.current_liabilities.length ? (
                           this.state.data.current_liabilities.map((item, index) => (
-                            <tr>
+                            <tr key={item.account_id}>
                                 <td className="data-row accountNameCol">{item.account_name}</td>
                                 <td className="debitCol" align="right">{item.balance}</td>
                                 <td className="creditCol" align="right"></td>

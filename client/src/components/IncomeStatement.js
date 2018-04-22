@@ -6,7 +6,7 @@ import AccountsAPI from '../api/AccountsApi.js';
 class IncomeStatement extends Component {
     constructor() {
         super();
-        
+
          this.state = {
             isLoading: true,
             data: [
@@ -34,9 +34,22 @@ class IncomeStatement extends Component {
                     <div className="income-statement-main-heading">Income Statement</div>
                     <div className="as-of-date ">For the period ending {moment(this.state.data.as_of_date).format('MMMM Do, YYYY')}</div>
                 </div>
-
+                <div className="tableWrapper">
+                    <table className="table income-statement-table">
+                        <thead>
+                            <tr>
+                                <th className="accountNameCol"></th>
+                                <th className="debitCol"></th>
+                                <th className="creditCol">Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div className="income-statement-heading">Revenue</div>
-                <div className="tableWrapper .table-responsive">
+                <div className="tableWrapper">
                     <table className="income-statement-table">
                       <tbody>
                         { this.state.data.revenues.length ? (
@@ -48,7 +61,7 @@ class IncomeStatement extends Component {
                             </tr>
                         ))): (
                             <tr>
-                                <td>{ this.state.isLoading ? 'Loading...' : 'No Data' }</td>
+                                <td>{ this.state.isLoading ? 'Loading...' : 'No Revenue' }</td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -77,7 +90,7 @@ class IncomeStatement extends Component {
                             </tr>
                         ))): (
                             <tr>
-                                <td>{ this.state.isLoading ? 'Loading...' : 'No Data' }</td>
+                                <td>{ this.state.isLoading ? 'Loading...' : 'No Expenses' }</td>
                                 <td></td>
                                 <td></td>
                             </tr>

@@ -6,7 +6,7 @@ import AccountsAPI from '../api/AccountsApi.js';
 class RetainedEarningsStatement extends Component {
     constructor() {
         super();
-        
+
          this.state = {
             isLoading: true,
             data: []
@@ -33,8 +33,21 @@ class RetainedEarningsStatement extends Component {
                     <div className="income-statement-main-heading">Statement of Retained Earnings</div>
                     <div className="as-of-date ">For the period ending {moment(this.state.data.as_of_date).format('MMMM Do, YYYY')}</div>
                 </div>
-
-                <div className="tableWrapper .table-responsive">
+                <div className="tableWrapper">
+                    <table className="table balance-sheet-table">
+                        <thead>
+                            <tr>
+                                <th className="accountNameCol"></th>
+                                <th className="debitCol"></th>
+                                <th className="creditCol">Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div className="tableWrapper">
                     <table className="retained-earnings-statement-table">
                       <tbody>
                             <tr>
