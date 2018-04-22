@@ -105,19 +105,20 @@ class JournalEntryCreate extends Component {
                                                 {
                                                     this.props.accounts.map((account, index) => (
                                                         <option key={account.id} value={account.id}>{ account.name }</option>
-                                                    ))                                                    
-                                                }                                                
+                                                    ))
+                                                }
                                             </select>
                                             <button className="textButton" value={item.is_debit === true } onClick={this.addNewTransaction}>+</button>
-                                         	<button className="textButton" value={item.is_debit === true } onClick={this.removeTransaction.bind(this, index)}>-</button> 
+                                         	<button className="textButton" value={item.is_debit === true } onClick={this.removeTransaction.bind(this, index)}>-</button>
                                         </div>
                                     </div>
                                     <div className={ 'col-xs-12 ' + (item.is_debit ? 'col-sm-6' : 'col-sm-3 col-sm-offset-3') }>
                                         <div className="entryAmountWrapper">
                                             <label className={ item.is_debit ? 'dollarSignDebit' : 'dollarSignCredit' } style={{visibility: !item.initial_display && 'hidden'}}>$</label>
                                             <input type="number" className={ 'form-control entryAmount ' + (item.is_debit ? 'debitEntryAmount' : 'creditEntryAmount') } placeholder="0.00"
+                                              value={item.amount}
                                               onChange={this.accountAmountOnChange.bind(this, index)}/>
-                                        </div>                                       
+                                        </div>
                                     </div>
                                 </div>
                             ))
@@ -172,7 +173,7 @@ class JournalEntryCreate extends Component {
         var newTransaction = {
             key: this.keygen(),
             accountID: "",
-            amount: 0
+            amount: "0"
         };
 
         if (isDebit) {
@@ -218,7 +219,7 @@ class JournalEntryCreate extends Component {
 
     accountNameOnChange(transactionIndex, event) {
         var transactionToEdit = this.state.transactions[transactionIndex];
-        
+
         //edit transaction
         transactionToEdit.accountID = event.target.value;
 
@@ -231,7 +232,7 @@ class JournalEntryCreate extends Component {
         var transactionToEdit = this.state.transactions[transactionIndex];
 
         //edit transaction
-        transactionToEdit.amount = Number(event.target.value);
+        transactionToEdit.amount = event.target.value;
 
         this.setState({
             transactions: this.state.transactions
@@ -286,7 +287,7 @@ class JournalEntryCreate extends Component {
             .then((files) => {
                 let transactions = this.state.transactions.map(transaction => ({
                     affected_account: transaction.accountID,
-                    value: transaction.amount,
+                    value: Number(transaction.amount),
                     is_debit: transaction.is_debit
                 }));
 
@@ -304,7 +305,7 @@ class JournalEntryCreate extends Component {
     journalIsBalanced() {
         let balance = this.state.transactions
             .reduce((result, transaction) => {
-                result += (transaction.is_debit ? transaction.amount : transaction.amount * -1);
+                result += (transaction.is_debit ? Number(transaction.amount) : Number(transaction.amount * -1));
                 return result;
             }, 0);
 
