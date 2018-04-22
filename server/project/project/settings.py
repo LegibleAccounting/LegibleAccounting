@@ -25,7 +25,9 @@ SECRET_KEY = '!1z%gao0gvecg+vh+j9)*a17^=)v3sm+oa-ws1y24)asx=!j07'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'legibleaccounting.com'
+]
 
 
 # Application definition
