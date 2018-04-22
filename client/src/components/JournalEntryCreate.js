@@ -200,29 +200,17 @@ class JournalEntryCreate extends Component {
     }
 
     removeTransaction(index) {
-    	var debitCount = 0;
-    	var creditCount = 0;
-    	for(let i = 0; i < this.state.transactions.length; i++)
-    	{
-    		if(this.state.transactions[i].is_debit)
-    			debitCount++;
-    		if(!this.state.transactions[i].is_debit)
-    			creditCount++;
-    	}
-    	if(this.state.transactions[index].is_debit)
-    	{
-			if(debitCount === 1)
-	    		this.state.transactions[index].accountID = 0;
-	    	else if(debitCount > 1)    
-        		this.state.transactions.splice(index, 1);
-		}
-		else
-		{
-			if(creditCount === 1)
-				this.state.transactions[index].accountID = 0;
-			else if(creditCount > 1)
-				this.state.transactions.splice(index,1);
-		}
+        let relatedCount = this.state.transactions
+            .filter(transaction => this.state.transactions[index].is_debit ? transaction.is_debit : !transaction.is_debit)
+            .length;
+
+        if (relatedCount === 1) {
+            this.state.transactions[index].accountID = "";
+            this.state.transactions[index].amount = "0";
+        } else if (relatedCount > 1) {
+            this.state.transactions.splice(index, 1);
+        }
+
         this.setState({
             transactions: this.state.transactions
         });
