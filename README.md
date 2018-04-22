@@ -7,6 +7,8 @@ view generated business statements.
 ## Deployment Requirements
 
 * [CentOS 7.4](https://centos.org/)
+  - [Extra Packages for Enterprise Linux (EPEL)](https://fedoraproject.org/wiki/EPEL)
+  - [CertBot](https://certbot.eff.org/)
   - [Ansible 2.5.x](https://ansible.com/)
 
 Software versions other than the ones specified may work, but it is not
@@ -20,6 +22,7 @@ range (e.g. 1.0.0) if you encounter issues with a newer software version.
   operational. Consult the documentation provided by the publishers of these
   software for details on how to install and verify proper operation.
 * Ensure that SELinux is configured to be in `permissive` mode.
+* Get an SSL certificate: `certbot --apache certonly`
 * Create a non-root user named `vagrant` and set the password to personal
   preference.
 * Add the `vagrant` user to the `wheel` group so they can use privilege
@@ -30,6 +33,7 @@ range (e.g. 1.0.0) if you encounter issues with a newer software version.
 * Copy the directory containing this file over to the `/vagrant` directory.
 * (If deploying to a new domain) A few codemods are necessary:
   - Change the VirtualHost `ServerName` to reference your domain.
+  - Change the VirtualHost SSL configuration to reference your domain.
   - Change the `ALLOWED_HOSTS` in the Django configuration to reference your
     domain.
 * Run this command to finish setting up the deployment:
