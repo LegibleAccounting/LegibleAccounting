@@ -43,7 +43,7 @@ class Users extends Component {
                     </div>
                 </div>
 
-                <div className="tableWrapper .table-responsive">
+                <div className="tableWrapper">
                     <table className="table table-hover">
                       <thead>
                         <tr>
@@ -63,16 +63,16 @@ class Users extends Component {
                         </tr>
                       </thead>
                        <tbody>
-                        { 
+                        {
                           	this.state.users.map((item, index) => (
                           		<tr key={index}>
 	                          		<td>{item.username}</td>
-			                        
+
 			                        <td>
 		                          	{
 		                          		item.groups.map((group, index) => group.name + (index !== item.groups.length - 1 ? ', ': ''))
-		                          	}	
-  				                     </td>
+		                          	}
+                                    </td>
 
 			                        <td>{item.is_active ? "Yes" : "No"}</td>
                                     <td>
@@ -80,7 +80,7 @@ class Users extends Component {
                                     </td>
 		                    	</tr>
                           	))
-	                        
+
                    		}
                        </tbody>
                     </table>

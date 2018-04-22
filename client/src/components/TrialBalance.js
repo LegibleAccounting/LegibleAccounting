@@ -36,7 +36,7 @@ class TrialBalance extends Component {
                     <div className="as-of-date ">As of {moment(this.state.data.as_of_date).format('MMMM Do YYYY')}</div>
                 </div>
 
-                <div className="tableWrapper .table-responsive">
+                <div className="tableWrapper">
                     <table className="table table-hover">
                       <thead>
                         <tr>

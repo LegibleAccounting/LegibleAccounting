@@ -107,7 +107,7 @@ class BalanceSheet extends Component {
                 </div>
 
                 <div className="data-heading">Equity & Liabilities</div>
-                <div className="tableWrapper .table-responsive">
+                <div className="tableWrapper">
                     <table className="balance-sheet-table">
                       <tbody>
                         {

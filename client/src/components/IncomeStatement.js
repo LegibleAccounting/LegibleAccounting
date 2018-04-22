@@ -76,7 +76,7 @@ class IncomeStatement extends Component {
                 </div>
 
                 <div className="income-statement-heading">Expenses</div>
-                <div className="tableWrapper .table-responsive">
+                <div className="tableWrapper">
                     <table className="income-statement-table">
                       <thead>
                       </thead>
@@ -105,7 +105,7 @@ class IncomeStatement extends Component {
                 </div>
 
                 <div className="income-statement-heading">Net Income</div>
-                <div className="tableWrapper .table-responsive">
+                <div className="tableWrapper">
                     <table className="income-statement-table">
                       <tbody>
                             <tr>

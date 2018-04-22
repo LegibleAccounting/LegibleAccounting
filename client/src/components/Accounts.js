@@ -40,7 +40,7 @@ class Accounts extends Component {
                     <h1>Accounts</h1>
                     {
                         Auth.currentUser.groups.find(group => group.name === 'Administrator') ? (
-                            <NavLink className="NavLink btn btn-primary newButton" to="/accounts/add">+ New</NavLink> 
+                            <NavLink className="NavLink btn btn-primary newButton" to="/accounts/add">+ New</NavLink>
                         ) : (
                             <span></span>
                         )
@@ -54,7 +54,7 @@ class Accounts extends Component {
                     </div>
                 </div>
 
-                <div className="tableWrapper .table-responsive">
+                <div className="tableWrapper">
                     <table className="table table-hover">
                       <thead>
                         <tr>
