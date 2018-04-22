@@ -20,7 +20,7 @@ class RetrieveAccountTypeSerializer(AccountTypeSerializer):
         return obj.get_classification_display()
 
 
-ACCOUNT_BASE_FIELDS = ('id', 'account_type', 'name', 'description', 'initial_balance', 'created_date', 'is_active', 'order',)
+ACCOUNT_BASE_FIELDS = ('id', 'account_type', 'name', 'description', 'initial_balance', 'created_date', 'is_active', 'is_contra', 'order',)
 
 
 class AccountSerializer(serializers.ModelSerializer):

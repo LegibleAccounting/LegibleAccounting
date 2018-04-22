@@ -5,14 +5,11 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from accounts.models import Account
+from .enums import JournalEntryTypes
 
-JOURNAL_ENTRY_TYPE_CHOICES = (
-    (1, 'Regular'),
-    (2, 'Adjusting'),
-    (3, 'Closing')
-)
-
-MANAGEMENT_JOURNAL_ENTRY_TYPES = [3]
+MANAGEMENT_JOURNAL_ENTRY_TYPES = [
+    JournalEntryTypes.CLOSING
+]
 
 class JournalEntryManager(models.Manager):
     def get_by_natural_key(self, date_created, creator_username):
@@ -24,7 +21,12 @@ class JournalEntry(models.Model):
 
     objects = JournalEntryManager()
 
-    entry_type = models.SmallIntegerField(choices=JOURNAL_ENTRY_TYPE_CHOICES)
+    entry_type = models.SmallIntegerField(choices=(
+        (JournalEntryTypes.REGULAR, 'Regular'),
+        (JournalEntryTypes.ADJUSTING, 'Adjusting'),
+        (JournalEntryTypes.CLOSING, 'Closing')
+    ))
+
     date_created = models.DateTimeField(auto_now_add=True)
     date = models.DateField()
     is_approved = models.NullBooleanField(blank=True)
