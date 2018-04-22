@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ChartOfAccounts from './ChartOfAccounts.js';
-import DashboardAPI from '../api/DashboardApi.js';
+import AccountsAPI from '../api/AccountsApi.js';
 import './Dashboard.css';
 
 class Dashboard extends Component {
@@ -16,32 +16,32 @@ class Dashboard extends Component {
             quickRatio: {}
         };
 
-        DashboardAPI.getCurrentRatio()
+        AccountsAPI.getCurrentRatio()
             .then((ratio_info) => {
         		this.setState({currentRatio: ratio_info});
         	});
 
-        DashboardAPI.getReturnOnAssets()
+        AccountsAPI.getReturnOnAssets()
                 .then((ratio_info) => {
                     this.setState({ returnOnAssets: ratio_info});
                 });
 
-        DashboardAPI.getReturnOnEquity()
+        AccountsAPI.getReturnOnEquity()
                 .then((ratio_info) => {
                     this.setState({ returnOnEquity: ratio_info});
                 });
 
-        DashboardAPI.getNetProfitMargin()
+        AccountsAPI.getNetProfitMargin()
                 .then((ratio_info) => {
                     this.setState({ netProfitMargin: ratio_info});
                 });
 
-        DashboardAPI.getAssetTurnover()
+        AccountsAPI.getAssetTurnover()
             .then((ratio_info) => {
                 this.setState({ assetTurnover: ratio_info});
             });
 
-        DashboardAPI.getQuickRatio()
+        AccountsAPI.getQuickRatio()
             .then((ratio_info) => {
                 this.setState({ quickRatio: ratio_info});
             });
