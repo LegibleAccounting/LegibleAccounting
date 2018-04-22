@@ -1,3 +1,11 @@
+:root {
+	--mainBlue: #549FF7;
+  --darkBlue: #3D7AC1;
+  --hoverBlue: #3986DF;
+  --tableWidth: 90%;
+  --journalEntryAccountMarginBottom: 8px;
+}
+
 html, body, #root {
     height: 100%;
 }
@@ -6,4 +14,44 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+.btn-primary {
+	border: 0px;
+	background-color: var(--mainBlue);
+}
+
+.btn-primary:hover {
+	border: 0px;
+	background-color: var(--hoverBlue);
+}
+
+.btn { 
+
+}
+
+h1 {
+	color: var(--mainBlue);
+}
+
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row > .flex-fill {
+  flex-grow: 1;
+}
+
+.flex-v-center {
+  align-items: center;
+}
+
+.flex-h-center {
+  justify-content: center;
+}
+
+.full-height {
+  height: 100%;
 }

@@ -7,7 +7,7 @@ import {Route, Redirect} from 'react-router-dom';
 
 import Auth from '../api/Auth.js';
 
-const GuardedRoute = ({ component: Component, ...rest }) => (
+const GuardedAuthRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
@@ -25,4 +25,4 @@ const GuardedRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-export default GuardedRoute;
+export default GuardedAuthRoute;

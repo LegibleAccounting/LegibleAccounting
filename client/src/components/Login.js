@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-
+import { NavLink, Redirect } from 'react-router-dom';
+import "./Login.css";
 import Auth from '../api/Auth.js';
-
+import logo from '../logo.png'
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -25,14 +25,36 @@ class Login extends Component {
     }
 
     return (
-      <form onSubmit={this.requestLogin}>
-        <input type="text" value={this.inputUsername} onChange={this.updateUsernameState} placeholder="Username" />
-        <input type="password" value={this.inputPassword} onChange={this.updatePasswordState} placeholder="Password" />
-        <button type="submit">Log In</button>
+       <form className="Login" onSubmit={this.requestLogin}>
+          <div className = "Spacer">
+            <img className ="Login-logo" alt="" src={logo} />
+          </div>
+          <div className = "Spacer"> 
+              <input className = "input"
+              placeholder = 'Username'
+              value={this.inputUsername} 
+              onChange={this.updateUsernameState} />
+          </div>
+          <div className = "Spacer"> 
+              <input className = "input"
+              type="password" 
+              placeholder = 'Password'
+              value={this.inputPassword}
+              onChange={this.updatePasswordState} />
+          </div>
+          <div className = "Spacer">
+            <button className ="button btn-primary" type = "submit">
+              Login
+            </button>
+          </div>
+          <div className = "Spacer">
+            <NavLink style={{color: 'white'}} to="/register">
+              Request Access
+            </NavLink>
+          </div>
       </form>
     );
   }
-
   updateUsernameState(event) {
     this.setState({ inputUsername: event.target.value });
   }

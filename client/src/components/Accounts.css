@@ -1,0 +1,42 @@
+.accounts .accountNumber{
+	min-width: 8rem;
+}
+
+.accounts .name {
+    width: auto;
+}
+
+.accounts .type {
+    min-width: 9rem;
+}
+
+.accounts .subtype {
+    min-width: 8rem;
+}
+
+.accounts .term {
+    min-width: 9rem;
+}
+
+.accounts .comments {
+    min-width: 1rem;
+}
+
+.accounts .edits{
+	min-width: 4rem;
+}
+
+.accounts .sorter {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-left: 0.5em;
+    padding: 0.25em;
+}
+
+.accounts .sorter:hover {
+    border: 1px solid #ccc;
+}
+
+.accounts .sorter-inactive {
+    color: #CCC;
+}

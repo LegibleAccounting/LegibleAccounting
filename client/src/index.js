@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import promiseFinallyPolyfill from 'promise.prototype.finally';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-datetime/css/react-datetime.css';
+import 'toastr/build/toastr.css';
+import 'animate.css/animate.css';
 import './index.css';
 
 import Auth from './api/Auth';
