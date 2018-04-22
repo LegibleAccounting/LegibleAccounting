@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'core-js/fn/array/find';
 import promiseFinallyPolyfill from 'promise.prototype.finally';
 
 import 'bootstrap/dist/css/bootstrap.css';
