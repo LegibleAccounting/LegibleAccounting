@@ -40,5 +40,4 @@ urlpatterns = [
         url(r'^logout/', views.logout_view),
         url(r'^current/', views.current_view)
     ])),
-    url(r'^auth2/', include('rest_framework.urls', namespace='rest_framework'))
 ]
