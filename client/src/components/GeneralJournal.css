@@ -52,14 +52,10 @@
 	overflow: hidden;
 }
 
-.accountEntryDropdownWrapper {
-	display: flex;
-	flex-direction: row;
-}
-
 .accountEntryDropdown {
-	margin-bottom: 8px;
 	margin-right: 10px;
+	width: 50%;
+	height: 30px;
 }
 
 .debitAccountEntryDropdown {
@@ -68,12 +64,6 @@
 
 .creditAccountEntryDropdown {
 	margin-left: 10%;
-}
-
-.accountEntryDropdown {
-	margin-bottom: 8px;
-	width: 50%;
-	height: 30px;
 }
 
 .entryAmount {
