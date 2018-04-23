@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import './TrialBalance.css';
 import AccountsAPI from '../api/AccountsApi.js';
+import Spinner from './Spinner.js';
 
 class TrialBalance extends Component {
     constructor(props) {
@@ -24,7 +25,11 @@ class TrialBalance extends Component {
 
     render() {
         if (this.state.isLoading) {
-            return (<div>Loading...</div>);
+            return (
+                <div style={{ marginTop: '2rem' }} className="full-height flex-row flex-v-center flex-h-center">
+                    <Spinner />
+                </div>
+            );
         }
 
         return (

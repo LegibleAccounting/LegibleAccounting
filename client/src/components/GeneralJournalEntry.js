@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './GeneralJournal.css';
 import './CommonChart.css';
 import GeneralJournalAPI from '../api/GeneralJournal.js';
-
+import Spinner from './Spinner.js';
 import JournalEntry from './JournalEntry.js';
 
 class GeneralJournalEntry extends Component {
@@ -33,9 +33,13 @@ class GeneralJournalEntry extends Component {
     }
 
     render() {
-    	if (this.state.isLoading) {
-    		return (<div>Loading...</div>);
-    	}
+        if (this.state.isLoading) {
+            return (
+                <div style={{ marginTop: '2rem' }} className="full-height flex-row flex-v-center flex-h-center">
+                    <Spinner />
+                </div>
+            );
+        }
 
         return (
             <div className="generalJournal">

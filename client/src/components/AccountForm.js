@@ -3,6 +3,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 import Auth from '../api/Auth.js';
 import AccountTypesAPI from '../api/AccountTypes.js';
 import AccountsAPI from '../api/AccountsApi.js';
+import Spinner from './Spinner.js';
 import './AccountForm.css';
 
 class AccountForm extends Component {
@@ -57,7 +58,11 @@ class AccountForm extends Component {
 
     render() {
         if (this.state.isLoading) {
-            return <div>Loading...</div>;
+            return (
+                <div style={{ marginTop: '2rem' }} className="full-height flex-row flex-v-center flex-h-center">
+                    <Spinner />
+                </div>
+            );
         }
 
         if (this.state.redirectToAccountsPage) {

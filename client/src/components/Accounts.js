@@ -5,6 +5,7 @@ import './Accounts.css';
 import './CommonChart.css';
 import Auth from '../api/Auth.js';
 import AccountsAPI from '../api/AccountsApi.js';
+import Spinner from './Spinner.js';
 import { Popover } from 'react-bootstrap';
 import { OverlayTrigger } from 'react-bootstrap';
 
@@ -153,10 +154,13 @@ class Accounts extends Component {
                           ))
                         ) : (
                             <tr>
-                                <td></td>
-                                <td>{ this.state.isLoading ? 'Loading...' : 'No Accounts' }</td>
-                                <td></td>
-                                <td></td>
+                                <td colSpan="1000" className="text-center">
+                                    <div style={{ marginTop: '4rem' }}>
+                                        { this.state.isLoading ? (
+                                            <Spinner />
+                                        ) : ('No Accounts') }
+                                    </div>
+                                </td>
                             </tr>
                         )}
                        </tbody>

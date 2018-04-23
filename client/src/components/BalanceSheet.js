@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import './BalanceSheet.css';
 import AccountsAPI from '../api/AccountsApi.js';
+import Spinner from './Spinner.js';
 
 class BalanceSheet extends Component {
     constructor() {
@@ -24,7 +25,11 @@ class BalanceSheet extends Component {
 
     render() {
         if (this.state.isLoading) {
-            return (<div>Loading...</div>);
+            return (
+                <div style={{ marginTop: '2rem' }} className="full-height flex-row flex-v-center flex-h-center">
+                    <Spinner />
+                </div>
+            );
         }
 
         return (
