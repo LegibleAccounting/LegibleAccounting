@@ -17,17 +17,17 @@
 }
 
 .Sidebar .sidebar-footing {
-    padding-bottom: 10px;
+    margin-top: 1rem;
+    padding: 1rem 0;
     text-align: center;
     color: white;
-    position: absolute;
     width: 100%;
-    bottom: 0px;
     background-color: var(--darkBlue);
 }
 
 .stack {
     font-size: 17px;
+    overflow-y: auto;
 }
 
 .user-logo {

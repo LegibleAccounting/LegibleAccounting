@@ -40,7 +40,12 @@ h1 {
   flex-direction: row;
 }
 
-.flex-row > .flex-fill {
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-fill {
   flex-grow: 1;
 }
 
