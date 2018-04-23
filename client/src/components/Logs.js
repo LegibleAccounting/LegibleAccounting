@@ -3,6 +3,7 @@ import { Glyphicon } from 'react-bootstrap';
 import './Logs.css';
 import './CommonChart.css';
 import LogsAPI from '../api/Logs.js';
+import Spinner from './Spinner.js';
 
 class Logs extends Component {
     constructor(props) {
@@ -112,14 +113,15 @@ class Logs extends Component {
 			                    	</tr>
 	                          	))
 	                        ) : (
-	                        	//else
-	                            <tr>
-	                                <td></td>
-	                                <td>No Logs</td>
-	                                <td></td>
-	                                <td></td>
-	                                <td></td>
-	                            </tr>
+                                <tr>
+                                    <td colSpan="1000" className="text-center">
+                                        <div style={{ marginTop: '4rem' }}>
+                                            { this.state.isLoading ? (
+                                                <Spinner />
+                                            ) : ('No Logs') }
+                                        </div>
+                                    </td>
+                                </tr>
 	                        )
                    		}
                        </tbody>

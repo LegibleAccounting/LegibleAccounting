@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import AccountsAPI from '../api/AccountsApi.js';
+import Spinner from './Spinner.js';
 
 class AccountLedger extends Component {
     constructor(props) {
@@ -25,7 +26,11 @@ class AccountLedger extends Component {
 
     render() {
         if (this.state.isLoading) {
-            return (<div>Loading...</div>);
+            return (
+                <div style={{ marginTop: '2rem' }} className="full-height flex-row flex-v-center flex-h-center">
+                    <Spinner />
+                </div>
+            );
         }
 
         return (
@@ -75,14 +80,15 @@ class AccountLedger extends Component {
                                     </tr>
                                 ))
                             ) : (
-                                <tr>
-                                    <td></td>
-                                    <td>{this.state.isLoading ? 'Loading...' : 'No Accounts'}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                            <tr>
+                                <td colSpan="1000" className="text-center">
+                                    <div style={{ marginTop: '4rem' }}>
+                                        { this.state.isLoading ? (
+                                            <Spinner />
+                                        ) : ('No Transactions') }
+                                    </div>
+                                </td>
+                            </tr>
                             )}
                         </tbody>
                     </table>

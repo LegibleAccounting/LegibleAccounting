@@ -5,6 +5,7 @@ import './CommonChart.css';
 import AuthAPI from '../api/Auth.js';
 import GeneralJournalAPI from '../api/GeneralJournal.js';
 import AccountsAPI from '../api/AccountsApi.js';
+import Spinner from './Spinner.js';
 
 import JournalEntryCreate from './JournalEntryCreate.js';
 import JournalEntry from './JournalEntry.js';
@@ -63,8 +64,8 @@ class GeneralJournal extends Component {
     render() {
         if (this.state.isLoading) {
             return (
-                <div className="full-height flex-row flex-h-center flex-v-center">
-                    <h1>Loading Journal...</h1>
+                <div style={{ marginTop: '2rem' }} className="full-height flex-row flex-v-center flex-h-center">
+                    <Spinner />
                 </div>
             );
         }

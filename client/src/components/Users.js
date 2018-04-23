@@ -4,6 +4,7 @@ import SortWidget from './SortWidget.js';
 import './Users.css';
 import './CommonChart.css';
 import UsersAPI from '../api/UsersApi.js';
+import Spinner from './Spinner.js';
 
 class Users extends Component {
     constructor(props) {
@@ -13,7 +14,8 @@ class Users extends Component {
             users: [],
             ogUsers: [],
             searchText: '',
-            sortState: {}
+            sortState: {},
+            isLoading: true
         };
 
         this.searchTextChanged = this.searchTextChanged.bind(this);
@@ -23,12 +25,21 @@ class Users extends Component {
             .then(data => {
                 this.setState({
                     users: data,
-                    ogUsers: data
+                    ogUsers: data,
+                    isLoading: false
                 });
             });
     }
 
     render() {
+        if (this.state.isLoading) {
+            return (
+                <div style={{ marginTop: '2rem' }} className="full-height flex-row flex-v-center flex-h-center">
+                    <Spinner />
+                </div>
+            );
+        }
+
         return (
             <div className="users">
                 <div className="titleBar">
