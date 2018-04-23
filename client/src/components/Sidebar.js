@@ -12,13 +12,13 @@ class Sidebar extends Component {
         }
 
         return (
-            <div className="Sidebar">
+            <div className="Sidebar flex-column">
                 <div className="sidebar-heading">
                     <div className = "Spacer">
                         <img className ="sidebar-logo" alt="" src={logo} />
                     </div>
                 </div>
-                <ul className="nav nav-stacked nav-pills stack">
+                <ul className="nav nav-stacked nav-pills stack flex-fill">
                     <li>
                         <NavLink exact to="/">Dashboard</NavLink>
                     </li>
