@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib import admin
+from project.admin import admin_site
 
 # Register your models here.
 
 from .models import Transaction, JournalEntry, Receipt
 
-admin.site.register(JournalEntry)
-admin.site.register(Transaction)
-admin.site.register(Receipt)
+admin_site.register(JournalEntry)
+admin_site.register(Transaction)
+admin_site.register(Receipt)

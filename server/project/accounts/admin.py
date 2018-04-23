@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib import admin
+from project.admin import admin_site
 from .models import Account, AccountType
 
-admin.site.register(Account)
-admin.site.register(AccountType)
+admin_site.register(Account)
+admin_site.register(AccountType)

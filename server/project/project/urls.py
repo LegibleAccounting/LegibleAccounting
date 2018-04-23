@@ -14,11 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from django.contrib import admin
 
 from rest_framework import routers
 
 from . import views
+from .admin import admin_site
 from accounts.views import AccountViewSet, AccountTypeViewSet
 from journalize.views import JournalEntryViewSet
 
@@ -32,7 +32,7 @@ router.register(r'account-types', AccountTypeViewSet)
 router.register(r'journal-entries', JournalEntryViewSet)
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin/', admin_site.urls),
     url(r'^api/', include(router.urls)),
     url(r'^auth/', include([
         url(r'^register/', views.register_view),
