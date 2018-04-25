@@ -1,6 +1,5 @@
-from auditlog.models import LogEntry
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User, Group
-
 from rest_framework import serializers
 
 
@@ -23,12 +22,10 @@ class WriteUserSerializer(UserSerializer):
     groups = serializers.PrimaryKeyRelatedField(many=True, queryset=Group.objects.all())
 
     def create(self, validated_data):
-        instance = User.objects.create_user(
-            validated_data['username'])
-
-        instance.is_active = validated_data.get('is_active', False)
-
-        instance.save()
+        instance = User.objects.create(
+            username=validated_data['username'],
+            password=make_password(None),
+            is_active=validated_data.get('is_active', False))
 
         groups = validated_data.pop('groups')
         for group in groups:
@@ -48,19 +45,3 @@ class WriteUserSerializer(UserSerializer):
             instance.groups.add(group)
 
         return instance
-
-
-class LogEntrySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = LogEntry
-        fields = ('actor', 'object_repr', 'action', 'timestamp', 'changes',)
-
-    actor = UserSerializer()
-    action = serializers.SerializerMethodField()
-    changes = serializers.SerializerMethodField()
-
-    def get_action(self, obj):
-        return obj.get_action_display()
-
-    def get_changes(self, obj):
-        return obj.changes_dict

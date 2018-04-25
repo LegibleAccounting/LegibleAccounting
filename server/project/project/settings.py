@@ -33,8 +33,11 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'users.apps.UsersConfig',
+    'logs.apps.LogsConfig',
     'accounts.apps.AccountsConfig',
     'journalize.apps.JournalizeConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

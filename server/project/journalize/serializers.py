@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import JournalEntry, Transaction, Receipt
 from accounts.serializers import RetrieveAccountSerializer
-from project.serializers import UserSerializer
+from users.serializers import UserSerializer
 from project.utils import format_currency
 
 from drf_extra_fields.fields import Base64FileField

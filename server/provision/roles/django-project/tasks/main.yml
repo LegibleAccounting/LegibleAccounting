@@ -12,6 +12,9 @@
 - name: Project database will contain fixture data for testing.
   shell: . {{ backend_env }}/bin/activate && python manage.py loaddata fixtures.json chdir={{ backend }}
 
+- name: Project database auto-generated event logs from loading fixture data will have appropriate creators.
+  shell: . {{ backend_env }}/bin/activate && python manage.py fix_initial_user_logs && python manage.py fix_initial_account_logs && python manage.py fix_initial_journal_entry_logs chdir={{ backend }}
+
 - name: Project static files will be collected.
   shell: . {{ backend_env }}/bin/activate && python manage.py collectstatic --noinput chdir={{ backend }}
 
