@@ -491,7 +491,7 @@ class AccountViewSet(viewsets.ModelViewSet):
         has_income_adjustment = False
 
         closing_journal = JournalEntry(date=timezone.now(), creator=request.user, description="Auto-generated closing journal",
-                                       entry_type=JournalEntryTypes.CLOSING, is_approved=True)
+                                       entry_type=JournalEntryTypes.CLOSING, is_approved=None)
         closing_journal.save()
 
         for account in accounts:
@@ -526,7 +526,7 @@ class AccountViewSet(viewsets.ModelViewSet):
                     closing_journal.delete()
 
                     return Response({
-                        'message': 'The Drawing account "%s" does not have a corresponding Capital account to adjust. No accounts were closed.' % \
+                        'message': 'The Drawing account "%s" does not have a corresponding Capital account to adjust.' % \
                             account.name }, status=403)
 
                 debits.append(Transaction(affected_account=equity_adjuster, journal_entry=closing_journal,
@@ -535,7 +535,7 @@ class AccountViewSet(viewsets.ModelViewSet):
 
         if not len(debits) and not len(credits):
             closing_journal.delete()
-            return Response({ 'message': 'Account have already been closed.' }, status=200)
+            return Response({ 'message': 'Accounts have already been closed.' }, status=200)
 
         if has_income_adjustment:
             try:
@@ -549,7 +549,7 @@ class AccountViewSet(viewsets.ModelViewSet):
                 closing_journal.delete()
 
                 return Response({
-                    'message': 'There is no acccount named "Retaining Earnings". No accounts were closed.'
+                    'message': 'There is no acccount named "Retaining Earnings".'
                 }, status=403)
 
             income_adjuster = Transaction(affected_account=income_account, journal_entry=closing_journal, value=abs(income_value))
@@ -564,4 +564,4 @@ class AccountViewSet(viewsets.ModelViewSet):
         for transaction in transaction_list:
             transaction.save()
 
-        return Response({'message': 'Accounts have been closed.'}, status=200)
+        return Response({'message': 'Closing Entry has been created.'}, status=200)
