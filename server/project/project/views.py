@@ -1,15 +1,11 @@
-from auditlog.models import LogEntry
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets, status
+from rest_framework import status
 from rest_framework.decorators import api_view, parser_classes, permission_classes
-from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
-from rest_framework.permissions import AllowAny, DjangoModelPermissions
-
-from .permissions import LAAuthModelReadPermission
-from .serializers import UserSerializer, WriteUserSerializer, GroupSerializer, LogEntrySerializer
+from rest_framework.permissions import AllowAny
+from users.serializers import UserSerializer
 
 @api_view(['POST'])
 @permission_classes((AllowAny,))
@@ -67,32 +63,3 @@ def logout_view(request):
 @api_view(['GET'])
 def current_view(request):
     return Response(UserSerializer(request.user, context={ 'request': request }).data)
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    filter_backends = (SearchFilter, OrderingFilter,)
-    search_fields = ('username', 'groups__name',)
-    ordering_fields = ('username', 'is_active', 'groups__name',)
-    permission_classes = (DjangoModelPermissions, LAAuthModelReadPermission,)
-
-    def get_serializer_class(self):
-        if self.request.method == 'GET':
-            return UserSerializer
-
-        return WriteUserSerializer
-
-
-class GroupViewSet(viewsets.ModelViewSet):
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-    permission_classes = (DjangoModelPermissions, LAAuthModelReadPermission,)
-
-
-class LogEntryViewSet(viewsets.ModelViewSet):
-    queryset = LogEntry.objects.filter(actor__is_staff=False)
-    filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('actor__username', 'object_repr', 'timestamp',)
-    ordering_fields = ('actor__username', 'object_repr', 'timestamp',)
-    serializer_class = LogEntrySerializer
-    permission_classes = (DjangoModelPermissions, LAAuthModelReadPermission,)

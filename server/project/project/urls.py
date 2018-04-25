@@ -21,12 +21,14 @@ from . import views
 from .admin import admin_site
 from accounts.views import AccountViewSet, AccountTypeViewSet
 from journalize.views import JournalEntryViewSet
+from logs.views import LogEntryViewSet
+from users.views import UserViewSet, GroupViewSet
 
 router = routers.DefaultRouter()
 
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
-router.register(r'logs', views.LogEntryViewSet)
+router.register(r'users', UserViewSet)
+router.register(r'groups', GroupViewSet)
+router.register(r'logs', LogEntryViewSet)
 router.register(r'accounts', AccountViewSet)
 router.register(r'account-types', AccountTypeViewSet)
 router.register(r'journal-entries', JournalEntryViewSet)
