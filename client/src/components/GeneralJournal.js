@@ -135,6 +135,16 @@ class GeneralJournal extends Component {
         AccountsAPI.closeAccounts()
             .then(({ message }) => {
                 this.props.onNotifySuccess(message);
+                GeneralJournalAPI.getAll()
+                    .then((entries) => {
+                        this.setState({
+                            activeFilter: 1,
+                            entries: entries.map((entry) => {
+                                entry.transactions = this.getIndexedTransactions(entry.transactions);
+                                return entry;
+                            })
+                        });
+                    });
             })
             .catch((response ) => {
                 this.props.onNotifyError(response.message || response.detail || 'An error occurred.');
