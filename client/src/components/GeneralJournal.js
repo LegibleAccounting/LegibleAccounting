@@ -45,6 +45,10 @@ class GeneralJournal extends Component {
                     entries: entries.map((entry) => {
                         entry.transactions = this.getIndexedTransactions(entry.transactions);
                         return entry;
+                    }),
+                    ogentries: entries.map((entry) => {
+                        entry.transactions = this.getIndexedTransactions(entry.transactions);
+                        return entry;
                     })
                 });
             })
@@ -81,7 +85,7 @@ class GeneralJournal extends Component {
                     <div className="filler"></div>
                     <div className="searchContainer btn-group">
                         <form onSubmit={this.search}>
-                            <input type="search" className="form-control search" onChange={this.searchTextChanged} onBlur={this.search} placeholder="Search"/>
+                            <input type="search" className="form-control search" value={this.state.searchText} onChange={this.searchTextChanged} onBlur={this.search} placeholder="Search"/>
                         </form>
                         <button className="btn btn-primary" type="submit" onClick={this.search}>Search</button>
                     </div>
@@ -186,6 +190,24 @@ class GeneralJournal extends Component {
 
     search(event) {
         event.preventDefault();
+
+        let approvalFilter;
+        if (this.state.activeFilter === 2) {
+            approvalFilter = true;
+        } else if (this.state.activeFilter === 3) {
+            approvalFilter = false;
+        } else {
+            approvalFilter = null;
+        }
+        GeneralJournalAPI.search(approvalFilter, this.state.searchText)
+            .then((entries) => {
+                this.setState({
+                    entries: entries.map((entry) => {
+                        entry.transactions = this.getIndexedTransactions(entry.transactions);
+                        return entry;
+                    })
+                })
+            });
     }
 
     submitNewJournalEntry(journalEntry) {
@@ -300,8 +322,13 @@ class GeneralJournal extends Component {
 
         awaitPromise.then((entries) => {
             this.setState({
+                searchText: '',
                 activeFilter: selectedKey,
                 entries: entries.map((entry) => {
+                    entry.transactions = this.getIndexedTransactions(entry.transactions);
+                    return entry;
+                }),
+                ogentries: entries.map((entry) => {
                     entry.transactions = this.getIndexedTransactions(entry.transactions);
                     return entry;
                 })
