@@ -8,7 +8,8 @@ from accounts.models import Account
 from .enums import JournalEntryTypes
 
 MANAGEMENT_JOURNAL_ENTRY_TYPES = [
-    JournalEntryTypes.CLOSING
+    JournalEntryTypes.CLOSING,
+    JournalEntryTypes.REVERSING
 ]
 
 class JournalEntryManager(models.Manager):
@@ -24,7 +25,8 @@ class JournalEntry(models.Model):
     entry_type = models.SmallIntegerField(choices=(
         (JournalEntryTypes.REGULAR, 'Regular'),
         (JournalEntryTypes.ADJUSTING, 'Adjusting'),
-        (JournalEntryTypes.CLOSING, 'Closing')
+        (JournalEntryTypes.CLOSING, 'Closing'),
+        (JournalEntryTypes.REVERSING, 'Reversing')
     ))
 
     date_created = models.DateTimeField(auto_now_add=True)
