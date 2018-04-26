@@ -199,6 +199,8 @@ class GeneralJournal extends Component {
         } else {
             approvalFilter = null;
         }
+
+        this.setState({ isLoading: true });
         GeneralJournalAPI.search(approvalFilter, this.state.searchText)
             .then((entries) => {
                 this.setState({
@@ -207,6 +209,9 @@ class GeneralJournal extends Component {
                         return entry;
                     })
                 })
+            })
+            .finally(() => {
+                this.setState({ isLoading: false });
             });
     }
 
@@ -304,6 +309,7 @@ class GeneralJournal extends Component {
     }
 
     handleJournalFilterSelection(selectedKey) {
+        this.setState({ isLoading: true });
         let awaitPromise = null;
         if (selectedKey === 1) {
             awaitPromise = GeneralJournalAPI.getAll();
@@ -333,6 +339,8 @@ class GeneralJournal extends Component {
                     return entry;
                 })
             });
+        }).finally(() => {
+            this.setState({ isLoading: false });
         });
     }
 }
