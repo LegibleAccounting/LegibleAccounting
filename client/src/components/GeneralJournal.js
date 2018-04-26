@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Nav, NavItem } from 'react-bootstrap';
+import { Nav, NavItem, Glyphicon } from 'react-bootstrap';
+import DateTime from 'react-datetime';
 import './GeneralJournal.css';
 import './CommonChart.css';
 import AuthAPI from '../api/Auth.js';
@@ -16,6 +17,7 @@ class GeneralJournal extends Component {
 
         this.state = {
            isLoading: true,
+           isFilteringDateRange: false,
            isCreatingJournalEntry: false,
            entries: [],
            ogentries: [],
@@ -24,6 +26,9 @@ class GeneralJournal extends Component {
            accounts: null,
            activeFilter: 1
         };
+
+        this.isStartRangeCalendarOpen = false;
+        this.isEndRangeCalendarOpen = false;
 
         AccountsAPI.getAll(true)
             .then((accounts) => {
@@ -45,6 +50,10 @@ class GeneralJournal extends Component {
                     entries: entries.map((entry) => {
                         entry.transactions = this.getIndexedTransactions(entry.transactions);
                         return entry;
+                    }),
+                    ogentries: entries.map((entry) => {
+                        entry.transactions = this.getIndexedTransactions(entry.transactions);
+                        return entry;
                     })
                 });
             })
@@ -59,6 +68,9 @@ class GeneralJournal extends Component {
         this.toggleNewJournalUI = this.toggleNewJournalUI.bind(this);
         this.submitNewJournalEntry = this.submitNewJournalEntry.bind(this);
         this.closeJournal = this.closeJournal.bind(this);
+        this.toggleStartRangeCalendar = this.toggleStartRangeCalendar.bind(this);
+        this.renderStartRangeDatePickerField = this.renderStartRangeDatePickerField.bind(this);
+        this.renderEndRangeDatePickerField = this.renderEndRangeDatePickerField.bind(this);
     }
 
     render() {
@@ -81,7 +93,7 @@ class GeneralJournal extends Component {
                     <div className="filler"></div>
                     <div className="searchContainer btn-group">
                         <form onSubmit={this.search}>
-                            <input type="search" className="form-control search" onChange={this.searchTextChanged} onBlur={this.search} placeholder="Search"/>
+                            <input type="search" className="form-control search" value={this.state.searchText} onChange={this.searchTextChanged} onBlur={this.search} placeholder="Search"/>
                         </form>
                         <button className="btn btn-primary" type="submit" onClick={this.search}>Search</button>
                     </div>
@@ -91,7 +103,13 @@ class GeneralJournal extends Component {
                         (<JournalEntryCreate entryTypeOptions={this.state.entryTypes} accounts={this.state.accounts} onCancel={this.toggleNewJournalUI} onSubmit={this.submitNewJournalEntry} />)
                 }
                 <div>
-                    <div className="flex-row journal-filters">
+                    <div className="flex-row flex-v-center journal-filters">
+                        <h4 style={{ marginLeft: '3rem', marginRight: '1rem' }}>Start Date: </h4>
+                        <DateTime renderInput={this.renderStartRangeDatePickerField} timeFormat={false} dateFormat="YYYY-MM-DD" value={this.state.rangeStartDate} onChange={this.changeStartRangeDate.bind(this)} onBlur={this.setStartRangeCalendarClosed.bind(this)}/>
+                        <h4 style={{ marginLeft: '1rem', marginRight: '1rem' }}>End Date: </h4>
+                        <DateTime renderInput={this.renderEndRangeDatePickerField} timeFormat={false} dateFormat="YYYY-MM-DD" value={this.state.rangeEndDate} onChange={this.changeEndRangeDate.bind(this)} onBlur={this.setEndRangeCalendarClosed.bind(this)}/>
+                        { !this.state.isFilteringDateRange && (<button style={{ marginLeft: '1rem' }} className="btn btn-primary" onClick={this.filterByDateRange.bind(this)}>Filter</button>) }
+                        { this.state.isFilteringDateRange && (<button style={{ marginLeft: '1rem' }} className="btn btn-danger" onClick={this.removeDateRangeFilter.bind(this)}>Clear</button>) }
                         <div className="flex-fill"></div>
                         <Nav bsStyle="pills" activeKey={this.state.activeFilter} onSelect={this.handleJournalFilterSelection.bind(this)}>
                             <NavItem eventKey={1}>
@@ -131,6 +149,107 @@ class GeneralJournal extends Component {
         );
     }
 
+    toggleStartRangeCalendar(openCalendarFn, closeCalendarFn) {
+        if (this.isStartRangeCalendarOpen) {
+            closeCalendarFn();
+            this.isStartRangeCalendarOpen = false;
+        } else {
+            openCalendarFn();
+            this.isStartRangeCalendarOpen = true;
+        }
+    }
+
+    toggleEndRangeCalendar(openCalendarFn, closeCalendarFn) {
+        if (this.isEndRangeCalendarOpen) {
+            closeCalendarFn();
+            this.isEndRangeCalendarOpen = false;
+        } else {
+            openCalendarFn();
+            this.isEndRangeCalendarOpen = true;
+        }
+    }
+
+    renderStartRangeDatePickerField(props, openCalendarFn, closeCalendarFn) {
+        return (
+            <div>
+                <button className="btn btn-default" onClick={this.toggleStartRangeCalendar.bind(this, openCalendarFn, closeCalendarFn)}>
+                    <Glyphicon glyph="calendar" />
+                </button>
+                <label className="date-left-margin">{ this.state.rangeStartDate }</label>
+            </div>
+        );
+    }
+
+    renderEndRangeDatePickerField(props, openCalendarFn, closeCalendarFn) {
+        return (
+            <div>
+                <button className="btn btn-default" onClick={this.toggleEndRangeCalendar.bind(this, openCalendarFn, closeCalendarFn)}>
+                    <Glyphicon glyph="calendar" />
+                </button>
+                <label className="date-left-margin">{ this.state.rangeEndDate }</label>
+            </div>
+        );
+    }
+
+    setStartRangeCalendarClosed() {
+        this.isStartRangeCalendarOpen = false;
+    }
+
+    setEndRangeCalendarClosed() {
+        this.isEndRangeCalendarOpen = false;
+    }
+
+    changeStartRangeDate(momentValue) {
+        this.setState({
+            rangeStartDate: momentValue.format('YYYY-MM-DD')
+        });
+    }
+
+    changeEndRangeDate(momentValue) {
+        this.setState({
+            rangeEndDate: momentValue.format('YYYY-MM-DD')
+        });
+    }
+
+    filterByDateRange() {
+        if (!this.state.rangeStartDate || !this.state.rangeEndDate) {
+            return;
+        }
+
+        let approvalFilter;
+        if (this.state.activeFilter === 2) {
+            approvalFilter = true;
+        } else if (this.state.activeFilter === 3) {
+            approvalFilter = false;
+        } else {
+            approvalFilter = null;
+        }
+
+        this.setState({ isLoading: true });
+        GeneralJournalAPI.search(approvalFilter, this.state.searchText, { dateStart: this.state.rangeStartDate, dateEnd: this.state.rangeEndDate })
+            .then((entries) => {
+                this.setState({
+                    isFilteringDateRange: true,
+                    entries: entries.map((entry) => {
+                        entry.transactions = this.getIndexedTransactions(entry.transactions);
+                        return entry;
+                    })
+                })
+            })
+            .finally(() => {
+                this.setState({ isLoading: false });
+            });
+    }
+
+    removeDateRangeFilter() {
+        this.setState({
+            isFilteringDateRange: false,
+            rangeStartDate: '',
+            rangeEndDate: '',
+            entries: this.state.ogentries
+        });
+    }
+
     closeJournal() {
         AccountsAPI.closeAccounts()
             .then(({ message }) => {
@@ -140,6 +259,10 @@ class GeneralJournal extends Component {
                         this.setState({
                             activeFilter: 1,
                             entries: entries.map((entry) => {
+                                entry.transactions = this.getIndexedTransactions(entry.transactions);
+                                return entry;
+                            }),
+                            ogentries: entries.map((entry) => {
                                 entry.transactions = this.getIndexedTransactions(entry.transactions);
                                 return entry;
                             })
@@ -186,6 +309,32 @@ class GeneralJournal extends Component {
 
     search(event) {
         event.preventDefault();
+
+        let approvalFilter;
+        if (this.state.activeFilter === 2) {
+            approvalFilter = true;
+        } else if (this.state.activeFilter === 3) {
+            approvalFilter = false;
+        } else {
+            approvalFilter = null;
+        }
+
+        this.setState({ isLoading: true });
+        GeneralJournalAPI.search(approvalFilter, this.state.searchText)
+            .then((entries) => {
+                this.setState({
+                    isFilteringDateRange: false,
+                    rangeStartDate: '',
+                    rangeEndDate: '',
+                    entries: entries.map((entry) => {
+                        entry.transactions = this.getIndexedTransactions(entry.transactions);
+                        return entry;
+                    })
+                })
+            })
+            .finally(() => {
+                this.setState({ isLoading: false });
+            });
     }
 
     submitNewJournalEntry(journalEntry) {
@@ -282,6 +431,7 @@ class GeneralJournal extends Component {
     }
 
     handleJournalFilterSelection(selectedKey) {
+        this.setState({ isLoading: true });
         let awaitPromise = null;
         if (selectedKey === 1) {
             awaitPromise = GeneralJournalAPI.getAll();
@@ -300,12 +450,22 @@ class GeneralJournal extends Component {
 
         awaitPromise.then((entries) => {
             this.setState({
+                searchText: '',
+                isFilteringDateRange: false,
+                rangeStartDate: '',
+                rangeEndDate: '',
                 activeFilter: selectedKey,
                 entries: entries.map((entry) => {
                     entry.transactions = this.getIndexedTransactions(entry.transactions);
                     return entry;
+                }),
+                ogentries: entries.map((entry) => {
+                    entry.transactions = this.getIndexedTransactions(entry.transactions);
+                    return entry;
                 })
             });
+        }).finally(() => {
+            this.setState({ isLoading: false });
         });
     }
 }

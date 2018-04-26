@@ -65,7 +65,7 @@ class GeneralJournalAPI {
             });
     }
 
-    search(approved, searchString) {
+    search(approved, searchString, dateRange) {
     	if (!Auth.token) {
             return Promise.reject();
         }
@@ -87,6 +87,10 @@ class GeneralJournalAPI {
         // determine if doing a text based search
         if (searchString) {
             parts.push('search=' + searchString);
+        }
+
+        if (dateRange) {
+            parts.push('date__range=' + dateRange.dateStart + ',' + dateRange.dateEnd);
         }
 
         // actually search
