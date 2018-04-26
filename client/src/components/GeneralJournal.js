@@ -453,7 +453,7 @@ class GeneralJournal extends Component {
                 searchText: '',
                 isFilteringDateRange: false,
                 rangeStartDate: '',
-                rangeEndDate: ''
+                rangeEndDate: '',
                 activeFilter: selectedKey,
                 entries: entries.map((entry) => {
                     entry.transactions = this.getIndexedTransactions(entry.transactions);
