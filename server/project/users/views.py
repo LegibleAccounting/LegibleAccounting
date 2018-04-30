@@ -18,7 +18,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = User.objects.exclude(is_staff=True)
     filter_backends = (SearchFilter, OrderingFilter,)
     search_fields = ('username', 'groups__name',)
     ordering_fields = ('username', 'is_active', 'groups__name',)
