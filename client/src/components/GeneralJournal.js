@@ -405,7 +405,22 @@ class GeneralJournal extends Component {
         GeneralJournalAPI.update({ id: journalEntryId, is_approved: true, memo: approvalMemo })
             .then(() => {
                 this.props.onNotifySuccess('Journal Entry has been successfully approved.');
-                this.handleJournalFilterSelection(this.state.activeFilter);
+                this.setState({
+                    entries: this.state.entries.map(entry => {
+                        if (entry.id === journalEntryId) {
+                            entry.is_approved = true;
+                        }
+
+                        return entry;
+                    }),
+                    ogentries: this.state.ogentries.map(entry => {
+                        if (entry.id === journalEntryId) {
+                            entry.is_approved = true;
+                        }
+
+                        return entry;
+                    })
+                });
             })
             .catch(() => {
                 this.props.onNotifyError('Failed to approve journal entry.');
@@ -417,7 +432,22 @@ class GeneralJournal extends Component {
         GeneralJournalAPI.update({ id: journalEntryId, is_approved: false, memo: rejectionMemo })
             .then(() => {
                 this.props.onNotifySuccess('Journal Entry has been successfully rejected.');
-                this.handleJournalFilterSelection(this.state.activeFilter);
+                this.setState({
+                    entries: this.state.entries.map(entry => {
+                        if (entry.id === journalEntryId) {
+                            entry.is_approved = false;
+                        }
+
+                        return entry;
+                    }),
+                    ogentries: this.state.ogentries.map(entry => {
+                        if (entry.id === journalEntryId) {
+                            entry.is_approved = false;
+                        }
+
+                        return entry;
+                    })
+                });
             })
             .catch((response) => {
                 if (!response.length) {
